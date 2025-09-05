@@ -1,16 +1,12 @@
 ---
-title: "Lab journal"
-author: "by: Your Name"
+title: "Mylene Husson Lab journal Social networks"
+author: 'by: Mylène Husson'
 bibliography: references.bib
-
- 
 ---
 
 
-
-
 ```{r, install remotely, globalsettings, echo=FALSE, warning=FALSE, results='hide'}
-# install.packages("remotes")
+#install.packages("remotes")
 #remotes::install_github("rlesur/klippy")
 ``` 
 
@@ -20,7 +16,7 @@ library(knitr)
 knitr::opts_chunk$set(echo = TRUE)
 opts_chunk$set(tidy.opts=list(width.cutoff=100),tidy=TRUE, warning = FALSE, message = FALSE,comment = "#>", cache=TRUE, class.source=c("test"), class.output=c("test2"))
 options(width = 100)
-rgl::setupKnitr()
+#rgl::setupKnitr()
 
 
 
