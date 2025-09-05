@@ -1,6 +1,6 @@
 ---
-title: "Lab journal"
-author: "by: Your Name"
+title: "Mylene Lab Journal Social Networks"
+author: "by: Mylène Husson"
 bibliography: references.bib
 
  
