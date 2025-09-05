@@ -49,7 +49,7 @@ But please note, we are not here to make a beautiful website, our intention is j
 # My Lab Journal
 Last compiled on `r format(Sys.time(), '%B, %Y')`  
 
-*Describe lab journal here.*
+Welcome to my lab journal. In here you will find an overview of my work for the course Social Networks.
 
 <br>
 
@@ -69,7 +69,7 @@ We, Jochem Tolsma and Bas Hofstra, use this repository for our Social Network An
 
 
 
-![](images/cover.jpg)
+![](images/Network.jpg)
 
 
 :::
