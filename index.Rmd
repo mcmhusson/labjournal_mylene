@@ -4,11 +4,10 @@ author: 'by: Mylène Husson'
 bibliography: references.bib
 ---
 
-
 ```{r, install remotely, globalsettings, echo=FALSE, warning=FALSE, results='hide'}
 #install.packages("remotes")
 #remotes::install_github("rlesur/klippy")
-``` 
+```
 
 ```{r, globalsettings, echo=FALSE, warning=FALSE, results='hide'}
 library(knitr)
@@ -30,72 +29,62 @@ klippy::klippy(position = c('top', 'right'))
 #klippy::klippy(tooltip_message = 'Click to copy', tooltip_success = 'Done')
 ```
 
+------------------------------------------------------------------------
 
-
-
-----
-
+```{=html}
 <!--- This is the best way to write a comment. 
-It also demonstrate, you can add html directly in your rmarkdown file. See: https://www.w3schools.com/html/html_comments.asp ---> 
+It also demonstrate, you can add html directly in your rmarkdown file. See: https://www.w3schools.com/html/html_comments.asp --->
+```
 
-
+```{=html}
 <!--- to use a multi column page we use Pandoc's fenced Div. 
 see here: https://bookdown.org/yihui/rmarkdown-cookbook/multi-column.html 
-But please note, we are not here to make a beautiful website, our intention is just to have a quick lab journal up and running ---> 
+But please note, we are not here to make a beautiful website, our intention is just to have a quick lab journal up and running --->
+```
 
-:::: {.columns}
+::::: columns
 ::: {.column width="50%"}
-
 # My Lab Journal
-Last compiled on `r format(Sys.time(), '%B, %Y')`  
+
+Last compiled on `r format(Sys.time(), '%B, %Y')`
 
 Welcome to my lab journal. In here you will find an overview of my work for the course Social Networks.
 
 <br>
 
-----
+------------------------------------------------------------------------
 
-## Open Science  
+## Open Science
 
-Everyone can fork this repository. Use this example to journal your lab work and assignments. 
+Everyone can fork this repository. Use this example to journal your lab work and assignments.
 
-We, Jochem Tolsma and Bas Hofstra, use this repository for our Social Network Analysis For Social Scientists course [@SNASS]. <!--- this is a reference, stored in references.bib. It will be automatically added at the bottom of the page --->
-
+We, Jochem Tolsma and Bas Hofstra, use this repository for our Social Network Analysis For Social Scientists course [@SNASS]. <!--- this is a reference, stored in references.bib. It will be automatically added at the bottom of the page ---> 
 
 :::
 
 ::: {.column width="50%"}
-
-
-
-
 ![](images/Network.jpg)
+::: 
 
+:::::
+<br>
 
-:::
-::::
-
+------------------------------------------------------------------------
 
 ## How to use
 
-1. Fork the repository for this website and follow instructions on `README` to get started [here](https://github.com/JochemTolsma/labjournal).  
+1.  Fork the repository for this website and follow instructions on `README` to get started [here](https://github.com/JochemTolsma/labjournal).
 
-2. Journal your work, by editing the .Rmd-files
+2.  Journal your work, by editing the .Rmd-files
 
-3. ...
+3.  ...
 
-4. Change everything to make it your own!
-
+4.  Change everything to make it your own!
 
 <br>
 
 Use the top menu to navigate through the journal.
 
-
-----
+------------------------------------------------------------------------
 
 # References
-
-
-
-

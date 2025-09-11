@@ -350,7 +350,7 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="lab1.html">Page 1</a>
+      <a href="lab1.html">Week 1</a>
     </li>
   </ul>
 </li>
@@ -391,17 +391,143 @@ div.tocify {
   addClassKlippyTo("pre.r, pre.markdown");
   addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
 </script>
-<p>Last compiled on September, 2025</p>
+<p>Last compiled on September, 2025 <br></p>
+<hr />
+<div id="week-1" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Week 1</h1>
 <p><br></p>
 <hr />
-<p>This is just an example page of your <span style="color: red;">lab
-journal</span>. You can journal the assignments of the first day
-here.</p>
+<div id="workshop" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Workshop</h2>
+<p>In Week 1 we set up our git and github accounts and created this
+<span style="color: red;">lab journal</span>. We also had time to follow
+the R tutorial in the Appendix A of SNASS.</p>
+<p>We also started thinking about research questions.</p>
+</div>
+<div id="homework" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Homework</h2>
+<p>For next week we have to</p>
+<ol style="list-style-type: decimal">
+<li><p>Formulate initial Descriptive and Explanatory Research
+Questions</p></li>
+<li><p>Find one or two relevant papers with respect to your research
+questions and that clearly provide a social network perspective</p></li>
+<li><p>Be prepared to discuss your RQs and literature next
+week.</p></li>
+<li><p>Update your lab journal / website. Be prepared to show you lab
+journal during class.</p></li>
+</ol>
+<p><br></p>
 <hr />
-<pre class="r test"><code>print(&quot;Hello Lab Journal&quot;)</code></pre>
-<pre class="test2"><code>#&gt; [1] &quot;Hello Lab Journal&quot;</code></pre>
+<div id="monday-8-september" class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Monday 8
+september</h3>
+<p>I just finished the R tutorial. I had already learned the basics of R
+and the tidyverse package in a course last year, but this tutorial was a
+great way to refresh my memory. I also picked up some new things, like
+the case_match() function for editing variables (which I used to handle
+in a much more complicated way), and the simple methods for creating
+polished tables directly in R. Previously, I would export results to
+Excel and then copy them into Word to make them look nice, so these new
+tools will definitely save me time. Next, I went through the Appendix B
+on variance, covariance, correlations and specifically the intraclass
+correlations. Here, I found the R scripts sometimes difficult to follow,
+especially the intraclass correlations part: why does it matter if data
+is in wide or long format? I will be asking questions on this in the
+next lecture and hope that will provide some clarity.</p>
+<pre class="r test"><code># Important R codes:
+#mutate()      # create or change variables
+#case_match()  # recode values by conditions
+#across()      # apply same transformation to many variables
+#select()      # keep or reorder columns
+#filter()      # keep rows by condition
+#arrange()     # order rows
+#group_by()    # define groups for calculations
+#summarise()   # collapse to summary stats
+#ungroup()     # drop grouping
+#na_if()       # set specific values to NA
+#as.factor()   # convert numeric → categorical
+#levels()      # rename factor categories
+#rowwise()     # do calculations row by row
+#add_row()     # append rows to a dataset
+#full_join()   # merge datasets by key
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiSm91cm5hbCAxIgojYmlibGlvZ3JhcGh5OiByZWZlcmVuY2VzLmJpYgphdXRob3I6ICJNeWzDqG5lIEh1c3NvbiIKLS0tCgoKCmBgYHtyLCBnbG9iYWxzZXR0aW5ncywgZWNobz1GQUxTRSwgd2FybmluZz1GQUxTRSwgcmVzdWx0cz0naGlkZSd9CmxpYnJhcnkoa25pdHIpCgprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpCm9wdHNfY2h1bmskc2V0KHRpZHkub3B0cz1saXN0KHdpZHRoLmN1dG9mZj0xMDApLHRpZHk9VFJVRSwgd2FybmluZyA9IEZBTFNFLCBtZXNzYWdlID0gRkFMU0UsY29tbWVudCA9ICIjPiIsIGNhY2hlPVRSVUUsIGNsYXNzLnNvdXJjZT1jKCJ0ZXN0IiksIGNsYXNzLm91dHB1dD1jKCJ0ZXN0MiIpKQpvcHRpb25zKHdpZHRoID0gMTAwKQojcmdsOjpzZXR1cEtuaXRyKCkKCgoKY29sb3JpemUgPC0gZnVuY3Rpb24oeCwgY29sb3IpIHtzcHJpbnRmKCI8c3BhbiBzdHlsZT0nY29sb3I6ICVzOyc+JXM8L3NwYW4+IiwgY29sb3IsIHgpIH0KCmBgYAoKYGBge3Iga2xpcHB5LCBlY2hvPUZBTFNFLCBpbmNsdWRlPVRSVUV9CmtsaXBweTo6a2xpcHB5KHBvc2l0aW9uID0gYygndG9wJywgJ3JpZ2h0JykpCiNrbGlwcHk6OmtsaXBweShjb2xvciA9ICdkYXJrcmVkJykKI2tsaXBweTo6a2xpcHB5KHRvb2x0aXBfbWVzc2FnZSA9ICdDbGljayB0byBjb3B5JywgdG9vbHRpcF9zdWNjZXNzID0gJ0RvbmUnKQpgYGAKCkxhc3QgY29tcGlsZWQgb24gYHIgZm9ybWF0KFN5cy50aW1lKCksICclQiwgJVknKWAKCjxicj4KCi0tLS0KICAKVGhpcyBpcyBqdXN0IGFuIGV4YW1wbGUgcGFnZSBvZiB5b3VyIGByIGNvbG9yaXplKCJsYWIgam91cm5hbCIsICJyZWQiKWAuCllvdSBjYW4gam91cm5hbCB0aGUgYXNzaWdubWVudHMgb2YgdGhlIGZpcnN0IGRheSBoZXJlLgogIAoKLS0tLQoKCmBgYHtyfQpwcmludCgiSGVsbG8gTGFiIEpvdXJuYWwiKQpgYGAKCgoK</div>
+#stargazer()      # create regression tables (LaTeX/HTML/Text)
+#apa.reg.table()  # APA-style regression tables (Word/RTF)
+#as_flextable()   # turn model or data frame into Word/PowerPoint table
+
+#str()         # structure of object
+#summary()     # descriptive statistics
+#table()       # frequency counts
+#attributes()  # see labels/metadata</code></pre>
+<p><br></p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>Lastly, I’ve started working on the assignment by developing a
+research question and identifying related articles. I knew I wanted to
+focus on gender inequality in academia, so I began exploring studies
+that use social network analysis on this topic. One concept that stood
+out to me was homophily: men often collaborate primarily with other men,
+while women tend to work in more diverse teams. This made me curious
+about how collaboration patterns relate to inequality outcomes,
+specifically, whether the composition of research collaborations
+influences the success of a paper or the researchers themselves. Do male
+collaborations get more prestige? If women are able to join a male
+collaboration, does it influence their prestige?</td>
+</tr>
+<tr class="even">
+<td>RQ1: To what extent does gender homophily shape collaboration
+patterns among researchers in Dutch sociology and politicology
+departments?</td>
+</tr>
+<tr class="odd">
+<td>RQ2: Do collaboration teams with higher female representation focus
+on different topics than teams with higher male representation?</td>
+</tr>
+<tr class="even">
+<td>RQ3: Are these “female-associated” topics valued less in terms of
+impact (e.g., citation counts, journal prestige) compared to topics more
+associated with male-dominated teams?</td>
+</tr>
+<tr class="odd">
+<td>RQ4 (optional extension): Do patterns of gender homophily, topic
+focus, and recognition vary across universities, depending on the
+overall gender composition of their sociology and politicology
+departments?</td>
+</tr>
+<tr class="even">
+<td>RQ5: are collaborations and networks more important for women than
+for men in citations of publications.</td>
+</tr>
+<tr class="odd">
+<td>One of the articles related to these questions would be: Collins,
+R., &amp; Steffen-Fluhr, N. (2019). Hidden patterns. <em>Equality
+Diversity And Inclusion An International Journal</em>, 38(2), 265–282.
+<a href="https://doi.org/10.1108/edi-09-2017-0183"
+class="uri">https://doi.org/10.1108/edi-09-2017-0183</a></td>
+</tr>
+<tr class="even">
+<td><br></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="wednesday-10-september" class="section level3" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Wednesday 10
+september</h3>
+<hr />
+<p>Today I read Chapter 2, Paragraph 3.3 and Chapter 5. While I could
+follow Chapter 2 and Paragraph 3.3, Chapter 5 went a bit quick for
+me.</p>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSm91cm5hbCAxIgojYmlibGlvZ3JhcGh5OiByZWZlcmVuY2VzLmJpYgphdXRob3I6ICJNeWzDqG5lIEh1c3NvbiIKLS0tCgpgYGB7ciwgZ2xvYmFsc2V0dGluZ3MsIGVjaG89RkFMU0UsIHdhcm5pbmc9RkFMU0UsIHJlc3VsdHM9J2hpZGUnfQpsaWJyYXJ5KGtuaXRyKQoKa25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQpvcHRzX2NodW5rJHNldCh0aWR5Lm9wdHM9bGlzdCh3aWR0aC5jdXRvZmY9MTAwKSx0aWR5PVRSVUUsIHdhcm5pbmcgPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFLGNvbW1lbnQgPSAiIz4iLCBjYWNoZT1UUlVFLCBjbGFzcy5zb3VyY2U9YygidGVzdCIpLCBjbGFzcy5vdXRwdXQ9YygidGVzdDIiKSkKb3B0aW9ucyh3aWR0aCA9IDEwMCkKI3JnbDo6c2V0dXBLbml0cigpCgoKCmNvbG9yaXplIDwtIGZ1bmN0aW9uKHgsIGNvbG9yKSB7c3ByaW50ZigiPHNwYW4gc3R5bGU9J2NvbG9yOiAlczsnPiVzPC9zcGFuPiIsIGNvbG9yLCB4KSB9CgpgYGAKCmBgYHtyIGtsaXBweSwgZWNobz1GQUxTRSwgaW5jbHVkZT1UUlVFfQprbGlwcHk6OmtsaXBweShwb3NpdGlvbiA9IGMoJ3RvcCcsICdyaWdodCcpKQoja2xpcHB5OjprbGlwcHkoY29sb3IgPSAnZGFya3JlZCcpCiNrbGlwcHk6OmtsaXBweSh0b29sdGlwX21lc3NhZ2UgPSAnQ2xpY2sgdG8gY29weScsIHRvb2x0aXBfc3VjY2VzcyA9ICdEb25lJykKYGBgCgpMYXN0IGNvbXBpbGVkIG9uIGByIGZvcm1hdChTeXMudGltZSgpLCAnJUIsICVZJylgCjxicj4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKIyBXZWVrIDEKPGJyPgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgojIyBXb3Jrc2hvcApJbiBXZWVrIDEgd2Ugc2V0IHVwIG91ciBnaXQgYW5kIGdpdGh1YiBhY2NvdW50cyBhbmQgY3JlYXRlZCB0aGlzIGByIGNvbG9yaXplKCJsYWIgam91cm5hbCIsICJyZWQiKWAuIFdlIGFsc28gaGFkIHRpbWUgdG8gZm9sbG93IHRoZSBSIHR1dG9yaWFsIGluIHRoZSBBcHBlbmRpeCBBIG9mIFNOQVNTLgoKV2UgYWxzbyBzdGFydGVkIHRoaW5raW5nIGFib3V0IHJlc2VhcmNoIHF1ZXN0aW9ucy4gCgojIyBIb21ld29yawpGb3IgbmV4dCB3ZWVrIHdlIGhhdmUgdG8KCjEuICBGb3JtdWxhdGUgaW5pdGlhbCBEZXNjcmlwdGl2ZSBhbmQgRXhwbGFuYXRvcnkgUmVzZWFyY2ggUXVlc3Rpb25zCgoyLiAgRmluZCBvbmUgb3IgdHdvIHJlbGV2YW50IHBhcGVycyB3aXRoIHJlc3BlY3QgdG8geW91ciByZXNlYXJjaCBxdWVzdGlvbnMgYW5kIHRoYXQgY2xlYXJseSBwcm92aWRlIGEgc29jaWFsIG5ldHdvcmsgcGVyc3BlY3RpdmUKCjMuICBCZSBwcmVwYXJlZCB0byBkaXNjdXNzIHlvdXIgUlFzIGFuZCBsaXRlcmF0dXJlIG5leHQgd2Vlay4KCjQuICBVcGRhdGUgeW91ciBsYWIgam91cm5hbCAvIHdlYnNpdGUuIEJlIHByZXBhcmVkIHRvIHNob3cgeW91IGxhYiBqb3VybmFsIGR1cmluZyBjbGFzcy4KCjxicj4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKIyMjIE1vbmRheSA4IHNlcHRlbWJlcgpJIGp1c3QgZmluaXNoZWQgdGhlIFIgdHV0b3JpYWwuIEkgaGFkIGFscmVhZHkgbGVhcm5lZCB0aGUgYmFzaWNzIG9mIFIgYW5kIHRoZSB0aWR5dmVyc2UgcGFja2FnZSBpbiBhIGNvdXJzZSBsYXN0IHllYXIsIGJ1dCB0aGlzIHR1dG9yaWFsIHdhcyBhIGdyZWF0IHdheSB0byByZWZyZXNoIG15IG1lbW9yeS4gSSBhbHNvIHBpY2tlZCB1cCBzb21lIG5ldyB0aGluZ3MsIGxpa2UgdGhlIGNhc2VfbWF0Y2goKSBmdW5jdGlvbiBmb3IgZWRpdGluZyB2YXJpYWJsZXMgKHdoaWNoIEkgdXNlZCB0byBoYW5kbGUgaW4gYSBtdWNoIG1vcmUgY29tcGxpY2F0ZWQgd2F5KSwgYW5kIHRoZSBzaW1wbGUgbWV0aG9kcyBmb3IgY3JlYXRpbmcgcG9saXNoZWQgdGFibGVzIGRpcmVjdGx5IGluIFIuIFByZXZpb3VzbHksIEkgd291bGQgZXhwb3J0IHJlc3VsdHMgdG8gRXhjZWwgYW5kIHRoZW4gY29weSB0aGVtIGludG8gV29yZCB0byBtYWtlIHRoZW0gbG9vayBuaWNlLCBzbyB0aGVzZSBuZXcgdG9vbHMgd2lsbCBkZWZpbml0ZWx5IHNhdmUgbWUgdGltZS4KTmV4dCwgSSB3ZW50IHRocm91Z2ggdGhlIEFwcGVuZGl4IEIgb24gdmFyaWFuY2UsIGNvdmFyaWFuY2UsIGNvcnJlbGF0aW9ucyBhbmQgc3BlY2lmaWNhbGx5IHRoZSBpbnRyYWNsYXNzIGNvcnJlbGF0aW9ucy4gSGVyZSwgSSBmb3VuZCB0aGUgUiBzY3JpcHRzIHNvbWV0aW1lcyBkaWZmaWN1bHQgdG8gZm9sbG93LCBlc3BlY2lhbGx5IHRoZSBpbnRyYWNsYXNzIGNvcnJlbGF0aW9ucyBwYXJ0OiB3aHkgZG9lcyBpdCBtYXR0ZXIgaWYgZGF0YSBpcyBpbiB3aWRlIG9yIGxvbmcgZm9ybWF0PyBJIHdpbGwgYmUgYXNraW5nIHF1ZXN0aW9ucyBvbiB0aGlzIGluIHRoZSBuZXh0IGxlY3R1cmUgYW5kIGhvcGUgdGhhdCB3aWxsIHByb3ZpZGUgc29tZSBjbGFyaXR5LgpgYGB7cn0KIyBJbXBvcnRhbnQgUiBjb2RlczoKI211dGF0ZSgpICAgICAgIyBjcmVhdGUgb3IgY2hhbmdlIHZhcmlhYmxlcwojY2FzZV9tYXRjaCgpICAjIHJlY29kZSB2YWx1ZXMgYnkgY29uZGl0aW9ucwojYWNyb3NzKCkgICAgICAjIGFwcGx5IHNhbWUgdHJhbnNmb3JtYXRpb24gdG8gbWFueSB2YXJpYWJsZXMKI3NlbGVjdCgpICAgICAgIyBrZWVwIG9yIHJlb3JkZXIgY29sdW1ucwojZmlsdGVyKCkgICAgICAjIGtlZXAgcm93cyBieSBjb25kaXRpb24KI2FycmFuZ2UoKSAgICAgIyBvcmRlciByb3dzCiNncm91cF9ieSgpICAgICMgZGVmaW5lIGdyb3VwcyBmb3IgY2FsY3VsYXRpb25zCiNzdW1tYXJpc2UoKSAgICMgY29sbGFwc2UgdG8gc3VtbWFyeSBzdGF0cwojdW5ncm91cCgpICAgICAjIGRyb3AgZ3JvdXBpbmcKI25hX2lmKCkgICAgICAgIyBzZXQgc3BlY2lmaWMgdmFsdWVzIHRvIE5BCiNhcy5mYWN0b3IoKSAgICMgY29udmVydCBudW1lcmljIOKGkiBjYXRlZ29yaWNhbAojbGV2ZWxzKCkgICAgICAjIHJlbmFtZSBmYWN0b3IgY2F0ZWdvcmllcwojcm93d2lzZSgpICAgICAjIGRvIGNhbGN1bGF0aW9ucyByb3cgYnkgcm93CiNhZGRfcm93KCkgICAgICMgYXBwZW5kIHJvd3MgdG8gYSBkYXRhc2V0CiNmdWxsX2pvaW4oKSAgICMgbWVyZ2UgZGF0YXNldHMgYnkga2V5Cgojc3RhcmdhemVyKCkgICAgICAjIGNyZWF0ZSByZWdyZXNzaW9uIHRhYmxlcyAoTGFUZVgvSFRNTC9UZXh0KQojYXBhLnJlZy50YWJsZSgpICAjIEFQQS1zdHlsZSByZWdyZXNzaW9uIHRhYmxlcyAoV29yZC9SVEYpCiNhc19mbGV4dGFibGUoKSAgICMgdHVybiBtb2RlbCBvciBkYXRhIGZyYW1lIGludG8gV29yZC9Qb3dlclBvaW50IHRhYmxlCgojc3RyKCkgICAgICAgICAjIHN0cnVjdHVyZSBvZiBvYmplY3QKI3N1bW1hcnkoKSAgICAgIyBkZXNjcmlwdGl2ZSBzdGF0aXN0aWNzCiN0YWJsZSgpICAgICAgICMgZnJlcXVlbmN5IGNvdW50cwojYXR0cmlidXRlcygpICAjIHNlZSBsYWJlbHMvbWV0YWRhdGEKYGBgCjxicj4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpMYXN0bHksIEnigJl2ZSBzdGFydGVkIHdvcmtpbmcgb24gdGhlIGFzc2lnbm1lbnQgYnkgZGV2ZWxvcGluZyBhIHJlc2VhcmNoIHF1ZXN0aW9uIGFuZCBpZGVudGlmeWluZyByZWxhdGVkIGFydGljbGVzLiBJIGtuZXcgSSB3YW50ZWQgdG8gZm9jdXMgb24gZ2VuZGVyIGluZXF1YWxpdHkgaW4gYWNhZGVtaWEsIHNvIEkgYmVnYW4gZXhwbG9yaW5nIHN0dWRpZXMgdGhhdCB1c2Ugc29jaWFsIG5ldHdvcmsgYW5hbHlzaXMgb24gdGhpcyB0b3BpYy4gT25lIGNvbmNlcHQgdGhhdCBzdG9vZCBvdXQgdG8gbWUgd2FzIGhvbW9waGlseTogbWVuIG9mdGVuIGNvbGxhYm9yYXRlIHByaW1hcmlseSB3aXRoIG90aGVyIG1lbiwgd2hpbGUgd29tZW4gdGVuZCB0byB3b3JrIGluIG1vcmUgZGl2ZXJzZSB0ZWFtcy4gVGhpcyBtYWRlIG1lIGN1cmlvdXMgYWJvdXQgaG93IGNvbGxhYm9yYXRpb24gcGF0dGVybnMgcmVsYXRlIHRvIGluZXF1YWxpdHkgb3V0Y29tZXMsIHNwZWNpZmljYWxseSwgd2hldGhlciB0aGUgY29tcG9zaXRpb24gb2YgcmVzZWFyY2ggY29sbGFib3JhdGlvbnMgaW5mbHVlbmNlcyB0aGUgc3VjY2VzcyBvZiBhIHBhcGVyIG9yIHRoZSByZXNlYXJjaGVycyB0aGVtc2VsdmVzLiAKRG8gbWFsZSBjb2xsYWJvcmF0aW9ucyBnZXQgbW9yZSBwcmVzdGlnZT8gSWYgd29tZW4gYXJlIGFibGUgdG8gam9pbiBhIG1hbGUgY29sbGFib3JhdGlvbiwgZG9lcyBpdCBpbmZsdWVuY2UgdGhlaXIgcHJlc3RpZ2U/CgpSUTE6IFRvIHdoYXQgZXh0ZW50IGRvZXMgZ2VuZGVyIGhvbW9waGlseSBzaGFwZSBjb2xsYWJvcmF0aW9uIHBhdHRlcm5zIGFtb25nIHJlc2VhcmNoZXJzIGluIER1dGNoIHNvY2lvbG9neSBhbmQgcG9saXRpY29sb2d5IGRlcGFydG1lbnRzPwoKUlEyOiBEbyBjb2xsYWJvcmF0aW9uIHRlYW1zIHdpdGggaGlnaGVyIGZlbWFsZSByZXByZXNlbnRhdGlvbiBmb2N1cyBvbiBkaWZmZXJlbnQgdG9waWNzIHRoYW4gdGVhbXMgd2l0aCBoaWdoZXIgbWFsZSByZXByZXNlbnRhdGlvbj8KClJRMzogQXJlIHRoZXNlIOKAnGZlbWFsZS1hc3NvY2lhdGVk4oCdIHRvcGljcyB2YWx1ZWQgbGVzcyBpbiB0ZXJtcyBvZiBpbXBhY3QgKGUuZy4sIGNpdGF0aW9uIGNvdW50cywgam91cm5hbCBwcmVzdGlnZSkgY29tcGFyZWQgdG8gdG9waWNzIG1vcmUgYXNzb2NpYXRlZCB3aXRoIG1hbGUtZG9taW5hdGVkIHRlYW1zPwoKUlE0IChvcHRpb25hbCBleHRlbnNpb24pOiBEbyBwYXR0ZXJucyBvZiBnZW5kZXIgaG9tb3BoaWx5LCB0b3BpYyBmb2N1cywgYW5kIHJlY29nbml0aW9uIHZhcnkgYWNyb3NzIHVuaXZlcnNpdGllcywgZGVwZW5kaW5nIG9uIHRoZSBvdmVyYWxsIGdlbmRlciBjb21wb3NpdGlvbiBvZiB0aGVpciBzb2Npb2xvZ3kgYW5kIHBvbGl0aWNvbG9neSBkZXBhcnRtZW50cz8KClJRNTogYXJlIGNvbGxhYm9yYXRpb25zIGFuZCBuZXR3b3JrcyBtb3JlIGltcG9ydGFudCBmb3Igd29tZW4gdGhhbiBmb3IgbWVuIGluIGNpdGF0aW9ucyBvZiBwdWJsaWNhdGlvbnMuIAoKT25lIG9mIHRoZSBhcnRpY2xlcyByZWxhdGVkIHRvIHRoZXNlIHF1ZXN0aW9ucyB3b3VsZCBiZToKQ29sbGlucywgUi4sICYgU3RlZmZlbi1GbHVociwgTi4gKDIwMTkpLiBIaWRkZW4gcGF0dGVybnMuICpFcXVhbGl0eSBEaXZlcnNpdHkgQW5kIEluY2x1c2lvbiBBbiBJbnRlcm5hdGlvbmFsIEpvdXJuYWwqLCAzOCgyKSwgMjY14oCTMjgyLiBodHRwczovL2RvaS5vcmcvMTAuMTEwOC9lZGktMDktMjAxNy0wMTgzCgo8YnI+CgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiMjIyBXZWRuZXNkYXkgMTAgc2VwdGVtYmVyCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KClRvZGF5IEkgcmVhZCBDaGFwdGVyIDIsIFBhcmFncmFwaCAzLjMgYW5kIENoYXB0ZXIgNS4gV2hpbGUgSSBjb3VsZCBmb2xsb3cgQ2hhcHRlciAyIGFuZCBQYXJhZ3JhcGggMy4zLCBDaGFwdGVyIDUgd2VudCBhIGJpdCBxdWljayBmb3IgbWUuIAoK</div>
 
 
 </div>
