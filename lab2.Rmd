@@ -39,9 +39,16 @@ Last compiled on `r format(Sys.time(), '%B, %Y')`
 ------------------------------------------------------------------------
 
 ## Workshop
+<br>
+
+------------------------------------------------------------------------
 
 ### Presenting my RQ's
 Today I presented my various research questions and we discussed how to make them more concrete. I drew the network, and after a lot of discussion, I now understand how I could visualize the network I wanted to analyse. 
+
+<br>
+
+------------------------------------------------------------------------
 
 ### Social networks in matrices
 Next, with some help, I created a matrix filled with randomly assigned 0 and 1. Start coding in small steps: see what needs to happen, and create steps to get there. 
@@ -109,6 +116,9 @@ mat_sym
 <br>
 
 ------------------------------------------------------------------------
+
+### Chapter 2
+
 Read Chapter 2 again: look at directional ties. Look at reciprocity.
 How do you measure it?
 
@@ -117,6 +127,7 @@ a possible reciprocal relationship is when at least one of the two people has a 
 because then it is possible for it to become reciprocal.
 
 ```{r}
+
 val <- sample(x = 0:1, size = 4*4, replace = TRUE)
 
 mat1 <- matrix(data = val, nrow = 4, ncol=4)
@@ -134,14 +145,12 @@ sum(mat3[upper.tri(mat3)] == 2)
 
 # then divide by the number of possible reciprocal ties
 # in this case there are 4 potential numbers 1/4 = 0.25
+
 ```
 
 <br>
 
 ------------------------------------------------------------------------
-
-### Chapter 2
-
 
 You can describe networks by describing notes, the dyads, the egonets embedded in the network. And describing the network as a whole.
 
@@ -187,32 +196,34 @@ if there are none: the clustering = 0
 if there is one out of three alters: the clustering = 1/3
 High clustering (max = 1), can lead to higher stability of a network
 
-
-Diad census!
 ```{r}
-# Find out how many dyads census are in our matrix
+# DYAD CENSUS!!!
+# find out how many dyads census are in our matrix
 # we need a directed network
 diag(net1) <-0
+library(igraph)
 neth <- graph_from_adjacency_matrix(net1)
 dyad_census(neth)
 
 plot1<- plot(neth)
-plot1
 # mut	  = the number of pairs with mutual connections = 3
 # asym  = The number of pairs with non-mutual connections = 2
-#null   = the number of pairs with no connection between them = 1
+# null   = the number of pairs with no connection between them = 1
 
 ```
-Triad census
+
 ```{r}
+# TRIAD CENSUS
 triad_census(neth)
 
 # you get numbers for every kind of triangle (there are 16 kinds)
 ?triad_census
 ```
 
-Reciprocity = reciprocated relations/ all possible reciprocated relations
+
 ```{r}
+# RECIPROCITY = reciprocated relations/ all possible reciprocated relations
+
 net1transp <- net1 + t(net1)
 net1transp
 
@@ -243,10 +254,14 @@ It is about 0/1 networks, not about weighted networks.
 ## Homework
 
 Workshop/Homework:
+
 1. Update your research questions
+
 2. Start writing your introduction in which you discuss your RQs, the relevance of a social network perspective
+
 3. Find one or two relevant papers with respect to your research question and focus on the type of data they use.
-4. Make a list of the type of data you will need (actor attributes, relational attributes, etc.) in order to answer your RQs from a
-social network perspective.
+
+4. Make a list of the type of data you will need (actor attributes, relational attributes, etc.) in order to answer your RQs from a social network perspective.
+
 5. Update your lab journal / website
 
