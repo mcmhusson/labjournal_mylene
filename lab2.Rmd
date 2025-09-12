@@ -1,0 +1,139 @@
+---
+title: "Journal 1"
+#bibliography: references.bib
+author: "Mylène Husson"
+---
+
+```{r, globalsettings, echo=FALSE, warning=FALSE, results='hide'}
+library(knitr)
+
+knitr::opts_chunk$set(echo = TRUE)
+opts_chunk$set(tidy.opts=list(width.cutoff=100),tidy=TRUE, warning = FALSE, message = FALSE,comment = "#>", cache=TRUE, class.source=c("test"), class.output=c("test2"))
+options(width = 100)
+#rgl::setupKnitr()
+
+
+
+colorize <- function(x, color) {sprintf("<span style='color: %s;'>%s</span>", color, x) }
+
+```
+
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy(position = c('top', 'right'))
+#klippy::klippy(color = 'darkred')
+#klippy::klippy(tooltip_message = 'Click to copy', tooltip_success = 'Done')
+```
+
+Last compiled on `r format(Sys.time(), '%B, %Y')`
+<br>
+
+------------------------------------------------------------------------
+
+# Week 2
+<br>
+
+------------------------------------------------------------------------
+
+## Workshop
+
+Today I presented my various research questions and we discussed how to make them more concrete. I drew the network, and after a lot of discussion, I now understand how I could visualize the network I wanted to analyse. 
+
+Next, with some help, I created a matrix filled with randomly assigned 0 and 1. Start coding in small steps: see what needs to happen, and create steps to get there. 
+
+
+```{r}
+
+# you can create 
+# val2 <- sample(x = 0:1, size = 100*100, replace = TRUE, prob = c(0.8, 0.2))
+# if you increase the probability of 1's then you have a higher density network
+
+val <- sample(x = 0:1, size = 100*100, replace = TRUE)
+
+mat = matrix(data = val, nrow = 100, ncol=100)
+mat
+
+# you can count how many ties a person has:
+rowsums <- rowSums(mat)
+rowsums
+
+# you can see the percentage of 1's
+rowmeans <- rowMeans(mat)
+rowmeans
+```
+
+
+```{r}
+
+# can say the diagonal needs to be a NA because people can't have ties with themselves it depends on the package you use whether you have to say NA or 0
+diag(mat) <- NA
+mat
+```
+
+
+
+```{r}
+# you can also do it with for loops (more work)
+# rep is replicate, is makkelijker dan typen
+mat2 <- matrix(0, nrow = 100, ncol = 100)
+
+for (col in 1:100) {
+  for (row in 1:100) {
+    mat2[row, col] <- sample(0:1, 1, replace = TRUE)
+  }
+}
+
+mat2
+```
+
+```{r}
+# if you want to have a symmetric matrix (undirexted network)
+# need to be able to flip the rows and columns
+val <- sample(x = 0:1, size = 100*100, replace = TRUE)
+
+mat3 = matrix(data = val, nrow = 100, ncol=100)
+
+# force symmetry
+mat_sym <- (mat3 + t(mat3)) %% 2
+mat_sym
+#uses function upper triangle of the matrix
+
+# you could also sum the networks: so if 1 knows 2 and 2 knows 1 they get a '2' 
+# and then say all the 2's become 1's and all the 1's and 0's become 0's.
+```
+<br>
+
+------------------------------------------------------------------------
+Read Chapter 2 again: look at directional ties. Look at reciprocity.
+How do you measure it?
+
+reciprocity of network: number of reciprocal relations divided by the number of possible reciprocal ties
+a possible reciprocal relationship is when at least one of the two people has a relationship with the other
+because then it is possible for it to become reciprocal.
+
+```{r}
+val <- sample(x = 0:1, size = 4*4, replace = TRUE)
+
+mat1 <- matrix(data = val, nrow = 4, ncol=4)
+mat1
+
+diag(mat1) <- 0
+mat1
+
+# transpose: make another matrix in which the columns and rows are switched
+mat2 <- t(mat1)
+mat2
+
+# then add the networks so if there are two 1's so they become 2
+mat3 <- mat1 + mat2
+mat3
+
+sum(mat3[upper.tri(mat3)] == 2)
+
+# then divide by the number of possible reciprocal ties
+# in this case there are 4 potential numbers 1/4 = 0.25
+
+
+
+
+```
+
