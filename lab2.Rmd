@@ -165,8 +165,8 @@ Reformulate the questions for next week and keep it simple.Try to understand net
 ------------------------------------------------------------------------
 
 ### Chapter 4
-Find the number of complete traids (= difficult).
-The number of traids divided by the number of triads that could be closed.
+Find the number of complete triads (= difficult).
+The number of triads divided by the number of triads that could be closed.
 
 ```{r}
 set.seed(123643)
@@ -177,17 +177,16 @@ net_un[net_un ==2] <- 1
 diag(net_un) <- 0
 net_un
 
-netg <- graph_from_adjacency_matrix(net_un)
-netg
-class(netg)
-plot<- plot(netg)
-plot
-
-#igraph::transitivity(triads, type = "undirected")
-
 # six closed ones: you count the closed ones three times, because there are three ways they could be 'unclosed'
 # the unclosed ones: 2
 # 6/2 = 3
+
+netg <- graph_from_adjacency_matrix(net_un)
+netg
+plot<- plot(netg)
+
+igraph::transitivity(netg, type = "undirected")
+
 ```
 
 For an egonet:
@@ -214,10 +213,10 @@ plot1<- plot(neth)
 
 ```{r}
 # TRIAD CENSUS
+# you get numbers for every kind of triangle (there are 16 kinds)
+# ?triad_census
 triad_census(neth)
 
-# you get numbers for every kind of triangle (there are 16 kinds)
-?triad_census
 ```
 
 
@@ -225,7 +224,6 @@ triad_census(neth)
 # RECIPROCITY = reciprocated relations/ all possible reciprocated relations
 
 net1transp <- net1 + t(net1)
-net1transp
 
 numtwos <- sum(net1transp == 2)
 numonetwos <- sum(net1transp == 1 | net1transp == 2)
@@ -265,3 +263,5 @@ Workshop/Homework:
 
 5. Update your lab journal / website
 
+Also read chapter 2, 4, 6 (a little bit) and 8 !
+Play around in OpenAlex
