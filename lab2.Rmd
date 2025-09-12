@@ -23,6 +23,10 @@ klippy::klippy(position = c('top', 'right'))
 #klippy::klippy(color = 'darkred')
 #klippy::klippy(tooltip_message = 'Click to copy', tooltip_success = 'Done')
 ```
+```{r}
+library(igraph)
+```
+
 
 Last compiled on `r format(Sys.time(), '%B, %Y')`
 <br>
@@ -36,8 +40,10 @@ Last compiled on `r format(Sys.time(), '%B, %Y')`
 
 ## Workshop
 
+### Presenting my RQ's
 Today I presented my various research questions and we discussed how to make them more concrete. I drew the network, and after a lot of discussion, I now understand how I could visualize the network I wanted to analyse. 
 
+### Social networks in matrices
 Next, with some help, I created a matrix filled with randomly assigned 0 and 1. Start coding in small steps: see what needs to happen, and create steps to get there. 
 
 
@@ -114,14 +120,11 @@ because then it is possible for it to become reciprocal.
 val <- sample(x = 0:1, size = 4*4, replace = TRUE)
 
 mat1 <- matrix(data = val, nrow = 4, ncol=4)
-mat1
-
 diag(mat1) <- 0
 mat1
 
 # transpose: make another matrix in which the columns and rows are switched
 mat2 <- t(mat1)
-mat2
 
 # then add the networks so if there are two 1's so they become 2
 mat3 <- mat1 + mat2
@@ -131,9 +134,119 @@ sum(mat3[upper.tri(mat3)] == 2)
 
 # then divide by the number of possible reciprocal ties
 # in this case there are 4 potential numbers 1/4 = 0.25
+```
+
+<br>
+
+------------------------------------------------------------------------
+
+### Chapter 2
 
 
+You can describe networks by describing notes, the dyads, the egonets embedded in the network. And describing the network as a whole.
 
+Multiplexity: the number of multiplex relationships/ possible number of multiplex relationships
+
+Need to put the things that are in Chapter 2 in you theory section: show that you are familiar. 
+
+
+Reformulate the questions for next week and keep it simple.Try to understand networks.
+<br>
+
+------------------------------------------------------------------------
+
+### Chapter 4
+Find the number of complete traids (= difficult).
+The number of traids divided by the number of triads that could be closed.
+
+```{r}
+set.seed(123643)
+
+net1 <- matrix(sample(0:1, 16, replace = TRUE), nrow=4, ncol=4)
+net_un <- net1 + t(net1)
+net_un[net_un ==2] <- 1
+diag(net_un) <- 0
+net_un
+
+netg <- graph_from_adjacency_matrix(net_un)
+netg
+class(netg)
+plot<- plot(netg)
+plot
+
+#igraph::transitivity(triads, type = "undirected")
+
+# six closed ones: you count the closed ones three times, because there are three ways they could be 'unclosed'
+# the unclosed ones: 2
+# 6/2 = 3
+```
+
+For an egonet:
+You can count the number of triads in an egonetwerk:
+if there are none: the clustering = 0
+if there is one out of three alters: the clustering = 1/3
+High clustering (max = 1), can lead to higher stability of a network
+
+
+Diad census!
+```{r}
+# Find out how many dyads census are in our matrix
+# we need a directed network
+diag(net1) <-0
+neth <- graph_from_adjacency_matrix(net1)
+dyad_census(neth)
+
+plot1<- plot(neth)
+plot1
+# mut	  = the number of pairs with mutual connections = 3
+# asym  = The number of pairs with non-mutual connections = 2
+#null   = the number of pairs with no connection between them = 1
 
 ```
+Triad census
+```{r}
+triad_census(neth)
+
+# you get numbers for every kind of triangle (there are 16 kinds)
+?triad_census
+```
+
+Reciprocity = reciprocated relations/ all possible reciprocated relations
+```{r}
+net1transp <- net1 + t(net1)
+net1transp
+
+numtwos <- sum(net1transp == 2)
+numonetwos <- sum(net1transp == 1 | net1transp == 2)
+
+reciprocity <- numtwos/numonetwos
+
+reciprocity
+```
+
+
+<br>
+
+------------------------------------------------------------------------
+
+### Bram explains betweenness
+
+How important certain actors are to get information across. You want to get information from actor A to actor B, and there are three shortest connections. For two of those connections C is necessary, you divided the amount of paths that go through C, by the total shortest paths: 2/3. It's always only about the shortest paths. If there is a direct connection between A to B, then C is not important at all.
+You have to do it for all dyads in the network.
+
+It is about 0/1 networks, not about weighted networks. 
+
+<br>
+
+------------------------------------------------------------------------
+
+## Homework
+
+Workshop/Homework:
+1. Update your research questions
+2. Start writing your introduction in which you discuss your RQs, the relevance of a social network perspective
+3. Find one or two relevant papers with respect to your research question and focus on the type of data they use.
+4. Make a list of the type of data you will need (actor attributes, relational attributes, etc.) in order to answer your RQs from a
+social network perspective.
+5. Update your lab journal / website
 
