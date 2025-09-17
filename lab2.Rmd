@@ -238,7 +238,7 @@ reciprocity
 
 ------------------------------------------------------------------------
 
-### Bram explains betweenness
+### Betweenness
 
 How important certain actors are to get information across. You want to get information from actor A to actor B, and there are three shortest connections. For two of those connections C is necessary, you divided the amount of paths that go through C, by the total shortest paths: 2/3. It's always only about the shortest paths. If there is a direct connection between A to B, then C is not important at all.
 You have to do it for all dyads in the network.
@@ -265,3 +265,46 @@ Workshop/Homework:
 
 Also read chapter 2, 4, 6 (a little bit) and 8 !
 Play around in OpenAlex
+
+<br>
+
+------------------------------------------------------------------------
+
+### Wednesday 17 september
+
+As I was unsure how to tackle the characterisation of the themes of articles, I decided to focus my research scope to the number of citations of articles. 
+
+A framing for the introduction:
+In academic research, researchers collaborate with each other, which not only combines expertise but also amplifies the reach and impact of scholarly work. This collaboration does not appear to be random: it is often shaped by homophily; the tendency to associate with others who are similar to oneself. In STEM fields, this tendency intersects with gender dynamics (Collins & Steffen-Fluhr, 2019). Men, who are often attributed higher status within academia, are more likely to co-author with other men. Women, on the other hand, defy the concept of homophily and are also more likely to co-author with men. This could be because men are attributed a higher status which makes it, in terms of impact, enticing to work together with men, or simply because there are simply more men within STEM. This raises a broader question: are such patterns unique to male-dominated disciplines, or do they persist even in fields where women are well-represented or hold the majority? The social sciences offer a compelling context to investigate these dynamics. Data allows us to research this within Dutch sociology and politicology departments. 
+
+RQ1: To what extent does gender homophily shape collaboration patterns among researchers in Dutch sociology and politicology departments?
+<br>
+The gender composition of research collaborations is an important factor shaping whose work gains recognition in academia. Recent studies show that collaboration patterns are not neutral but can significantly influence the visibility and impact of scholarly articles. Chatterjee and Werner (2021), for instance, analyzed 5,554 articles in leading medical journals and found that papers with women in either the first or senior author position received fewer citations than those with men in the same roles. The effect was even more pronounced when both positions were held by women, whose articles received roughly half as many citations as male-authored counterparts. These findings indicate that looking only at individual authors or single publications obscures the broader dynamics at play. Instead, examining the gender composition of entire author teams provides a more complete understanding of how impact is distributed across the academic landscape.
+
+While this evidence comes from medicine, a STEM field with persistently low representation of women, similar dynamics have been observed in disciplines with higher female participation, such as the social sciences. Casad et al. (2022), for example, found that in US social sciences, papers with men as both first and last authors were over-cited, whereas those with at least one woman in a lead position were systematically under-cited. This suggests that gendered citation disparities are not confined to male-dominated disciplines but may be a broader feature of academic publishing. Building on this evidence, the second research question is:
+
+RQ2: How do the gender composition of collaborations among researchers in Dutch sociology and politicology departments shape the impact of their scholarly work? 
+
+![](images/MyNetworkCitations.png)
+
+<br>
+
+Casad, B. J., Garasky, C. E., Jancetic, T. R., Brown, A. K., Franks, J. E., & Bach, C. R. (2022). U.S. Women Faculty in the Social Sciences Also Face Gender Inequalities. *Frontiers in Psychology, 13*. https://doi.org/10.3389/fpsyg.2022.792756
+
+Collins, R., & Steffen-Fluhr, N. (2019). Hidden patterns. *Equality Diversity And Inclusion An International Journal, 38*(2), 265–282. https://doi.org/10.1108/edi-09-2017-0183
+
+Chatterjee, P., & Werner, R. M. (2021). Gender disparity in citations in High-Impact Journal articles. *JAMA Network Open, 4*(7), e2114509. https://doi.org/10.1001/jamanetworkopen.2021.14509
+
+<br>
+
+Disclaimer: Wu (2024) mentions how various research have shown minimum differences between an author's gender the number of citations an article receives, he only finds that women have a lower total number of citations due to their differing career trajectories. 
+
+Wu, C. (2024). The gender citation gap: Approaches, explanations, and implications. *Sociology Compass, 18*(2). https://doi.org/10.1111/soc4.13189
+
+
+<br>
+
+------------------------------------------------------------------------
+
+I furthermore read the chapters 4, 6 and 8 as I already read chapter 2. 
+
