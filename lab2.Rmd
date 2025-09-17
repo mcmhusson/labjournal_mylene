@@ -308,3 +308,35 @@ Wu, C. (2024). The gender citation gap: Approaches, explanations, and implicatio
 
 I furthermore read the chapters 4, 6 and 8 as I already read chapter 2. 
 
+```{r}
+# CHAPTER 6
+
+# start with clean workspace
+rm(list = ls())
+library(data.table)  # mainly for faster data handling
+library(tidyverse)  # I assume you already installed this one!
+require(xml2)
+require(rvest)
+require(devtools)
+# Note we're doing something different here. We're installing a *latest* version directly from
+# GitHub This is because the released version of this packages contains some errors!
+
+require(scholar)
+
+# Get anchor data
+soc_staff <- read_html("https://web.archive.org/web/20230528153336/https://www.ru.nl/sociology/research/staff/")
+head(soc_staff)
+class(soc_staff)
+
+# so we need to find WHERE the table is located in the html 'inspect element' in mozilla firefox or
+# 'view page source' and you see that everything AFTER /td in the 'body' of the page seems to be
+# the table we do need
+soc_staff <- soc_staff %>%
+    rvest::html_nodes("body") %>%
+    xml2::xml_find_all("//td") %>%
+    rvest::html_text()
+
+soc_staff
+```
+
+
