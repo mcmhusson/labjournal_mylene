@@ -393,6 +393,16 @@ div.tocify {
 </div>
 
 
+<pre class="r"><code>library(knitr)
+library(tidyverse)
+library(scholar)
+library(openalexR)
+library(rvest)
+library(jsonlite)
+library(httr)
+library(rvest)
+library(reshape2)
+library(xml2)</code></pre>
 <script>
   addClassKlippyTo("pre.r, pre.markdown");
   addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
@@ -405,17 +415,219 @@ div.tocify {
 <hr />
 <div id="workshop" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Workshop</h2>
-<p>Recap: people are connected through social networks and therefore the
-observations can’t be seen as independent. The theoretical part is now
-completed.</p>
+<p>In class we started with a recap: people are connected through social
+networks and therefore the observations can’t be seen as independent.
+The theoretical part is now completed.</p>
 <p>Now: what are the implications for the data</p>
 <p>You can’t ONLY study individuals, but also the relations: so now you,
 need data on relations. This means you always have to get information
 from atleast 2 people.</p>
+<p><br></p>
+<hr />
+<div id="survey-data" class="section level3" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Survey data</h3>
+<p>How to get ego’s from a survey: 1. Diary approach question: who have
+you talked to/met in the last week/month/etc? 2. Who are people you feel
+comfortable discuss difficult issues with? List a maximum of 5. 3. Who
+are the people at work you hang around with?</p>
+<p>Then, if someone mentioned 50 people, you can’t ask them their
+relationship with everyone. So you sample people from each
+group/question, and ask them if they trust this person.</p>
+<p>Then you ask the ego for contact information of the other people, or
+even better: send a link to the ego to send to the alters. To ensure
+this goes well: you get a bol.com voucher if the alter fills in the
+survey and then alter also got a gift card.</p>
+<p>Ethics: Consent from alters. It’s sensitive data. Especially
+web-scraping data. Whether you get ethical permission or not: think for
+yourself, do you think it is appropriate?</p>
+<p><br></p>
+<hr />
+</div>
+<div id="ethical-webscraping" class="section level3" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Ethical
+webscraping</h3>
+<p>Ethical considerations: which sites can you webscrape, and why are
+you not allowed to scare certain websites?</p>
+<p>The information is public, but by combining the data, we add extra
+information, we are doing stuff with the data, which it was not intended
+for. The purpose of the data changes.</p>
+<p>General Privacy Regulations law: you are allowed to do this, as long
+as it serves a higher societal goal and is not used for commercial
+purposes.</p>
+<p>If you do not abide to the terms of the website, the question is who
+has legal authority.</p>
+<p>So we are collecting publicly available data, on a website which
+allows web scraping. We are then enriching that data with the gender of
+the persons (and ethnicity? weird).</p>
+<p><br></p>
+</div>
+<div id="practical-webscraping" class="section level3" number="1.1.3">
+<h3><span class="header-section-number">1.1.3</span> Practical
+webscraping</h3>
+<p>We are gong to use Xpath. Use xml code instead of HTML. Div is just a
+section of a page, and the div has a class. Assigning a class to
+specific elements, tells a website what it should look like. There are
+functions to get all information stored in a list.</p>
+<pre class="r"><code>lpol_staff &lt;- read_html(&quot;https://www.universiteitleiden.nl/en/social-behavioural-sciences/political-science/staff#tab-1&quot;)
+
+# you can do this and then find the pattern with which the names start and say: only select those.
+lpol_staff &lt;- lpol_staff |&gt;
+  html_nodes(&quot;body&quot;) |&gt;
+  html_nodes(xpath = &quot;//a&quot;) |&gt; #collects all hyperlinks 
+  html_text() #puts it into text
+
+#lpol_staff
+
+# a different way:
+lpol_staff_names &lt;- read_html(&quot;https://www.universiteitleiden.nl/en/social-behavioural-sciences/political-science/staff#tab-1&quot;) |&gt;
+    html_element(&quot;section.tab.active&quot;) |&gt;
+    html_elements(&quot;ul.table-list&quot;) |&gt;
+    html_elements(&quot;li&quot;) |&gt;
+    html_elements(&quot;a&quot;) |&gt;
+    html_elements(&quot;div&quot;) |&gt;
+    html_elements(&quot;strong&quot;) |&gt;
+    html_text()
+
+lpol_staff_functions &lt;- read_html(&quot;https://www.universiteitleiden.nl/en/social-behavioural-sciences/political-science/staff#tab-1&quot;) |&gt;
+    html_element(&quot;section.tab.active&quot;) |&gt;
+    html_elements(&quot;ul.table-list&quot;) |&gt;
+    html_elements(&quot;li&quot;) |&gt;
+    html_elements(&quot;a&quot;) |&gt;
+    html_elements(&quot;div&quot;) |&gt;
+    html_elements(&quot;span&quot;) |&gt;
+    html_text()
+
+lpol_staff2 &lt;- data.frame(name = lpol_staff_names, funct = lpol_staff_functions)
+#lpol_staff2</code></pre>
+<p><br></p>
+<p>For interactive websites: package Selenider. Can tell it to click on
+certain parts of pages. With open_url()</p>
+<p>You could also use Rselenium Can tell it to click on allow cookies
+when a popup shows up. Can also ask it to highlight the element, nice
+for constructing the web-scraper.</p>
+<p><br></p>
+</div>
+<div id="openalexai-scraping" class="section level3" number="1.1.4">
+<h3><span class="header-section-number">1.1.4</span> OpenAlexAI
+scraping</h3>
+<p>For our final project we need to collect data via OpenAlex. You need
+to quiry your dataset before it is loaded in R, because it is too large
+to open in R.</p>
+<p>Can retrieve information using api OpenAlex: <a
+href="https://api.openalex.org/works/W2741809807"
+class="uri">https://api.openalex.org/works/W2741809807</a></p>
+<p>Attributes, publications page 1: You want read in JSON: fromJSON</p>
+<pre class="r"><code>#load the functions you need from the packages
+fpackage.check &lt;- function(packages) {
+    lapply(packages, FUN = function(x) {
+        if (!require(x, character.only = TRUE)) {
+            install.packages(x, dependencies = TRUE)
+            library(x, character.only = TRUE)
+        }
+    })
+}
+
+fsave &lt;- function(x, file = NULL, location = &quot;./data/processed/&quot;) {
+    ifelse(!dir.exists(&quot;data&quot;), dir.create(&quot;data&quot;), FALSE)
+    ifelse(!dir.exists(&quot;data/processed&quot;), dir.create(&quot;data/processed&quot;), FALSE)
+    if (is.null(file))
+        file = deparse(substitute(x))
+    datename &lt;- substr(gsub(&quot;[:-]&quot;, &quot;&quot;, Sys.time()), 1, 8)
+    totalname &lt;- paste(location, datename, file, &quot;.rda&quot;, sep = &quot;&quot;)
+    save(x, file = totalname)  #need to fix if file is reloaded as input name, not as x. 
+}
+
+fload &lt;- function(filename) {
+    load(filename)
+    get(ls()[ls() != &quot;filename&quot;])
+}
+
+fshowdf &lt;- function(x, ...) {
+    knitr::kable(x, digits = 2, &quot;html&quot;, ...) %&gt;%
+        kableExtra::kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;%
+        kableExtra::scroll_box(width = &quot;100%&quot;, height = &quot;300px&quot;)
+}
+
+# load the dataset
+df &lt;- fload(&quot;./data/processed/20230620df_gender_jt.rda&quot;)
+
+# link your email
+options(openalexR.mailto = &quot;mylene.husson@ru.nl&quot;) 
+
+url &lt;- &quot;https://api.openalex.org/authors?search=Jochem Tolsma&quot;
+
+# based on what you have learned so far, you would probably first try:
+jt &lt;- read_html(&quot;https://api.openalex.org/authors?search=Jochem+Tolsma&quot;) %&gt;%
+    html_text2()
+
+substr(jt, 1, 100)</code></pre>
+<pre><code>## [1] &quot;{\&quot;meta\&quot;:{\&quot;count\&quot;:1,\&quot;db_response_time_ms\&quot;:119,\&quot;page\&quot;:1,\&quot;per_page\&quot;:25,\&quot;groups_count\&quot;:null},\&quot;results\&quot;:[&quot;</code></pre>
+<pre class="r"><code>jt_json &lt;- fromJSON(&quot;https://api.openalex.org/authors?search=Jochem+Tolsma&quot;, simplifyVector = FALSE)
+#glimpse(jt_json, max.level = 1)
+
+#jt_json[[&quot;results&quot;]][[1]][[&quot;display_name&quot;]]
+
+#View(jt_json)
+
+df &lt;- oa_fetch(entity = &quot;author&quot;, search = &quot;Jochem Tolsma&quot;)
+#fshowdf(df)
+
+# can access parts of the list jt_json
+jt_json[[&quot;meta&quot;]]</code></pre>
+<pre><code>## $count
+## [1] 1
+## 
+## $db_response_time_ms
+## [1] 119
+## 
+## $page
+## [1] 1
+## 
+## $per_page
+## [1] 25
+## 
+## $groups_count
+## NULL</code></pre>
+<pre class="r"><code># could also put the number of the list there (is the third list in jt_json)
+jt_json[[&quot;3&quot;]]</code></pre>
+<pre><code>## NULL</code></pre>
+<pre class="r"><code># you can also do it with $ and ask for the structure for instance
+# str(jt_json$results)
+
+
+# look at affiliations
+#jt_json$results[[1]]$affiliations</code></pre>
+<p><br></p>
+<p>OpenAlex have tutorials of how to get data: you need to read this.
+You can also use Rappers which have functions which construct the
+correct URL to send to OpenAlex: in R the best one is “openalexR” Then
+you don’t have to understand the logic of AlexAPI, but then you have to
+study the R package. oa_query() is very important: can ask what you
+need, and then it constructs for you the correct URL which is sent to
+OpenAlexAI but also need to retrieve it and convert it to a nice dataset
+so use oa_fech()</p>
+<p><br></p>
+<hr />
+</div>
+</div>
+<div id="homework" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Homework</h2>
+<p>Update your Research Questions 1. Construct your datasets (including
+your new variable/relation)</p>
+<p>You only need to give prove of concept, and show how you would do
+that on a small scale. So collect co-authors, citations, citationscore
+data etc. Doing this with one variable is enough.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Describe your social network data (see week 2)</p></li>
+<li><p>Be prepared to discuss the results of your descriptive statistics
+next week.</p></li>
+<li><p>Start writing your data section and your result section</p></li>
+<li><p>Update your lab journal / website</p></li>
+</ol>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiSm91cm5hbCAxIgojYmlibGlvZ3JhcGh5OiByZWZlcmVuY2VzLmJpYgphdXRob3I6ICJNeWzDqG5lIEh1c3NvbiIKLS0tCgpgYGB7ciwgZ2xvYmFsc2V0dGluZ3MsIGVjaG89RkFMU0UsIHdhcm5pbmc9RkFMU0UsIHJlc3VsdHM9J2hpZGUnfQpsaWJyYXJ5KGtuaXRyKQoKa25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQpvcHRzX2NodW5rJHNldCh0aWR5Lm9wdHM9bGlzdCh3aWR0aC5jdXRvZmY9MTAwKSx0aWR5PVRSVUUsIHdhcm5pbmcgPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFLGNvbW1lbnQgPSAiIz4iLCBjYWNoZT1UUlVFLCBjbGFzcy5zb3VyY2U9YygidGVzdCIpLCBjbGFzcy5vdXRwdXQ9YygidGVzdDIiKSkKb3B0aW9ucyh3aWR0aCA9IDEwMCkKI3JnbDo6c2V0dXBLbml0cigpCgoKCmNvbG9yaXplIDwtIGZ1bmN0aW9uKHgsIGNvbG9yKSB7c3ByaW50ZigiPHNwYW4gc3R5bGU9J2NvbG9yOiAlczsnPiVzPC9zcGFuPiIsIGNvbG9yLCB4KSB9CgpgYGAKCmBgYHtyIGtsaXBweSwgZWNobz1GQUxTRSwgaW5jbHVkZT1UUlVFfQprbGlwcHk6OmtsaXBweShwb3NpdGlvbiA9IGMoJ3RvcCcsICdyaWdodCcpKQoja2xpcHB5OjprbGlwcHkoY29sb3IgPSAnZGFya3JlZCcpCiNrbGlwcHk6OmtsaXBweSh0b29sdGlwX21lc3NhZ2UgPSAnQ2xpY2sgdG8gY29weScsIHRvb2x0aXBfc3VjY2VzcyA9ICdEb25lJykKYGBgCgpMYXN0IGNvbXBpbGVkIG9uIGByIGZvcm1hdChTeXMudGltZSgpLCAnJUIsICVZJylgCjxicj4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKIyBXZWVrIDMKPGJyPgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgojIyBXb3Jrc2hvcAoKUmVjYXA6IHBlb3BsZSBhcmUgY29ubmVjdGVkIHRocm91Z2ggc29jaWFsIG5ldHdvcmtzIGFuZCB0aGVyZWZvcmUgdGhlIG9ic2VydmF0aW9ucyBjYW4ndCBiZSBzZWVuIGFzIGluZGVwZW5kZW50LiBUaGUgdGhlb3JldGljYWwgcGFydCBpcyBub3cgY29tcGxldGVkLiAKCk5vdzogd2hhdCBhcmUgdGhlIGltcGxpY2F0aW9ucyBmb3IgdGhlIGRhdGEKCllvdSBjYW4ndCBPTkxZIHN0dWR5IGluZGl2aWR1YWxzLCBidXQgYWxzbyB0aGUgcmVsYXRpb25zOiBzbyBub3cgeW91LCBuZWVkIGRhdGEgb24gcmVsYXRpb25zLiBUaGlzIG1lYW5zIHlvdSBhbHdheXMgaGF2ZSB0byBnZXQgaW5mb3JtYXRpb24gZnJvbSBhdGxlYXN0IDIgcGVvcGxlLiAKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSm91cm5hbCAxIgojYmlibGlvZ3JhcGh5OiByZWZlcmVuY2VzLmJpYgphdXRob3I6ICJNeWzDqG5lIEh1c3NvbiIKLS0tCgpgYGB7ciwgZWNobz1UUlVFLCByZXN1bHRzPSdoaWRlJywgbWVzc2FnZT1GQUxTRSwgd2FybmluZz1GQUxTRX0KbGlicmFyeShrbml0cikKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkoc2Nob2xhcikKbGlicmFyeShvcGVuYWxleFIpCmxpYnJhcnkocnZlc3QpCmxpYnJhcnkoanNvbmxpdGUpCmxpYnJhcnkoaHR0cikKbGlicmFyeShydmVzdCkKbGlicmFyeShyZXNoYXBlMikKbGlicmFyeSh4bWwyKQpgYGAKCmBgYHtyIGtsaXBweSwgZWNobz1GQUxTRSwgaW5jbHVkZT1UUlVFfQprbGlwcHk6OmtsaXBweShwb3NpdGlvbiA9IGMoJ3RvcCcsICdyaWdodCcpKQoja2xpcHB5OjprbGlwcHkoY29sb3IgPSAnZGFya3JlZCcpCiNrbGlwcHk6OmtsaXBweSh0b29sdGlwX21lc3NhZ2UgPSAnQ2xpY2sgdG8gY29weScsIHRvb2x0aXBfc3VjY2VzcyA9ICdEb25lJykKYGBgCgpMYXN0IGNvbXBpbGVkIG9uIGByIGZvcm1hdChTeXMudGltZSgpLCAnJUIsICVZJylgCjxicj4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKIyBXZWVrIDMKPGJyPgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgojIyBXb3Jrc2hvcAoKSW4gY2xhc3Mgd2Ugc3RhcnRlZCB3aXRoIGEgcmVjYXA6IHBlb3BsZSBhcmUgY29ubmVjdGVkIHRocm91Z2ggc29jaWFsIG5ldHdvcmtzIGFuZCB0aGVyZWZvcmUgdGhlIG9ic2VydmF0aW9ucyBjYW4ndCBiZSBzZWVuIGFzIGluZGVwZW5kZW50LiBUaGUgdGhlb3JldGljYWwgcGFydCBpcyBub3cgY29tcGxldGVkLiAKCk5vdzogd2hhdCBhcmUgdGhlIGltcGxpY2F0aW9ucyBmb3IgdGhlIGRhdGEKCllvdSBjYW4ndCBPTkxZIHN0dWR5IGluZGl2aWR1YWxzLCBidXQgYWxzbyB0aGUgcmVsYXRpb25zOiBzbyBub3cgeW91LCBuZWVkIGRhdGEgb24gcmVsYXRpb25zLiBUaGlzIG1lYW5zIHlvdSBhbHdheXMgaGF2ZSB0byBnZXQgaW5mb3JtYXRpb24gZnJvbSBhdGxlYXN0IDIgcGVvcGxlLiAKCjxicj4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKIyMjIFN1cnZleSBkYXRhCkhvdyB0byBnZXQgZWdvJ3MgZnJvbSBhIHN1cnZleToKMS4gRGlhcnkgYXBwcm9hY2ggcXVlc3Rpb246IHdobyBoYXZlIHlvdSB0YWxrZWQgdG8vbWV0IGluIHRoZSBsYXN0IHdlZWsvbW9udGgvZXRjPwoyLiBXaG8gYXJlIHBlb3BsZSB5b3UgZmVlbCBjb21mb3J0YWJsZSBkaXNjdXNzIGRpZmZpY3VsdCBpc3N1ZXMgd2l0aD8gTGlzdCBhIG1heGltdW0gb2YgNS4KMy4gV2hvIGFyZSB0aGUgcGVvcGxlIGF0IHdvcmsgeW91IGhhbmcgYXJvdW5kIHdpdGg/IAoKVGhlbiwgaWYgc29tZW9uZSBtZW50aW9uZWQgNTAgcGVvcGxlLCB5b3UgY2FuJ3QgYXNrIHRoZW0gdGhlaXIgcmVsYXRpb25zaGlwIHdpdGggZXZlcnlvbmUuIFNvIHlvdSBzYW1wbGUgcGVvcGxlIGZyb20gZWFjaCBncm91cC9xdWVzdGlvbiwgYW5kIGFzayB0aGVtIGlmIHRoZXkgdHJ1c3QgdGhpcyBwZXJzb24uCgpUaGVuIHlvdSBhc2sgdGhlIGVnbyBmb3IgY29udGFjdCBpbmZvcm1hdGlvbiBvZiB0aGUgb3RoZXIgcGVvcGxlLCBvciBldmVuIGJldHRlcjogc2VuZCBhIGxpbmsgdG8gdGhlIGVnbyB0byBzZW5kIHRvIHRoZSBhbHRlcnMuIFRvIGVuc3VyZSB0aGlzIGdvZXMgd2VsbDogeW91IGdldCBhIGJvbC5jb20gdm91Y2hlciBpZiB0aGUgYWx0ZXIgZmlsbHMgaW4gdGhlIHN1cnZleSBhbmQgdGhlbiBhbHRlciBhbHNvIGdvdCBhIGdpZnQgY2FyZC4KCkV0aGljczogQ29uc2VudCBmcm9tIGFsdGVycy4gSXQncyBzZW5zaXRpdmUgZGF0YS4gRXNwZWNpYWxseSB3ZWItc2NyYXBpbmcgZGF0YS4KV2hldGhlciB5b3UgZ2V0IGV0aGljYWwgcGVybWlzc2lvbiBvciBub3Q6IHRoaW5rIGZvciB5b3Vyc2VsZiwgZG8geW91IHRoaW5rIGl0IGlzIGFwcHJvcHJpYXRlPwoKPGJyPgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgojIyMgRXRoaWNhbCB3ZWJzY3JhcGluZwpFdGhpY2FsIGNvbnNpZGVyYXRpb25zOiB3aGljaCBzaXRlcyBjYW4geW91IHdlYnNjcmFwZSwgYW5kIHdoeSBhcmUgeW91IG5vdCBhbGxvd2VkIHRvIHNjYXJlIGNlcnRhaW4gd2Vic2l0ZXM/CgpUaGUgaW5mb3JtYXRpb24gaXMgcHVibGljLCBidXQgYnkgY29tYmluaW5nIHRoZSBkYXRhLCB3ZSBhZGQgZXh0cmEgaW5mb3JtYXRpb24sIHdlIGFyZSBkb2luZyBzdHVmZiB3aXRoIHRoZSBkYXRhLCB3aGljaCBpdCB3YXMgbm90IGludGVuZGVkIGZvci4gVGhlIHB1cnBvc2Ugb2YgdGhlIGRhdGEgY2hhbmdlcy4gCgpHZW5lcmFsIFByaXZhY3kgUmVndWxhdGlvbnMgbGF3OiB5b3UgYXJlIGFsbG93ZWQgdG8gZG8gdGhpcywgYXMgbG9uZyBhcyBpdCBzZXJ2ZXMgYSBoaWdoZXIgc29jaWV0YWwgZ29hbCBhbmQgaXMgbm90IHVzZWQgZm9yIGNvbW1lcmNpYWwgcHVycG9zZXMuIAoKSWYgeW91IGRvIG5vdCBhYmlkZSB0byB0aGUgdGVybXMgb2YgdGhlIHdlYnNpdGUsIHRoZSBxdWVzdGlvbiBpcyB3aG8gaGFzIGxlZ2FsIGF1dGhvcml0eS4KClNvIHdlIGFyZSBjb2xsZWN0aW5nIHB1YmxpY2x5IGF2YWlsYWJsZSBkYXRhLCBvbiBhIHdlYnNpdGUgd2hpY2ggYWxsb3dzIHdlYiBzY3JhcGluZy4gV2UgYXJlIHRoZW4gZW5yaWNoaW5nIHRoYXQgZGF0YSB3aXRoIHRoZSBnZW5kZXIgb2YgdGhlIHBlcnNvbnMgKGFuZCBldGhuaWNpdHk/IHdlaXJkKS4KCjxicj4KCiMjIyBQcmFjdGljYWwgd2Vic2NyYXBpbmcKCldlIGFyZSBnb25nIHRvIHVzZSBYcGF0aC4gVXNlIHhtbCBjb2RlIGluc3RlYWQgb2YgSFRNTC4KRGl2IGlzIGp1c3QgYSBzZWN0aW9uIG9mIGEgcGFnZSwgYW5kIHRoZSBkaXYgaGFzIGEgY2xhc3MuIEFzc2lnbmluZyBhIGNsYXNzIHRvIHNwZWNpZmljIGVsZW1lbnRzLCB0ZWxscyBhIHdlYnNpdGUgd2hhdCBpdCBzaG91bGQgbG9vayBsaWtlLgpUaGVyZSBhcmUgZnVuY3Rpb25zIHRvIGdldCBhbGwgaW5mb3JtYXRpb24gc3RvcmVkIGluIGEgbGlzdC4KCmBgYHtyfQoKbHBvbF9zdGFmZiA8LSByZWFkX2h0bWwoImh0dHBzOi8vd3d3LnVuaXZlcnNpdGVpdGxlaWRlbi5ubC9lbi9zb2NpYWwtYmVoYXZpb3VyYWwtc2NpZW5jZXMvcG9saXRpY2FsLXNjaWVuY2Uvc3RhZmYjdGFiLTEiKQoKIyB5b3UgY2FuIGRvIHRoaXMgYW5kIHRoZW4gZmluZCB0aGUgcGF0dGVybiB3aXRoIHdoaWNoIHRoZSBuYW1lcyBzdGFydCBhbmQgc2F5OiBvbmx5IHNlbGVjdCB0aG9zZS4KbHBvbF9zdGFmZiA8LSBscG9sX3N0YWZmIHw+CiAgaHRtbF9ub2RlcygiYm9keSIpIHw+CiAgaHRtbF9ub2Rlcyh4cGF0aCA9ICIvL2EiKSB8PiAjY29sbGVjdHMgYWxsIGh5cGVybGlua3MgCiAgaHRtbF90ZXh0KCkgI3B1dHMgaXQgaW50byB0ZXh0CgojbHBvbF9zdGFmZgoKIyBhIGRpZmZlcmVudCB3YXk6Cmxwb2xfc3RhZmZfbmFtZXMgPC0gcmVhZF9odG1sKCJodHRwczovL3d3dy51bml2ZXJzaXRlaXRsZWlkZW4ubmwvZW4vc29jaWFsLWJlaGF2aW91cmFsLXNjaWVuY2VzL3BvbGl0aWNhbC1zY2llbmNlL3N0YWZmI3RhYi0xIikgfD4KICAgIGh0bWxfZWxlbWVudCgic2VjdGlvbi50YWIuYWN0aXZlIikgfD4KICAgIGh0bWxfZWxlbWVudHMoInVsLnRhYmxlLWxpc3QiKSB8PgogICAgaHRtbF9lbGVtZW50cygibGkiKSB8PgogICAgaHRtbF9lbGVtZW50cygiYSIpIHw+CiAgICBodG1sX2VsZW1lbnRzKCJkaXYiKSB8PgogICAgaHRtbF9lbGVtZW50cygic3Ryb25nIikgfD4KICAgIGh0bWxfdGV4dCgpCgpscG9sX3N0YWZmX2Z1bmN0aW9ucyA8LSByZWFkX2h0bWwoImh0dHBzOi8vd3d3LnVuaXZlcnNpdGVpdGxlaWRlbi5ubC9lbi9zb2NpYWwtYmVoYXZpb3VyYWwtc2NpZW5jZXMvcG9saXRpY2FsLXNjaWVuY2Uvc3RhZmYjdGFiLTEiKSB8PgogICAgaHRtbF9lbGVtZW50KCJzZWN0aW9uLnRhYi5hY3RpdmUiKSB8PgogICAgaHRtbF9lbGVtZW50cygidWwudGFibGUtbGlzdCIpIHw+CiAgICBodG1sX2VsZW1lbnRzKCJsaSIpIHw+CiAgICBodG1sX2VsZW1lbnRzKCJhIikgfD4KICAgIGh0bWxfZWxlbWVudHMoImRpdiIpIHw+CiAgICBodG1sX2VsZW1lbnRzKCJzcGFuIikgfD4KICAgIGh0bWxfdGV4dCgpCgpscG9sX3N0YWZmMiA8LSBkYXRhLmZyYW1lKG5hbWUgPSBscG9sX3N0YWZmX25hbWVzLCBmdW5jdCA9IGxwb2xfc3RhZmZfZnVuY3Rpb25zKQojbHBvbF9zdGFmZjIKCmBgYAo8YnI+CgpGb3IgaW50ZXJhY3RpdmUgd2Vic2l0ZXM6IHBhY2thZ2UgU2VsZW5pZGVyLiBDYW4gdGVsbCBpdCB0byBjbGljayBvbiBjZXJ0YWluIHBhcnRzIG9mIHBhZ2VzLiBXaXRoIG9wZW5fdXJsKCkKCllvdSBjb3VsZCBhbHNvIHVzZSBSc2VsZW5pdW0KQ2FuIHRlbGwgaXQgdG8gY2xpY2sgb24gYWxsb3cgY29va2llcyB3aGVuIGEgcG9wdXAgc2hvd3MgdXAuIENhbiBhbHNvIGFzayBpdCB0byBoaWdobGlnaHQgdGhlIGVsZW1lbnQsIG5pY2UgZm9yIGNvbnN0cnVjdGluZyB0aGUgd2ViLXNjcmFwZXIuIAoKPGJyPgoKIyMjIE9wZW5BbGV4QUkgc2NyYXBpbmcKCkZvciBvdXIgZmluYWwgcHJvamVjdCB3ZSBuZWVkIHRvIGNvbGxlY3QgZGF0YSB2aWEgT3BlbkFsZXguCllvdSBuZWVkIHRvIHF1aXJ5IHlvdXIgZGF0YXNldCBiZWZvcmUgaXQgaXMgbG9hZGVkIGluIFIsIGJlY2F1c2UgaXQgaXMgdG9vIGxhcmdlIHRvIG9wZW4gaW4gUi4KCkNhbiByZXRyaWV2ZSBpbmZvcm1hdGlvbiB1c2luZyBhcGkgT3BlbkFsZXg6IGh0dHBzOi8vYXBpLm9wZW5hbGV4Lm9yZy93b3Jrcy9XMjc0MTgwOTgwNwoKQXR0cmlidXRlcywgcHVibGljYXRpb25zIHBhZ2UgMToKWW91IHdhbnQgcmVhZCBpbiBKU09OOiBmcm9tSlNPTgoKYGBge3J9CiNsb2FkIHRoZSBmdW5jdGlvbnMgeW91IG5lZWQgZnJvbSB0aGUgcGFja2FnZXMKZnBhY2thZ2UuY2hlY2sgPC0gZnVuY3Rpb24ocGFja2FnZXMpIHsKICAgIGxhcHBseShwYWNrYWdlcywgRlVOID0gZnVuY3Rpb24oeCkgewogICAgICAgIGlmICghcmVxdWlyZSh4LCBjaGFyYWN0ZXIub25seSA9IFRSVUUpKSB7CiAgICAgICAgICAgIGluc3RhbGwucGFja2FnZXMoeCwgZGVwZW5kZW5jaWVzID0gVFJVRSkKICAgICAgICAgICAgbGlicmFyeSh4LCBjaGFyYWN0ZXIub25seSA9IFRSVUUpCiAgICAgICAgfQogICAgfSkKfQoKZnNhdmUgPC0gZnVuY3Rpb24oeCwgZmlsZSA9IE5VTEwsIGxvY2F0aW9uID0gIi4vZGF0YS9wcm9jZXNzZWQvIikgewogICAgaWZlbHNlKCFkaXIuZXhpc3RzKCJkYXRhIiksIGRpci5jcmVhdGUoImRhdGEiKSwgRkFMU0UpCiAgICBpZmVsc2UoIWRpci5leGlzdHMoImRhdGEvcHJvY2Vzc2VkIiksIGRpci5jcmVhdGUoImRhdGEvcHJvY2Vzc2VkIiksIEZBTFNFKQogICAgaWYgKGlzLm51bGwoZmlsZSkpCiAgICAgICAgZmlsZSA9IGRlcGFyc2Uoc3Vic3RpdHV0ZSh4KSkKICAgIGRhdGVuYW1lIDwtIHN1YnN0cihnc3ViKCJbOi1dIiwgIiIsIFN5cy50aW1lKCkpLCAxLCA4KQogICAgdG90YWxuYW1lIDwtIHBhc3RlKGxvY2F0aW9uLCBkYXRlbmFtZSwgZmlsZSwgIi5yZGEiLCBzZXAgPSAiIikKICAgIHNhdmUoeCwgZmlsZSA9IHRvdGFsbmFtZSkgICNuZWVkIHRvIGZpeCBpZiBmaWxlIGlzIHJlbG9hZGVkIGFzIGlucHV0IG5hbWUsIG5vdCBhcyB4LiAKfQoKZmxvYWQgPC0gZnVuY3Rpb24oZmlsZW5hbWUpIHsKICAgIGxvYWQoZmlsZW5hbWUpCiAgICBnZXQobHMoKVtscygpICE9ICJmaWxlbmFtZSJdKQp9Cgpmc2hvd2RmIDwtIGZ1bmN0aW9uKHgsIC4uLikgewogICAga25pdHI6OmthYmxlKHgsIGRpZ2l0cyA9IDIsICJodG1sIiwgLi4uKSAlPiUKICAgICAgICBrYWJsZUV4dHJhOjprYWJsZV9zdHlsaW5nKGJvb3RzdHJhcF9vcHRpb25zID0gYygic3RyaXBlZCIsICJob3ZlciIpKSAlPiUKICAgICAgICBrYWJsZUV4dHJhOjpzY3JvbGxfYm94KHdpZHRoID0gIjEwMCUiLCBoZWlnaHQgPSAiMzAwcHgiKQp9CgojIGxvYWQgdGhlIGRhdGFzZXQKZGYgPC0gZmxvYWQoIi4vZGF0YS9wcm9jZXNzZWQvMjAyMzA2MjBkZl9nZW5kZXJfanQucmRhIikKCiMgbGluayB5b3VyIGVtYWlsCm9wdGlvbnMob3BlbmFsZXhSLm1haWx0byA9ICJteWxlbmUuaHVzc29uQHJ1Lm5sIikgCgp1cmwgPC0gImh0dHBzOi8vYXBpLm9wZW5hbGV4Lm9yZy9hdXRob3JzP3NlYXJjaD1Kb2NoZW0gVG9sc21hIgoKIyBiYXNlZCBvbiB3aGF0IHlvdSBoYXZlIGxlYXJuZWQgc28gZmFyLCB5b3Ugd291bGQgcHJvYmFibHkgZmlyc3QgdHJ5OgpqdCA8LSByZWFkX2h0bWwoImh0dHBzOi8vYXBpLm9wZW5hbGV4Lm9yZy9hdXRob3JzP3NlYXJjaD1Kb2NoZW0rVG9sc21hIikgJT4lCiAgICBodG1sX3RleHQyKCkKCnN1YnN0cihqdCwgMSwgMTAwKQoKanRfanNvbiA8LSBmcm9tSlNPTigiaHR0cHM6Ly9hcGkub3BlbmFsZXgub3JnL2F1dGhvcnM/c2VhcmNoPUpvY2hlbStUb2xzbWEiLCBzaW1wbGlmeVZlY3RvciA9IEZBTFNFKQojZ2xpbXBzZShqdF9qc29uLCBtYXgubGV2ZWwgPSAxKQoKI2p0X2pzb25bWyJyZXN1bHRzIl1dW1sxXV1bWyJkaXNwbGF5X25hbWUiXV0KCiNWaWV3KGp0X2pzb24pCgpkZiA8LSBvYV9mZXRjaChlbnRpdHkgPSAiYXV0aG9yIiwgc2VhcmNoID0gIkpvY2hlbSBUb2xzbWEiKQojZnNob3dkZihkZikKCiMgY2FuIGFjY2VzcyBwYXJ0cyBvZiB0aGUgbGlzdCBqdF9qc29uCmp0X2pzb25bWyJtZXRhIl1dCiMgY291bGQgYWxzbyBwdXQgdGhlIG51bWJlciBvZiB0aGUgbGlzdCB0aGVyZSAoaXMgdGhlIHRoaXJkIGxpc3QgaW4ganRfanNvbikKanRfanNvbltbIjMiXV0KCiMgeW91IGNhbiBhbHNvIGRvIGl0IHdpdGggJCBhbmQgYXNrIGZvciB0aGUgc3RydWN0dXJlIGZvciBpbnN0YW5jZQojIHN0cihqdF9qc29uJHJlc3VsdHMpCgoKIyBsb29rIGF0IGFmZmlsaWF0aW9ucwojanRfanNvbiRyZXN1bHRzW1sxXV0kYWZmaWxpYXRpb25zCgpgYGAKPGJyPgoKT3BlbkFsZXggaGF2ZSB0dXRvcmlhbHMgb2YgaG93IHRvIGdldCBkYXRhOiB5b3UgbmVlZCB0byByZWFkIHRoaXMuCllvdSBjYW4gYWxzbyB1c2UgUmFwcGVycyB3aGljaCBoYXZlIGZ1bmN0aW9ucyB3aGljaCBjb25zdHJ1Y3QgdGhlIGNvcnJlY3QgVVJMIHRvIHNlbmQgdG8gT3BlbkFsZXg6IGluIFIgdGhlIGJlc3Qgb25lIGlzICJvcGVuYWxleFIiClRoZW4geW91IGRvbid0IGhhdmUgdG8gdW5kZXJzdGFuZCB0aGUgbG9naWMgb2YgQWxleEFQSSwgYnV0IHRoZW4geW91IGhhdmUgdG8gc3R1ZHkgdGhlIFIgcGFja2FnZS4gCm9hX3F1ZXJ5KCkgaXMgdmVyeSBpbXBvcnRhbnQ6IGNhbiBhc2sgd2hhdCB5b3UgbmVlZCwgYW5kIHRoZW4gaXQgY29uc3RydWN0cyBmb3IgeW91IHRoZSBjb3JyZWN0IFVSTCB3aGljaCBpcyBzZW50IHRvIE9wZW5BbGV4QUkKYnV0IGFsc28gbmVlZCB0byByZXRyaWV2ZSBpdCBhbmQgY29udmVydCBpdCB0byBhIG5pY2UgZGF0YXNldApzbyB1c2Ugb2FfZmVjaCgpCgo8YnI+CgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiMjIEhvbWV3b3JrCgpVcGRhdGUgeW91ciBSZXNlYXJjaCBRdWVzdGlvbnMKMS4gQ29uc3RydWN0IHlvdXIgZGF0YXNldHMgKGluY2x1ZGluZyB5b3VyIG5ldyB2YXJpYWJsZS9yZWxhdGlvbikKCllvdSBvbmx5IG5lZWQgdG8gZ2l2ZSBwcm92ZSBvZiBjb25jZXB0LCBhbmQgc2hvdyBob3cgeW91IHdvdWxkIGRvIHRoYXQgb24gYSBzbWFsbCBzY2FsZS4gU28gY29sbGVjdCBjby1hdXRob3JzLCBjaXRhdGlvbnMsIGNpdGF0aW9uc2NvcmUgZGF0YSBldGMuIERvaW5nIHRoaXMgd2l0aCBvbmUgdmFyaWFibGUgaXMgZW5vdWdoLgoKMi4gRGVzY3JpYmUgeW91ciBzb2NpYWwgbmV0d29yayBkYXRhIChzZWUgd2VlayAyKQoKMy4gQmUgcHJlcGFyZWQgdG8gZGlzY3VzcyB0aGUgcmVzdWx0cyBvZiB5b3VyIGRlc2NyaXB0aXZlIHN0YXRpc3RpY3MgbmV4dCB3ZWVrLgoKNC4gU3RhcnQgd3JpdGluZyB5b3VyIGRhdGEgc2VjdGlvbiBhbmQgeW91ciByZXN1bHQgc2VjdGlvbgoKNS4gVXBkYXRlIHlvdXIgbGFiIGpvdXJuYWwgLyB3ZWJzaXRlCgoKCg==</div>
 
 
 </div>

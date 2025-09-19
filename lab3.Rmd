@@ -4,18 +4,17 @@ title: "Journal 1"
 author: "Mylène Husson"
 ---
 
-```{r, globalsettings, echo=FALSE, warning=FALSE, results='hide'}
+```{r, echo=TRUE, results='hide', message=FALSE, warning=FALSE}
 library(knitr)
-
-knitr::opts_chunk$set(echo = TRUE)
-opts_chunk$set(tidy.opts=list(width.cutoff=100),tidy=TRUE, warning = FALSE, message = FALSE,comment = "#>", cache=TRUE, class.source=c("test"), class.output=c("test2"))
-options(width = 100)
-#rgl::setupKnitr()
-
-
-
-colorize <- function(x, color) {sprintf("<span style='color: %s;'>%s</span>", color, x) }
-
+library(tidyverse)
+library(scholar)
+library(openalexR)
+library(rvest)
+library(jsonlite)
+library(httr)
+library(rvest)
+library(reshape2)
+library(xml2)
 ```
 
 ```{r klippy, echo=FALSE, include=TRUE}
@@ -36,9 +35,202 @@ Last compiled on `r format(Sys.time(), '%B, %Y')`
 
 ## Workshop
 
-Recap: people are connected through social networks and therefore the observations can't be seen as independent. The theoretical part is now completed. 
+In class we started with a recap: people are connected through social networks and therefore the observations can't be seen as independent. The theoretical part is now completed. 
 
 Now: what are the implications for the data
 
 You can't ONLY study individuals, but also the relations: so now you, need data on relations. This means you always have to get information from atleast 2 people. 
+
+<br>
+
+------------------------------------------------------------------------
+
+### Survey data
+How to get ego's from a survey:
+1. Diary approach question: who have you talked to/met in the last week/month/etc?
+2. Who are people you feel comfortable discuss difficult issues with? List a maximum of 5.
+3. Who are the people at work you hang around with? 
+
+Then, if someone mentioned 50 people, you can't ask them their relationship with everyone. So you sample people from each group/question, and ask them if they trust this person.
+
+Then you ask the ego for contact information of the other people, or even better: send a link to the ego to send to the alters. To ensure this goes well: you get a bol.com voucher if the alter fills in the survey and then alter also got a gift card.
+
+Ethics: Consent from alters. It's sensitive data. Especially web-scraping data.
+Whether you get ethical permission or not: think for yourself, do you think it is appropriate?
+
+<br>
+
+------------------------------------------------------------------------
+
+### Ethical webscraping
+Ethical considerations: which sites can you webscrape, and why are you not allowed to scare certain websites?
+
+The information is public, but by combining the data, we add extra information, we are doing stuff with the data, which it was not intended for. The purpose of the data changes. 
+
+General Privacy Regulations law: you are allowed to do this, as long as it serves a higher societal goal and is not used for commercial purposes. 
+
+If you do not abide to the terms of the website, the question is who has legal authority.
+
+So we are collecting publicly available data, on a website which allows web scraping. We are then enriching that data with the gender of the persons (and ethnicity? weird).
+
+<br>
+
+### Practical webscraping
+
+We are gong to use Xpath. Use xml code instead of HTML.
+Div is just a section of a page, and the div has a class. Assigning a class to specific elements, tells a website what it should look like.
+There are functions to get all information stored in a list.
+
+```{r}
+
+lpol_staff <- read_html("https://www.universiteitleiden.nl/en/social-behavioural-sciences/political-science/staff#tab-1")
+
+# you can do this and then find the pattern with which the names start and say: only select those.
+lpol_staff <- lpol_staff |>
+  html_nodes("body") |>
+  html_nodes(xpath = "//a") |> #collects all hyperlinks 
+  html_text() #puts it into text
+
+#lpol_staff
+
+# a different way:
+lpol_staff_names <- read_html("https://www.universiteitleiden.nl/en/social-behavioural-sciences/political-science/staff#tab-1") |>
+    html_element("section.tab.active") |>
+    html_elements("ul.table-list") |>
+    html_elements("li") |>
+    html_elements("a") |>
+    html_elements("div") |>
+    html_elements("strong") |>
+    html_text()
+
+lpol_staff_functions <- read_html("https://www.universiteitleiden.nl/en/social-behavioural-sciences/political-science/staff#tab-1") |>
+    html_element("section.tab.active") |>
+    html_elements("ul.table-list") |>
+    html_elements("li") |>
+    html_elements("a") |>
+    html_elements("div") |>
+    html_elements("span") |>
+    html_text()
+
+lpol_staff2 <- data.frame(name = lpol_staff_names, funct = lpol_staff_functions)
+#lpol_staff2
+
+```
+<br>
+
+For interactive websites: package Selenider. Can tell it to click on certain parts of pages. With open_url()
+
+You could also use Rselenium
+Can tell it to click on allow cookies when a popup shows up. Can also ask it to highlight the element, nice for constructing the web-scraper. 
+
+<br>
+
+### OpenAlexAI scraping
+
+For our final project we need to collect data via OpenAlex.
+You need to quiry your dataset before it is loaded in R, because it is too large to open in R.
+
+Can retrieve information using api OpenAlex: https://api.openalex.org/works/W2741809807
+
+Attributes, publications page 1:
+You want read in JSON: fromJSON
+
+```{r}
+#load the functions you need from the packages
+fpackage.check <- function(packages) {
+    lapply(packages, FUN = function(x) {
+        if (!require(x, character.only = TRUE)) {
+            install.packages(x, dependencies = TRUE)
+            library(x, character.only = TRUE)
+        }
+    })
+}
+
+fsave <- function(x, file = NULL, location = "./data/processed/") {
+    ifelse(!dir.exists("data"), dir.create("data"), FALSE)
+    ifelse(!dir.exists("data/processed"), dir.create("data/processed"), FALSE)
+    if (is.null(file))
+        file = deparse(substitute(x))
+    datename <- substr(gsub("[:-]", "", Sys.time()), 1, 8)
+    totalname <- paste(location, datename, file, ".rda", sep = "")
+    save(x, file = totalname)  #need to fix if file is reloaded as input name, not as x. 
+}
+
+fload <- function(filename) {
+    load(filename)
+    get(ls()[ls() != "filename"])
+}
+
+fshowdf <- function(x, ...) {
+    knitr::kable(x, digits = 2, "html", ...) %>%
+        kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
+        kableExtra::scroll_box(width = "100%", height = "300px")
+}
+
+# load the dataset
+df <- fload("./data/processed/20230620df_gender_jt.rda")
+
+# link your email
+options(openalexR.mailto = "mylene.husson@ru.nl") 
+
+url <- "https://api.openalex.org/authors?search=Jochem Tolsma"
+
+# based on what you have learned so far, you would probably first try:
+jt <- read_html("https://api.openalex.org/authors?search=Jochem+Tolsma") %>%
+    html_text2()
+
+substr(jt, 1, 100)
+
+jt_json <- fromJSON("https://api.openalex.org/authors?search=Jochem+Tolsma", simplifyVector = FALSE)
+#glimpse(jt_json, max.level = 1)
+
+#jt_json[["results"]][[1]][["display_name"]]
+
+#View(jt_json)
+
+df <- oa_fetch(entity = "author", search = "Jochem Tolsma")
+#fshowdf(df)
+
+# can access parts of the list jt_json
+jt_json[["meta"]]
+# could also put the number of the list there (is the third list in jt_json)
+jt_json[["3"]]
+
+# you can also do it with $ and ask for the structure for instance
+# str(jt_json$results)
+
+
+# look at affiliations
+#jt_json$results[[1]]$affiliations
+
+```
+<br>
+
+OpenAlex have tutorials of how to get data: you need to read this.
+You can also use Rappers which have functions which construct the correct URL to send to OpenAlex: in R the best one is "openalexR"
+Then you don't have to understand the logic of AlexAPI, but then you have to study the R package. 
+oa_query() is very important: can ask what you need, and then it constructs for you the correct URL which is sent to OpenAlexAI
+but also need to retrieve it and convert it to a nice dataset
+so use oa_fech()
+
+<br>
+
+------------------------------------------------------------------------
+
+## Homework
+
+Update your Research Questions
+1. Construct your datasets (including your new variable/relation)
+
+You only need to give prove of concept, and show how you would do that on a small scale. So collect co-authors, citations, citationscore data etc. Doing this with one variable is enough.
+
+2. Describe your social network data (see week 2)
+
+3. Be prepared to discuss the results of your descriptive statistics next week.
+
+4. Start writing your data section and your result section
+
+5. Update your lab journal / website
+
+
 
