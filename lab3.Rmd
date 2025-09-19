@@ -36,3 +36,9 @@ Last compiled on `r format(Sys.time(), '%B, %Y')`
 
 ## Workshop
 
+Recap: people are connected through social networks and therefore the observations can't be seen as independent. The theoretical part is now completed. 
+
+Now: what are the implications for the data
+
+You can't ONLY study individuals, but also the relations: so now you, need data on relations. This means you always have to get information from atleast 2 people. 
+
