@@ -15,6 +15,40 @@ library(httr)
 library(rvest)
 library(reshape2)
 library(xml2)
+library(openxlsx)
+library(polite)
+
+#load the functions you need from the packages
+fpackage.check <- function(packages) {
+  lapply(packages, FUN = function(x) {
+    if (!require(x, character.only = TRUE)) {
+      install.packages(x, dependencies = TRUE)
+      library(x, character.only = TRUE)
+    }
+  })
+}
+
+fsave <- function(x, file = NULL, location = "./data/processed/") {
+  ifelse(!dir.exists("data"), dir.create("data"), FALSE)
+  ifelse(!dir.exists("data/processed"), dir.create("data/processed"), FALSE)
+  if (is.null(file))
+    file = deparse(substitute(x))
+  datename <- substr(gsub("[:-]", "", Sys.time()), 1, 8)
+  totalname <- paste(location, datename, file, ".rda", sep = "")
+  save(x, file = totalname)  #need to fix if file is reloaded as input name, not as x. 
+}
+
+fload <- function(filename) {
+  load(filename)
+  get(ls()[ls() != "filename"])
+}
+
+fshowdf <- function(x, ...) {
+  knitr::kable(x, digits = 2, "html", ...) %>%
+    kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
+    kableExtra::scroll_box(width = "100%", height = "300px")
+}
+
 ```
 
 ```{r klippy, echo=FALSE, include=TRUE}
@@ -136,36 +170,6 @@ Attributes, publications page 1:
 You want read in JSON: fromJSON
 
 ```{r}
-#load the functions you need from the packages
-fpackage.check <- function(packages) {
-    lapply(packages, FUN = function(x) {
-        if (!require(x, character.only = TRUE)) {
-            install.packages(x, dependencies = TRUE)
-            library(x, character.only = TRUE)
-        }
-    })
-}
-
-fsave <- function(x, file = NULL, location = "./data/processed/") {
-    ifelse(!dir.exists("data"), dir.create("data"), FALSE)
-    ifelse(!dir.exists("data/processed"), dir.create("data/processed"), FALSE)
-    if (is.null(file))
-        file = deparse(substitute(x))
-    datename <- substr(gsub("[:-]", "", Sys.time()), 1, 8)
-    totalname <- paste(location, datename, file, ".rda", sep = "")
-    save(x, file = totalname)  #need to fix if file is reloaded as input name, not as x. 
-}
-
-fload <- function(filename) {
-    load(filename)
-    get(ls()[ls() != "filename"])
-}
-
-fshowdf <- function(x, ...) {
-    knitr::kable(x, digits = 2, "html", ...) %>%
-        kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
-        kableExtra::scroll_box(width = "100%", height = "300px")
-}
 
 # load the dataset
 df <- fload("./data/processed/20230620df_gender_jt.rda")
@@ -179,12 +183,13 @@ url <- "https://api.openalex.org/authors?search=Jochem Tolsma"
 jt <- read_html("https://api.openalex.org/authors?search=Jochem+Tolsma") %>%
     html_text2()
 
-substr(jt, 1, 100)
+#substr(jt, 1, 100)
 
 jt_json <- fromJSON("https://api.openalex.org/authors?search=Jochem+Tolsma", simplifyVector = FALSE)
 #glimpse(jt_json, max.level = 1)
 
-#jt_json[["results"]][[1]][["display_name"]]
+jt_json[["results"]][[1]][["display_name"]]
+#jt_json$results[[1]]$display_name
 
 #View(jt_json)
 
@@ -192,9 +197,9 @@ df <- oa_fetch(entity = "author", search = "Jochem Tolsma")
 #fshowdf(df)
 
 # can access parts of the list jt_json
-jt_json[["meta"]]
+#jt_json[["meta"]]
 # could also put the number of the list there (is the third list in jt_json)
-jt_json[["3"]]
+#jt_json[["3"]]
 
 # you can also do it with $ and ask for the structure for instance
 # str(jt_json$results)
@@ -209,6 +214,7 @@ jt_json[["3"]]
 OpenAlex have tutorials of how to get data: you need to read this.
 You can also use Rappers which have functions which construct the correct URL to send to OpenAlex: in R the best one is "openalexR"
 Then you don't have to understand the logic of AlexAPI, but then you have to study the R package. 
+
 oa_query() is very important: can ask what you need, and then it constructs for you the correct URL which is sent to OpenAlexAI
 but also need to retrieve it and convert it to a nice dataset
 so use oa_fech()
@@ -232,5 +238,248 @@ You only need to give prove of concept, and show how you would do that on a smal
 
 5. Update your lab journal / website
 
+<br>
+
+------------------------------------------------------------------------
+
+### Friday 19 September
+
+My refined research questions were not truly from a social network perspective so I will try again. This time I am not going to spend a lot of time finding research, seeking scientific and societal relevance, and writing a short introduction as that appears to have been a waste of time last time. I am going to stick with looking at the node level characteristic gender and zoom in on the position people have in their collaboration network: betweenness centrality. Betweenness centrality captures the extent to which a professor serves as a bridge connecting different co-authorship clusters, and this study investigates whether male or female professors in Dutch political science and sociology departments are more likely to occupy these strategically central positions in the network.
+
+I can first look at how the collaboration patterns are clustered and then look at the positions men and women have. 
+
+RQ1: “How are co-authorship collaborations among Dutch professors in political science and sociology structured? Are there identifiable clusters or communities of collaboration?”
+
+Focus: overall network structure, clustering, density, community detection.
+
+RQ2: “How does gender influence the likelihood of a professor occupying central positions (e.g., high betweenness centrality) in the co-authorship network?”
+
+Focus: are women systematically less central than men?
+
+![](images/Mynetworkcentrality.png)
+
+------------------------------------------------------------------------
+
+### Wednesday 24 September
+
+Last week I already started on some code to figure out how to get information from OpenAlex. Today I continued with this. Here you can find what I figured out. 
+
+```{r}
+################################################################################
+
+# Jochem name
+
+# link your email
+options(openalexR.mailto = "mylene.husson@ru.nl") 
+
+url <- "https://api.openalex.org/authors?search=Jochem Tolsma"
+
+# based on what you have learned so far, you would probably first try:
+jt <- read_html("https://api.openalex.org/authors?search=Jochem+Tolsma") %>%
+  html_text2()
+
+#substr(jt, 1, 100)
+
+jt_json <- fromJSON("https://api.openalex.org/authors?search=Jochem+Tolsma", simplifyVector = FALSE)
+#glimpse(jt_json, max.level = 1)
+
+List_names <- c()
+List_names <- c(List_names, jt_json$results[[1]]$display_name)
+
+################################################################################
+
+List_citationindex <- c()
+List_citationindex <- c(List_citationindex, jt_json$results[[1]]$cited_by_count)
+
+#List_citationindex
+
+################################################################################
+# GET THE COLLABORATOR'S NAMES
+
+#jt_json$results[[1]]$works_api_url
+jt_publi <- fromJSON(jt_json$results[[1]]$works_api_url, simplifyVector = FALSE)
+
+# Let's try to make a loop: get all of the people Jochem works together with
+
+List_publi <- c()
+
+for (j in 1:length(jt_publi$results)){
+  for (i in 1:length(jt_publi$results[[j]]$authorships)) {
+    List_publi <- c(List_publi, jt_publi$results[[j]]$authorships[[i]]$raw_author_name)
+  }
+}
+
+List_publi
+
+# But you don't just want to know the people, you want to know the collaborations
+# So we will make a list of authors per paper, and add that list to a list of all people
+
+
+List_colabs <- list()
+for (j in 1:length(jt_publi$results)){
+  List_authors <- c()
+  for (i in 1:length(jt_publi$results[[j]]$authorships)) {
+    List_authors <- c(List_authors, jt_publi$results[[j]]$authorships[[i]]$raw_author_name)
+  }
+  List_colabs[[j]] <- List_authors  # assign as list element
+}
+
+#View(List_colabs)
+
+```
+<br>
+
+Now let's try with openalex api and excel data
+```{r}
+
+
+soc_pol <- readxl::read_excel("/Users/mylenehusson/Desktop/SocialNetworks/labjournal_mylene/data/20240419Scholarid_soc_pol.xlsx")
+
+mail <- "mylene.husson@ru.nl"
+
+author_list <- soc_pol$Naam[1:3]
+#View(author_list)
+
+all_author_data <- list()
+all_colabs <- list()
+
+for (author in author_list) {
+  search <- tryCatch({
+    oa_fetch(entity = "authors", 
+             search = author, 
+             mailto = mail)
+  }, error = function(e) {
+    message("Error with author: ", author)
+    return(NULL)
+  })
+  
+  if (is.null(search) || nrow(search) == 0) {
+    next
+  }
+  
+  # store the first result in the list
+  all_author_data[[author]] <- search[1, ]
+}
+
+#View(all_author_data)
+
+# From all_author_data we can now get the works_api_url
+# and use the for loops we made before to get data on who they worked together with.
+
+for (author in names(all_author_data)) {
+  
+  # get the works_api_url
+  works_url <- all_author_data[[author]]$works_api_url
+  
+  # fetch the publications JSON from the API
+  publi <- fromJSON(content(GET(works_url), as = "text"), simplifyVector = FALSE)
+  
+  List_colabs <- list()  # store co-authors per publication for this author
+  
+  # loop over each publication
+  for (j in seq_along(publi$results)) {
+    List_authors <- c()
+    
+    # loop over authorships in this publication
+    for (i in seq_along(publi$results[[j]]$authorships)) {
+      List_authors <- c(List_authors, 
+                        publi$results[[j]]$authorships[[i]]$raw_author_name)
+    }
+    
+    List_colabs[[j]] <- List_authors
+  }
+  
+  # assign this author's collaborations to the main list
+  all_colabs[[author]] <- List_colabs
+}
+
+#View(all_colabs)
+
+# make it into a dataframe 
+# Prepare a tidy data frame for all co-authors
+df_colabs <- tibble()
+
+for (author in names(all_colabs)) {
+  # get the list of publications for this author
+  pubs <- all_colabs[[author]]
+  
+  # flatten into a tidy format: one row per publication-author
+  if (length(pubs) > 0) {
+    df_tmp <- tibble(
+      main_author = author,
+      publication = rep(seq_along(pubs), times = sapply(pubs, length)),
+      co_author = unlist(pubs)
+    )
+    df_colabs <- bind_rows(df_colabs, df_tmp)
+  }
+}
+
+df_colabs
+
+################################################################################
+
+# We could also get information on number of works counts
+work_count <- list()
+
+for (author in names(all_author_data)) {
+  work_count[[author]] <- all_author_data[[author]]$works_count
+}
+
+
+# Convert named list to data frame
+df_work_count <- data.frame(
+  author = names(work_count),
+  works_count = unlist(work_count),
+  row.names = NULL
+)
+
+head(df_work_count)
+```
+
+
+
+<br>
+
+As for gender, I think I understand the code from Daphne from 2 years ago
+But I can't get it to work, I think this might be because the site has changed.
+
+```{r}
+
+# only the first three rows of socpol
+# Keep only the first 3 rows
+soc_pol_small <- soc_pol[1:3, ]  # or use slice
+soc_pol_small <- soc_pol_small %>%
+  mutate(firstname = word(Naam, 1))  # extract first names
+
+# Initialize gender column
+soc_pol_small$gender <- NA
+
+# Set up polite session
+#session <- bow("https://www.meertens.knaw.nl/nvb/naam/is", 
+ #              user_agent = "mylene.husson@ru.nl")
+
+# Loop over only these 3 rows
+#for (i in seq_len(nrow(soc_pol_small))) {
+  
+  #name_url <- paste0("https://www.meertens.knaw.nl/nvb/naam/is/", soc_pol_small$firstname[i])
+  
+  #name_session <- nod(session, path = name_url)
+  #name_page <- scrape(name_session)
+  
+  #table_list <- name_page %>% html_table()
+  #table_list[[1]][table_list[[1]] == "--"] <- "0"
+  
+  #if (as.numeric(table_list[[1]]$X3[2]) > as.numeric(table_list[[1]]$X3[6])) {
+  #  soc_pol_small$gender[i] <- "male"
+  #} else {
+  #  soc_pol_small$gender[i] <- "female"
+  #}
+  
+  #print(paste(i, soc_pol_small$firstname[i], soc_pol_small$gender[i]))
+#}
+
+# View results for the 3 rows
+#View(soc_pol_small)
+```
 
 

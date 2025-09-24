@@ -268,7 +268,7 @@ Play around in OpenAlex
 
 ------------------------------------------------------------------------
 
-### Wednesday 17 september
+### Wednesday 17 September
 
 As I was unsure how to tackle the characterisation of the themes of articles, I decided to focus my research scope to the number of citations of articles. 
 
