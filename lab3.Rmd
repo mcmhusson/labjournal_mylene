@@ -482,4 +482,9 @@ soc_pol_small$gender <- NA
 #View(soc_pol_small)
 ```
 
+<br>
 
+Finally, I read the literature and scanned chapter 8.
+For the graphs, perhaps use: 
+install.packages("pak")
+pak::pak('thomasp85/ggraph')
