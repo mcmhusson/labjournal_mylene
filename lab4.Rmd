@@ -17,6 +17,12 @@ library(reshape2)
 library(xml2)
 library(openxlsx)
 library(polite)
+library(igraph)
+library(sna)
+library(genderizeR)
+library(RSelenium)
+library(netstat)
+library(pingr)
 
 #load the functions you need from the packages
 fpackage.check <- function(packages) {
@@ -68,3 +74,443 @@ Last compiled on `r format(Sys.time(), '%B, %Y')`
 ------------------------------------------------------------------------
 
 ## Workshop
+
+Today we are going to look at network visualisation. It is important you look at the data
+
+<br>
+
+------------------------------------------------------------------------
+
+###  Zachary’s karate club
+
+```{r}
+require(igraph)
+
+# Visualise Zachary's network
+g <- make_graph("Zachary")
+plot(g)
+
+# you see differences between ego's in centralities, it's a complete network, undirected and unweighted ties.
+# Perhaps something like friendship or something.
+
+gmat <- as_adjacency_matrix(g, type = "both", sparse = FALSE)
+#gmat
+
+# Descriptives
+# number of nodes: vcount(g)
+
+# number of edges: ecount(g)
+
+# the number of degrees: heavliy skewed
+igraph::degree(g)
+
+# transitivity
+# be aware that directed graphs are considered as undirected. but g is undirected.
+igraph::transitivity(g, type = c("localundirected"), isolates = c("NaN", "zero"))
+
+# betweenness: 1 and 34 very high
+igraph::betweenness(g, directed = FALSE)
+
+# dyad census: igraph::dyad.census(g)
+# igraph::triad.census(g)
+# I will use sna because it shows the names of the triads as well.
+
+igraph::transitivity(g, type = "global")
+#sna::gtrans(gmat)
+
+triad_g <- data.frame(sna::triad.census(gmat))
+
+# for transitivity on network level: divide number of transitive triads by all possible transitive triads
+
+# X300 is the variable of transative triads, and the X201 is the one in which one person is linked with two persons, who are not linked: so it's a possible transitive triad. 
+# therefore, X201 + X300 are all possible transititve triads.
+transitivity_g <- (3 * triad_g$X300)/(triad_g$X201 + 3 * triad_g$X300)
+transitivity_g
+```
+<br>
+------------------------------------------------------------------------
+
+### Ashwin Presentation
+
+You can look at network properties (descriptives, graph), Ashwin looks at how we can use networks to explain certain phenomena. 
+
+RQ: How are social and intellectual relations structured and given shape within research universities?
+
+Not only about social relationships, but also intellectual thinking.
+Do shared interests lead to collaborations, or do collaborations lead to similar interests.
+
+    - structure:    collaboration leads to similar interests
+    - culture:      scientists with similar interests find each other
+    - homophily:    similar backgrounds lead to similar interest and collaboration
+    - propinquity:  physical proximity leads to similar research interest and collaboration
+
+If you have a huge network of ties, you can see if there are people who do not work together with people you are observing, but that does not mean they don't collaborate at all. 
+
+<br>
+------------------------------------------------------------------------
+
+### Continuing with Zachary’s karate club
+
+```{r}
+# make sizes proportional to betweenness score
+V(g)$size = igraph::betweenness(g, normalized = TRUE, directed = FALSE)* 60 + 10  #after some trial and error
+plot(g, mode = "undirected")
+
+# the + 10 is added because some nodes have a 0 on betweenness and dissapear in the graph without +10
+# the * 60 makes the differences bigger
+
+# now: we want no overlap 
+set.seed(2345)
+l <- layout_with_mds(g)  #https://igraph.org/r/doc/layout_with_mds.html
+plot(g, layout = l)
+# now you see three clusters: around 33/34, around 1 and around 3, and the cluser around 3 you didn't see before. And that the two biggest clusters are not linked directly.
+
+# you can then say that specific ones should be further apart:
+# l  #let us take a look at the coordinates
+l[1, 1] <- 4
+l[34, 1] <- -3.5
+plot(g, layout = l)
+
+# 1 and 34 are most connected, perhaps they are the owners/masters from the karate club
+# and maybe they are having an argument and are therefore not connected
+```
+
+Looking at Jochem's paper about twitter and the people in parliament. 
+You see pollarisation: people mostly interact with people in their own party (clusters)
+
+<br>
+
+------------------------------------------------------------------------
+
+## Homework
+
+
+<br>
+
+------------------------------------------------------------------------
+
+## Friday September 19th
+
+<br>
+
+------------------------------------------------------------------------
+
+### Figuring out assigning gender: 
+
+```{r}
+# from the tutorial
+df <- fload(file = "./data/20230627df_names.rda")
+
+firstname <- df |>
+  distinct(firstname) |> #only unique
+  select(firstname) |> #only this variable
+  filter(firstname != "") |> #remove empty
+  pull(firstname) #save as chr
+
+test <- genderizeAPI(firstname[1])
+#test$response
+
+length(firstname)
+df_genderizer <- data.frame(matrix(ncol = 4, nrow = length(firstname)))
+colnames(df_genderizer) <- c("count", "name", "gender", "probability")
+
+#for (i in 1:length(firstname)) {
+#    Sys.sleep(0.1)
+#    df_genderizer[i, ] <- genderizeAPI(firstname[i])$response
+#}
+#colnames(df_genderizer) <- c("count", "name", "gender", "probability")
+#df_genderizer$name <- firstname  #so we know which names are not found. 
+
+#df_genderizer
+
+# now we have a probability score, but you can also dummify it
+#df_genderizer <- df_genderizer[df_genderizer$probability > 0.9, ]
+
+#df_genderizer <- subset(df_genderizer, select = c("name", "gender"))
+
+#fshowdf(df_genderizer)
+#View(df_genderizer)
+
+#df |>
+#    left_join(df_genderizer, by = c(firstname = "name")) -> df_gender
+
+#fshowdf(df_gender)
+
+#fsave(df_gender)
+
+```
+<br>
+
+------------------------------------------------------------------------
+
+### Figured out assigning gender
+```{r}
+# Rvest table object inspecteren en die geven aan het 
+name = "Erik"
+
+# Build URL robustly
+base_url <- "https://nvb.meertens.knaw.nl/naam/is"
+name_url <- paste0(base_url, "/", name)
+
+table <- read_html(name_url) |>
+  html_element("table") |>
+  html_table()
+
+
+# Replace "--" with "0" everywhere
+table[table == "--"] <- "0"
+
+# Now you can safely convert to numeric
+val_male   <- as.numeric(table[2, 3])
+val_female <- as.numeric(table[6, 3])
+
+# Compare and assign gender
+gender <- if (val_male > val_female) {
+  "male"
+} else if (val_female >= val_male) {
+  "female"
+} else {
+  NA
+}
+
+gender
+
+```
+<br>
+
+------------------------------------------------------------------------
+
+### Making a function genderizer
+
+```{r}
+
+my_genderizer <- function(name) {
+  name <- gsub("^/+|/+$", "", name)
+  
+  # Build URL
+  base_url <- "https://nvb.meertens.knaw.nl/naam/is"
+  name_url <- paste0(base_url, "/", name)
+  
+  # Try reading table
+  table <- tryCatch(
+    read_html(name_url) |>
+      html_element("table") |>
+      html_table(),
+    error = function(e) NULL
+  )
+  
+  if (is.null(table)) return(NA)  # return NA if no table found
+  
+  # Replace "--" with "0"
+  table[table == "--"] <- "0"
+  
+  # Convert to numeric
+  val_male   <- suppressWarnings(as.numeric(table[2, 3]))
+  val_female <- suppressWarnings(as.numeric(table[6, 3]))
+  
+  # Decide gender
+  if (is.na(val_male) & is.na(val_female)) {
+    gender <- NA
+  } else if (val_male > val_female) {
+    gender <- "male"
+  } else if (val_female > val_male) {
+    gender <- "female"
+  } else {
+    gender <- NA
+  }
+  
+  return(gender)
+}
+
+soc_pol <- readxl::read_excel("/Users/mylenehusson/Desktop/SocialNetworks/labjournal_mylene/data/20240419Scholarid_soc_pol.xlsx")
+soc_pol_small <- soc_pol[1:20, ]
+
+soc_pol_small <- soc_pol_small |>
+  mutate(firstname = word(Naam, 1)) 
+
+for (i in seq_len(nrow(soc_pol_small))) {
+  name <- soc_pol_small$firstname[i]
+  gender <- my_genderizer(name)
+
+  soc_pol_small$gender[i] <- gender
+}
+
+#View(soc_pol_small)
+```
+
+<br>
+
+------------------------------------------------------------------------
+
+### The nomination Network
+
+```{r}
+# load in the data
+scholars <- fload("./data/processed/scholars_20240924.rda")
+
+# select scholars
+# (sociology, RU)
+demographics <- do.call(rbind.data.frame, scholars$demographics)
+demographics <- demographics %>%
+    mutate(Universiteit1.22 = replace(Universiteit1.22, is.na(Universiteit1.22), ""), Universiteit2.22 = replace(Universiteit2.22,
+        is.na(Universiteit2.22), ""), Universiteit1.24 = replace(Universiteit1.24, is.na(Universiteit1.24),
+        ""), Universiteit2.24 = replace(Universiteit2.24, is.na(Universiteit2.24), ""), discipline.22 = replace(discipline.22,
+        is.na(discipline.22), ""), discipline.24 = replace(discipline.24, is.na(discipline.24), ""))
+
+sample <- which((demographics$Universiteit1.22 == "RU" | demographics$Universiteit2.22 == "RU" | demographics$Universiteit1.24 ==
+    "RU" | demographics$Universiteit2.24 == "RU") & (demographics$discipline.22 == "sociology" | demographics$discipline.24 ==
+    "sociology"))
+
+demographics_soc <- demographics[sample, ]
+scholars_sel <- lapply(scholars, "[", sample)
+
+# construct the empty adjacency matrix
+ids <- demographics_soc$au_id
+wave2 <- wave1 <- matrix(0, nrow = length(ids), ncol = length(ids), dimnames = list(ids, ids))
+
+# filter works
+works <- scholars_sel$work
+
+works_id <- unlist(lapply(works, function(l) l$id))
+works_author <- unlist(lapply(works, function(l) l$author), recursive = FALSE)
+works_year <- unlist(lapply(works, function(l) l$publication_year), recursive = FALSE)
+
+df_works <- tibble(works_id, works_author, works_year)
+
+dups <- which(duplicated(works_id))
+
+df_works <- df_works[-dups, ]
+df_works_w2 <- df_works[df_works$works_year > 2019, ]
+
+# undirected
+# undirected
+for (i in 1:nrow(df_works_w2)) {
+    egos <- df_works_w2$works_author[i][[1]]$au_id
+
+    if (sum(ids %in% egos) > 0) {
+        wave2[which(ids %in% egos), which(ids %in% egos)] <- 1
+    }
+}
+```
+<br>
+
+Now one function to rule them all:
+
+```{r}
+fcolnet <- function(data = scholars, university = "RU", discipline = "sociology", waves = list(c(2015,
+    2018), c(2019, 2023)), type = c("first")) {
+
+    # step 1
+    demographics <- do.call(rbind.data.frame, data$demographics)
+    demographics <- demographics %>%
+        mutate(Universiteit1.22 = replace(Universiteit1.22, is.na(Universiteit1.22), ""), Universiteit2.22 = replace(Universiteit2.22,
+            is.na(Universiteit2.22), ""), Universiteit1.24 = replace(Universiteit1.24, is.na(Universiteit1.24),
+            ""), Universiteit2.24 = replace(Universiteit2.24, is.na(Universiteit2.24), ""), discipline.22 = replace(discipline.22,
+            is.na(discipline.22), ""), discipline.24 = replace(discipline.24, is.na(discipline.24), ""))
+
+    sample <- which((demographics$Universiteit1.22 %in% university | demographics$Universiteit2.22 %in%
+        university | demographics$Universiteit1.24 %in% university | demographics$Universiteit2.24 %in%
+        university) & (demographics$discipline.22 %in% discipline | demographics$discipline.24 %in% discipline))
+
+    demographics_soc <- demographics[sample, ]
+    scholars_sel <- lapply(scholars, "[", sample)
+
+    # step 2
+    ids <- demographics_soc$au_id
+    nwaves <- length(waves)
+    nets <- array(0, dim = c(nwaves, length(ids), length(ids)), dimnames = list(wave = 1:nwaves, ids,
+        ids))
+    dimnames(nets)
+
+    # step 3
+    df_works <- tibble(works_id = unlist(lapply(scholars_sel$work, function(l) l$id)), works_author = unlist(lapply(scholars_sel$work,
+        function(l) l$author), recursive = FALSE), works_year = unlist(lapply(scholars_sel$work, function(l) l$publication_year),
+        recursive = FALSE))
+
+    df_works <- df_works[!duplicated(df_works), ]
+
+    # step 4
+    if (type == "first") {
+        for (j in 1:nwaves) {
+            df_works_w <- df_works[df_works$works_year >= waves[[j]][1] & df_works$works_year <= waves[[j]][2],
+                ]
+            for (i in 1:nrow(df_works_w)) {
+                ego <- df_works_w$works_author[i][[1]]$au_id[1]
+                alters <- df_works_w$works_author[i][[1]]$au_id[-1]
+                if (sum(ids %in% ego) > 0 & sum(ids %in% alters) > 0) {
+                  nets[j, which(ids %in% ego), which(ids %in% alters)] <- 1
+                }
+            }
+        }
+    }
+
+    if (type == "last") {
+        for (j in 1:nwaves) {
+            df_works_w <- df_works[df_works$works_year >= waves[[j]][1] & df_works$works_year <= waves[[j]][2],
+                ]
+            for (i in 1:nrow(df_works_w)) {
+                ego <- rev(df_works_w$works_author[i][[1]]$au_id)[1]
+                alters <- rev(df_works_w$works_author[i][[1]]$au_id)[-1]
+                if (sum(ids %in% ego) > 0 & sum(ids %in% alters) > 0) {
+                  nets[j, which(ids %in% ego), which(ids %in% alters)] <- 1
+                }
+            }
+        }
+    }
+
+    if (type == "all") {
+        for (j in 1:nwaves) {
+            df_works_w <- df_works[df_works$works_year >= waves[[j]][1] & df_works$works_year <= waves[[j]][2],
+                ]
+            for (i in 1:nrow(df_works_w)) {
+                egos <- df_works_w$works_author[i][[1]]$au_id
+                if (sum(ids %in% egos) > 0) {
+                  nets[j, which(ids %in% egos), which(ids %in% egos)] <- 1
+                }
+            }
+        }
+    }
+    output <- list()
+    output$data <- scholars_sel
+    output$nets <- nets
+    return(output)
+}
+```
+<br>
+
+------------------------------------------------------------------------
+
+### Assigning Gender to demographics
+```{r}
+
+df_scholars <- do.call(rbind, scholars$demographics)
+
+#View(df_scholars)
+
+df_scholars2 <- df_scholars |>
+  mutate(firstname = word(Naam, 1))  # extract first names
+
+df_scholars2$gender <- NA_character_  # initialize gender column
+
+for (i in seq_len(nrow(df_scholars2))) {
+  name <- df_scholars2$firstname[i]
+  gender <- my_genderizer(name)
+  
+  df_scholars2$gender[i] <- gender
+  Sys.sleep(0.1)  # pause between requests
+}
+
+#View(df_scholars2)
+
+```
+
+<br>
+
+------------------------------------------------------------------------
+
+### Who works together with whom?
+```{r}
+
+
+```
+
