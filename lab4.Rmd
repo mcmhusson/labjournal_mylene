@@ -732,3 +732,43 @@ network_df |>
 In this network, male scholars tend to have higher degree centrality than female scholars.
 
 Many female nodes are isolated or weakly connected, while males have more collaborations.
+
+<br>
+
+### Updated RQ 
+
+How does network centrality vary between men and women in Sociology and Political science departments in the Netherlands?
+
+What is the correlation between a person’s centrality in a network and the number of citations that someone has in Sociology and Political science departments in the Netherlands?
+
+How does network centrality influence the trajectory of citation growth over time, and is centrality more strongly associated with citation growth for women than for men in Sociology and Political science departments in the Netherlands?
+
+<br>
+Sketch of an introduction:
+
+This paper analyses academic collaboration networks, where authors are represented as nodes and co-authored publications establish edges, forming an undirected network. I am particularly interested in understanding how the position of researchers within these networks, measured through centrality metrics, relates to academic recognition through citation impact.
+
+In social network analysis (SNA), a node’s influence is commonly assessed using centrality metrics, including degree, betweenness, closeness, and eigenvector centrality (Freeman, 1980; Pappi & Scott, 1991; Xu & Chang, 2020). Authors occupying central positions tend to gain greater recognition and higher citation impact, linking network position directly to academic performance (Bihari & Pandia, 2015; Freeman, 1980).
+
+Prior research suggests that gender plays a role in shaping network positions. Women often face structural barriers that limit centrality, though in certain contexts they can achieve equal or higher centrality by strategically forming collaborative ties (Burt, 1998; Brass, 1985; Kretschmer & Aguillo, 2005; Badar, Hite, & Badir, 2012). 
+
+In the Netherlands, the social sciences are relatively gender-balanced, although men still frequently occupy higher organizational positions. This raises important questions about the distribution of centrality among male and female researchers and whether centrality confers similar advantages in terms of both citations and academic recognition.
+
+By examining these dynamics, this study aims to shed light on how network position intersects with gender to influence academic performance, collaboration patterns, and visibility within scholarly communities.
+
+
+References
+Badar, K., Hite, J. M., & Badir, Y. F. (2012). Examining the relationship of co-authorship network centrality and gender on academic research performance: the case of chemistry researchers in Pakistan. Scientometrics, 94(2), 755–775. https://doi.org/10.1007/s11192-012-0764-z
+
+Brass, D. J. (1985). Men’s and women’s networks: a study of interaction patterns and influence in an organisation. Academy Of Management Journal, 28(2), 327–343. https://doi.org/10.2307/256204
+
+Burt, R. S. (1998). The gender of social capital. Rationality And Society, 10(1), 5–46. https://doi.org/10.1177/104346398010001001
+
+Freeman, L. C. (1978). Centrality in social networks conceptual clarification. Social Networks, 1(3), 215–239. https://doi.org/10.1016/0378-8733(78)90021-7
+
+Kretschmer, H., & Aguillo, I. F. (2005). New indicators for gender studies in Web networks. Information Processing & Management, 41(6), 1481–1494. https://doi.org/10.1016/j.ipm.2005.03.009
+
+Pappi, F. U., & Scott, J. (1993). Social Network Analysis: A handbook. Contemporary Sociology A Journal Of Reviews, 22(1), 128. https://doi.org/10.2307/2075047
+
+Xu, Q. A., & Chang, V. (2020). Co-authorship network and the correlation with academic performance. Internet Of Things, 12, 100307. https://doi.org/10.1016/j.iot.2020.100307
+
