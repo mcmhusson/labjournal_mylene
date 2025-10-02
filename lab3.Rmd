@@ -17,7 +17,6 @@ library(reshape2)
 library(xml2)
 library(openxlsx)
 library(polite)
-library(RSelenium)
 
 #load the functions you need from the packages
 fpackage.check <- function(packages) {
@@ -366,14 +365,35 @@ for (author in author_list) {
 
 # From all_author_data we can now get the works_api_url
 # and use the for loops we made before to get data on who they worked together with.
+library(httr)
+library(jsonlite)
+
+# Initialize main list for collaborations
+all_colabs <- list()
 
 for (author in names(all_author_data)) {
   
   # get the works_api_url
   works_url <- all_author_data[[author]]$works_api_url
   
-  # fetch the publications JSON from the API
-  publi <- fromJSON(content(GET(works_url), as = "text"), simplifyVector = FALSE)
+  # fetch the publications safely
+  res <- GET(works_url)
+  
+  # check if response is JSON
+  if (http_type(res) != "application/json") {
+    warning(paste("Author", author, "did not return JSON. Skipping."))
+    all_colabs[[author]] <- list()  # store empty list to keep structure
+    next
+  }
+  
+  # parse JSON content
+  publi <- fromJSON(content(res, "text"), simplifyVector = FALSE)
+  
+  # if no results, store empty list and continue
+  if (length(publi$results) == 0) {
+    all_colabs[[author]] <- list()
+    next
+  }
   
   List_colabs <- list()  # store co-authors per publication for this author
   

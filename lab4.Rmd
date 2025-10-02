@@ -128,8 +128,6 @@ transitivity_g <- (3 * triad_g$X300)/(triad_g$X201 + 3 * triad_g$X300)
 transitivity_g
 ```
 <br>
-------------------------------------------------------------------------
-
 ### Ashwin Presentation
 
 You can look at network properties (descriptives, graph), Ashwin looks at how we can use networks to explain certain phenomena. 
@@ -145,9 +143,6 @@ Do shared interests lead to collaborations, or do collaborations lead to similar
     - propinquity:  physical proximity leads to similar research interest and collaboration
 
 If you have a huge network of ties, you can see if there are people who do not work together with people you are observing, but that does not mean they don't collaborate at all. 
-
-<br>
-------------------------------------------------------------------------
 
 ### Continuing with Zachary’s karate club
 
@@ -184,6 +179,14 @@ You see pollarisation: people mostly interact with people in their own party (cl
 
 ## Homework
 
+Update your Research Questions
+
+1. Visualize your social network data: Static (a) Interactive and/or dynamic (b)
+
+2. Be prepared to discuss the results of your network visualization next week.
+
+3. Continue writing your data section and your result section
+4. Update your lab journal / website
 
 <br>
 
@@ -195,7 +198,7 @@ You see pollarisation: people mostly interact with people in their own party (cl
 
 ------------------------------------------------------------------------
 
-### Figuring out assigning gender: 
+### Try assigning gender: 
 
 ```{r}
 # from the tutorial
@@ -240,10 +243,7 @@ colnames(df_genderizer) <- c("count", "name", "gender", "probability")
 
 ```
 <br>
-
-------------------------------------------------------------------------
-
-### Figured out assigning gender
+### Assigned gender
 ```{r}
 # Rvest table object inspecteren en die geven aan het 
 name = "Erik"
@@ -277,10 +277,7 @@ gender
 
 ```
 <br>
-
-------------------------------------------------------------------------
-
-### Making a function genderizer
+### Gender Function
 
 ```{r}
 
@@ -324,6 +321,7 @@ my_genderizer <- function(name) {
 
 soc_pol <- readxl::read_excel("/Users/mylenehusson/Desktop/SocialNetworks/labjournal_mylene/data/20240419Scholarid_soc_pol.xlsx")
 soc_pol_small <- soc_pol[1:20, ]
+soc_pol_small$gender <- NA
 
 soc_pol_small <- soc_pol_small |>
   mutate(firstname = word(Naam, 1)) 
@@ -337,11 +335,7 @@ for (i in seq_len(nrow(soc_pol_small))) {
 
 #View(soc_pol_small)
 ```
-
 <br>
-
-------------------------------------------------------------------------
-
 ### The nomination Network
 
 ```{r}
@@ -476,10 +470,8 @@ fcolnet <- function(data = scholars, university = "RU", discipline = "sociology"
     return(output)
 }
 ```
+
 <br>
-
-------------------------------------------------------------------------
-
 ### Assigning Gender to demographics
 ```{r}
 
@@ -497,7 +489,7 @@ for (i in seq_len(nrow(df_scholars2))) {
   gender <- my_genderizer(name)
   
   df_scholars2$gender[i] <- gender
-  Sys.sleep(0.1)  # pause between requests
+  Sys.sleep(0.06)  # pause between requests
 }
 
 #View(df_scholars2)
@@ -508,9 +500,235 @@ for (i in seq_len(nrow(df_scholars2))) {
 
 ------------------------------------------------------------------------
 
-### Who works together with whom?
-```{r}
+## Thursday Oktober 2nd
 
+<br>
+
+------------------------------------------------------------------------
+
+### Add to big data
+
+Now add the new demographics including gender to the big data
+
+```{r}
+fcolnet_gender <- function(data = scholars,
+                           university = "RU",
+                           discipline = "sociology",
+                           waves = list(c(2015, 2018), c(2019, 2023)),
+                           type = c("first"),
+                           demographics = NULL) {
+  
+  # -------------------------
+  # Step 1: demographics
+  # -------------------------
+  if (is.null(demographics)) {
+    demographics <- do.call(rbind.data.frame, data$demographics)
+  }
+  
+  demographics <- demographics %>%
+    mutate(
+      Universiteit1.22 = replace(Universiteit1.22, is.na(Universiteit1.22), ""),
+      Universiteit2.22 = replace(Universiteit2.22, is.na(Universiteit2.22), ""),
+      Universiteit1.24 = replace(Universiteit1.24, is.na(Universiteit1.24), ""),
+      Universiteit2.24 = replace(Universiteit2.24, is.na(Universiteit2.24), ""),
+      discipline.22    = replace(discipline.22,    is.na(discipline.22),    ""),
+      discipline.24    = replace(discipline.24,    is.na(discipline.24),    "")
+    )
+  
+  sample <- which(
+    (demographics$Universiteit1.22 %in% university |
+       demographics$Universiteit2.22 %in% university |
+       demographics$Universiteit1.24 %in% university |
+       demographics$Universiteit2.24 %in% university) &
+      (demographics$discipline.22 %in% discipline |
+         demographics$discipline.24 %in% discipline)
+  )
+  
+  demographics_soc <- demographics[sample, ]
+  scholars_sel <- lapply(data, "[", sample)
+  
+  # -------------------------
+  # Step 2: initialize network array
+  # -------------------------
+  ids <- demographics_soc$au_id
+  nwaves <- length(waves)
+  nets <- array(
+    0,
+    dim = c(nwaves, length(ids), length(ids)),
+    dimnames = list(wave = 1:nwaves, ids, ids)
+  )
+  
+  # -------------------------
+  # Step 3: works dataframe
+  # -------------------------
+  df_works <- tibble(
+    works_id     = unlist(lapply(scholars_sel$work, function(l) l$id)),
+    works_author = unlist(lapply(scholars_sel$work, function(l) l$author), recursive = FALSE),
+    works_year   = unlist(lapply(scholars_sel$work, function(l) l$publication_year), recursive = FALSE)
+  )
+  
+  df_works <- df_works[!duplicated(df_works), ]
+  
+  # -------------------------
+  # Step 4: build networks
+  # -------------------------
+  if (type == "first") {
+    for (j in 1:nwaves) {
+      df_works_w <- df_works[df_works$works_year >= waves[[j]][1] &
+                               df_works$works_year <= waves[[j]][2], ]
+      for (i in 1:nrow(df_works_w)) {
+        ego <- df_works_w$works_author[i][[1]]$au_id[1]
+        alters <- df_works_w$works_author[i][[1]]$au_id[-1]
+        if (sum(ids %in% ego) > 0 & sum(ids %in% alters) > 0) {
+          nets[j, which(ids %in% ego), which(ids %in% alters)] <- 1
+        }
+      }
+    }
+  }
+  
+  if (type == "last") {
+    for (j in 1:nwaves) {
+      df_works_w <- df_works[df_works$works_year >= waves[[j]][1] &
+                               df_works$works_year <= waves[[j]][2], ]
+      for (i in 1:nrow(df_works_w)) {
+        ego <- rev(df_works_w$works_author[i][[1]]$au_id)[1]
+        alters <- rev(df_works_w$works_author[i][[1]]$au_id)[-1]
+        if (sum(ids %in% ego) > 0 & sum(ids %in% alters) > 0) {
+          nets[j, which(ids %in% ego), which(ids %in% alters)] <- 1
+        }
+      }
+    }
+  }
+  
+  if (type == "all") {
+    for (j in 1:nwaves) {
+      df_works_w <- df_works[df_works$works_year >= waves[[j]][1] &
+                               df_works$works_year <= waves[[j]][2], ]
+      for (i in 1:nrow(df_works_w)) {
+        egos <- df_works_w$works_author[i][[1]]$au_id
+        if (sum(ids %in% egos) > 0) {
+          nets[j, which(ids %in% egos), which(ids %in% egos)] <- 1
+        }
+      }
+    }
+  }
+  
+  # -------------------------
+  # Step 5: output
+  # -------------------------
+  output <- list()
+  output$data <- scholars_sel
+  output$nets <- nets
+  output$demographics <- demographics_soc  # includes gender if passed in
+  
+  return(output)
+}
 
 ```
 
+```{r}
+result_gender <- fcolnet_gender(
+  data = scholars,
+  university = "RU",
+  discipline = "sociology",
+  demographics = df_scholars2
+)
+
+# Now you can access gender info in the output
+head(result_gender$demographics[, c("au_id", "firstname", "gender")])
+```
+
+### Visualisation
+
+```{r}
+# adjacency matrix for first wave, can get the second one by making it a 2
+adj_mat <- result_gender$nets[1,,]
+
+# create igraph object
+g <- graph_from_adjacency_matrix(adj_mat, mode = "undirected")
+
+# make sure vertex order matches demographics order
+gender_vec <- result_gender$demographics$gender
+names(gender_vec) <- result_gender$demographics$au_id
+
+# assign gender attribute to igraph
+V(g)$gender <- gender_vec[V(g)$name]
+
+# I am not sure whether people with NA are still in my network so I added a grey option???
+V(g)$color <- ifelse(V(g)$gender == "male", "blue",
+                     ifelse(V(g)$gender == "female", "orange", "grey"))
+
+# assign node size by betweenness centrality
+V(g)$size <- igraph::betweenness(g, normalized = TRUE, directed = FALSE) * 60 + 7
+
+# final plot
+plot(
+  g,
+  vertex.label = NA,
+  edge.arrow.size = 0.4,
+  main = "Co-authorship Network RU Sociology (Wave 1)"
+)
+
+# add legend
+legend(
+  "topright",
+  legend = c("Men", "Women", "Unknown"),
+  col    = c("blue", "orange", "grey"),
+  pch    = 19,
+  pt.cex = 1.5,
+  bty    = "n"
+)
+```
+
+### Properties
+```{r}
+
+# number of nodes and edges
+vcount(g)
+ecount(g)
+
+# density
+edge_density(g)
+
+# average degree
+degree <- igraph::degree(g)
+mean(degree)
+
+# betweenness centrality
+head(igraph::betweenness(g))
+
+# transivitivity: clustering
+transitivity(g, type = "global")
+
+
+```
+<br>
+
+Let's if men or women have a higher degree of centrality:
+```{r}
+# degree of each node
+deg <- igraph::degree(g, mode = "all") # for undirected
+
+# gender attribute
+gender <- V(g)$gender
+
+# combine into a dataframe
+network_df <- data.frame(
+  au_id = V(g)$name,
+  gender = gender,
+  degree = deg
+)
+
+network_df |>
+  group_by(gender) |>
+  summarise(
+    mean_degree = mean(degree),
+    median_degree = median(degree),
+    max_degree = max(degree),
+    n = n()
+  )
+
+```
+In this network, male scholars tend to have higher degree centrality than female scholars.
+
+Many female nodes are isolated or weakly connected, while males have more collaborations.
