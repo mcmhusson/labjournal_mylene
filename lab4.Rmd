@@ -632,6 +632,7 @@ result_gender <- fcolnet_gender(
   university = "RU",
   discipline = "sociology",
   demographics = df_scholars2
+  
 )
 
 # Now you can access gender info in the output

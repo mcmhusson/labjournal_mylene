@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Mylène Husson" />
+
+
+<title>Journal 1</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="tweaks.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    My journal
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lab1.html">Week 1</a>
+    </li>
+    <li>
+      <a href="lab2.html">Week 2</a>
+    </li>
+    <li>
+      <a href="lab3.html">Week 3</a>
+    </li>
+    <li>
+      <a href="lab4.html">Week 4</a>
+    </li>
+    <li>
+      <a href="lab5.html">Week 5a</a>
+    </li>
+    <li>
+      <a href="lab5tryouts.html">Week 5b</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://mcmhusson.github.io/labjournal_mylene/">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Journal 1</h1>
+<h4 class="author">Mylène Husson</h4>
+
+</div>
+
+
+<pre class="r"><code>library(knitr)
+library(tidyverse)
+library(scholar)
+library(openalexR)
+library(rvest)
+library(jsonlite)
+library(httr)
+library(rvest)
+library(reshape2)
+library(xml2)
+library(openxlsx)
+library(polite)
+library(igraph)
+library(sna)
+library(genderizeR)
+library(RSelenium)
+library(netstat)
+library(pingr)
+library(RSiena)
+library(devtools)
+library(RsienaTwoStep)
+
+#load the functions you need from the packages
+fpackage.check &lt;- function(packages) {
+  lapply(packages, FUN = function(x) {
+    if (!require(x, character.only = TRUE)) {
+      install.packages(x, dependencies = TRUE)
+      library(x, character.only = TRUE)
+    }
+  })
+}
+
+fsave &lt;- function(x, file = NULL, location = &quot;./data/processed/&quot;) {
+  ifelse(!dir.exists(&quot;data&quot;), dir.create(&quot;data&quot;), FALSE)
+  ifelse(!dir.exists(&quot;data/processed&quot;), dir.create(&quot;data/processed&quot;), FALSE)
+  if (is.null(file))
+    file = deparse(substitute(x))
+  datename &lt;- substr(gsub(&quot;[:-]&quot;, &quot;&quot;, Sys.time()), 1, 8)
+  totalname &lt;- paste(location, datename, file, &quot;.rda&quot;, sep = &quot;&quot;)
+  save(x, file = totalname)  #need to fix if file is reloaded as input name, not as x. 
+}
+
+fload &lt;- function(filename) {
+  load(filename)
+  get(ls()[ls() != &quot;filename&quot;])
+}
+
+fshowdf &lt;- function(x, ...) {
+  knitr::kable(x, digits = 2, &quot;html&quot;, ...) %&gt;%
+    kableExtra::kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;%
+    kableExtra::scroll_box(width = &quot;100%&quot;, height = &quot;300px&quot;)
+}</code></pre>
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<p>Last compiled on October, 2025 <br></p>
+<hr />
+<div id="week-5" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Week 5</h1>
+<p><br></p>
+<hr />
+<div id="workshop" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Workshop</h2>
+<p>results_hold runs the complete code chunk and then shows the output.
+You can also make scrollable output boxes.</p>
+<p>eval= False (then you can push stuff that doesn’t work) echo = False
+(something else Jochem does)</p>
+<p>Wave 1: many isolates, because it is in the time period 2015-2019
+Collected in 2022, so many people are phd students or junior researchers
+just entering the department in 2022, when the data was collected.</p>
+<p>You have to take “joiners” and “leavers” into account the network is
+defined as being in one of the department at one of the points in our
+data collection network, if you joined in 2025 you’ll also be in the
+dataset of 2015. So you need to keep into account when they joined.</p>
+<p><br></p>
+<div id="chapter-7" class="section level3" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Chapter 7</h3>
+<p>RSienna: one of the many methods to analyse a network. Developed to
+analyse the evolution of networks, but can also analyse static
+networks.</p>
+<p>It takes an observed network at T1 and looks at how it evolves over
+time. The network we analyse at T2 is dependent on the network at T1.
+similar people will become friends depends on the network you have at T1
+Your theory may also depend on what happens at T1.</p>
+<p>All your hypothesis are tested “conditional” at T1.</p>
+<p>The model estimates rules for agents on how to change ties and
+behaviour You figure out to what extent an agent likes or does not like
+to close a triad configuration So you figure out rules of individuals:
+it’s on individual level, not on macro level.</p>
+<p>These micro rules can become so complex and are interdependent, so
+it’s hard to predict how micro level rules transform to macro level.</p>
+<p>If we know the rules of these agents, we can actually simulate the
+networks.</p>
+<p>You can try to get the simulated network to look like the actual
+network evolution.</p>
+<p>Crucial assumption RSiena: Agents make ministeps. On actor at a time,
+is allowed to make one single tie change at a time.</p>
+<p>Is not always how it works in real life: if you meet 4 people at the
+same time you don’t go by them one by one to see.</p>
+<p>Additional assumptions: if a relationship is a complete failure, you
+break a tie, but afterwards you forget about this. It has no
+memories.There is also no recognition, no future seeing.</p>
+<p>So if these mechanisms are at play, they should be measured by the
+ministeps. But you need to be aware that you can’t test hypotheses in
+which these are very important assumptions.</p>
+<p>Now he’s created a package in which you can do more, but it does not
+seem that it makes a great difference.</p>
+<p>It evaluates possible options, and then it pics the one it likes: not
+in a deterministic way, but a suggestive way?</p>
+<pre class="r"><code># Start with a clean environment
+rm(list = ls())
+
+ts_net1</code></pre>
+<pre><code>##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+##  [1,]    0    0    0    0    0    0    0    0    0     0
+##  [2,]    0    0    1    0    0    0    0    0    0     0
+##  [3,]    1    0    0    0    0    1    0    0    0     0
+##  [4,]    0    0    0    0    0    0    0    0    1     0
+##  [5,]    0    0    0    0    0    0    0    0    0     0
+##  [6,]    0    0    0    0    0    0    0    0    1     1
+##  [7,]    1    0    0    0    0    0    0    0    0     0
+##  [8,]    0    0    0    0    0    0    0    0    0     1
+##  [9,]    0    0    0    1    0    0    0    1    0     0
+## [10,]    0    0    0    0    0    0    0    1    1     0</code></pre>
+<pre class="r"><code>net1g &lt;- graph_from_adjacency_matrix(ts_net1, mode = &quot;directed&quot;)
+coords &lt;- layout_(net1g, nicely())  #let us keep the layout
+par(mar = c(0.1, 0.1, 0.1, 0.1))
+{
+    plot.igraph(net1g, layout = coords)
+    graphics::box()
+}</code></pre>
+<p><img src="lab5_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<br> Now you need to figure out who is allowed to make a ministep: for
+now we assume it’s random. Mostly focus on, when they change, how do
+they change?</p>
+<p>For every actor, the number of actions are 10: it can do nothing,
+create a tie, or break a tie.</p>
+<p>So there are 10 options: do nothing or do something with the 9 other
+actors.</p>
+<pre class="r"><code># Let&#39;s say a random ego gets chosen
+set.seed(24553253)
+ego &lt;- ts_select(net = ts_net1)
+
+# We pick ego 4
+
+# in this network, ego (ego 4) is allowed to make ministeps
+# then it saves all the alternatives in the object options
+options &lt;- ts_alternatives_ministep(net = ts_net1, ego = ego)
+options</code></pre>
+<pre><code>## [[1]]
+##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+##  [1,]    0    0    0    0    0    0    0    0    0     0
+##  [2,]    0    0    1    0    0    0    0    0    0     0
+##  [3,]    1    0    0    0    0    1    0    0    0     0
+##  [4,]    1    0    0    0    0    0    0    0    1     0
+##  [5,]    0    0    0    0    0    0    0    0    0     0
+##  [6,]    0    0    0    0    0    0    0    0    1     1
+##  [7,]    1    0    0    0    0    0    0    0    0     0
+##  [8,]    0    0    0    0    0    0    0    0    0     1
+##  [9,]    0    0    0    1    0    0    0    1    0     0
+## [10,]    0    0    0    0    0    0    0    1    1     0
+## 
+## [[2]]
+##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+##  [1,]    0    0    0    0    0    0    0    0    0     0
+##  [2,]    0    0    1    0    0    0    0    0    0     0
+##  [3,]    1    0    0    0    0    1    0    0    0     0
+##  [4,]    0    1    0    0    0    0    0    0    1     0
+##  [5,]    0    0    0    0    0    0    0    0    0     0
+##  [6,]    0    0    0    0    0    0    0    0    1     1
+##  [7,]    1    0    0    0    0    0    0    0    0     0
+##  [8,]    0    0    0    0    0    0    0    0    0     1
+##  [9,]    0    0    0    1    0    0    0    1    0     0
+## [10,]    0    0    0    0    0    0    0    1    1     0
+## 
+## [[3]]
+##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+##  [1,]    0    0    0    0    0    0    0    0    0     0
+##  [2,]    0    0    1    0    0    0    0    0    0     0
+##  [3,]    1    0    0    0    0    1    0    0    0     0
+##  [4,]    0    0    1    0    0    0    0    0    1     0
+##  [5,]    0    0    0    0    0    0    0    0    0     0
+##  [6,]    0    0    0    0    0    0    0    0    1     1
+##  [7,]    1    0    0    0    0    0    0    0    0     0
+##  [8,]    0    0    0    0    0    0    0    0    0     1
+##  [9,]    0    0    0    1    0    0    0    1    0     0
+## [10,]    0    0    0    0    0    0    0    1    1     0
+## 
+## [[4]]
+##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+##  [1,]    0    0    0    0    0    0    0    0    0     0
+##  [2,]    0    0    1    0    0    0    0    0    0     0
+##  [3,]    1    0    0    0    0    1    0    0    0     0
+##  [4,]    0    0    0    0    0    0    0    0    1     0
+##  [5,]    0    0    0    0    0    0    0    0    0     0
+##  [6,]    0    0    0    0    0    0    0    0    1     1
+##  [7,]    1    0    0    0    0    0    0    0    0     0
+##  [8,]    0    0    0    0    0    0    0    0    0     1
+##  [9,]    0    0    0    1    0    0    0    1    0     0
+## [10,]    0    0    0    0    0    0    0    1    1     0
+## 
+## [[5]]
+##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+##  [1,]    0    0    0    0    0    0    0    0    0     0
+##  [2,]    0    0    1    0    0    0    0    0    0     0
+##  [3,]    1    0    0    0    0    1    0    0    0     0
+##  [4,]    0    0    0    0    1    0    0    0    1     0
+##  [5,]    0    0    0    0    0    0    0    0    0     0
+##  [6,]    0    0    0    0    0    0    0    0    1     1
+##  [7,]    1    0    0    0    0    0    0    0    0     0
+##  [8,]    0    0    0    0    0    0    0    0    0     1
+##  [9,]    0    0    0    1    0    0    0    1    0     0
+## [10,]    0    0    0    0    0    0    0    1    1     0
+## 
+## [[6]]
+##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+##  [1,]    0    0    0    0    0    0    0    0    0     0
+##  [2,]    0    0    1    0    0    0    0    0    0     0
+##  [3,]    1    0    0    0    0    1    0    0    0     0
+##  [4,]    0    0    0    0    0    1    0    0    1     0
+##  [5,]    0    0    0    0    0    0    0    0    0     0
+##  [6,]    0    0    0    0    0    0    0    0    1     1
+##  [7,]    1    0    0    0    0    0    0    0    0     0
+##  [8,]    0    0    0    0    0    0    0    0    0     1
+##  [9,]    0    0    0    1    0    0    0    1    0     0
+## [10,]    0    0    0    0    0    0    0    1    1     0
+## 
+## [[7]]
+##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+##  [1,]    0    0    0    0    0    0    0    0    0     0
+##  [2,]    0    0    1    0    0    0    0    0    0     0
+##  [3,]    1    0    0    0    0    1    0    0    0     0
+##  [4,]    0    0    0    0    0    0    1    0    1     0
+##  [5,]    0    0    0    0    0    0    0    0    0     0
+##  [6,]    0    0    0    0    0    0    0    0    1     1
+##  [7,]    1    0    0    0    0    0    0    0    0     0
+##  [8,]    0    0    0    0    0    0    0    0    0     1
+##  [9,]    0    0    0    1    0    0    0    1    0     0
+## [10,]    0    0    0    0    0    0    0    1    1     0
+## 
+## [[8]]
+##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+##  [1,]    0    0    0    0    0    0    0    0    0     0
+##  [2,]    0    0    1    0    0    0    0    0    0     0
+##  [3,]    1    0    0    0    0    1    0    0    0     0
+##  [4,]    0    0    0    0    0    0    0    1    1     0
+##  [5,]    0    0    0    0    0    0    0    0    0     0
+##  [6,]    0    0    0    0    0    0    0    0    1     1
+##  [7,]    1    0    0    0    0    0    0    0    0     0
+##  [8,]    0    0    0    0    0    0    0    0    0     1
+##  [9,]    0    0    0    1    0    0    0    1    0     0
+## [10,]    0    0    0    0    0    0    0    1    1     0
+## 
+## [[9]]
+##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+##  [1,]    0    0    0    0    0    0    0    0    0     0
+##  [2,]    0    0    1    0    0    0    0    0    0     0
+##  [3,]    1    0    0    0    0    1    0    0    0     0
+##  [4,]    0    0    0    0    0    0    0    0    0     0
+##  [5,]    0    0    0    0    0    0    0    0    0     0
+##  [6,]    0    0    0    0    0    0    0    0    1     1
+##  [7,]    1    0    0    0    0    0    0    0    0     0
+##  [8,]    0    0    0    0    0    0    0    0    0     1
+##  [9,]    0    0    0    1    0    0    0    1    0     0
+## [10,]    0    0    0    0    0    0    0    1    1     0
+## 
+## [[10]]
+##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+##  [1,]    0    0    0    0    0    0    0    0    0     0
+##  [2,]    0    0    1    0    0    0    0    0    0     0
+##  [3,]    1    0    0    0    0    1    0    0    0     0
+##  [4,]    0    0    0    0    0    0    0    0    1     1
+##  [5,]    0    0    0    0    0    0    0    0    0     0
+##  [6,]    0    0    0    0    0    0    0    0    1     1
+##  [7,]    1    0    0    0    0    0    0    0    0     0
+##  [8,]    0    0    0    0    0    0    0    0    0     1
+##  [9,]    0    0    0    1    0    0    0    1    0     0
+## [10,]    0    0    0    0    0    0    0    1    1     0</code></pre>
+<pre class="r"><code># make plots of the different options
+plots &lt;- lapply(options, graph_from_adjacency_matrix, mode = &quot;directed&quot;)
+par(mar = c(0, 0, 0, 0) + 0.1)
+par(mfrow = c(2, 2))
+
+fplot &lt;- function(x) {
+    plot.igraph(x, layout = coords, margin = 0)
+    graphics::box()
+}
+
+lapply(plots, fplot)</code></pre>
+<p><img src="lab5_files/figure-html/unnamed-chunk-3-1.png" width="672" /><img src="lab5_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<pre><code>## [[1]]
+## NULL
+## 
+## [[2]]
+## NULL
+## 
+## [[3]]
+## NULL
+## 
+## [[4]]
+## NULL
+## 
+## [[5]]
+## NULL
+## 
+## [[6]]
+## NULL
+## 
+## [[7]]
+## NULL
+## 
+## [[8]]
+## NULL
+## 
+## [[9]]
+## NULL
+## 
+## [[10]]
+## NULL</code></pre>
+<p><img src="lab5_files/figure-html/unnamed-chunk-3-3.png" width="672" />
+<br></p>
+<p>It is not plausible that someone can take into account all these
+options and choose. So you need to have rules which are at play.</p>
+<p>A possible rule: I want to make a tie if it is not present. This
+means every tie is evaluated positively.</p>
+<p>You can then per network count how many ties 4 has: and you want as
+many ties possible. The cases in which 4 gets two ties are favoured more
+than the one in which 4 has 1 or 0. We count the statistic for every
+network, and pick the one which is best.</p>
+<p>Another possible rule: Preference for reciprocated ties.</p>
+<p>You can combine those two statistics (rules): then you need to add a
+value to the statistic: is degree more important or reciprocity more
+important? &gt; parameters</p>
+<p>We are going to estimate the parameters with Rsiena: the model will
+spit out: how important is the reciprocity parameter?</p>
+<pre class="r"><code># Let us count the number of ties ego sends to alters.
+ts_degree(net = options[[1]], ego = ego)</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code># Count this for all options
+sapply(options, ts_degree, ego = ego)</code></pre>
+<pre><code>##  [1] 2 2 2 1 2 2 2 2 0 2</code></pre>
+<pre class="r"><code># reciprocated ties
+sapply(options, ts_recip, ego = ego)</code></pre>
+<pre><code>##  [1] 1 1 1 1 1 1 1 1 0 1</code></pre>
+<p>For each network, calculate the statistic, multiply it by the value,
+do that for all statistics, and then add them to each other. and pick
+the one with the highest number. If there are several with the highest
+number: pick them randomly.</p>
+<p>The formula basically states:</p>
+<p>For actor(i) take their network, for their network we calculate the
+statistic k and we multiply it by the importance for that statistic and
+sum those.</p>
+<pre class="r"><code># lets say: the statistic ‘degree’ is -1 and the statistic ‘reciprocity’ is 1.5.
+
+option &lt;- 4
+ts_degree(options[[option]], ego = ego) * -1 + ts_recip(options[[option]], ego = ego) * 1.5</code></pre>
+<pre><code>## [1] 0.5</code></pre>
+<pre class="r"><code># or use the evaluation function
+Copyeval &lt;- ts_eval(net = options[[option]], ego = ego, statistics = list(ts_degree, ts_recip), parameters = c(-1, 1.5))
+eval</code></pre>
+<pre><code>## function (expr, envir = parent.frame(), enclos = if (is.list(envir) || 
+##     is.pairlist(envir)) parent.frame() else baseenv()) 
+## .Internal(eval(expr, envir, enclos))
+## &lt;bytecode: 0x14491a8e0&gt;
+## &lt;environment: namespace:base&gt;</code></pre>
+<pre class="r"><code># Now, let us calculate the evaluation of all possible networks:
+eval &lt;- sapply(options, FUN = ts_eval, ego = ego, statistics = list(ts_degree, ts_recip), parameters = c(-1,
+    1.5))
+eval</code></pre>
+<pre><code>##  [1] -0.5 -0.5 -0.5  0.5 -0.5 -0.5 -0.5 -0.5  0.0 -0.5</code></pre>
+<pre class="r"><code>print(&quot;network with maximum evaluation score:&quot;)</code></pre>
+<pre><code>## [1] &quot;network with maximum evaluation score:&quot;</code></pre>
+<pre class="r"><code>which.max(eval)</code></pre>
+<pre><code>## [1] 4</code></pre>
+<p><br></p>
+<p>Now we need to force people to choose: take the exponent of that
+score and compare it by the total of all the option: you get a
+probability of that choice being chosen. It does not pick the option
+with the highest probability score, that would make it deterministic,
+but it’s not. Because of the stoactic element, you can get to more
+realistic network structures.</p>
+<p>We sample from all our options (which were saved in eval), we can
+only take one option (size = 1), and we weigh these options based on
+their probability.</p>
+<pre class="r"><code>choice &lt;- sample(1:length(eval), size = 1, prob = exp(eval)/sum(exp(eval)))
+print(&quot;choice:&quot;)</code></pre>
+<pre><code>## [1] &quot;choice:&quot;</code></pre>
+<pre class="r"><code>choice</code></pre>
+<pre><code>## [1] 10</code></pre>
+<p><br></p>
+<p>Now, we can repeat this process many times. But eventually you need
+it to stop.</p>
+<p>Need agent based modeling for this. We need to have a stopping
+rule.</p>
+<p>But we are not interested in simulating, we want to estimate
+stuff:</p>
+<ul>
+<li>We need start values: say which statistics are important</li>
+<li>Start with informative starting values</li>
+<li>Then it simulates a network many times</li>
+<li>Then it looks at, how did I do?</li>
+<li>After a lot of ping-ponging you narrow it down: this should be the
+statistic to get to the actual degree in my network.</li>
+</ul>
+<p>If you say degree is more important, this will also impact the
+reciprocity degree, they are interdependent so you need to look at those
+parameters. This is the logic, you don’t do this yourself: you can use
+Rsiena for that and mongrows algorithm to get it there.</p>
+<p>It is not about: did I get the specific ties correct, but more about
+did i get the degree correct. We are predicted at the aggregated
+statistics level. YOu can make it more alike by putting in more specific
+rules: people aged 40 and older create less ties…</p>
+<pre class="r"><code>rate &lt;- 2
+degree &lt;- -1
+recip &lt;- 1.5
+#ts_sims(nsims = 1, net = ts_net1, startvalues = c(rate, degree, recip), statistics = list(ts_degree,
+#    ts_recip), p2step = c(1, 0, 0), chain = FALSE)  #not that rate parameter is automatically included. 
+
+# we do not calculate SE for now.
+#ans &lt;- ts_estim(net1 = s501, net2 = s502, statistics = list(ts_degree, ts_recip), p2step = c(1, 0, 0),
+#    conv = 0.01, phase3 = TRUE, itef3 = 50, verbose = TRUE)</code></pre>
+<p><br></p>
+<p>Based on the output seen here below, you can interpret it.</p>
+<p>Assuming my object of interest increased with 1 then the probability
+is the exponent of your parameter the log probability is your parameter
+of interest.</p>
+<p>The exp(-2.25): the probability to have one tie instead of none is
+0.10. This estimate will be very close to the density of our network. If
+the probability of sending a tie to not sending a tie is 1: then you get
+0.5 (in most network the densitiy is below 0, smaller than 0.5)</p>
+<p>The higher the score: the more positive, the more we like the
+statistic, the higher the probability, the more likely. You can also
+compare estimate sizes to each other.</p>
+<pre class="r"><code>#&gt;            estim        SE
+#&gt; rate    5.122247 1.1833275
+#&gt; degree -2.258332 0.1371387
+#&gt; recip   2.428552 0.2102846</code></pre>
+<p><br></p>
+<p>You need to be specific: is your hypothesis on the ego level (like
+your model is: estimates are on the micro level) or a the network level?
+In the second case you need to take other steps (next week).</p>
+<p>For your final assignment you need to explain the estimates, say
+which ones are bigger</p>
+<p><br></p>
+<p>By the way: The ministeps are not observed, we observe network at T1
+and at T2 and between them are ministeps (unobserved), if we did have
+the ministeps we could use different models: because then you can
+analyse the ministeps, you’d need timestamped data (we have that in our
+data beacuse the publications are dated (but those are messy because it
+does not include the start of the process etc.))</p>
+<p><br></p>
+<p>In the package RsienaTwoStep there are functions for the following
+network statistics:</p>
+<ul>
+<li><p>degree: ts_degree()</p></li>
+<li><p>reciprocity: ts_recip()</p></li>
+<li><p>outdegree activity: ts_outAct()</p></li>
+<li><p>indegree activity: ts_inAct()</p></li>
+<li><p>outdegree popularity: ts_outPop()</p></li>
+<li><p>indegree popularity: ts_inPop()</p></li>
+<li><p>transitivity: ts_transTrip()</p></li>
+<li><p>mediated transitivity: ts_transMedTrip()</p></li>
+<li><p>transitive reciprocated triplets: ts_transRecTrip()</p></li>
+<li><p>number of three-cycles: ts_cycle3()</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSm91cm5hbCAxIgojYmlibGlvZ3JhcGh5OiByZWZlcmVuY2VzLmJpYgphdXRob3I6ICJNeWzDqG5lIEh1c3NvbiIKLS0tCgpgYGB7ciwgZWNobz1UUlVFLCByZXN1bHRzPSdoaWRlJywgbWVzc2FnZT1GQUxTRSwgd2FybmluZz1GQUxTRX0KbGlicmFyeShrbml0cikKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkoc2Nob2xhcikKbGlicmFyeShvcGVuYWxleFIpCmxpYnJhcnkocnZlc3QpCmxpYnJhcnkoanNvbmxpdGUpCmxpYnJhcnkoaHR0cikKbGlicmFyeShydmVzdCkKbGlicmFyeShyZXNoYXBlMikKbGlicmFyeSh4bWwyKQpsaWJyYXJ5KG9wZW54bHN4KQpsaWJyYXJ5KHBvbGl0ZSkKbGlicmFyeShpZ3JhcGgpCmxpYnJhcnkoc25hKQpsaWJyYXJ5KGdlbmRlcml6ZVIpCmxpYnJhcnkoUlNlbGVuaXVtKQpsaWJyYXJ5KG5ldHN0YXQpCmxpYnJhcnkocGluZ3IpCmxpYnJhcnkoUlNpZW5hKQpsaWJyYXJ5KGRldnRvb2xzKQpsaWJyYXJ5KFJzaWVuYVR3b1N0ZXApCgojbG9hZCB0aGUgZnVuY3Rpb25zIHlvdSBuZWVkIGZyb20gdGhlIHBhY2thZ2VzCmZwYWNrYWdlLmNoZWNrIDwtIGZ1bmN0aW9uKHBhY2thZ2VzKSB7CiAgbGFwcGx5KHBhY2thZ2VzLCBGVU4gPSBmdW5jdGlvbih4KSB7CiAgICBpZiAoIXJlcXVpcmUoeCwgY2hhcmFjdGVyLm9ubHkgPSBUUlVFKSkgewogICAgICBpbnN0YWxsLnBhY2thZ2VzKHgsIGRlcGVuZGVuY2llcyA9IFRSVUUpCiAgICAgIGxpYnJhcnkoeCwgY2hhcmFjdGVyLm9ubHkgPSBUUlVFKQogICAgfQogIH0pCn0KCmZzYXZlIDwtIGZ1bmN0aW9uKHgsIGZpbGUgPSBOVUxMLCBsb2NhdGlvbiA9ICIuL2RhdGEvcHJvY2Vzc2VkLyIpIHsKICBpZmVsc2UoIWRpci5leGlzdHMoImRhdGEiKSwgZGlyLmNyZWF0ZSgiZGF0YSIpLCBGQUxTRSkKICBpZmVsc2UoIWRpci5leGlzdHMoImRhdGEvcHJvY2Vzc2VkIiksIGRpci5jcmVhdGUoImRhdGEvcHJvY2Vzc2VkIiksIEZBTFNFKQogIGlmIChpcy5udWxsKGZpbGUpKQogICAgZmlsZSA9IGRlcGFyc2Uoc3Vic3RpdHV0ZSh4KSkKICBkYXRlbmFtZSA8LSBzdWJzdHIoZ3N1YigiWzotXSIsICIiLCBTeXMudGltZSgpKSwgMSwgOCkKICB0b3RhbG5hbWUgPC0gcGFzdGUobG9jYXRpb24sIGRhdGVuYW1lLCBmaWxlLCAiLnJkYSIsIHNlcCA9ICIiKQogIHNhdmUoeCwgZmlsZSA9IHRvdGFsbmFtZSkgICNuZWVkIHRvIGZpeCBpZiBmaWxlIGlzIHJlbG9hZGVkIGFzIGlucHV0IG5hbWUsIG5vdCBhcyB4LiAKfQoKZmxvYWQgPC0gZnVuY3Rpb24oZmlsZW5hbWUpIHsKICBsb2FkKGZpbGVuYW1lKQogIGdldChscygpW2xzKCkgIT0gImZpbGVuYW1lIl0pCn0KCmZzaG93ZGYgPC0gZnVuY3Rpb24oeCwgLi4uKSB7CiAga25pdHI6OmthYmxlKHgsIGRpZ2l0cyA9IDIsICJodG1sIiwgLi4uKSAlPiUKICAgIGthYmxlRXh0cmE6OmthYmxlX3N0eWxpbmcoYm9vdHN0cmFwX29wdGlvbnMgPSBjKCJzdHJpcGVkIiwgImhvdmVyIikpICU+JQogICAga2FibGVFeHRyYTo6c2Nyb2xsX2JveCh3aWR0aCA9ICIxMDAlIiwgaGVpZ2h0ID0gIjMwMHB4IikKfQoKYGBgCgpgYGB7ciBrbGlwcHksIGVjaG89RkFMU0UsIGluY2x1ZGU9VFJVRX0Ka2xpcHB5OjprbGlwcHkocG9zaXRpb24gPSBjKCd0b3AnLCAncmlnaHQnKSkKI2tsaXBweTo6a2xpcHB5KGNvbG9yID0gJ2RhcmtyZWQnKQoja2xpcHB5OjprbGlwcHkodG9vbHRpcF9tZXNzYWdlID0gJ0NsaWNrIHRvIGNvcHknLCB0b29sdGlwX3N1Y2Nlc3MgPSAnRG9uZScpCmBgYAoKTGFzdCBjb21waWxlZCBvbiBgciBmb3JtYXQoU3lzLnRpbWUoKSwgJyVCLCAlWScpYAo8YnI+CgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiMgV2VlayA1Cjxicj4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKIyMgV29ya3Nob3AKCnJlc3VsdHNfaG9sZCBydW5zIHRoZSBjb21wbGV0ZSBjb2RlIGNodW5rIGFuZCB0aGVuIHNob3dzIHRoZSBvdXRwdXQuIApZb3UgY2FuIGFsc28gbWFrZSBzY3JvbGxhYmxlIG91dHB1dCBib3hlcy4KCmV2YWw9IEZhbHNlICh0aGVuIHlvdSBjYW4gcHVzaCBzdHVmZiB0aGF0IGRvZXNuJ3Qgd29yaykKZWNobyA9IEZhbHNlIChzb21ldGhpbmcgZWxzZSBKb2NoZW0gZG9lcykKCldhdmUgMTogbWFueSBpc29sYXRlcywgYmVjYXVzZSBpdCBpcyBpbiB0aGUgdGltZSBwZXJpb2QgMjAxNS0yMDE5CkNvbGxlY3RlZCBpbiAyMDIyLCBzbyBtYW55IHBlb3BsZSBhcmUgcGhkIHN0dWRlbnRzIG9yIGp1bmlvciByZXNlYXJjaGVycyBqdXN0IGVudGVyaW5nIHRoZSBkZXBhcnRtZW50IGluIDIwMjIsIHdoZW4gdGhlIGRhdGEgd2FzIGNvbGxlY3RlZC4gCgpZb3UgaGF2ZSB0byB0YWtlICJqb2luZXJzIiBhbmQgImxlYXZlcnMiIGludG8gYWNjb3VudAp0aGUgbmV0d29yayBpcyBkZWZpbmVkIGFzIGJlaW5nIGluIG9uZSBvZiB0aGUgZGVwYXJ0bWVudCBhdCBvbmUgb2YgdGhlIHBvaW50cyBpbiBvdXIgZGF0YSBjb2xsZWN0aW9uIG5ldHdvcmssIGlmIHlvdSBqb2luZWQgaW4gMjAyNSB5b3UnbGwgYWxzbyBiZSBpbiB0aGUgZGF0YXNldCBvZiAyMDE1LiBTbyB5b3UgbmVlZCB0byBrZWVwIGludG8gYWNjb3VudCB3aGVuIHRoZXkgam9pbmVkLiAKCjxicj4KCiMjIyBDaGFwdGVyIDcKClJTaWVubmE6IG9uZSBvZiB0aGUgbWFueSBtZXRob2RzIHRvIGFuYWx5c2UgYSBuZXR3b3JrLiBEZXZlbG9wZWQgdG8gYW5hbHlzZSB0aGUgZXZvbHV0aW9uIG9mIG5ldHdvcmtzLCBidXQgY2FuIGFsc28gYW5hbHlzZSBzdGF0aWMgbmV0d29ya3MuIAoKSXQgdGFrZXMgYW4gb2JzZXJ2ZWQgbmV0d29yayBhdCBUMSBhbmQgbG9va3MgYXQgaG93IGl0IGV2b2x2ZXMgb3ZlciB0aW1lLiAKVGhlIG5ldHdvcmsgd2UgYW5hbHlzZSBhdCBUMiBpcyBkZXBlbmRlbnQgb24gdGhlIG5ldHdvcmsgYXQgVDEuCnNpbWlsYXIgcGVvcGxlIHdpbGwgYmVjb21lIGZyaWVuZHMgZGVwZW5kcyBvbiB0aGUgbmV0d29yayB5b3UgaGF2ZSBhdCBUMQpZb3VyIHRoZW9yeSBtYXkgYWxzbyBkZXBlbmQgb24gd2hhdCBoYXBwZW5zIGF0IFQxLgoKQWxsIHlvdXIgaHlwb3RoZXNpcyBhcmUgdGVzdGVkICJjb25kaXRpb25hbCIgYXQgVDEuIAoKVGhlIG1vZGVsIGVzdGltYXRlcyBydWxlcyBmb3IgYWdlbnRzIG9uIGhvdyB0byBjaGFuZ2UgdGllcyBhbmQgYmVoYXZpb3VyCllvdSBmaWd1cmUgb3V0IHRvIHdoYXQgZXh0ZW50IGFuIGFnZW50IGxpa2VzIG9yIGRvZXMgbm90IGxpa2UgdG8gY2xvc2UgYSB0cmlhZCBjb25maWd1cmF0aW9uClNvIHlvdSBmaWd1cmUgb3V0IHJ1bGVzIG9mIGluZGl2aWR1YWxzOiBpdCdzIG9uIGluZGl2aWR1YWwgbGV2ZWwsIG5vdCBvbiBtYWNybyBsZXZlbC4KClRoZXNlIG1pY3JvIHJ1bGVzIGNhbiBiZWNvbWUgc28gY29tcGxleCBhbmQgYXJlIGludGVyZGVwZW5kZW50LCBzbyBpdCdzIGhhcmQgdG8gcHJlZGljdCBob3cgbWljcm8gbGV2ZWwgcnVsZXMgdHJhbnNmb3JtIHRvIG1hY3JvIGxldmVsLiAKCklmIHdlIGtub3cgdGhlIHJ1bGVzIG9mIHRoZXNlIGFnZW50cywgd2UgY2FuIGFjdHVhbGx5IHNpbXVsYXRlIHRoZSBuZXR3b3Jrcy4gCgpZb3UgY2FuIHRyeSB0byBnZXQgdGhlIHNpbXVsYXRlZCBuZXR3b3JrIHRvIGxvb2sgbGlrZSB0aGUgYWN0dWFsIG5ldHdvcmsgZXZvbHV0aW9uLgoKQ3J1Y2lhbCBhc3N1bXB0aW9uIFJTaWVuYTogQWdlbnRzIG1ha2UgbWluaXN0ZXBzLiBPbiBhY3RvciBhdCBhIHRpbWUsIGlzIGFsbG93ZWQgdG8gbWFrZSBvbmUgc2luZ2xlIHRpZSBjaGFuZ2UgYXQgYSB0aW1lLiAKCklzIG5vdCBhbHdheXMgaG93IGl0IHdvcmtzIGluIHJlYWwgbGlmZTogaWYgeW91IG1lZXQgNCBwZW9wbGUgYXQgdGhlIHNhbWUgdGltZSB5b3UgZG9uJ3QgZ28gYnkgdGhlbSBvbmUgYnkgb25lIHRvIHNlZS4KCkFkZGl0aW9uYWwgYXNzdW1wdGlvbnM6IGlmIGEgcmVsYXRpb25zaGlwIGlzIGEgY29tcGxldGUgZmFpbHVyZSwgeW91IGJyZWFrIGEgdGllLCBidXQgYWZ0ZXJ3YXJkcyB5b3UgZm9yZ2V0IGFib3V0IHRoaXMuIEl0IGhhcyBubyBtZW1vcmllcy5UaGVyZSBpcyBhbHNvIG5vIHJlY29nbml0aW9uLCBubyBmdXR1cmUgc2VlaW5nLgoKU28gaWYgdGhlc2UgbWVjaGFuaXNtcyBhcmUgYXQgcGxheSwgdGhleSBzaG91bGQgYmUgbWVhc3VyZWQgYnkgdGhlIG1pbmlzdGVwcy4KQnV0IHlvdSBuZWVkIHRvIGJlIGF3YXJlIHRoYXQgeW91IGNhbid0IHRlc3QgaHlwb3RoZXNlcyBpbiB3aGljaCB0aGVzZSBhcmUgdmVyeSBpbXBvcnRhbnQgYXNzdW1wdGlvbnMuCgpOb3cgaGUncyBjcmVhdGVkIGEgcGFja2FnZSBpbiB3aGljaCB5b3UgY2FuIGRvIG1vcmUsIGJ1dCBpdCBkb2VzIG5vdCBzZWVtIHRoYXQgaXQgbWFrZXMgYSBncmVhdCBkaWZmZXJlbmNlLiAKCkl0IGV2YWx1YXRlcyBwb3NzaWJsZSBvcHRpb25zLCBhbmQgdGhlbiBpdCBwaWNzIHRoZSBvbmUgaXQgbGlrZXM6IG5vdCBpbiBhIGRldGVybWluaXN0aWMgd2F5LCBidXQgYSBzdWdnZXN0aXZlIHdheT8KCmBgYHtyfQojIFN0YXJ0IHdpdGggYSBjbGVhbiBlbnZpcm9ubWVudApybShsaXN0ID0gbHMoKSkKCnRzX25ldDEKCm5ldDFnIDwtIGdyYXBoX2Zyb21fYWRqYWNlbmN5X21hdHJpeCh0c19uZXQxLCBtb2RlID0gImRpcmVjdGVkIikKY29vcmRzIDwtIGxheW91dF8obmV0MWcsIG5pY2VseSgpKSAgI2xldCB1cyBrZWVwIHRoZSBsYXlvdXQKcGFyKG1hciA9IGMoMC4xLCAwLjEsIDAuMSwgMC4xKSkKewogICAgcGxvdC5pZ3JhcGgobmV0MWcsIGxheW91dCA9IGNvb3JkcykKICAgIGdyYXBoaWNzOjpib3goKQp9CmBgYAo8YnI+Ck5vdyB5b3UgbmVlZCB0byBmaWd1cmUgb3V0IHdobyBpcyBhbGxvd2VkIHRvIG1ha2UgYSBtaW5pc3RlcDogZm9yIG5vdyB3ZSBhc3N1bWUgaXQncyByYW5kb20uIE1vc3RseSBmb2N1cyBvbiwgd2hlbiB0aGV5IGNoYW5nZSwgaG93IGRvIHRoZXkgY2hhbmdlPwoKRm9yIGV2ZXJ5IGFjdG9yLCB0aGUgbnVtYmVyIG9mIGFjdGlvbnMgYXJlIDEwOiBpdCBjYW4gZG8gbm90aGluZywgY3JlYXRlIGEgdGllLCBvciBicmVhayBhIHRpZS4KClNvIHRoZXJlIGFyZSAxMCBvcHRpb25zOiBkbyBub3RoaW5nIG9yIGRvIHNvbWV0aGluZyB3aXRoIHRoZSA5IG90aGVyIGFjdG9ycy4gCmBgYHtyfQojIExldCdzIHNheSBhIHJhbmRvbSBlZ28gZ2V0cyBjaG9zZW4Kc2V0LnNlZWQoMjQ1NTMyNTMpCmVnbyA8LSB0c19zZWxlY3QobmV0ID0gdHNfbmV0MSkKCiMgV2UgcGljayBlZ28gNAoKIyBpbiB0aGlzIG5ldHdvcmssIGVnbyAoZWdvIDQpIGlzIGFsbG93ZWQgdG8gbWFrZSBtaW5pc3RlcHMKIyB0aGVuIGl0IHNhdmVzIGFsbCB0aGUgYWx0ZXJuYXRpdmVzIGluIHRoZSBvYmplY3Qgb3B0aW9ucwpvcHRpb25zIDwtIHRzX2FsdGVybmF0aXZlc19taW5pc3RlcChuZXQgPSB0c19uZXQxLCBlZ28gPSBlZ28pCm9wdGlvbnMKCiMgbWFrZSBwbG90cyBvZiB0aGUgZGlmZmVyZW50IG9wdGlvbnMKcGxvdHMgPC0gbGFwcGx5KG9wdGlvbnMsIGdyYXBoX2Zyb21fYWRqYWNlbmN5X21hdHJpeCwgbW9kZSA9ICJkaXJlY3RlZCIpCnBhcihtYXIgPSBjKDAsIDAsIDAsIDApICsgMC4xKQpwYXIobWZyb3cgPSBjKDIsIDIpKQoKZnBsb3QgPC0gZnVuY3Rpb24oeCkgewogICAgcGxvdC5pZ3JhcGgoeCwgbGF5b3V0ID0gY29vcmRzLCBtYXJnaW4gPSAwKQogICAgZ3JhcGhpY3M6OmJveCgpCn0KCmxhcHBseShwbG90cywgZnBsb3QpCgoKYGBgCjxicj4KCkl0IGlzIG5vdCBwbGF1c2libGUgdGhhdCBzb21lb25lIGNhbiB0YWtlIGludG8gYWNjb3VudCBhbGwgdGhlc2Ugb3B0aW9ucyBhbmQgY2hvb3NlLiBTbyB5b3UgbmVlZCB0byBoYXZlIHJ1bGVzIHdoaWNoIGFyZSBhdCBwbGF5LgoKQSBwb3NzaWJsZSBydWxlOiBJIHdhbnQgdG8gbWFrZSBhIHRpZSBpZiBpdCBpcyBub3QgcHJlc2VudC4gVGhpcyBtZWFucyBldmVyeSB0aWUgaXMgZXZhbHVhdGVkIHBvc2l0aXZlbHkuCgpZb3UgY2FuIHRoZW4gcGVyIG5ldHdvcmsgY291bnQgaG93IG1hbnkgdGllcyA0IGhhczogYW5kIHlvdSB3YW50IGFzIG1hbnkgdGllcyBwb3NzaWJsZS4gVGhlIGNhc2VzIGluIHdoaWNoIDQgZ2V0cyB0d28gdGllcyBhcmUgZmF2b3VyZWQgbW9yZSB0aGFuIHRoZSBvbmUgaW4gd2hpY2ggNCBoYXMgMSBvciAwLiAKV2UgY291bnQgdGhlIHN0YXRpc3RpYyBmb3IgZXZlcnkgbmV0d29yaywgYW5kIHBpY2sgdGhlIG9uZSB3aGljaCBpcyBiZXN0LgoKQW5vdGhlciBwb3NzaWJsZSBydWxlOiBQcmVmZXJlbmNlIGZvciByZWNpcHJvY2F0ZWQgdGllcy4gCgpZb3UgY2FuIGNvbWJpbmUgdGhvc2UgdHdvIHN0YXRpc3RpY3MgKHJ1bGVzKTogdGhlbiB5b3UgbmVlZCB0byBhZGQgYSB2YWx1ZSB0byB0aGUgc3RhdGlzdGljOiBpcyBkZWdyZWUgbW9yZSBpbXBvcnRhbnQgb3IgcmVjaXByb2NpdHkgbW9yZSBpbXBvcnRhbnQ/ID4gcGFyYW1ldGVycwoKV2UgYXJlIGdvaW5nIHRvIGVzdGltYXRlIHRoZSBwYXJhbWV0ZXJzIHdpdGggUnNpZW5hOiB0aGUgbW9kZWwgd2lsbCBzcGl0IG91dDogaG93IGltcG9ydGFudCBpcyB0aGUgcmVjaXByb2NpdHkgcGFyYW1ldGVyPwoKCmBgYHtyfQojIExldCB1cyBjb3VudCB0aGUgbnVtYmVyIG9mIHRpZXMgZWdvIHNlbmRzIHRvIGFsdGVycy4KdHNfZGVncmVlKG5ldCA9IG9wdGlvbnNbWzFdXSwgZWdvID0gZWdvKQoKIyBDb3VudCB0aGlzIGZvciBhbGwgb3B0aW9ucwpzYXBwbHkob3B0aW9ucywgdHNfZGVncmVlLCBlZ28gPSBlZ28pCgojIHJlY2lwcm9jYXRlZCB0aWVzCnNhcHBseShvcHRpb25zLCB0c19yZWNpcCwgZWdvID0gZWdvKQpgYGAKCkZvciBlYWNoIG5ldHdvcmssIGNhbGN1bGF0ZSB0aGUgc3RhdGlzdGljLCBtdWx0aXBseSBpdCBieSB0aGUgdmFsdWUsIGRvIHRoYXQgZm9yIGFsbCBzdGF0aXN0aWNzLCBhbmQgdGhlbiBhZGQgdGhlbSB0byBlYWNoIG90aGVyLiBhbmQgcGljayB0aGUgb25lIHdpdGggdGhlIGhpZ2hlc3QgbnVtYmVyLiBJZiB0aGVyZSBhcmUgc2V2ZXJhbCB3aXRoIHRoZSBoaWdoZXN0IG51bWJlcjogcGljayB0aGVtIHJhbmRvbWx5LgoKVGhlIGZvcm11bGEgYmFzaWNhbGx5IHN0YXRlczoKCkZvciBhY3RvcihpKSB0YWtlIHRoZWlyIG5ldHdvcmssIGZvciB0aGVpciBuZXR3b3JrIHdlIGNhbGN1bGF0ZSB0aGUgc3RhdGlzdGljIGsgYW5kIHdlIG11bHRpcGx5IGl0IGJ5IHRoZSBpbXBvcnRhbmNlIGZvciB0aGF0IHN0YXRpc3RpYyBhbmQgc3VtIHRob3NlLiAKYGBge3J9CiMgbGV0cyBzYXk6IHRoZSBzdGF0aXN0aWMg4oCYZGVncmVl4oCZIGlzIC0xIGFuZCB0aGUgc3RhdGlzdGljIOKAmHJlY2lwcm9jaXR54oCZIGlzIDEuNS4KCm9wdGlvbiA8LSA0CnRzX2RlZ3JlZShvcHRpb25zW1tvcHRpb25dXSwgZWdvID0gZWdvKSAqIC0xICsgdHNfcmVjaXAob3B0aW9uc1tbb3B0aW9uXV0sIGVnbyA9IGVnbykgKiAxLjUKCiMgb3IgdXNlIHRoZSBldmFsdWF0aW9uIGZ1bmN0aW9uCkNvcHlldmFsIDwtIHRzX2V2YWwobmV0ID0gb3B0aW9uc1tbb3B0aW9uXV0sIGVnbyA9IGVnbywgc3RhdGlzdGljcyA9IGxpc3QodHNfZGVncmVlLCB0c19yZWNpcCksIHBhcmFtZXRlcnMgPSBjKC0xLCAxLjUpKQpldmFsCgoKIyBOb3csIGxldCB1cyBjYWxjdWxhdGUgdGhlIGV2YWx1YXRpb24gb2YgYWxsIHBvc3NpYmxlIG5ldHdvcmtzOgpldmFsIDwtIHNhcHBseShvcHRpb25zLCBGVU4gPSB0c19ldmFsLCBlZ28gPSBlZ28sIHN0YXRpc3RpY3MgPSBsaXN0KHRzX2RlZ3JlZSwgdHNfcmVjaXApLCBwYXJhbWV0ZXJzID0gYygtMSwKICAgIDEuNSkpCmV2YWwKcHJpbnQoIm5ldHdvcmsgd2l0aCBtYXhpbXVtIGV2YWx1YXRpb24gc2NvcmU6IikKd2hpY2gubWF4KGV2YWwpCmBgYAoKPGJyPgoKTm93IHdlIG5lZWQgdG8gZm9yY2UgcGVvcGxlIHRvIGNob29zZTogdGFrZSB0aGUgZXhwb25lbnQgb2YgdGhhdCBzY29yZSBhbmQgY29tcGFyZSBpdCBieSB0aGUgdG90YWwgb2YgYWxsIHRoZSBvcHRpb246IHlvdSBnZXQgYSBwcm9iYWJpbGl0eSBvZiB0aGF0IGNob2ljZSBiZWluZyBjaG9zZW4uIEl0IGRvZXMgbm90IHBpY2sgdGhlIG9wdGlvbiB3aXRoIHRoZSBoaWdoZXN0IHByb2JhYmlsaXR5IHNjb3JlLCB0aGF0IHdvdWxkIG1ha2UgaXQgZGV0ZXJtaW5pc3RpYywgYnV0IGl0J3Mgbm90LiBCZWNhdXNlIG9mIHRoZSBzdG9hY3RpYyBlbGVtZW50LCB5b3UgY2FuIGdldCB0byBtb3JlIHJlYWxpc3RpYyBuZXR3b3JrIHN0cnVjdHVyZXMuCgpXZSBzYW1wbGUgZnJvbSBhbGwgb3VyIG9wdGlvbnMgKHdoaWNoIHdlcmUgc2F2ZWQgaW4gZXZhbCksIHdlIGNhbiBvbmx5IHRha2Ugb25lIG9wdGlvbiAoc2l6ZSA9IDEpLCBhbmQgd2Ugd2VpZ2ggdGhlc2Ugb3B0aW9ucyBiYXNlZCBvbiB0aGVpciBwcm9iYWJpbGl0eS4gCmBgYHtyfQpjaG9pY2UgPC0gc2FtcGxlKDE6bGVuZ3RoKGV2YWwpLCBzaXplID0gMSwgcHJvYiA9IGV4cChldmFsKS9zdW0oZXhwKGV2YWwpKSkKcHJpbnQoImNob2ljZToiKQpjaG9pY2UKYGBgCgo8YnI+CgpOb3csIHdlIGNhbiByZXBlYXQgdGhpcyBwcm9jZXNzIG1hbnkgdGltZXMuIEJ1dCBldmVudHVhbGx5IHlvdSBuZWVkIGl0IHRvIHN0b3AuCgpOZWVkIGFnZW50IGJhc2VkIG1vZGVsaW5nIGZvciB0aGlzLiBXZSBuZWVkIHRvIGhhdmUgYSBzdG9wcGluZyBydWxlLgoKQnV0IHdlIGFyZSBub3QgaW50ZXJlc3RlZCBpbiBzaW11bGF0aW5nLCB3ZSB3YW50IHRvIGVzdGltYXRlIHN0dWZmOgoKLSBXZSBuZWVkIHN0YXJ0IHZhbHVlczogc2F5IHdoaWNoIHN0YXRpc3RpY3MgYXJlIGltcG9ydGFudAotIFN0YXJ0IHdpdGggaW5mb3JtYXRpdmUgc3RhcnRpbmcgdmFsdWVzCi0gVGhlbiBpdCBzaW11bGF0ZXMgYSBuZXR3b3JrIG1hbnkgdGltZXMKLSBUaGVuIGl0IGxvb2tzIGF0LCBob3cgZGlkIEkgZG8/Ci0gQWZ0ZXIgYSBsb3Qgb2YgcGluZy1wb25naW5nIHlvdSBuYXJyb3cgaXQgZG93bjogdGhpcyBzaG91bGQgYmUgdGhlIHN0YXRpc3RpYyB0byBnZXQgdG8gdGhlIGFjdHVhbCBkZWdyZWUgaW4gbXkgbmV0d29yay4KCklmIHlvdSBzYXkgZGVncmVlIGlzIG1vcmUgaW1wb3J0YW50LCB0aGlzIHdpbGwgYWxzbyBpbXBhY3QgdGhlIHJlY2lwcm9jaXR5IGRlZ3JlZSwgdGhleSBhcmUgaW50ZXJkZXBlbmRlbnQgc28geW91IG5lZWQgdG8gbG9vayBhdCB0aG9zZSBwYXJhbWV0ZXJzLiBUaGlzIGlzIHRoZSBsb2dpYywgeW91IGRvbid0IGRvIHRoaXMgeW91cnNlbGY6IHlvdSBjYW4gdXNlIFJzaWVuYSBmb3IgdGhhdCBhbmQgbW9uZ3Jvd3MgYWxnb3JpdGhtIHRvIGdldCBpdCB0aGVyZS4KCkl0IGlzIG5vdCBhYm91dDogZGlkIEkgZ2V0IHRoZSBzcGVjaWZpYyB0aWVzIGNvcnJlY3QsIGJ1dCBtb3JlIGFib3V0IGRpZCBpIGdldCB0aGUgZGVncmVlIGNvcnJlY3QuIFdlIGFyZSBwcmVkaWN0ZWQgYXQgdGhlIGFnZ3JlZ2F0ZWQgc3RhdGlzdGljcyBsZXZlbC4gWU91IGNhbiBtYWtlIGl0IG1vcmUgYWxpa2UgYnkgcHV0dGluZyBpbiBtb3JlIHNwZWNpZmljIHJ1bGVzOiBwZW9wbGUgYWdlZCA0MCBhbmQgb2xkZXIgY3JlYXRlIGxlc3MgdGllcy4uLgoKYGBge3J9CnJhdGUgPC0gMgpkZWdyZWUgPC0gLTEKcmVjaXAgPC0gMS41CiN0c19zaW1zKG5zaW1zID0gMSwgbmV0ID0gdHNfbmV0MSwgc3RhcnR2YWx1ZXMgPSBjKHJhdGUsIGRlZ3JlZSwgcmVjaXApLCBzdGF0aXN0aWNzID0gbGlzdCh0c19kZWdyZWUsCiMgICAgdHNfcmVjaXApLCBwMnN0ZXAgPSBjKDEsIDAsIDApLCBjaGFpbiA9IEZBTFNFKSAgI25vdCB0aGF0IHJhdGUgcGFyYW1ldGVyIGlzIGF1dG9tYXRpY2FsbHkgaW5jbHVkZWQuIAoKIyB3ZSBkbyBub3QgY2FsY3VsYXRlIFNFIGZvciBub3cuCiNhbnMgPC0gdHNfZXN0aW0obmV0MSA9IHM1MDEsIG5ldDIgPSBzNTAyLCBzdGF0aXN0aWNzID0gbGlzdCh0c19kZWdyZWUsIHRzX3JlY2lwKSwgcDJzdGVwID0gYygxLCAwLCAwKSwKIyAgICBjb252ID0gMC4wMSwgcGhhc2UzID0gVFJVRSwgaXRlZjMgPSA1MCwgdmVyYm9zZSA9IFRSVUUpCmBgYAo8YnI+CgpCYXNlZCBvbiB0aGUgb3V0cHV0IHNlZW4gaGVyZSBiZWxvdywgeW91IGNhbiBpbnRlcnByZXQgaXQuIAoKQXNzdW1pbmcgbXkgb2JqZWN0IG9mIGludGVyZXN0IGluY3JlYXNlZCB3aXRoIDEgdGhlbiB0aGUgcHJvYmFiaWxpdHkgaXMgdGhlIGV4cG9uZW50IG9mIHlvdXIgcGFyYW1ldGVyCnRoZSBsb2cgcHJvYmFiaWxpdHkgaXMgeW91ciBwYXJhbWV0ZXIgb2YgaW50ZXJlc3QuIAoKVGhlIGV4cCgtMi4yNSk6IHRoZSBwcm9iYWJpbGl0eSB0byBoYXZlIG9uZSB0aWUgaW5zdGVhZCBvZiBub25lIGlzIDAuMTAuIApUaGlzIGVzdGltYXRlIHdpbGwgYmUgdmVyeSBjbG9zZSB0byB0aGUgZGVuc2l0eSBvZiBvdXIgbmV0d29yay4gCklmIHRoZSBwcm9iYWJpbGl0eSBvZiBzZW5kaW5nIGEgdGllIHRvIG5vdCBzZW5kaW5nIGEgdGllIGlzIDE6IHRoZW4geW91IGdldCAwLjUgCihpbiBtb3N0IG5ldHdvcmsgdGhlIGRlbnNpdGl5IGlzIGJlbG93IDAsIHNtYWxsZXIgdGhhbiAwLjUpCgpUaGUgaGlnaGVyIHRoZSBzY29yZTogdGhlIG1vcmUgcG9zaXRpdmUsIHRoZSBtb3JlIHdlIGxpa2UgdGhlIHN0YXRpc3RpYywgdGhlIGhpZ2hlciB0aGUgcHJvYmFiaWxpdHksIHRoZSBtb3JlIGxpa2VseS4KWW91IGNhbiBhbHNvIGNvbXBhcmUgZXN0aW1hdGUgc2l6ZXMgdG8gZWFjaCBvdGhlci4gCmBgYHtyfQojPiAgICAgICAgICAgIGVzdGltICAgICAgICBTRQojPiByYXRlICAgIDUuMTIyMjQ3IDEuMTgzMzI3NQojPiBkZWdyZWUgLTIuMjU4MzMyIDAuMTM3MTM4NwojPiByZWNpcCAgIDIuNDI4NTUyIDAuMjEwMjg0NgpgYGAKPGJyPgoKWW91IG5lZWQgdG8gYmUgc3BlY2lmaWM6IGlzIHlvdXIgaHlwb3RoZXNpcyBvbiB0aGUgZWdvIGxldmVsIChsaWtlIHlvdXIgbW9kZWwgaXM6IGVzdGltYXRlcyBhcmUgb24gdGhlIG1pY3JvIGxldmVsKSBvciBhIHRoZSBuZXR3b3JrIGxldmVsPyBJbiB0aGUgc2Vjb25kIGNhc2UgeW91IG5lZWQgdG8gdGFrZSBvdGhlciBzdGVwcyAobmV4dCB3ZWVrKS4gCgpGb3IgeW91ciBmaW5hbCBhc3NpZ25tZW50IHlvdSBuZWVkIHRvIGV4cGxhaW4gdGhlIGVzdGltYXRlcywgc2F5IHdoaWNoIG9uZXMgYXJlIGJpZ2dlciAKCjxicj4KCkJ5IHRoZSB3YXk6ClRoZSBtaW5pc3RlcHMgYXJlIG5vdCBvYnNlcnZlZCwgd2Ugb2JzZXJ2ZSBuZXR3b3JrIGF0IFQxIGFuZCBhdCBUMiBhbmQgYmV0d2VlbiB0aGVtIGFyZSBtaW5pc3RlcHMgKHVub2JzZXJ2ZWQpLCBpZiB3ZSBkaWQgaGF2ZSB0aGUgbWluaXN0ZXBzIHdlIGNvdWxkIHVzZSBkaWZmZXJlbnQgbW9kZWxzOiBiZWNhdXNlIHRoZW4geW91IGNhbiBhbmFseXNlIHRoZSBtaW5pc3RlcHMsIHlvdSdkIG5lZWQgdGltZXN0YW1wZWQgZGF0YSAod2UgaGF2ZSB0aGF0IGluIG91ciBkYXRhIGJlYWN1c2UgdGhlIHB1YmxpY2F0aW9ucyBhcmUgZGF0ZWQgKGJ1dCB0aG9zZSBhcmUgbWVzc3kgYmVjYXVzZSBpdCBkb2VzIG5vdCBpbmNsdWRlIHRoZSBzdGFydCBvZiB0aGUgcHJvY2VzcyBldGMuKSkKCjxicj4KCkluIHRoZSBwYWNrYWdlIFJzaWVuYVR3b1N0ZXAgdGhlcmUgYXJlIGZ1bmN0aW9ucyBmb3IgdGhlIGZvbGxvd2luZyBuZXR3b3JrIHN0YXRpc3RpY3M6CgotIGRlZ3JlZTogdHNfZGVncmVlKCkKCi0gcmVjaXByb2NpdHk6IHRzX3JlY2lwKCkKCi0gb3V0ZGVncmVlIGFjdGl2aXR5OiB0c19vdXRBY3QoKQoKLSBpbmRlZ3JlZSBhY3Rpdml0eTogdHNfaW5BY3QoKQoKLSBvdXRkZWdyZWUgcG9wdWxhcml0eTogdHNfb3V0UG9wKCkKCi0gaW5kZWdyZWUgcG9wdWxhcml0eTogdHNfaW5Qb3AoKQoKLSB0cmFuc2l0aXZpdHk6IHRzX3RyYW5zVHJpcCgpCgotIG1lZGlhdGVkIHRyYW5zaXRpdml0eTogdHNfdHJhbnNNZWRUcmlwKCkKCi0gdHJhbnNpdGl2ZSByZWNpcHJvY2F0ZWQgdHJpcGxldHM6IHRzX3RyYW5zUmVjVHJpcCgpCgotIG51bWJlciBvZiB0aHJlZS1jeWNsZXM6IHRzX2N5Y2xlMygpCgo=</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("lab5.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

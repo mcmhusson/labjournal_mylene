@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Create_Dataset.knit</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="tweaks.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    My journal
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lab1.html">Week 1</a>
+    </li>
+    <li>
+      <a href="lab2.html">Week 2</a>
+    </li>
+    <li>
+      <a href="lab3.html">Week 3</a>
+    </li>
+    <li>
+      <a href="lab4.html">Week 4</a>
+    </li>
+    <li>
+      <a href="lab5.html">Week 5a</a>
+    </li>
+    <li>
+      <a href="lab5tryouts.html">Week 5b</a>
+    </li>
+    <li>
+      <a href="Create_dataset.html">Week 5c</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://mcmhusson.github.io/labjournal_mylene/">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<pre class="r"><code>library(knitr)
+library(tidyverse)
+library(scholar)
+library(openalexR)
+library(rvest)
+library(jsonlite)
+library(httr)
+library(rvest)
+library(reshape2)
+library(xml2)
+library(openxlsx)
+library(polite)
+library(igraph)
+library(sna)
+library(genderizeR)
+library(RSelenium)
+library(netstat)
+library(pingr)
+library(RSiena)
+library(devtools)
+library(RsienaTwoStep)
+
+
+# load the functions you need from the packages
+fpackage.check &lt;- function(packages) {
+  lapply(packages, FUN = function(x) {
+    if (!require(x, character.only = TRUE)) {
+      install.packages(x, dependencies = TRUE)
+      library(x, character.only = TRUE)
+    }
+  })
+}
+
+fsave &lt;- function(x, file = NULL, location = &quot;./data/processed/&quot;) {
+  ifelse(!dir.exists(&quot;data&quot;), dir.create(&quot;data&quot;), FALSE)
+  ifelse(!dir.exists(&quot;data/processed&quot;), dir.create(&quot;data/processed&quot;), FALSE)
+  
+  if (is.null(file)) {
+    file &lt;- deparse(substitute(x))
+  }
+  
+  datename &lt;- substr(gsub(&quot;[:-]&quot;, &quot;&quot;, Sys.time()), 1, 8)
+  totalname &lt;- paste(location, datename, file, &quot;.rda&quot;, sep = &quot;&quot;)
+  save(x, file = totalname)  # need to fix if file is reloaded as input name, not as x.
+}
+
+fload &lt;- function(filename) {
+  load(filename)
+  get(ls()[ls() != &quot;filename&quot;])
+}
+
+fshowdf &lt;- function(x, ...) {
+  knitr::kable(x, digits = 2, &quot;html&quot;, ...) %&gt;%
+    kableExtra::kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;%
+    kableExtra::scroll_box(width = &quot;100%&quot;, height = &quot;300px&quot;)
+}</code></pre>
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<p>Last compiled on October, 2025 <br></p>
+<hr />
+<div id="create-dataset" class="section level2" number="1">
+<h2><span class="header-section-number">1</span> Create Dataset</h2>
+<p><br></p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left">### Genderize function</td>
+</tr>
+<tr class="even">
+<td align="left">``` r my_genderizer &lt;- function(name) { name &lt;-
+gsub(“^/+|/+$”, ““, name)</td>
+</tr>
+<tr class="odd">
+<td align="left"># Build URL base_url &lt;- “<a
+href="https://nvb.meertens.knaw.nl/naam/is"
+class="uri">https://nvb.meertens.knaw.nl/naam/is</a>” name_url &lt;-
+paste0(base_url, “/”, name)</td>
+</tr>
+<tr class="even">
+<td align="left"># Try reading table table &lt;- tryCatch(
+read_html(name_url) |&gt; html_element(“table”) |&gt; html_table(),
+error = function(e) NULL )</td>
+</tr>
+<tr class="odd">
+<td align="left">if (is.null(table)) return(NA) # return NA if no table
+found</td>
+</tr>
+<tr class="even">
+<td align="left"># Replace “–” with “0” table[table == “–”] &lt;-
+“0”</td>
+</tr>
+<tr class="odd">
+<td align="left"># Convert to numeric val_male &lt;-
+suppressWarnings(as.numeric(table[2, 3])) val_female &lt;-
+suppressWarnings(as.numeric(table[6, 3]))</td>
+</tr>
+<tr class="even">
+<td align="left"># Decide gender if (is.na(val_male) &amp;
+is.na(val_female)) { gender &lt;- NA } else if (val_male &gt;
+val_female) { gender &lt;- “male” } else if (val_female &gt; val_male) {
+gender &lt;- “female” } else { gender &lt;- NA }</td>
+</tr>
+<tr class="odd">
+<td align="left">return(gender) } ``` <br> ### Load the data</td>
+</tr>
+<tr class="even">
+<td align="left">``` r # load in the data scholars &lt;-
+fload(“./data/processed/scholars_20240924.rda”)</td>
+</tr>
+<tr class="odd">
+<td align="left"># select scholars # (sociology, RU) demographics &lt;-
+do.call(rbind.data.frame, scholars$demographics) demographics &lt;-
+demographics %&gt;% mutate(Universiteit1.22 = replace(Universiteit1.22,
+is.na(Universiteit1.22), ““), Universiteit2.22 =
+replace(Universiteit2.22, is.na(Universiteit2.22),”“), Universiteit1.24
+= replace(Universiteit1.24, is.na(Universiteit1.24),”“),
+Universiteit2.24 = replace(Universiteit2.24,
+is.na(Universiteit2.24),”“), discipline.22 = replace(discipline.22,
+is.na(discipline.22),”“), discipline.24 = replace(discipline.24,
+is.na(discipline.24),”“))</td>
+</tr>
+<tr class="even">
+<td align="left">sample &lt;- which((demographics<span
+class="math inline">\(Universiteit1.22 == &quot;RU&quot; |
+demographics\)</span>Universiteit2.22 == “RU” | demographics<span
+class="math inline">\(Universiteit1.24 ==
+&quot;RU&quot; | demographics\)</span>Universiteit2.24 == “RU”) &amp;
+(demographics<span class="math inline">\(discipline.22 ==
+&quot;sociology&quot; | demographics\)</span>discipline.24 ==
+“sociology”))</td>
+</tr>
+<tr class="odd">
+<td align="left">demographics_soc &lt;- demographics[sample, ]
+scholars_sel &lt;- lapply(scholars, “[”, sample)</td>
+</tr>
+<tr class="even">
+<td align="left"># construct the empty adjacency matrix ids &lt;-
+demographics_soc$au_id wave2 &lt;- wave1 &lt;- matrix(0, nrow =
+length(ids), ncol = length(ids), dimnames = list(ids, ids))</td>
+</tr>
+<tr class="odd">
+<td align="left"># filter works works &lt;- scholars_sel$work</td>
+</tr>
+<tr class="even">
+<td align="left">works_id &lt;- unlist(lapply(works, function(l) l<span
+class="math inline">\(id))
+works_author &lt;- unlist(lapply(works, function(l) l\)</span>author),
+recursive = FALSE) works_year &lt;- unlist(lapply(works, function(l)
+l$publication_year), recursive = FALSE)</td>
+</tr>
+<tr class="odd">
+<td align="left">df_works &lt;- tibble(works_id, works_author,
+works_year)</td>
+</tr>
+<tr class="even">
+<td align="left">dups &lt;- which(duplicated(works_id))</td>
+</tr>
+<tr class="odd">
+<td align="left">df_works &lt;- df_works[-dups, ] df_works_w2 &lt;-
+df_works[df_works$works_year &gt; 2019, ]</td>
+</tr>
+<tr class="even">
+<td align="left"># undirected # undirected for (i in
+1:nrow(df_works_w2)) { egos &lt;- df_works_w2<span
+class="math inline">\(works_author[i][[1]]\)</span>au_id</td>
+</tr>
+<tr class="odd">
+<td align="left">if (sum(ids %in% egos) &gt; 0) { wave2[which(ids %in%
+egos), which(ids %in% egos)] &lt;- 1 } }</td>
+</tr>
+<tr class="even">
+<td align="left">fcolnet &lt;- function(data = scholars, university =
+“RU”, discipline = “sociology”, waves = list(c(2015, 2018), c(2019,
+2023)), type = c(“first”)) {</td>
+</tr>
+<tr class="odd">
+<td align="left"># step 1 demographics &lt;- do.call(rbind.data.frame,
+data$demographics) demographics &lt;- demographics %&gt;%
+mutate(Universiteit1.22 = replace(Universiteit1.22,
+is.na(Universiteit1.22), ““), Universiteit2.22 =
+replace(Universiteit2.22, is.na(Universiteit2.22),”“), Universiteit1.24
+= replace(Universiteit1.24, is.na(Universiteit1.24),”“),
+Universiteit2.24 = replace(Universiteit2.24,
+is.na(Universiteit2.24),”“), discipline.22 = replace(discipline.22,
+is.na(discipline.22),”“), discipline.24 = replace(discipline.24,
+is.na(discipline.24),”“))</td>
+</tr>
+<tr class="even">
+<td align="left">sample &lt;- which((demographics<span
+class="math inline">\(Universiteit1.22 %in% university |
+demographics\)</span>Universiteit2.22 %in% university |
+demographics<span class="math inline">\(Universiteit1.24 %in% university
+| demographics\)</span>Universiteit2.24 %in% university) &amp;
+(demographics<span class="math inline">\(discipline.22 %in% discipline |
+demographics\)</span>discipline.24 %in% discipline))</td>
+</tr>
+<tr class="odd">
+<td align="left">demographics_soc &lt;- demographics[sample, ]
+scholars_sel &lt;- lapply(scholars, “[”, sample)</td>
+</tr>
+<tr class="even">
+<td align="left"># step 2 ids &lt;- demographics_soc$au_id nwaves &lt;-
+length(waves) nets &lt;- array(0, dim = c(nwaves, length(ids),
+length(ids)), dimnames = list(wave = 1:nwaves, ids, ids))
+dimnames(nets)</td>
+</tr>
+<tr class="odd">
+<td align="left"># step 3 df_works &lt;- tibble(works_id =
+unlist(lapply(scholars_sel<span class="math inline">\(work, function(l)
+l\)</span>id)), works_author = unlist(lapply(scholars_sel<span
+class="math inline">\(work,
+function(l) l\)</span>author), recursive = FALSE), works_year =
+unlist(lapply(scholars_sel<span class="math inline">\(work, function(l)
+l\)</span>publication_year), recursive = FALSE))</td>
+</tr>
+<tr class="even">
+<td align="left">df_works &lt;- df_works[!duplicated(df_works), ]</td>
+</tr>
+<tr class="odd">
+<td align="left"># step 4 if (type == “first”) { for (j in 1:nwaves) {
+df_works_w &lt;- df_works[df_works<span class="math inline">\(works_year
+&gt;= waves[[j]][1] &amp; df_works\)</span>works_year &lt;=
+waves[[j]][2],] for (i in 1:nrow(df_works_w)) { ego &lt;-
+df_works_w<span
+class="math inline">\(works_author[i][[1]]\)</span>au_id[1] alters &lt;-
+df_works_w<span
+class="math inline">\(works_author[i][[1]]\)</span>au_id[-1] if (sum(ids
+%in% ego) &gt; 0 &amp; sum(ids %in% alters) &gt; 0) { nets[j, which(ids
+%in% ego), which(ids %in% alters)] &lt;- 1 } } } }</td>
+</tr>
+<tr class="even">
+<td align="left">if (type == “last”) { for (j in 1:nwaves) { df_works_w
+&lt;- df_works[df_works<span class="math inline">\(works_year &gt;=
+waves[[j]][1] &amp; df_works\)</span>works_year &lt;= waves[[j]][2],]
+for (i in 1:nrow(df_works_w)) { ego &lt;- rev(df_works_w<span
+class="math inline">\(works_author[i][[1]]\)</span>au_id)[1] alters
+&lt;- rev(df_works_w<span
+class="math inline">\(works_author[i][[1]]\)</span>au_id)[-1] if
+(sum(ids %in% ego) &gt; 0 &amp; sum(ids %in% alters) &gt; 0) { nets[j,
+which(ids %in% ego), which(ids %in% alters)] &lt;- 1 } } } }</td>
+</tr>
+<tr class="odd">
+<td align="left">if (type == “all”) { for (j in 1:nwaves) { df_works_w
+&lt;- df_works[df_works<span class="math inline">\(works_year &gt;=
+waves[[j]][1] &amp; df_works\)</span>works_year &lt;= waves[[j]][2],]
+for (i in 1:nrow(df_works_w)) { egos &lt;- df_works_w<span
+class="math inline">\(works_author[i][[1]]\)</span>au_id if (sum(ids
+%in% egos) &gt; 0) { nets[j, which(ids %in% egos), which(ids %in% egos)]
+&lt;- 1 } } } } output &lt;- list() output<span
+class="math inline">\(data &lt;- scholars_sel
+output\)</span>nets &lt;- nets return(output) }</td>
+</tr>
+<tr class="even">
+<td align="left">df_scholars &lt;- do.call(rbind, scholars$demographics)
+``` <br> ### Attach gender</td>
+</tr>
+<tr class="odd">
+<td align="left">``` r df_scholars_gender &lt;- df_scholars |&gt;
+mutate(firstname = word(Naam, 1)) # extract first names</td>
+</tr>
+<tr class="even">
+<td align="left">df_scholars_gender$gender &lt;- NA_character_ #
+initialize gender column</td>
+</tr>
+<tr class="odd">
+<td align="left">for (i in seq_len(nrow(df_scholars_gender))) { name
+&lt;- df_scholars_gender$firstname[i] gender &lt;-
+my_genderizer(name)</td>
+</tr>
+<tr class="even">
+<td align="left">df_scholars_gender$gender[i] &lt;- gender
+Sys.sleep(0.06) # pause between requests } ``` <br> ### Big data</td>
+</tr>
+<tr class="odd">
+<td align="left">``` r fcolnet_gender &lt;- function(data = scholars,
+waves = list(c(2015, 2018), c(2019, 2023)), type = “first”, demographics
+= NULL) {</td>
+</tr>
+<tr class="even">
+<td align="left"># ————————- # Step 1: demographics # ————————- if
+(is.null(demographics)) { demographics &lt;- do.call(rbind.data.frame,
+data$demographics) }</td>
+</tr>
+<tr class="odd">
+<td align="left">demographics &lt;- demographics %&gt;% mutate(
+Universiteit1.22 = replace(Universiteit1.22, is.na(Universiteit1.22),
+““), Universiteit2.22 = replace(Universiteit2.22,
+is.na(Universiteit2.22),”“), Universiteit1.24 =
+replace(Universiteit1.24, is.na(Universiteit1.24),”“), Universiteit2.24
+= replace(Universiteit2.24, is.na(Universiteit2.24),”“), discipline.22 =
+replace(discipline.22, is.na(discipline.22),”“), discipline.24 =
+replace(discipline.24, is.na(discipline.24),”“) )</td>
+</tr>
+<tr class="even">
+<td align="left"># ————————- # select all scholars # ————————- sample
+&lt;- seq_len(nrow(demographics))</td>
+</tr>
+<tr class="odd">
+<td align="left">demographics_all &lt;- demographics[sample, ]
+scholars_sel &lt;- lapply(data, “[”, sample)</td>
+</tr>
+<tr class="even">
+<td align="left"># ————————- # Step 2: initialize network array #
+————————- ids &lt;- demographics_all$au_id nwaves &lt;- length(waves)
+nets &lt;- array( 0, dim = c(nwaves, length(ids), length(ids)), dimnames
+= list(wave = 1:nwaves, ids, ids) )</td>
+</tr>
+<tr class="odd">
+<td align="left"># ————————- # Step 3: works dataframe # ————————-
+df_works &lt;- tibble( works_id = unlist(lapply(scholars_sel<span
+class="math inline">\(work, function(l) if(!is.null(l)) l\)</span>id
+else NA)), works_author = unlist(lapply(scholars_sel<span
+class="math inline">\(work, function(l) if(!is.null(l)) l\)</span>author
+else NA), recursive = FALSE), works_year =
+unlist(lapply(scholars_sel<span class="math inline">\(work, function(l)
+if(!is.null(l)) l\)</span>publication_year else NA), recursive = FALSE)
+) %&gt;% filter(!is.na(works_id))</td>
+</tr>
+<tr class="even">
+<td align="left">df_works &lt;- df_works[!duplicated(df_works), ]</td>
+</tr>
+<tr class="odd">
+<td align="left"># ————————- # Step 4: build networks # ————————- if
+(type == “first”) { for (j in 1:nwaves) { df_works_w &lt;-
+df_works[df_works<span class="math inline">\(works_year &gt;=
+waves[[j]][1] &amp;
+df_works\)</span>works_year &lt;= waves[[j]][2], ] for (i in
+1:nrow(df_works_w)) { ego &lt;- df_works_w<span
+class="math inline">\(works_author[i][[1]]\)</span>au_id[1] alters &lt;-
+df_works_w<span
+class="math inline">\(works_author[i][[1]]\)</span>au_id[-1] if (sum(ids
+%in% ego) &gt; 0 &amp; sum(ids %in% alters) &gt; 0) { nets[j, which(ids
+%in% ego), which(ids %in% alters)] &lt;- 1 } } } }</td>
+</tr>
+<tr class="even">
+<td align="left">if (type == “last”) { for (j in 1:nwaves) { df_works_w
+&lt;- df_works[df_works<span class="math inline">\(works_year &gt;=
+waves[[j]][1] &amp;
+df_works\)</span>works_year &lt;= waves[[j]][2], ] for (i in
+1:nrow(df_works_w)) { ego &lt;- rev(df_works_w<span
+class="math inline">\(works_author[i][[1]]\)</span>au_id)[1] alters
+&lt;- rev(df_works_w<span
+class="math inline">\(works_author[i][[1]]\)</span>au_id)[-1] if
+(sum(ids %in% ego) &gt; 0 &amp; sum(ids %in% alters) &gt; 0) { nets[j,
+which(ids %in% ego), which(ids %in% alters)] &lt;- 1 } } } }</td>
+</tr>
+<tr class="odd">
+<td align="left">if (type == “all”) { for (j in 1:nwaves) { df_works_w
+&lt;- df_works[df_works<span class="math inline">\(works_year &gt;=
+waves[[j]][1] &amp;
+df_works\)</span>works_year &lt;= waves[[j]][2], ] for (i in
+1:nrow(df_works_w)) { egos &lt;- df_works_w<span
+class="math inline">\(works_author[i][[1]]\)</span>au_id if (sum(ids
+%in% egos) &gt; 0) { nets[j, which(ids %in% egos), which(ids %in% egos)]
+&lt;- 1 } } } }</td>
+</tr>
+<tr class="even">
+<td align="left"># ————————- # Step 5: output # ————————- output &lt;-
+list() output<span class="math inline">\(data &lt;- scholars_sel
+output\)</span>nets &lt;- nets output$demographics &lt;-
+demographics_all # includes gender if passed in</td>
+</tr>
+<tr class="odd">
+<td align="left">return(output) } ``` ### output</td>
+</tr>
+<tr class="even">
+<td align="left">``` r result_gender2 &lt;- fcolnet_gender( data =
+scholars, demographics = df_scholars_gender, waves = list(c(2015, 2018),
+c(2019,2023)), type= “first” )</td>
+</tr>
+<tr class="odd">
+<td align="left"># View gender info head(result_gender2$demographics[,
+c(“au_id”, “firstname”, “gender”)]) ```</td>
+</tr>
+<tr class="even">
+<td
+align="left"><code>## # A tibble: 6 × 3 ##   au_id                            firstname gender ##   &lt;chr&gt;                            &lt;chr&gt;     &lt;chr&gt; ## 1 https://openalex.org/A5076379849 Ece       female ## 2 https://openalex.org/A5043161143 Marcel    male ## 3 https://openalex.org/A5065278343 Weverthon &lt;NA&gt; ## 4 https://openalex.org/A5087995858 Vardan    male ## 5 https://openalex.org/A5038890249 Anne      female ## 6 https://openalex.org/A5060904065 Vincent   male</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="first-analyses" class="section level2" number="2">
+<h2><span class="header-section-number">2</span> First analyses</h2>
+<p><br></p>
+<div id="check-waves" class="section level3" number="2.1">
+<h3><span class="header-section-number">2.1</span> Check waves</h3>
+<pre class="r"><code>wave1 &lt;- result_gender2$nets[1,,]
+wave2 &lt;- result_gender2$nets[2,,]
+
+# filter out the waves of the object: we need to check our input
+dim(wave1)</code></pre>
+<pre><code>## [1] 675 675</code></pre>
+<pre class="r"><code>dim(wave2)</code></pre>
+<pre><code>## [1] 675 675</code></pre>
+<pre class="r"><code># you need to have 0 missing values:
+sum(is.na(wave1))</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>sum(is.na(wave2))</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>#check the diagonal: all places should be 0
+sum(diag(wave1)==0)</code></pre>
+<pre><code>## [1] 671</code></pre>
+<pre class="r"><code>sum(diag(wave2)==0)</code></pre>
+<pre><code>## [1] 672</code></pre>
+<pre class="r"><code># a few people did work with themselves:
+diag(wave1) &lt;- 0
+diag(wave2) &lt;- 0
+
+# everything should be 1 or 0:
+sum(wave1&gt;1)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>sum(wave2&gt;1)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code># check if it&#39;s not empty: there are people with 1&#39;s
+sum(wave1&gt;0)</code></pre>
+<pre><code>## [1] 336</code></pre>
+<pre class="r"><code>sum(wave2&gt;0)</code></pre>
+<pre><code>## [1] 573</code></pre>
+<pre class="r"><code>net_gender &lt;- array(data = c(wave1, wave2), dim = c(dim(wave1), 2))
+# net_gender
+
+# dependent
+net2 &lt;- sienaDependent(net_gender)
+
+# independent variables
+gender &lt;- result_gender2$demographics$gender
+
+gender &lt;- ifelse(gender==&quot;female&quot;,1,0)
+gender &lt;- coCovar(gender)
+
+#gender
+
+# Create siena data object
+mydata3 &lt;- sienaDataCreate(net2, gender)
+mydata3</code></pre>
+<pre><code>## Dependent variables:  net2 
+## Number of observations: 2 
+## 
+## Nodeset                  Actors 
+## Number of nodes             675 
+## 
+## Dependent variable net2          
+## Type               oneMode       
+## Observations       2             
+## Nodeset            Actors        
+## Densities          0.00074 0.0013
+## 
+## Constant covariates:  gender</code></pre>
+<pre class="r"><code>myeff &lt;-getEffects(mydata3)
+
+ifelse(!dir.exists(&quot;results&quot;), dir.create(&quot;results&quot;), FALSE)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>print01Report(mydata3, modelname = &quot;./results/soc_init2&quot;)</code></pre>
+</div>
+<div id="include-effects" class="section level3" number="2.2">
+<h3><span class="header-section-number">2.2</span> Include effects</h3>
+<pre class="r"><code>myeff &lt;- includeEffects(myeff, egoX, interaction1 = &quot;gender&quot;, type = &quot;eval&quot;, include = T)   </code></pre>
+<pre><code>##   effectNumber effectName shortName include fix   test  initialValue parm
+## 1 253          gender ego egoX      TRUE    FALSE FALSE          0   0</code></pre>
+<pre class="r"><code># can allso add the altX to the equation
+myeff &lt;- setEffect(myeff, altX, interaction1 = &quot;gender&quot;, include = T)  </code></pre>
+<pre><code>##   effectNumber effectName   shortName include fix   test  initialValue parm
+## 1 238          gender alter altX      TRUE    FALSE FALSE          0   0</code></pre>
+<pre class="r"><code># can also add egoXaltX
+myeff &lt;- setEffect(myeff, egoXaltX, interaction1 = &quot;gender&quot;, include = T)</code></pre>
+<pre><code>##   effectNumber effectName                shortName include fix   test 
+## 1 388          gender ego x gender alter egoXaltX  TRUE    FALSE FALSE
+##   initialValue parm
+## 1          0   0</code></pre>
+</div>
+<div id="estimate" class="section level3" number="2.3">
+<h3><span class="header-section-number">2.3</span> Estimate</h3>
+<pre class="r"><code>myAlgorithm &lt;- sienaAlgorithmCreate(projname = &quot;soc_init&quot;)</code></pre>
+<pre><code>## If you use this algorithm object, siena07 will create/use an output file soc_init.txt .</code></pre>
+<pre class="r"><code>ansM1 &lt;- siena07(myAlgorithm, data = mydata3, effects = myeff, returnDeps = TRUE)</code></pre>
+<pre><code>## tcltk DLL is linked to &#39;/opt/X11/lib/libX11.6.dylib&#39;</code></pre>
+<pre><code>## Package tcltk not available, forcing use of batch mode</code></pre>
+<pre><code>## 
+## Start phase 0 
+## theta: -1.74  0.00  0.00  0.00  0.00 
+## 
+## Start phase 1 
+## Phase 1 Iteration 1 Progress: 0%
+## Phase 1 Iteration 2 Progress: 0%
+## Phase 1 Iteration 3 Progress: 0%
+## Phase 1 Iteration 4 Progress: 0%
+## Phase 1 Iteration 5 Progress: 0%
+## Phase 1 Iteration 10 Progress: 0%
+## Phase 1 Iteration 15 Progress: 1%
+## Phase 1 Iteration 20 Progress: 1%
+## Phase 1 Iteration 25 Progress: 1%
+## Phase 1 Iteration 30 Progress: 1%
+## Phase 1 Iteration 35 Progress: 1%
+## Phase 1 Iteration 40 Progress: 1%
+## Phase 1 Iteration 45 Progress: 2%
+## Phase 1 Iteration 50 Progress: 2%
+## theta: -2.0960  1.0000 -0.0121 -0.2343  0.0505 
+## 
+## Start phase 2.1
+## Phase 2 Subphase 1 Iteration 1 Progress: 10%
+## Phase 2 Subphase 1 Iteration 2 Progress: 11%
+## theta -2.4360  1.7562 -0.0179 -0.3668  0.0969 
+## ac 1.084 1.175 0.897 0.662 2.391 
+## Phase 2 Subphase 1 Iteration 3 Progress: 11%
+## Phase 2 Subphase 1 Iteration 4 Progress: 11%
+## theta -3.5102  3.9467 -0.0358 -0.5323  0.2547 
+## ac 1.164 0.243 1.120 0.861 2.161 
+## Phase 2 Subphase 1 Iteration 5 Progress: 11%
+## Phase 2 Subphase 1 Iteration 6 Progress: 11%
+## theta -4.3972  3.6944 -0.0268  0.1879  0.4470 
+## ac  1.090 -0.560  0.615  0.868 -0.345 
+## Phase 2 Subphase 1 Iteration 7 Progress: 11%
+## Phase 2 Subphase 1 Iteration 8 Progress: 11%
+## theta -4.4714  3.3272 -0.0963  0.6031  0.4230 
+## ac  1.033 -0.712  0.657  0.828 -0.329 
+## Phase 2 Subphase 1 Iteration 9 Progress: 11%
+## Phase 2 Subphase 1 Iteration 10 Progress: 11%
+## theta -4.379  3.180 -0.159  0.790  0.420 
+## ac  1.024 -0.710  0.519  0.768 -0.427 
+## Phase 2 Subphase 1 Iteration 1 Progress: 11%
+## Phase 2 Subphase 1 Iteration 2 Progress: 11%
+## Phase 2 Subphase 1 Iteration 3 Progress: 11%
+## Phase 2 Subphase 1 Iteration 4 Progress: 11%
+## Phase 2 Subphase 1 Iteration 5 Progress: 11%
+## Phase 2 Subphase 1 Iteration 6 Progress: 11%
+## Phase 2 Subphase 1 Iteration 7 Progress: 11%
+## Phase 2 Subphase 1 Iteration 8 Progress: 11%
+## Phase 2 Subphase 1 Iteration 9 Progress: 11%
+## Phase 2 Subphase 1 Iteration 10 Progress: 11%
+## theta -4.163  3.641 -0.267  0.379  0.450 
+## ac -0.763 -0.972 -0.711 -0.920 -0.229 
+## theta: -4.163  3.641 -0.267  0.379  0.450 
+## 
+## Start phase 2.2
+## Phase 2 Subphase 2 Iteration 1 Progress: 19%
+## Phase 2 Subphase 2 Iteration 2 Progress: 19%
+## Phase 2 Subphase 2 Iteration 3 Progress: 19%
+## Phase 2 Subphase 2 Iteration 4 Progress: 19%
+## Phase 2 Subphase 2 Iteration 5 Progress: 19%
+## Phase 2 Subphase 2 Iteration 6 Progress: 19%
+## Phase 2 Subphase 2 Iteration 7 Progress: 19%
+## Phase 2 Subphase 2 Iteration 8 Progress: 19%
+## Phase 2 Subphase 2 Iteration 9 Progress: 19%
+## Phase 2 Subphase 2 Iteration 10 Progress: 19%
+## theta -4.182  3.727 -0.293  0.403  0.508 
+## ac -0.3277 -0.5822 -0.3158 -0.1653 -0.0978 
+## theta: -4.182  3.727 -0.293  0.403  0.508 
+## 
+## Start phase 2.3
+## Phase 2 Subphase 3 Iteration 1 Progress: 28%
+## Phase 2 Subphase 3 Iteration 2 Progress: 28%
+## Phase 2 Subphase 3 Iteration 3 Progress: 28%
+## Phase 2 Subphase 3 Iteration 4 Progress: 28%
+## Phase 2 Subphase 3 Iteration 5 Progress: 28%
+## Phase 2 Subphase 3 Iteration 6 Progress: 28%
+## Phase 2 Subphase 3 Iteration 7 Progress: 28%
+## Phase 2 Subphase 3 Iteration 8 Progress: 28%
+## Phase 2 Subphase 3 Iteration 9 Progress: 28%
+## Phase 2 Subphase 3 Iteration 10 Progress: 28%
+## theta -4.180  3.736 -0.295  0.426  0.520 
+## ac -0.00525 -0.36677 -0.10805 -0.14241 -0.03099 
+## theta: -4.180  3.736 -0.295  0.426  0.520 
+## 
+## Start phase 2.4
+## Phase 2 Subphase 4 Iteration 1 Progress: 42%
+## Phase 2 Subphase 4 Iteration 2 Progress: 42%
+## Phase 2 Subphase 4 Iteration 3 Progress: 42%
+## Phase 2 Subphase 4 Iteration 4 Progress: 42%
+## Phase 2 Subphase 4 Iteration 5 Progress: 42%
+## Phase 2 Subphase 4 Iteration 6 Progress: 42%
+## Phase 2 Subphase 4 Iteration 7 Progress: 42%
+## Phase 2 Subphase 4 Iteration 8 Progress: 42%
+## Phase 2 Subphase 4 Iteration 9 Progress: 42%
+## Phase 2 Subphase 4 Iteration 10 Progress: 42%
+## Phase 2 Subphase 4 Iteration 500 Progress: 59%
+## theta -4.198  3.772 -0.289  0.365  0.550 
+## ac  0.0447 -0.1775  0.0338 -0.2119 -0.0332 
+## theta -4.176  3.725 -0.288  0.416  0.529 
+## ac  0.0432 -0.2071  0.0661 -0.1903 -0.0303 
+## theta: -4.176  3.725 -0.288  0.416  0.529 
+## 
+## Start phase 3 
+## Phase 3 Iteration 200 Progress 72%
+## Phase 3 Iteration 400 Progress 79%
+## Phase 3 Iteration 600 Progress 86%
+## Phase 3 Iteration 800 Progress 93%
+## Phase 3 Iteration 1000 Progress 100%</code></pre>
+<pre class="r"><code># if necessary estimate again!  ansM1 &lt;- siena07(myAlgorithm, data = mydata, effects = myeff,
+# prevAns = ansM1, returnDeps=TRUE)
+ansM1</code></pre>
+<pre><code>## Estimates, standard errors and convergence t-ratios
+## 
+##                                     Estimate   Standard   Convergence 
+##                                                  Error      t-ratio   
+## 
+## Rate parameters: 
+##   0       Rate parameter             3.5275  ( 0.3350   )             
+## 
+## Other parameters: 
+##   1. eval outdegree (density)       -4.1758  ( 0.0840   )   -0.0129   
+##   2. eval reciprocity                3.7255  ( 0.1553   )    0.0281   
+##   3. eval gender alter              -0.2882  ( 0.0842   )   -0.0061   
+##   4. eval gender ego                 0.4160  ( 0.1339   )   -0.0048   
+##   5. eval gender ego x gender alter  0.5290  ( 0.1725   )    0.0273   
+## 
+## Overall maximum convergence ratio:    0.0521 
+## 
+## 
+## Total of 2105 iteration steps.</code></pre>
+<p><br> This means that:</p>
+<p>Outdegree: Significant and negative: there is an overall tendency not
+to form ties (most people collaborate with few others)</p>
+<p>Reciprocity: Significant and positive: mutual collaborations are more
+likely: if A co-authors with B, B is more likely to co-author with
+A.</p>
+<p>Gender ego: Significant and positive: Being a woman increases the
+likelihood of initiating co-authorships.</p>
+<p>Gender alter: Significant and negative: Being a woman decreases the
+likelihood of being chosen as a co-author.</p>
+<p>Gender ego × gender alter: Significant and positive: Suggests
+same-gender collaborations are more likely than cross-gender ones.</p>
+<hr />
+</div>
+</div>
+<div id="rsienna-chapters" class="section level2" number="3">
+<h2><span class="header-section-number">3</span> RSienna chapters</h2>
+<p><br></p>
+<div id="chapter-2" class="section level3" number="3.1">
+<h3><span class="header-section-number">3.1</span> Chapter 2</h3>
+<p>The defining characteristic of Stochastic Actor-Oriented Models is
+their ‘actor-oriented’ nature which means that they model change from
+the perspective of the actors (nodes).</p>
+<p>For network evolution, three conceptual functions may be used:
+evaluation, creation, and endowment. These differ in whether one models
+all tie presence (evaluation), just tie formation (creation), or tie
+maintenance (endowment).</p>
+<p>Effects: These are the modeled influences (explanatory factors) on
+change.</p>
+<ul>
+<li><p>Structural effects (endogenous) e.g. reciprocity,
+transitivity</p></li>
+<li><p>Covariate effects (exogenous) e.g. similarity, attribute of
+sender/receiver</p></li>
+<li><p>Interaction effects (combinations) e.g. interaction of structure
+and covariate</p></li>
+</ul>
+<p>Estimation procedure:</p>
+<p>RSiena uses the function siena07 to estimate parameters.The goal is
+that the model-implied (expected) network/behavioral statistics match
+observed statistics.</p>
+<p>The estimation proceeds in phases:</p>
+<ul>
+<li><p>Estimate sensitivity of statistics to parameters</p></li>
+<li><p>Iterative updates: simulate networks, compute deviations, adjust
+parameters</p></li>
+<li><p>Check convergence: whether simulated statistics are close enough
+to observed targets</p></li>
+</ul>
+<p>If convergence criteria are not met, estimation may be repeated or
+refined.</p>
+<p><br> ### Chapter 5</p>
+<p>In many applications, it’s best to start with a simple baseline model
+(e.g. including only core structural effects like out-degree and
+reciprocity).</p>
+<p>From there, add or remove effects (in small sets, e.g. 1–3 at a
+time), assessing convergence, interpretability, and fit at each
+stage.</p>
+<p>It is wise to always retain certain “anchor” effects (e.g. out-degree
+or rate parameters) even if they are not statistically significant,
+because they stabilize the model structure.</p>
+<hr />
+</div>
+</div>
+<div id="my-statistics" class="section level2" number="4">
+<h2><span class="header-section-number">4</span> My statistics</h2>
+<div id="transtrip" class="section level3" number="4.1">
+<h3><span class="header-section-number">4.1</span> transTrip</h3>
+<p>There are many Structural effects you can include. I tried around
+with triangulation, but I did not think it really fit my gender
+research. It could be interesting: if you have A -&gt; B -&gt; C, would
+the gender of B impact whether A -&gt; C would collaborate.</p>
+<pre class="r"><code>myeff &lt;- includeEffects(myeff, egoX, interaction1 = &quot;gender&quot;, type = &quot;eval&quot;, include = T) </code></pre>
+<pre><code>##   effectNumber effectName shortName include fix   test  initialValue parm
+## 1 253          gender ego egoX      TRUE    FALSE FALSE          0   0</code></pre>
+<pre class="r"><code>myeff &lt;- setEffect(myeff, altX, interaction1 = &quot;gender&quot;, include = T) </code></pre>
+<pre><code>##   effectNumber effectName   shortName include fix   test  initialValue parm
+## 1 238          gender alter altX      TRUE    FALSE FALSE          0   0</code></pre>
+<pre class="r"><code>myeff &lt;- setEffect(myeff, egoXaltX, interaction1 = &quot;gender&quot;, include = T)</code></pre>
+<pre><code>##   effectNumber effectName                shortName include fix   test 
+## 1 388          gender ego x gender alter egoXaltX  TRUE    FALSE FALSE
+##   initialValue parm
+## 1          0   0</code></pre>
+<pre class="r"><code>myeff &lt;- includeEffects(myeff, transTrip, include = T)</code></pre>
+<pre><code>##   effectNumber effectName          shortName include fix   test  initialValue
+## 1 21           transitive triplets transTrip TRUE    FALSE FALSE          0  
+##   parm
+## 1 0</code></pre>
+<pre class="r"><code>myeff &lt;- includeEffects(myeff, transTripX, interaction1 = &quot;gender&quot;, type = &quot;eval&quot;, include = T)</code></pre>
+<pre><code>##   effectNumber effectName                       shortName  include fix   test 
+## 1 358          trans. triplets intermed. gender transTripX TRUE    FALSE FALSE
+##   initialValue parm
+## 1          0   0</code></pre>
+<pre class="r"><code>myAlgorithm &lt;- sienaAlgorithmCreate(projname = &quot;soc_init&quot;)</code></pre>
+<pre><code>## If you use this algorithm object, siena07 will create/use an output file soc_init.txt .</code></pre>
+<pre class="r"><code>ansM2 &lt;- siena07(myAlgorithm, data = mydata3, effects = myeff, returnDeps = TRUE)</code></pre>
+<pre><code>## tcltk DLL is linked to &#39;/opt/X11/lib/libX11.6.dylib&#39;</code></pre>
+<pre><code>## Package tcltk not available, forcing use of batch mode</code></pre>
+<pre><code>## 
+## Start phase 0 
+## theta: -1.74  0.00  0.00  0.00  0.00  0.00  0.00 
+## 
+## Start phase 1 
+## Phase 1 Iteration 1 Progress: 0%
+## Phase 1 Iteration 2 Progress: 0%
+## Phase 1 Iteration 3 Progress: 0%
+## Phase 1 Iteration 4 Progress: 0%
+## Phase 1 Iteration 5 Progress: 0%
+## Phase 1 Iteration 10 Progress: 0%
+## Phase 1 Iteration 15 Progress: 0%
+## Phase 1 Iteration 20 Progress: 1%
+## Phase 1 Iteration 25 Progress: 1%
+## Phase 1 Iteration 30 Progress: 1%
+## Phase 1 Iteration 35 Progress: 1%
+## Phase 1 Iteration 40 Progress: 1%
+## Phase 1 Iteration 45 Progress: 1%
+## Phase 1 Iteration 50 Progress: 2%
+## theta: -2.2704  0.1714  0.8117  0.1235 -0.0339  1.0000  0.0174 
+## 
+## Start phase 2.1
+## Phase 2 Subphase 1 Iteration 1 Progress: 13%
+## Phase 2 Subphase 1 Iteration 2 Progress: 13%
+## theta -2.6194  0.3381  1.2180  0.1794 -0.0278  1.3019  0.0242 
+## ac 1.147 0.861 0.997 0.488 7.324 0.375 1.276 
+## Phase 2 Subphase 1 Iteration 3 Progress: 13%
+## Phase 2 Subphase 1 Iteration 4 Progress: 13%
+## theta -3.732  0.938  2.363  0.338 -0.058  1.775  0.040 
+## ac 1.262 0.803 1.021 0.712 5.512 0.606 0.679 
+## Phase 2 Subphase 1 Iteration 5 Progress: 13%
+## Phase 2 Subphase 1 Iteration 6 Progress: 13%
+## theta -4.4189  2.5090  2.1166  0.3165 -0.0929 -0.6745  0.0690 
+## ac 1.261 0.943 1.003 0.791 0.915 0.472 0.915 
+## Phase 2 Subphase 1 Iteration 7 Progress: 13%
+## Phase 2 Subphase 1 Iteration 8 Progress: 13%
+## theta -4.444  3.789  1.853  0.113  0.246  0.937  0.323 
+## ac  1.2286  0.9492  0.3584  0.7400  0.1321 -0.0262  0.9065 
+## Phase 2 Subphase 1 Iteration 9 Progress: 13%
+## Phase 2 Subphase 1 Iteration 10 Progress: 13%
+## theta -4.3902  3.7027  1.7577 -0.0315  0.2539  0.5272  0.3968 
+## ac  1.228  1.106  0.454  0.669  0.348 -0.335  0.716 
+## Phase 2 Subphase 1 Iteration 1 Progress: 13%
+## Phase 2 Subphase 1 Iteration 2 Progress: 13%
+## Phase 2 Subphase 1 Iteration 3 Progress: 13%
+## Phase 2 Subphase 1 Iteration 4 Progress: 13%
+## Phase 2 Subphase 1 Iteration 5 Progress: 13%
+## Phase 2 Subphase 1 Iteration 6 Progress: 13%
+## Phase 2 Subphase 1 Iteration 7 Progress: 13%
+## Phase 2 Subphase 1 Iteration 8 Progress: 13%
+## Phase 2 Subphase 1 Iteration 9 Progress: 14%
+## Phase 2 Subphase 1 Iteration 10 Progress: 14%
+## Phase 2 Subphase 1 Iteration 1 Progress: 14%
+## Phase 2 Subphase 1 Iteration 2 Progress: 14%
+## Phase 2 Subphase 1 Iteration 3 Progress: 14%
+## Phase 2 Subphase 1 Iteration 4 Progress: 14%
+## Phase 2 Subphase 1 Iteration 5 Progress: 14%
+## Phase 2 Subphase 1 Iteration 6 Progress: 14%
+## Phase 2 Subphase 1 Iteration 7 Progress: 14%
+## Phase 2 Subphase 1 Iteration 8 Progress: 14%
+## Phase 2 Subphase 1 Iteration 9 Progress: 14%
+## Phase 2 Subphase 1 Iteration 10 Progress: 14%
+## theta -4.31243  3.17178  1.83358 -0.30371  0.36552  0.00217  0.46605 
+## ac -0.18322 -0.22135 -0.24720 -0.20989 -0.00331 -0.38736 -0.22071 
+## theta: -4.31243  3.17178  1.83358 -0.30371  0.36552  0.00217  0.46605 
+## 
+## Start phase 2.2
+## Phase 2 Subphase 2 Iteration 1 Progress: 21%
+## Phase 2 Subphase 2 Iteration 2 Progress: 21%
+## Phase 2 Subphase 2 Iteration 3 Progress: 21%
+## Phase 2 Subphase 2 Iteration 4 Progress: 21%
+## Phase 2 Subphase 2 Iteration 5 Progress: 21%
+## Phase 2 Subphase 2 Iteration 6 Progress: 21%
+## Phase 2 Subphase 2 Iteration 7 Progress: 21%
+## Phase 2 Subphase 2 Iteration 8 Progress: 21%
+## Phase 2 Subphase 2 Iteration 9 Progress: 21%
+## Phase 2 Subphase 2 Iteration 10 Progress: 21%
+## theta -4.310  3.123  1.901 -0.330  0.350  0.283  0.478 
+## ac -0.2953 -0.2511 -0.3802 -0.1804 -0.0802 -0.5310 -0.2282 
+## theta: -4.310  3.123  1.901 -0.330  0.350  0.283  0.478 
+## 
+## Start phase 2.3
+## Phase 2 Subphase 3 Iteration 1 Progress: 30%
+## Phase 2 Subphase 3 Iteration 2 Progress: 30%
+## Phase 2 Subphase 3 Iteration 3 Progress: 30%
+## Phase 2 Subphase 3 Iteration 4 Progress: 30%
+## Phase 2 Subphase 3 Iteration 5 Progress: 30%
+## Phase 2 Subphase 3 Iteration 6 Progress: 30%
+## Phase 2 Subphase 3 Iteration 7 Progress: 30%
+## Phase 2 Subphase 3 Iteration 8 Progress: 30%
+## Phase 2 Subphase 3 Iteration 9 Progress: 30%
+## Phase 2 Subphase 3 Iteration 10 Progress: 30%
+## Phase 2 Subphase 3 Iteration 200 Progress: 37%
+## theta -4.336  3.039  2.004 -0.297  0.372 -0.076  0.443 
+## ac -0.206 -0.250 -0.294 -0.151 -0.155 -0.272 -0.107 
+## theta -4.305  3.121  1.917 -0.291  0.387  0.142  0.485 
+## ac -0.2275 -0.2591 -0.2836 -0.0769 -0.1221 -0.2389 -0.1257 
+## theta: -4.305  3.121  1.917 -0.291  0.387  0.142  0.485 
+## 
+## Start phase 2.4
+## Phase 2 Subphase 4 Iteration 1 Progress: 43%
+## Phase 2 Subphase 4 Iteration 2 Progress: 43%
+## Phase 2 Subphase 4 Iteration 3 Progress: 43%
+## Phase 2 Subphase 4 Iteration 4 Progress: 43%
+## Phase 2 Subphase 4 Iteration 5 Progress: 44%
+## Phase 2 Subphase 4 Iteration 6 Progress: 44%
+## Phase 2 Subphase 4 Iteration 7 Progress: 44%
+## Phase 2 Subphase 4 Iteration 8 Progress: 44%
+## Phase 2 Subphase 4 Iteration 9 Progress: 44%
+## Phase 2 Subphase 4 Iteration 10 Progress: 44%
+## Phase 2 Subphase 4 Iteration 200 Progress: 50%
+## theta -4.310  3.114  1.810 -0.283  0.410 -0.203  0.524 
+## ac -0.1959 -0.0186 -0.0799 -0.0145  0.0966 -0.1742  0.0761 
+## Phase 2 Subphase 4 Iteration 400 Progress: 57%
+## theta -4.280  3.120  1.845 -0.308  0.407  0.132  0.487 
+## ac -0.16871 -0.10722 -0.14819  0.00459 -0.00623 -0.12134  0.07271 
+## theta -4.304  3.112  1.912 -0.303  0.394  0.182  0.509 
+## ac -0.15211 -0.08539 -0.09675 -0.00162 -0.01206 -0.12667 -0.00666 
+## theta: -4.304  3.112  1.912 -0.303  0.394  0.182  0.509 
+## 
+## Start phase 3 
+## Phase 3 Iteration 100 Progress 71%
+## Phase 3 Iteration 200 Progress 74%
+## Phase 3 Iteration 300 Progress 77%
+## Phase 3 Iteration 400 Progress 81%
+## Phase 3 Iteration 500 Progress 84%
+## Phase 3 Iteration 600 Progress 87%
+## Phase 3 Iteration 700 Progress 90%
+## Phase 3 Iteration 800 Progress 94%
+## Phase 3 Iteration 900 Progress 97%
+## Phase 3 Iteration 1000 Progress 100%</code></pre>
+<pre class="r"><code># if necessary estimate again!  ansM1 &lt;- siena07(myAlgorithm, data = mydata, effects = myeff,
+# prevAns = ansM1, returnDeps=TRUE)
+ansM2</code></pre>
+<pre><code>## Estimates, standard errors and convergence t-ratios
+## 
+##                                            Estimate   Standard   Convergence 
+##                                                         Error      t-ratio   
+## 
+## Rate parameters: 
+##   0       Rate parameter                    4.1871  ( 0.4405   )             
+## 
+## Other parameters: 
+##   1. eval outdegree (density)              -4.3035  ( 0.0901   )   -0.0141   
+##   2. eval reciprocity                       3.1118  ( 0.2079   )    0.0252   
+##   3. eval transitive triplets               1.9123  ( 0.2191   )    0.1052   
+##   4. eval gender alter                     -0.3031  ( 0.0878   )    0.0083   
+##   5. eval gender ego                        0.3941  ( 0.1556   )    0.0455   
+##   6. eval trans. triplets intermed. gender  0.1824  ( 0.5046   )    0.0647   
+##   7. eval gender ego x gender alter         0.5093  ( 0.1732   )    0.0405   
+## 
+## Overall maximum convergence ratio:    0.1728 
+## 
+## 
+## Total of 2173 iteration steps.</code></pre>
+<p>The network shows a significant tendency toward transitive closure,
+meaning that “friends of friends” are more likely to become connected.
+The effect of transitive triplets moderated by the intermediate person’s
+gender is positive but not significant, suggesting that the gender of
+the intermediate has no influence on whether triads close.</p>
+<p>Formula: <img src="images/Triad.png" /> For all alters j, if ego i is
+tied to an intermediary h who is a woman (male = 0, female = 1) and
+intermediary h has a connection to alter j, and alter j has a connection
+to ego i, then that configuration adds 1 to i’s transTripX
+statistic.</p>
+</div>
+<div id="inpop" class="section level3" number="4.2">
+<h3><span class="header-section-number">4.2</span> inPop</h3>
+<pre class="r"><code># first put the triadic effects on: do not include
+myeff &lt;- includeEffects(myeff, transTrip, include = F)</code></pre>
+<pre><code>##   effectNumber effectName          shortName include fix   test  initialValue
+## 1 21           transitive triplets transTrip FALSE   FALSE FALSE          0  
+##   parm
+## 1 0</code></pre>
+<pre class="r"><code>myeff &lt;- includeEffects(myeff, transTripX, interaction1 = &quot;gender&quot;, type = &quot;eval&quot;, include = F)</code></pre>
+<pre><code>##   effectNumber effectName                       shortName  include fix   test 
+## 1 358          trans. triplets intermed. gender transTripX FALSE   FALSE FALSE
+##   initialValue parm
+## 1          0   0</code></pre>
+<pre class="r"><code># Get ego, alt and egoalt effects
+myeff &lt;- includeEffects(myeff, egoX, interaction1 = &quot;gender&quot;, type = &quot;eval&quot;, include = T) </code></pre>
+<pre><code>##   effectNumber effectName shortName include fix   test  initialValue parm
+## 1 253          gender ego egoX      TRUE    FALSE FALSE          0   0</code></pre>
+<pre class="r"><code>myeff &lt;- setEffect(myeff, altX, interaction1 = &quot;gender&quot;, include = T) </code></pre>
+<pre><code>##   effectNumber effectName   shortName include fix   test  initialValue parm
+## 1 238          gender alter altX      TRUE    FALSE FALSE          0   0</code></pre>
+<pre class="r"><code>myeff &lt;- setEffect(myeff, egoXaltX, interaction1 = &quot;gender&quot;, include = T)</code></pre>
+<pre><code>##   effectNumber effectName                shortName include fix   test 
+## 1 388          gender ego x gender alter egoXaltX  TRUE    FALSE FALSE
+##   initialValue parm
+## 1          0   0</code></pre>
+<pre class="r"><code>myeff &lt;- includeEffects(myeff, inPop, include = T)</code></pre>
+<pre><code>##   effectNumber effectName            shortName include fix   test  initialValue
+## 1 78           indegree - popularity inPop     TRUE    FALSE FALSE          0  
+##   parm
+## 1 0</code></pre>
+<pre class="r"><code>myeff &lt;- includeInteraction(myeff, egoX, inPop, interaction1 = c(&quot;gender&quot;, &quot;&quot;), type = &quot;eval&quot;, include = T)</code></pre>
+<pre><code>##   effectNumber effectName                         shortName include fix   test 
+## 1  78          indegree - popularity              inPop     TRUE    FALSE FALSE
+## 2 253          gender ego                         egoX      TRUE    FALSE FALSE
+## 3 422          gender ego x indegree - popularity unspInt   TRUE    FALSE FALSE
+##   initialValue parm effect1 effect2
+## 1          0   0      0      0     
+## 2          0   0      0      0     
+## 3          0   0    253     78</code></pre>
+<pre class="r"><code>myAlgorithm &lt;- sienaAlgorithmCreate(projname = &quot;soc_init&quot;)</code></pre>
+<pre><code>## If you use this algorithm object, siena07 will create/use an output file soc_init.txt .</code></pre>
+<pre class="r"><code>ansM3 &lt;- siena07(myAlgorithm, data = mydata3, effects = myeff, returnDeps = TRUE)</code></pre>
+<pre><code>## tcltk DLL is linked to &#39;/opt/X11/lib/libX11.6.dylib&#39;</code></pre>
+<pre><code>## Package tcltk not available, forcing use of batch mode</code></pre>
+<pre><code>## 
+## Start phase 0 
+## theta: -1.74  0.00  0.00  0.00  0.00  0.00  0.00 
+## 
+## Start phase 1 
+## Phase 1 Iteration 1 Progress: 0%
+## Phase 1 Iteration 2 Progress: 0%
+## Phase 1 Iteration 3 Progress: 0%
+## Phase 1 Iteration 4 Progress: 0%
+## Phase 1 Iteration 5 Progress: 0%
+## Phase 1 Iteration 10 Progress: 0%
+## Phase 1 Iteration 15 Progress: 0%
+## Phase 1 Iteration 20 Progress: 1%
+## Phase 1 Iteration 25 Progress: 1%
+## Phase 1 Iteration 30 Progress: 1%
+## Phase 1 Iteration 35 Progress: 1%
+## Phase 1 Iteration 40 Progress: 1%
+## Phase 1 Iteration 45 Progress: 1%
+## Phase 1 Iteration 50 Progress: 2%
+## theta: -2.4718  1.0000  0.0457  0.0988  0.1089  0.0480  0.0143 
+## 
+## Start phase 2.1
+## Phase 2 Subphase 1 Iteration 1 Progress: 13%
+## Phase 2 Subphase 1 Iteration 2 Progress: 13%
+## theta -2.9509  1.6324  0.0683  0.1474  0.1592  0.0683  0.0292 
+## ac 1.128 1.006 1.990 0.366 2.985 0.806 1.796 
+## Phase 2 Subphase 1 Iteration 3 Progress: 13%
+## Phase 2 Subphase 1 Iteration 4 Progress: 13%
+## theta -4.4392  3.6587  0.1471  0.2811  0.2619  0.1413  0.0702 
+## ac 1.123 1.004 0.389 0.669 1.076 1.224 1.736 
+## Phase 2 Subphase 1 Iteration 5 Progress: 13%
+## Phase 2 Subphase 1 Iteration 6 Progress: 13%
+## theta -5.0808  4.5224  0.1872  0.2543  0.1923  0.1846  0.0764 
+## ac   1.0780   0.4515 -11.0815   0.0791   1.0814   1.4847  -8.2913 
+## Phase 2 Subphase 1 Iteration 7 Progress: 13%
+## Phase 2 Subphase 1 Iteration 8 Progress: 13%
+## theta -5.1568  4.0362  0.1921  0.1826  0.0705  0.2184  0.0897 
+## ac   0.901   0.463 -19.221  -0.129   1.152   1.164   3.193 
+## Phase 2 Subphase 1 Iteration 9 Progress: 13%
+## Phase 2 Subphase 1 Iteration 10 Progress: 13%
+## theta -4.9703  4.4518  0.1868  0.0680  0.1320  0.2622  0.0394 
+## ac  0.906  0.658 -2.578 -0.150  1.161  1.310  1.233 
+## Phase 2 Subphase 1 Iteration 200 Progress: 20%
+## theta -4.7134  3.4510  0.1982 -0.1544  0.3267  0.6239  0.0275 
+## ac  0.14744 -0.07035  0.01786  0.08899 -0.01989  0.17603 -0.00266 
+## theta -4.6203  3.7582  0.1827 -0.1619  0.3089  0.5635  0.0395 
+## ac  0.1344 -0.0615  0.0098  0.0650  0.0302  0.1209 -0.0060 
+## theta: -4.6203  3.7582  0.1827 -0.1619  0.3089  0.5635  0.0395 
+## 
+## Start phase 2.2
+## Phase 2 Subphase 2 Iteration 1 Progress: 21%
+## Phase 2 Subphase 2 Iteration 2 Progress: 21%
+## Phase 2 Subphase 2 Iteration 3 Progress: 21%
+## Phase 2 Subphase 2 Iteration 4 Progress: 21%
+## Phase 2 Subphase 2 Iteration 5 Progress: 21%
+## Phase 2 Subphase 2 Iteration 6 Progress: 21%
+## Phase 2 Subphase 2 Iteration 7 Progress: 21%
+## Phase 2 Subphase 2 Iteration 8 Progress: 21%
+## Phase 2 Subphase 2 Iteration 9 Progress: 21%
+## Phase 2 Subphase 2 Iteration 10 Progress: 21%
+## Phase 2 Subphase 2 Iteration 200 Progress: 27%
+## theta -4.6294  3.8132  0.1682 -0.1686  0.3233  0.5301  0.0298 
+## ac  0.1355 -0.1280  0.1189  0.0748 -0.0485 -0.0550 -0.0422 
+## theta -4.6454  3.7598  0.1898 -0.1617  0.3138  0.5547  0.0392 
+## ac  0.10195 -0.14660  0.09833  0.03175 -0.07498  0.00943 -0.02183 
+## theta: -4.6454  3.7598  0.1898 -0.1617  0.3138  0.5547  0.0392 
+## 
+## Start phase 2.3
+## Phase 2 Subphase 3 Iteration 1 Progress: 30%
+## Phase 2 Subphase 3 Iteration 2 Progress: 30%
+## Phase 2 Subphase 3 Iteration 3 Progress: 30%
+## Phase 2 Subphase 3 Iteration 4 Progress: 30%
+## Phase 2 Subphase 3 Iteration 5 Progress: 30%
+## Phase 2 Subphase 3 Iteration 6 Progress: 30%
+## Phase 2 Subphase 3 Iteration 7 Progress: 30%
+## Phase 2 Subphase 3 Iteration 8 Progress: 30%
+## Phase 2 Subphase 3 Iteration 9 Progress: 30%
+## Phase 2 Subphase 3 Iteration 10 Progress: 30%
+## Phase 2 Subphase 3 Iteration 200 Progress: 37%
+## theta -4.6129  3.7858  0.1814 -0.1254  0.3411  0.5184  0.0373 
+## ac  0.1039 -0.0926  0.0588  0.0715 -0.0695  0.0615  0.0353 
+## Phase 2 Subphase 3 Iteration 400 Progress: 43%
+## theta -4.6319  3.7044  0.1959 -0.1643  0.3369  0.5594  0.0189 
+## ac  0.0981 -0.0503  0.0709  0.0678 -0.0702  0.0129  0.0491 
+## theta -4.6437  3.7431  0.1920 -0.1464  0.3133  0.5462  0.0361 
+## ac  0.0960 -0.0358  0.0683  0.0697 -0.0751  0.0363  0.0486 
+## theta: -4.6437  3.7431  0.1920 -0.1464  0.3133  0.5462  0.0361 
+## 
+## Start phase 2.4
+## Phase 2 Subphase 4 Iteration 1 Progress: 43%
+## Phase 2 Subphase 4 Iteration 2 Progress: 43%
+## Phase 2 Subphase 4 Iteration 3 Progress: 43%
+## Phase 2 Subphase 4 Iteration 4 Progress: 43%
+## Phase 2 Subphase 4 Iteration 5 Progress: 44%
+## Phase 2 Subphase 4 Iteration 6 Progress: 44%
+## Phase 2 Subphase 4 Iteration 7 Progress: 44%
+## Phase 2 Subphase 4 Iteration 8 Progress: 44%
+## Phase 2 Subphase 4 Iteration 9 Progress: 44%
+## Phase 2 Subphase 4 Iteration 10 Progress: 44%
+## Phase 2 Subphase 4 Iteration 200 Progress: 50%
+## theta -4.6053  3.6733  0.1858 -0.1498  0.2534  0.5651  0.0458 
+## ac  0.1407  0.0822  0.1072  0.1399 -0.0719 -0.1231  0.1822 
+## Phase 2 Subphase 4 Iteration 400 Progress: 57%
+## theta -4.6153  3.7272  0.1935 -0.1366  0.2791  0.5478  0.0435 
+## ac  0.19067  0.12592  0.11304  0.16584 -0.00354  0.00621  0.09686 
+## Phase 2 Subphase 4 Iteration 600 Progress: 63%
+## theta -4.6077  3.7268  0.1831 -0.1487  0.2979  0.5378  0.0307 
+## ac  0.1514  0.1108  0.1005  0.1609 -0.0495  0.0311  0.0784 
+## theta -4.6265  3.7340  0.1887 -0.1420  0.2832  0.5496  0.0373 
+## ac  0.1603  0.0646  0.1330  0.1647 -0.0797  0.0447  0.0738 
+## theta: -4.6265  3.7340  0.1887 -0.1420  0.2832  0.5496  0.0373 
+## 
+## Start phase 3 
+## Phase 3 Iteration 100 Progress 71%
+## Phase 3 Iteration 200 Progress 74%
+## Phase 3 Iteration 300 Progress 77%
+## Phase 3 Iteration 400 Progress 81%
+## Phase 3 Iteration 500 Progress 84%
+## Phase 3 Iteration 600 Progress 87%
+## Phase 3 Iteration 700 Progress 90%
+## Phase 3 Iteration 800 Progress 94%
+## Phase 3 Iteration 900 Progress 97%
+## Phase 3 Iteration 1000 Progress 100%</code></pre>
+<pre class="r"><code># if necessary estimate again!  ansM1 &lt;- siena07(myAlgorithm, data = mydata, effects = myeff,
+# prevAns = ansM1, returnDeps=TRUE)
+ansM3</code></pre>
+<pre><code>## Estimates, standard errors and convergence t-ratios
+## 
+##                                              Estimate   Standard   Convergence 
+##                                                           Error      t-ratio   
+## 
+## Rate parameters: 
+##   0       Rate parameter                      3.3382  ( 0.6564   )             
+## 
+## Other parameters: 
+##   1. eval outdegree (density)                -4.6265  ( 0.1670   )    0.4967   
+##   2. eval reciprocity                         3.7340  ( 0.2173   )   -0.1518   
+##   3. eval indegree - popularity               0.1887  ( 0.0270   )    0.4304   
+##   4. eval gender alter                       -0.1420  ( 0.1044   )   -0.4850   
+##   5. eval gender ego                          0.2832  ( 0.2783   )   -0.1693   
+##   6. eval gender ego x gender alter           0.5496  ( 0.1825   )   -0.1769   
+##   7. eval gender ego x indegree - popularity  0.0373  ( 0.0602   )    0.3226   
+## 
+## Overall maximum convergence ratio:    0.5486 
+## 
+## 
+## Total of 2750 iteration steps.</code></pre>
+<p><br></p>
+<p>I am not sure whether I am interpreting this correctly but: Women in
+the network in our previous model received fewer ties than men This
+model now accounts for the tendency of nodes to send ties to already
+popular individuals. We now see that the direct effect of gender on
+receiving ties and sending ties is no longer significant. This indicates
+that current tie formation is not actively biased against women;
+however, women’s lower number of received ties reflects pre-existing
+structural inequalities in the network. Popularity dynamics amplify
+these initial differences, meaning that women are disadvantaged not
+because others avoid forming ties with them, but because they start from
+a lower baseline of connections. The direct effect of gender on sending
+ties is also no longer significant after accounting for popularity
+dynamics. This indicates that gender differences in tie initiation were
+driven not by gender itself, but by structural tendencies in the network
+— such as the preference for connecting to already popular alters, among
+whom men are probably overrepresented.</p>
+<p>The formula: <img src="images/inPop.png" /> For all alter’s (j): if
+an ego (i) has a tie to an alter (j) sum for the alter (j) the number of
+its alters (h) which are not ego (i), and then you do plus one because
+you also want to count the one connection to ego (i).</p>
+</div>
+</div>
+
+<div id="rmd-source-code">CmBgYHtyLCBlY2hvPVRSVUUsIHJlc3VsdHM9J2hpZGUnLCBtZXNzYWdlPUZBTFNFLCB3YXJuaW5nPUZBTFNFfQpsaWJyYXJ5KGtuaXRyKQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShzY2hvbGFyKQpsaWJyYXJ5KG9wZW5hbGV4UikKbGlicmFyeShydmVzdCkKbGlicmFyeShqc29ubGl0ZSkKbGlicmFyeShodHRyKQpsaWJyYXJ5KHJ2ZXN0KQpsaWJyYXJ5KHJlc2hhcGUyKQpsaWJyYXJ5KHhtbDIpCmxpYnJhcnkob3Blbnhsc3gpCmxpYnJhcnkocG9saXRlKQpsaWJyYXJ5KGlncmFwaCkKbGlicmFyeShzbmEpCmxpYnJhcnkoZ2VuZGVyaXplUikKbGlicmFyeShSU2VsZW5pdW0pCmxpYnJhcnkobmV0c3RhdCkKbGlicmFyeShwaW5ncikKbGlicmFyeShSU2llbmEpCmxpYnJhcnkoZGV2dG9vbHMpCmxpYnJhcnkoUnNpZW5hVHdvU3RlcCkKCgojIGxvYWQgdGhlIGZ1bmN0aW9ucyB5b3UgbmVlZCBmcm9tIHRoZSBwYWNrYWdlcwpmcGFja2FnZS5jaGVjayA8LSBmdW5jdGlvbihwYWNrYWdlcykgewogIGxhcHBseShwYWNrYWdlcywgRlVOID0gZnVuY3Rpb24oeCkgewogICAgaWYgKCFyZXF1aXJlKHgsIGNoYXJhY3Rlci5vbmx5ID0gVFJVRSkpIHsKICAgICAgaW5zdGFsbC5wYWNrYWdlcyh4LCBkZXBlbmRlbmNpZXMgPSBUUlVFKQogICAgICBsaWJyYXJ5KHgsIGNoYXJhY3Rlci5vbmx5ID0gVFJVRSkKICAgIH0KICB9KQp9Cgpmc2F2ZSA8LSBmdW5jdGlvbih4LCBmaWxlID0gTlVMTCwgbG9jYXRpb24gPSAiLi9kYXRhL3Byb2Nlc3NlZC8iKSB7CiAgaWZlbHNlKCFkaXIuZXhpc3RzKCJkYXRhIiksIGRpci5jcmVhdGUoImRhdGEiKSwgRkFMU0UpCiAgaWZlbHNlKCFkaXIuZXhpc3RzKCJkYXRhL3Byb2Nlc3NlZCIpLCBkaXIuY3JlYXRlKCJkYXRhL3Byb2Nlc3NlZCIpLCBGQUxTRSkKICAKICBpZiAoaXMubnVsbChmaWxlKSkgewogICAgZmlsZSA8LSBkZXBhcnNlKHN1YnN0aXR1dGUoeCkpCiAgfQogIAogIGRhdGVuYW1lIDwtIHN1YnN0cihnc3ViKCJbOi1dIiwgIiIsIFN5cy50aW1lKCkpLCAxLCA4KQogIHRvdGFsbmFtZSA8LSBwYXN0ZShsb2NhdGlvbiwgZGF0ZW5hbWUsIGZpbGUsICIucmRhIiwgc2VwID0gIiIpCiAgc2F2ZSh4LCBmaWxlID0gdG90YWxuYW1lKSAgIyBuZWVkIHRvIGZpeCBpZiBmaWxlIGlzIHJlbG9hZGVkIGFzIGlucHV0IG5hbWUsIG5vdCBhcyB4Lgp9CgpmbG9hZCA8LSBmdW5jdGlvbihmaWxlbmFtZSkgewogIGxvYWQoZmlsZW5hbWUpCiAgZ2V0KGxzKClbbHMoKSAhPSAiZmlsZW5hbWUiXSkKfQoKZnNob3dkZiA8LSBmdW5jdGlvbih4LCAuLi4pIHsKICBrbml0cjo6a2FibGUoeCwgZGlnaXRzID0gMiwgImh0bWwiLCAuLi4pICU+JQogICAga2FibGVFeHRyYTo6a2FibGVfc3R5bGluZyhib290c3RyYXBfb3B0aW9ucyA9IGMoInN0cmlwZWQiLCAiaG92ZXIiKSkgJT4lCiAgICBrYWJsZUV4dHJhOjpzY3JvbGxfYm94KHdpZHRoID0gIjEwMCUiLCBoZWlnaHQgPSAiMzAwcHgiKQp9CmBgYAoKYGBge3Iga2xpcHB5LCBlY2hvPUZBTFNFLCBpbmNsdWRlPVRSVUV9CmtsaXBweTo6a2xpcHB5KHBvc2l0aW9uID0gYygndG9wJywgJ3JpZ2h0JykpCiNrbGlwcHk6OmtsaXBweShjb2xvciA9ICdkYXJrcmVkJykKI2tsaXBweTo6a2xpcHB5KHRvb2x0aXBfbWVzc2FnZSA9ICdDbGljayB0byBjb3B5JywgdG9vbHRpcF9zdWNjZXNzID0gJ0RvbmUnKQpgYGAKCkxhc3QgY29tcGlsZWQgb24gYHIgZm9ybWF0KFN5cy50aW1lKCksICclQiwgJVknKWAKPGJyPgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgojIyBDcmVhdGUgRGF0YXNldAo8YnI+CgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KIyMjIEdlbmRlcml6ZSBmdW5jdGlvbgpgYGB7cn0KCm15X2dlbmRlcml6ZXIgPC0gZnVuY3Rpb24obmFtZSkgewogIG5hbWUgPC0gZ3N1YigiXi8rfC8rJCIsICIiLCBuYW1lKQogIAogICMgQnVpbGQgVVJMCiAgYmFzZV91cmwgPC0gImh0dHBzOi8vbnZiLm1lZXJ0ZW5zLmtuYXcubmwvbmFhbS9pcyIKICBuYW1lX3VybCA8LSBwYXN0ZTAoYmFzZV91cmwsICIvIiwgbmFtZSkKICAKICAjIFRyeSByZWFkaW5nIHRhYmxlCiAgdGFibGUgPC0gdHJ5Q2F0Y2goCiAgICByZWFkX2h0bWwobmFtZV91cmwpIHw+CiAgICAgIGh0bWxfZWxlbWVudCgidGFibGUiKSB8PgogICAgICBodG1sX3RhYmxlKCksCiAgICBlcnJvciA9IGZ1bmN0aW9uKGUpIE5VTEwKICApCiAgCiAgaWYgKGlzLm51bGwodGFibGUpKSByZXR1cm4oTkEpICAjIHJldHVybiBOQSBpZiBubyB0YWJsZSBmb3VuZAogIAogICMgUmVwbGFjZSAiLS0iIHdpdGggIjAiCiAgdGFibGVbdGFibGUgPT0gIi0tIl0gPC0gIjAiCiAgCiAgIyBDb252ZXJ0IHRvIG51bWVyaWMKICB2YWxfbWFsZSAgIDwtIHN1cHByZXNzV2FybmluZ3MoYXMubnVtZXJpYyh0YWJsZVsyLCAzXSkpCiAgdmFsX2ZlbWFsZSA8LSBzdXBwcmVzc1dhcm5pbmdzKGFzLm51bWVyaWModGFibGVbNiwgM10pKQogIAogICMgRGVjaWRlIGdlbmRlcgogIGlmIChpcy5uYSh2YWxfbWFsZSkgJiBpcy5uYSh2YWxfZmVtYWxlKSkgewogICAgZ2VuZGVyIDwtIE5BCiAgfSBlbHNlIGlmICh2YWxfbWFsZSA+IHZhbF9mZW1hbGUpIHsKICAgIGdlbmRlciA8LSAibWFsZSIKICB9IGVsc2UgaWYgKHZhbF9mZW1hbGUgPiB2YWxfbWFsZSkgewogICAgZ2VuZGVyIDwtICJmZW1hbGUiCiAgfSBlbHNlIHsKICAgIGdlbmRlciA8LSBOQQogIH0KICAKICByZXR1cm4oZ2VuZGVyKQp9CmBgYAo8YnI+CiMjIyBMb2FkIHRoZSBkYXRhCmBgYHtyfQojIGxvYWQgaW4gdGhlIGRhdGEKc2Nob2xhcnMgPC0gZmxvYWQoIi4vZGF0YS9wcm9jZXNzZWQvc2Nob2xhcnNfMjAyNDA5MjQucmRhIikKCiMgc2VsZWN0IHNjaG9sYXJzCiMgKHNvY2lvbG9neSwgUlUpCmRlbW9ncmFwaGljcyA8LSBkby5jYWxsKHJiaW5kLmRhdGEuZnJhbWUsIHNjaG9sYXJzJGRlbW9ncmFwaGljcykKZGVtb2dyYXBoaWNzIDwtIGRlbW9ncmFwaGljcyAlPiUKICAgIG11dGF0ZShVbml2ZXJzaXRlaXQxLjIyID0gcmVwbGFjZShVbml2ZXJzaXRlaXQxLjIyLCBpcy5uYShVbml2ZXJzaXRlaXQxLjIyKSwgIiIpLCBVbml2ZXJzaXRlaXQyLjIyID0gcmVwbGFjZShVbml2ZXJzaXRlaXQyLjIyLAogICAgICAgIGlzLm5hKFVuaXZlcnNpdGVpdDIuMjIpLCAiIiksIFVuaXZlcnNpdGVpdDEuMjQgPSByZXBsYWNlKFVuaXZlcnNpdGVpdDEuMjQsIGlzLm5hKFVuaXZlcnNpdGVpdDEuMjQpLAogICAgICAgICIiKSwgVW5pdmVyc2l0ZWl0Mi4yNCA9IHJlcGxhY2UoVW5pdmVyc2l0ZWl0Mi4yNCwgaXMubmEoVW5pdmVyc2l0ZWl0Mi4yNCksICIiKSwgZGlzY2lwbGluZS4yMiA9IHJlcGxhY2UoZGlzY2lwbGluZS4yMiwKICAgICAgICBpcy5uYShkaXNjaXBsaW5lLjIyKSwgIiIpLCBkaXNjaXBsaW5lLjI0ID0gcmVwbGFjZShkaXNjaXBsaW5lLjI0LCBpcy5uYShkaXNjaXBsaW5lLjI0KSwgIiIpKQoKc2FtcGxlIDwtIHdoaWNoKChkZW1vZ3JhcGhpY3MkVW5pdmVyc2l0ZWl0MS4yMiA9PSAiUlUiIHwgZGVtb2dyYXBoaWNzJFVuaXZlcnNpdGVpdDIuMjIgPT0gIlJVIiB8IGRlbW9ncmFwaGljcyRVbml2ZXJzaXRlaXQxLjI0ID09CiAgICAiUlUiIHwgZGVtb2dyYXBoaWNzJFVuaXZlcnNpdGVpdDIuMjQgPT0gIlJVIikgJiAoZGVtb2dyYXBoaWNzJGRpc2NpcGxpbmUuMjIgPT0gInNvY2lvbG9neSIgfCBkZW1vZ3JhcGhpY3MkZGlzY2lwbGluZS4yNCA9PQogICAgInNvY2lvbG9neSIpKQoKZGVtb2dyYXBoaWNzX3NvYyA8LSBkZW1vZ3JhcGhpY3Nbc2FtcGxlLCBdCnNjaG9sYXJzX3NlbCA8LSBsYXBwbHkoc2Nob2xhcnMsICJbIiwgc2FtcGxlKQoKIyBjb25zdHJ1Y3QgdGhlIGVtcHR5IGFkamFjZW5jeSBtYXRyaXgKaWRzIDwtIGRlbW9ncmFwaGljc19zb2MkYXVfaWQKd2F2ZTIgPC0gd2F2ZTEgPC0gbWF0cml4KDAsIG5yb3cgPSBsZW5ndGgoaWRzKSwgbmNvbCA9IGxlbmd0aChpZHMpLCBkaW1uYW1lcyA9IGxpc3QoaWRzLCBpZHMpKQoKIyBmaWx0ZXIgd29ya3MKd29ya3MgPC0gc2Nob2xhcnNfc2VsJHdvcmsKCndvcmtzX2lkIDwtIHVubGlzdChsYXBwbHkod29ya3MsIGZ1bmN0aW9uKGwpIGwkaWQpKQp3b3Jrc19hdXRob3IgPC0gdW5saXN0KGxhcHBseSh3b3JrcywgZnVuY3Rpb24obCkgbCRhdXRob3IpLCByZWN1cnNpdmUgPSBGQUxTRSkKd29ya3NfeWVhciA8LSB1bmxpc3QobGFwcGx5KHdvcmtzLCBmdW5jdGlvbihsKSBsJHB1YmxpY2F0aW9uX3llYXIpLCByZWN1cnNpdmUgPSBGQUxTRSkKCmRmX3dvcmtzIDwtIHRpYmJsZSh3b3Jrc19pZCwgd29ya3NfYXV0aG9yLCB3b3Jrc195ZWFyKQoKZHVwcyA8LSB3aGljaChkdXBsaWNhdGVkKHdvcmtzX2lkKSkKCmRmX3dvcmtzIDwtIGRmX3dvcmtzWy1kdXBzLCBdCmRmX3dvcmtzX3cyIDwtIGRmX3dvcmtzW2RmX3dvcmtzJHdvcmtzX3llYXIgPiAyMDE5LCBdCgojIHVuZGlyZWN0ZWQKIyB1bmRpcmVjdGVkCmZvciAoaSBpbiAxOm5yb3coZGZfd29ya3NfdzIpKSB7CiAgICBlZ29zIDwtIGRmX3dvcmtzX3cyJHdvcmtzX2F1dGhvcltpXVtbMV1dJGF1X2lkCgogICAgaWYgKHN1bShpZHMgJWluJSBlZ29zKSA+IDApIHsKICAgICAgICB3YXZlMlt3aGljaChpZHMgJWluJSBlZ29zKSwgd2hpY2goaWRzICVpbiUgZWdvcyldIDwtIDEKICAgIH0KfQoKZmNvbG5ldCA8LSBmdW5jdGlvbihkYXRhID0gc2Nob2xhcnMsIHVuaXZlcnNpdHkgPSAiUlUiLCBkaXNjaXBsaW5lID0gInNvY2lvbG9neSIsIHdhdmVzID0gbGlzdChjKDIwMTUsCiAgICAyMDE4KSwgYygyMDE5LCAyMDIzKSksIHR5cGUgPSBjKCJmaXJzdCIpKSB7CgogICAgIyBzdGVwIDEKICAgIGRlbW9ncmFwaGljcyA8LSBkby5jYWxsKHJiaW5kLmRhdGEuZnJhbWUsIGRhdGEkZGVtb2dyYXBoaWNzKQogICAgZGVtb2dyYXBoaWNzIDwtIGRlbW9ncmFwaGljcyAlPiUKICAgICAgICBtdXRhdGUoVW5pdmVyc2l0ZWl0MS4yMiA9IHJlcGxhY2UoVW5pdmVyc2l0ZWl0MS4yMiwgaXMubmEoVW5pdmVyc2l0ZWl0MS4yMiksICIiKSwgVW5pdmVyc2l0ZWl0Mi4yMiA9IHJlcGxhY2UoVW5pdmVyc2l0ZWl0Mi4yMiwKICAgICAgICAgICAgaXMubmEoVW5pdmVyc2l0ZWl0Mi4yMiksICIiKSwgVW5pdmVyc2l0ZWl0MS4yNCA9IHJlcGxhY2UoVW5pdmVyc2l0ZWl0MS4yNCwgaXMubmEoVW5pdmVyc2l0ZWl0MS4yNCksCiAgICAgICAgICAgICIiKSwgVW5pdmVyc2l0ZWl0Mi4yNCA9IHJlcGxhY2UoVW5pdmVyc2l0ZWl0Mi4yNCwgaXMubmEoVW5pdmVyc2l0ZWl0Mi4yNCksICIiKSwgZGlzY2lwbGluZS4yMiA9IHJlcGxhY2UoZGlzY2lwbGluZS4yMiwKICAgICAgICAgICAgaXMubmEoZGlzY2lwbGluZS4yMiksICIiKSwgZGlzY2lwbGluZS4yNCA9IHJlcGxhY2UoZGlzY2lwbGluZS4yNCwgaXMubmEoZGlzY2lwbGluZS4yNCksICIiKSkKCiAgICBzYW1wbGUgPC0gd2hpY2goKGRlbW9ncmFwaGljcyRVbml2ZXJzaXRlaXQxLjIyICVpbiUgdW5pdmVyc2l0eSB8IGRlbW9ncmFwaGljcyRVbml2ZXJzaXRlaXQyLjIyICVpbiUKICAgICAgICB1bml2ZXJzaXR5IHwgZGVtb2dyYXBoaWNzJFVuaXZlcnNpdGVpdDEuMjQgJWluJSB1bml2ZXJzaXR5IHwgZGVtb2dyYXBoaWNzJFVuaXZlcnNpdGVpdDIuMjQgJWluJQogICAgICAgIHVuaXZlcnNpdHkpICYgKGRlbW9ncmFwaGljcyRkaXNjaXBsaW5lLjIyICVpbiUgZGlzY2lwbGluZSB8IGRlbW9ncmFwaGljcyRkaXNjaXBsaW5lLjI0ICVpbiUgZGlzY2lwbGluZSkpCgogICAgZGVtb2dyYXBoaWNzX3NvYyA8LSBkZW1vZ3JhcGhpY3Nbc2FtcGxlLCBdCiAgICBzY2hvbGFyc19zZWwgPC0gbGFwcGx5KHNjaG9sYXJzLCAiWyIsIHNhbXBsZSkKCiAgICAjIHN0ZXAgMgogICAgaWRzIDwtIGRlbW9ncmFwaGljc19zb2MkYXVfaWQKICAgIG53YXZlcyA8LSBsZW5ndGgod2F2ZXMpCiAgICBuZXRzIDwtIGFycmF5KDAsIGRpbSA9IGMobndhdmVzLCBsZW5ndGgoaWRzKSwgbGVuZ3RoKGlkcykpLCBkaW1uYW1lcyA9IGxpc3Qod2F2ZSA9IDE6bndhdmVzLCBpZHMsCiAgICAgICAgaWRzKSkKICAgIGRpbW5hbWVzKG5ldHMpCgogICAgIyBzdGVwIDMKICAgIGRmX3dvcmtzIDwtIHRpYmJsZSh3b3Jrc19pZCA9IHVubGlzdChsYXBwbHkoc2Nob2xhcnNfc2VsJHdvcmssIGZ1bmN0aW9uKGwpIGwkaWQpKSwgd29ya3NfYXV0aG9yID0gdW5saXN0KGxhcHBseShzY2hvbGFyc19zZWwkd29yaywKICAgICAgICBmdW5jdGlvbihsKSBsJGF1dGhvciksIHJlY3Vyc2l2ZSA9IEZBTFNFKSwgd29ya3NfeWVhciA9IHVubGlzdChsYXBwbHkoc2Nob2xhcnNfc2VsJHdvcmssIGZ1bmN0aW9uKGwpIGwkcHVibGljYXRpb25feWVhciksCiAgICAgICAgcmVjdXJzaXZlID0gRkFMU0UpKQoKICAgIGRmX3dvcmtzIDwtIGRmX3dvcmtzWyFkdXBsaWNhdGVkKGRmX3dvcmtzKSwgXQoKICAgICMgc3RlcCA0CiAgICBpZiAodHlwZSA9PSAiZmlyc3QiKSB7CiAgICAgICAgZm9yIChqIGluIDE6bndhdmVzKSB7CiAgICAgICAgICAgIGRmX3dvcmtzX3cgPC0gZGZfd29ya3NbZGZfd29ya3Mkd29ya3NfeWVhciA+PSB3YXZlc1tbal1dWzFdICYgZGZfd29ya3Mkd29ya3NfeWVhciA8PSB3YXZlc1tbal1dWzJdLAogICAgICAgICAgICAgICAgXQogICAgICAgICAgICBmb3IgKGkgaW4gMTpucm93KGRmX3dvcmtzX3cpKSB7CiAgICAgICAgICAgICAgICBlZ28gPC0gZGZfd29ya3NfdyR3b3Jrc19hdXRob3JbaV1bWzFdXSRhdV9pZFsxXQogICAgICAgICAgICAgICAgYWx0ZXJzIDwtIGRmX3dvcmtzX3ckd29ya3NfYXV0aG9yW2ldW1sxXV0kYXVfaWRbLTFdCiAgICAgICAgICAgICAgICBpZiAoc3VtKGlkcyAlaW4lIGVnbykgPiAwICYgc3VtKGlkcyAlaW4lIGFsdGVycykgPiAwKSB7CiAgICAgICAgICAgICAgICAgIG5ldHNbaiwgd2hpY2goaWRzICVpbiUgZWdvKSwgd2hpY2goaWRzICVpbiUgYWx0ZXJzKV0gPC0gMQogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgfQogICAgfQoKICAgIGlmICh0eXBlID09ICJsYXN0IikgewogICAgICAgIGZvciAoaiBpbiAxOm53YXZlcykgewogICAgICAgICAgICBkZl93b3Jrc193IDwtIGRmX3dvcmtzW2RmX3dvcmtzJHdvcmtzX3llYXIgPj0gd2F2ZXNbW2pdXVsxXSAmIGRmX3dvcmtzJHdvcmtzX3llYXIgPD0gd2F2ZXNbW2pdXVsyXSwKICAgICAgICAgICAgICAgIF0KICAgICAgICAgICAgZm9yIChpIGluIDE6bnJvdyhkZl93b3Jrc193KSkgewogICAgICAgICAgICAgICAgZWdvIDwtIHJldihkZl93b3Jrc193JHdvcmtzX2F1dGhvcltpXVtbMV1dJGF1X2lkKVsxXQogICAgICAgICAgICAgICAgYWx0ZXJzIDwtIHJldihkZl93b3Jrc193JHdvcmtzX2F1dGhvcltpXVtbMV1dJGF1X2lkKVstMV0KICAgICAgICAgICAgICAgIGlmIChzdW0oaWRzICVpbiUgZWdvKSA+IDAgJiBzdW0oaWRzICVpbiUgYWx0ZXJzKSA+IDApIHsKICAgICAgICAgICAgICAgICAgbmV0c1tqLCB3aGljaChpZHMgJWluJSBlZ28pLCB3aGljaChpZHMgJWluJSBhbHRlcnMpXSA8LSAxCiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICB9CgogICAgaWYgKHR5cGUgPT0gImFsbCIpIHsKICAgICAgICBmb3IgKGogaW4gMTpud2F2ZXMpIHsKICAgICAgICAgICAgZGZfd29ya3NfdyA8LSBkZl93b3Jrc1tkZl93b3JrcyR3b3Jrc195ZWFyID49IHdhdmVzW1tqXV1bMV0gJiBkZl93b3JrcyR3b3Jrc195ZWFyIDw9IHdhdmVzW1tqXV1bMl0sCiAgICAgICAgICAgICAgICBdCiAgICAgICAgICAgIGZvciAoaSBpbiAxOm5yb3coZGZfd29ya3NfdykpIHsKICAgICAgICAgICAgICAgIGVnb3MgPC0gZGZfd29ya3NfdyR3b3Jrc19hdXRob3JbaV1bWzFdXSRhdV9pZAogICAgICAgICAgICAgICAgaWYgKHN1bShpZHMgJWluJSBlZ29zKSA+IDApIHsKICAgICAgICAgICAgICAgICAgbmV0c1tqLCB3aGljaChpZHMgJWluJSBlZ29zKSwgd2hpY2goaWRzICVpbiUgZWdvcyldIDwtIDEKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgfQogICAgICAgIH0KICAgIH0KICAgIG91dHB1dCA8LSBsaXN0KCkKICAgIG91dHB1dCRkYXRhIDwtIHNjaG9sYXJzX3NlbAogICAgb3V0cHV0JG5ldHMgPC0gbmV0cwogICAgcmV0dXJuKG91dHB1dCkKfQoKZGZfc2Nob2xhcnMgPC0gZG8uY2FsbChyYmluZCwgc2Nob2xhcnMkZGVtb2dyYXBoaWNzKQpgYGAKPGJyPgojIyMgQXR0YWNoIGdlbmRlcgpgYGB7cn0KZGZfc2Nob2xhcnNfZ2VuZGVyIDwtIGRmX3NjaG9sYXJzIHw+CiAgbXV0YXRlKGZpcnN0bmFtZSA9IHdvcmQoTmFhbSwgMSkpICAjIGV4dHJhY3QgZmlyc3QgbmFtZXMKCmRmX3NjaG9sYXJzX2dlbmRlciRnZW5kZXIgPC0gTkFfY2hhcmFjdGVyXyAgIyBpbml0aWFsaXplIGdlbmRlciBjb2x1bW4KCmZvciAoaSBpbiBzZXFfbGVuKG5yb3coZGZfc2Nob2xhcnNfZ2VuZGVyKSkpIHsKICBuYW1lIDwtIGRmX3NjaG9sYXJzX2dlbmRlciRmaXJzdG5hbWVbaV0KICBnZW5kZXIgPC0gbXlfZ2VuZGVyaXplcihuYW1lKQogIAogIGRmX3NjaG9sYXJzX2dlbmRlciRnZW5kZXJbaV0gPC0gZ2VuZGVyCiAgU3lzLnNsZWVwKDAuMDYpICAjIHBhdXNlIGJldHdlZW4gcmVxdWVzdHMKfQpgYGAKPGJyPgojIyMgQmlnIGRhdGEKYGBge3J9CmZjb2xuZXRfZ2VuZGVyIDwtIGZ1bmN0aW9uKGRhdGEgPSBzY2hvbGFycywKICAgICAgICAgICAgICAgICAgICAgICAgICAgd2F2ZXMgPSBsaXN0KGMoMjAxNSwgMjAxOCksIGMoMjAxOSwgMjAyMykpLAogICAgICAgICAgICAgICAgICAgICAgICAgICB0eXBlID0gImZpcnN0IiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgZGVtb2dyYXBoaWNzID0gTlVMTCkgewogIAogICMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQogICMgU3RlcCAxOiBkZW1vZ3JhcGhpY3MKICAjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KICBpZiAoaXMubnVsbChkZW1vZ3JhcGhpY3MpKSB7CiAgICBkZW1vZ3JhcGhpY3MgPC0gZG8uY2FsbChyYmluZC5kYXRhLmZyYW1lLCBkYXRhJGRlbW9ncmFwaGljcykKICB9CiAgCiAgZGVtb2dyYXBoaWNzIDwtIGRlbW9ncmFwaGljcyAlPiUKICAgIG11dGF0ZSgKICAgICAgVW5pdmVyc2l0ZWl0MS4yMiA9IHJlcGxhY2UoVW5pdmVyc2l0ZWl0MS4yMiwgaXMubmEoVW5pdmVyc2l0ZWl0MS4yMiksICIiKSwKICAgICAgVW5pdmVyc2l0ZWl0Mi4yMiA9IHJlcGxhY2UoVW5pdmVyc2l0ZWl0Mi4yMiwgaXMubmEoVW5pdmVyc2l0ZWl0Mi4yMiksICIiKSwKICAgICAgVW5pdmVyc2l0ZWl0MS4yNCA9IHJlcGxhY2UoVW5pdmVyc2l0ZWl0MS4yNCwgaXMubmEoVW5pdmVyc2l0ZWl0MS4yNCksICIiKSwKICAgICAgVW5pdmVyc2l0ZWl0Mi4yNCA9IHJlcGxhY2UoVW5pdmVyc2l0ZWl0Mi4yNCwgaXMubmEoVW5pdmVyc2l0ZWl0Mi4yNCksICIiKSwKICAgICAgZGlzY2lwbGluZS4yMiAgICA9IHJlcGxhY2UoZGlzY2lwbGluZS4yMiwgICAgaXMubmEoZGlzY2lwbGluZS4yMiksICAgICIiKSwKICAgICAgZGlzY2lwbGluZS4yNCAgICA9IHJlcGxhY2UoZGlzY2lwbGluZS4yNCwgICAgaXMubmEoZGlzY2lwbGluZS4yNCksICAgICIiKQogICAgKQogIAogICMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQogICMgc2VsZWN0IGFsbCBzY2hvbGFycwogICMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQogIHNhbXBsZSA8LSBzZXFfbGVuKG5yb3coZGVtb2dyYXBoaWNzKSkKICAKICBkZW1vZ3JhcGhpY3NfYWxsIDwtIGRlbW9ncmFwaGljc1tzYW1wbGUsIF0KICBzY2hvbGFyc19zZWwgPC0gbGFwcGx5KGRhdGEsICJbIiwgc2FtcGxlKQogIAogICMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQogICMgU3RlcCAyOiBpbml0aWFsaXplIG5ldHdvcmsgYXJyYXkKICAjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KICBpZHMgPC0gZGVtb2dyYXBoaWNzX2FsbCRhdV9pZAogIG53YXZlcyA8LSBsZW5ndGgod2F2ZXMpCiAgbmV0cyA8LSBhcnJheSgKICAgIDAsCiAgICBkaW0gPSBjKG53YXZlcywgbGVuZ3RoKGlkcyksIGxlbmd0aChpZHMpKSwKICAgIGRpbW5hbWVzID0gbGlzdCh3YXZlID0gMTpud2F2ZXMsIGlkcywgaWRzKQogICkKICAKICAjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KICAjIFN0ZXAgMzogd29ya3MgZGF0YWZyYW1lCiAgIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiAgZGZfd29ya3MgPC0gdGliYmxlKAogICAgd29ya3NfaWQgICAgID0gdW5saXN0KGxhcHBseShzY2hvbGFyc19zZWwkd29yaywgZnVuY3Rpb24obCkgaWYoIWlzLm51bGwobCkpIGwkaWQgZWxzZSBOQSkpLAogICAgd29ya3NfYXV0aG9yID0gdW5saXN0KGxhcHBseShzY2hvbGFyc19zZWwkd29yaywgZnVuY3Rpb24obCkgaWYoIWlzLm51bGwobCkpIGwkYXV0aG9yIGVsc2UgTkEpLCByZWN1cnNpdmUgPSBGQUxTRSksCiAgICB3b3Jrc195ZWFyICAgPSB1bmxpc3QobGFwcGx5KHNjaG9sYXJzX3NlbCR3b3JrLCBmdW5jdGlvbihsKSBpZighaXMubnVsbChsKSkgbCRwdWJsaWNhdGlvbl95ZWFyIGVsc2UgTkEpLCByZWN1cnNpdmUgPSBGQUxTRSkKICApICU+JSBmaWx0ZXIoIWlzLm5hKHdvcmtzX2lkKSkKICAKICBkZl93b3JrcyA8LSBkZl93b3Jrc1shZHVwbGljYXRlZChkZl93b3JrcyksIF0KICAKICAjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KICAjIFN0ZXAgNDogYnVpbGQgbmV0d29ya3MKICAjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KICBpZiAodHlwZSA9PSAiZmlyc3QiKSB7CiAgICBmb3IgKGogaW4gMTpud2F2ZXMpIHsKICAgICAgZGZfd29ya3NfdyA8LSBkZl93b3Jrc1tkZl93b3JrcyR3b3Jrc195ZWFyID49IHdhdmVzW1tqXV1bMV0gJgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZGZfd29ya3Mkd29ya3NfeWVhciA8PSB3YXZlc1tbal1dWzJdLCBdCiAgICAgIGZvciAoaSBpbiAxOm5yb3coZGZfd29ya3NfdykpIHsKICAgICAgICBlZ28gPC0gZGZfd29ya3NfdyR3b3Jrc19hdXRob3JbaV1bWzFdXSRhdV9pZFsxXQogICAgICAgIGFsdGVycyA8LSBkZl93b3Jrc193JHdvcmtzX2F1dGhvcltpXVtbMV1dJGF1X2lkWy0xXQogICAgICAgIGlmIChzdW0oaWRzICVpbiUgZWdvKSA+IDAgJiBzdW0oaWRzICVpbiUgYWx0ZXJzKSA+IDApIHsKICAgICAgICAgIG5ldHNbaiwgd2hpY2goaWRzICVpbiUgZWdvKSwgd2hpY2goaWRzICVpbiUgYWx0ZXJzKV0gPC0gMQogICAgICAgIH0KICAgICAgfQogICAgfQogIH0KICAKICBpZiAodHlwZSA9PSAibGFzdCIpIHsKICAgIGZvciAoaiBpbiAxOm53YXZlcykgewogICAgICBkZl93b3Jrc193IDwtIGRmX3dvcmtzW2RmX3dvcmtzJHdvcmtzX3llYXIgPj0gd2F2ZXNbW2pdXVsxXSAmCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBkZl93b3JrcyR3b3Jrc195ZWFyIDw9IHdhdmVzW1tqXV1bMl0sIF0KICAgICAgZm9yIChpIGluIDE6bnJvdyhkZl93b3Jrc193KSkgewogICAgICAgIGVnbyA8LSByZXYoZGZfd29ya3NfdyR3b3Jrc19hdXRob3JbaV1bWzFdXSRhdV9pZClbMV0KICAgICAgICBhbHRlcnMgPC0gcmV2KGRmX3dvcmtzX3ckd29ya3NfYXV0aG9yW2ldW1sxXV0kYXVfaWQpWy0xXQogICAgICAgIGlmIChzdW0oaWRzICVpbiUgZWdvKSA+IDAgJiBzdW0oaWRzICVpbiUgYWx0ZXJzKSA+IDApIHsKICAgICAgICAgIG5ldHNbaiwgd2hpY2goaWRzICVpbiUgZWdvKSwgd2hpY2goaWRzICVpbiUgYWx0ZXJzKV0gPC0gMQogICAgICAgIH0KICAgICAgfQogICAgfQogIH0KICAKICBpZiAodHlwZSA9PSAiYWxsIikgewogICAgZm9yIChqIGluIDE6bndhdmVzKSB7CiAgICAgIGRmX3dvcmtzX3cgPC0gZGZfd29ya3NbZGZfd29ya3Mkd29ya3NfeWVhciA+PSB3YXZlc1tbal1dWzFdICYKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGRmX3dvcmtzJHdvcmtzX3llYXIgPD0gd2F2ZXNbW2pdXVsyXSwgXQogICAgICBmb3IgKGkgaW4gMTpucm93KGRmX3dvcmtzX3cpKSB7CiAgICAgICAgZWdvcyA8LSBkZl93b3Jrc193JHdvcmtzX2F1dGhvcltpXVtbMV1dJGF1X2lkCiAgICAgICAgaWYgKHN1bShpZHMgJWluJSBlZ29zKSA+IDApIHsKICAgICAgICAgIG5ldHNbaiwgd2hpY2goaWRzICVpbiUgZWdvcyksIHdoaWNoKGlkcyAlaW4lIGVnb3MpXSA8LSAxCiAgICAgICAgfQogICAgICB9CiAgICB9CiAgfQogIAogICMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQogICMgU3RlcCA1OiBvdXRwdXQKICAjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KICBvdXRwdXQgPC0gbGlzdCgpCiAgb3V0cHV0JGRhdGEgPC0gc2Nob2xhcnNfc2VsCiAgb3V0cHV0JG5ldHMgPC0gbmV0cwogIG91dHB1dCRkZW1vZ3JhcGhpY3MgPC0gZGVtb2dyYXBoaWNzX2FsbCAgIyBpbmNsdWRlcyBnZW5kZXIgaWYgcGFzc2VkIGluCiAgCiAgcmV0dXJuKG91dHB1dCkKfQpgYGAKIyMjIG91dHB1dApgYGB7cn0KcmVzdWx0X2dlbmRlcjIgPC0gZmNvbG5ldF9nZW5kZXIoCiAgZGF0YSA9IHNjaG9sYXJzLAogIGRlbW9ncmFwaGljcyA9IGRmX3NjaG9sYXJzX2dlbmRlciwKICB3YXZlcyA9IGxpc3QoYygyMDE1LCAyMDE4KSwgYygyMDE5LDIwMjMpKSwKICB0eXBlPSAiZmlyc3QiCikKCiMgVmlldyBnZW5kZXIgaW5mbwpoZWFkKHJlc3VsdF9nZW5kZXIyJGRlbW9ncmFwaGljc1ssIGMoImF1X2lkIiwgImZpcnN0bmFtZSIsICJnZW5kZXIiKV0pCmBgYAotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiMjIEZpcnN0IGFuYWx5c2VzCjxicj4KCiMjIyBDaGVjayB3YXZlcwpgYGB7cn0Kd2F2ZTEgPC0gcmVzdWx0X2dlbmRlcjIkbmV0c1sxLCxdCndhdmUyIDwtIHJlc3VsdF9nZW5kZXIyJG5ldHNbMiwsXQoKIyBmaWx0ZXIgb3V0IHRoZSB3YXZlcyBvZiB0aGUgb2JqZWN0OiB3ZSBuZWVkIHRvIGNoZWNrIG91ciBpbnB1dApkaW0od2F2ZTEpCmRpbSh3YXZlMikKCiMgeW91IG5lZWQgdG8gaGF2ZSAwIG1pc3NpbmcgdmFsdWVzOgpzdW0oaXMubmEod2F2ZTEpKQpzdW0oaXMubmEod2F2ZTIpKQoKI2NoZWNrIHRoZSBkaWFnb25hbDogYWxsIHBsYWNlcyBzaG91bGQgYmUgMApzdW0oZGlhZyh3YXZlMSk9PTApCnN1bShkaWFnKHdhdmUyKT09MCkKCiMgYSBmZXcgcGVvcGxlIGRpZCB3b3JrIHdpdGggdGhlbXNlbHZlczoKZGlhZyh3YXZlMSkgPC0gMApkaWFnKHdhdmUyKSA8LSAwCgojIGV2ZXJ5dGhpbmcgc2hvdWxkIGJlIDEgb3IgMDoKc3VtKHdhdmUxPjEpCnN1bSh3YXZlMj4xKQoKIyBjaGVjayBpZiBpdCdzIG5vdCBlbXB0eTogdGhlcmUgYXJlIHBlb3BsZSB3aXRoIDEncwpzdW0od2F2ZTE+MCkKc3VtKHdhdmUyPjApCgoKbmV0X2dlbmRlciA8LSBhcnJheShkYXRhID0gYyh3YXZlMSwgd2F2ZTIpLCBkaW0gPSBjKGRpbSh3YXZlMSksIDIpKQojIG5ldF9nZW5kZXIKCiMgZGVwZW5kZW50Cm5ldDIgPC0gc2llbmFEZXBlbmRlbnQobmV0X2dlbmRlcikKCiMgaW5kZXBlbmRlbnQgdmFyaWFibGVzCmdlbmRlciA8LSByZXN1bHRfZ2VuZGVyMiRkZW1vZ3JhcGhpY3MkZ2VuZGVyCgpnZW5kZXIgPC0gaWZlbHNlKGdlbmRlcj09ImZlbWFsZSIsMSwwKQpnZW5kZXIgPC0gY29Db3ZhcihnZW5kZXIpCgojZ2VuZGVyCgojIENyZWF0ZSBzaWVuYSBkYXRhIG9iamVjdApteWRhdGEzIDwtIHNpZW5hRGF0YUNyZWF0ZShuZXQyLCBnZW5kZXIpCm15ZGF0YTMKYGBgCgpgYGB7cn0KbXllZmYgPC1nZXRFZmZlY3RzKG15ZGF0YTMpCgppZmVsc2UoIWRpci5leGlzdHMoInJlc3VsdHMiKSwgZGlyLmNyZWF0ZSgicmVzdWx0cyIpLCBGQUxTRSkKcHJpbnQwMVJlcG9ydChteWRhdGEzLCBtb2RlbG5hbWUgPSAiLi9yZXN1bHRzL3NvY19pbml0MiIpCmBgYAoKIyMjIEluY2x1ZGUgZWZmZWN0cwpgYGB7cn0KbXllZmYgPC0gaW5jbHVkZUVmZmVjdHMobXllZmYsIGVnb1gsIGludGVyYWN0aW9uMSA9ICJnZW5kZXIiLCB0eXBlID0gImV2YWwiLCBpbmNsdWRlID0gVCkgICAKCiMgY2FuIGFsbHNvIGFkZCB0aGUgYWx0WCB0byB0aGUgZXF1YXRpb24KbXllZmYgPC0gc2V0RWZmZWN0KG15ZWZmLCBhbHRYLCBpbnRlcmFjdGlvbjEgPSAiZ2VuZGVyIiwgaW5jbHVkZSA9IFQpICAKCiMgY2FuIGFsc28gYWRkIGVnb1hhbHRYCm15ZWZmIDwtIHNldEVmZmVjdChteWVmZiwgZWdvWGFsdFgsIGludGVyYWN0aW9uMSA9ICJnZW5kZXIiLCBpbmNsdWRlID0gVCkKCmBgYAoKIyMjIEVzdGltYXRlCgpgYGB7cn0KbXlBbGdvcml0aG0gPC0gc2llbmFBbGdvcml0aG1DcmVhdGUocHJvam5hbWUgPSAic29jX2luaXQiKQphbnNNMSA8LSBzaWVuYTA3KG15QWxnb3JpdGhtLCBkYXRhID0gbXlkYXRhMywgZWZmZWN0cyA9IG15ZWZmLCByZXR1cm5EZXBzID0gVFJVRSkKIyBpZiBuZWNlc3NhcnkgZXN0aW1hdGUgYWdhaW4hICBhbnNNMSA8LSBzaWVuYTA3KG15QWxnb3JpdGhtLCBkYXRhID0gbXlkYXRhLCBlZmZlY3RzID0gbXllZmYsCiMgcHJldkFucyA9IGFuc00xLCByZXR1cm5EZXBzPVRSVUUpCmFuc00xCmBgYAo8YnI+ClRoaXMgbWVhbnMgdGhhdDoKCk91dGRlZ3JlZToJU2lnbmlmaWNhbnQgYW5kIG5lZ2F0aXZlOiB0aGVyZSBpcyBhbiBvdmVyYWxsIHRlbmRlbmN5IG5vdCB0byBmb3JtIHRpZXMgKG1vc3QgcGVvcGxlIGNvbGxhYm9yYXRlIHdpdGggZmV3IG90aGVycykKClJlY2lwcm9jaXR5OiBTaWduaWZpY2FudCBhbmQgcG9zaXRpdmU6IG11dHVhbCBjb2xsYWJvcmF0aW9ucyBhcmUgbW9yZSBsaWtlbHk6IGlmIEEgY28tYXV0aG9ycyB3aXRoIEIsIEIgaXMgbW9yZSBsaWtlbHkgdG8gY28tYXV0aG9yIHdpdGggQS4KCkdlbmRlciBlZ286CVNpZ25pZmljYW50IGFuZCBwb3NpdGl2ZTogQmVpbmcgYSB3b21hbiBpbmNyZWFzZXMgdGhlIGxpa2VsaWhvb2Qgb2YgaW5pdGlhdGluZyBjby1hdXRob3JzaGlwcy4JCgpHZW5kZXIgYWx0ZXI6IFNpZ25pZmljYW50IGFuZCBuZWdhdGl2ZToJQmVpbmcgYSB3b21hbiBkZWNyZWFzZXMgdGhlIGxpa2VsaWhvb2Qgb2YgYmVpbmcgY2hvc2VuIGFzIGEgY28tYXV0aG9yLgoKR2VuZGVyIGVnbyDDlyBnZW5kZXIgYWx0ZXI6IFNpZ25pZmljYW50IGFuZCBwb3NpdGl2ZTogU3VnZ2VzdHMgc2FtZS1nZW5kZXIgY29sbGFib3JhdGlvbnMgYXJlIG1vcmUgbGlrZWx5IHRoYW4gY3Jvc3MtZ2VuZGVyIG9uZXMuCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiMjIFJTaWVubmEgY2hhcHRlcnMKPGJyPgoKIyMjIENoYXB0ZXIgMgpUaGUgZGVmaW5pbmcgY2hhcmFjdGVyaXN0aWMgb2YgU3RvY2hhc3RpYyBBY3Rvci1PcmllbnRlZCBNb2RlbHMgaXMgdGhlaXIg4oCYYWN0b3Itb3JpZW50ZWTigJkgbmF0dXJlCndoaWNoIG1lYW5zIHRoYXQgdGhleSBtb2RlbCBjaGFuZ2UgZnJvbSB0aGUgcGVyc3BlY3RpdmUgb2YgdGhlIGFjdG9ycyAobm9kZXMpLgoKRm9yIG5ldHdvcmsgZXZvbHV0aW9uLCB0aHJlZSBjb25jZXB0dWFsIGZ1bmN0aW9ucyBtYXkgYmUgdXNlZDogZXZhbHVhdGlvbiwgY3JlYXRpb24sIGFuZCBlbmRvd21lbnQuIFRoZXNlIGRpZmZlciBpbiB3aGV0aGVyIG9uZSBtb2RlbHMgYWxsIHRpZSBwcmVzZW5jZSAoZXZhbHVhdGlvbiksIGp1c3QgdGllIGZvcm1hdGlvbiAoY3JlYXRpb24pLCBvciB0aWUgbWFpbnRlbmFuY2UgKGVuZG93bWVudCkuIAoKRWZmZWN0czogVGhlc2UgYXJlIHRoZSBtb2RlbGVkIGluZmx1ZW5jZXMgKGV4cGxhbmF0b3J5IGZhY3RvcnMpIG9uIGNoYW5nZS4KCiAgLSBTdHJ1Y3R1cmFsIGVmZmVjdHMgKGVuZG9nZW5vdXMpIGUuZy4gcmVjaXByb2NpdHksIHRyYW5zaXRpdml0eQogIAogIC0gQ292YXJpYXRlIGVmZmVjdHMgKGV4b2dlbm91cykgZS5nLiBzaW1pbGFyaXR5LCBhdHRyaWJ1dGUgb2Ygc2VuZGVyL3JlY2VpdmVyCiAgCiAgLSBJbnRlcmFjdGlvbiBlZmZlY3RzIChjb21iaW5hdGlvbnMpIGUuZy4gaW50ZXJhY3Rpb24gb2Ygc3RydWN0dXJlIGFuZCBjb3ZhcmlhdGUgCiAgCkVzdGltYXRpb24gcHJvY2VkdXJlOgoKUlNpZW5hIHVzZXMgdGhlIGZ1bmN0aW9uIHNpZW5hMDcgdG8gZXN0aW1hdGUgcGFyYW1ldGVycy5UaGUgZ29hbCBpcyB0aGF0IHRoZSBtb2RlbC1pbXBsaWVkIChleHBlY3RlZCkgbmV0d29yay9iZWhhdmlvcmFsIHN0YXRpc3RpY3MgbWF0Y2ggb2JzZXJ2ZWQgc3RhdGlzdGljcy4gCgpUaGUgZXN0aW1hdGlvbiBwcm9jZWVkcyBpbiBwaGFzZXM6CgogIC0gRXN0aW1hdGUgc2Vuc2l0aXZpdHkgb2Ygc3RhdGlzdGljcyB0byBwYXJhbWV0ZXJzCiAgCiAgLSBJdGVyYXRpdmUgdXBkYXRlczogc2ltdWxhdGUgbmV0d29ya3MsIGNvbXB1dGUgZGV2aWF0aW9ucywgYWRqdXN0IHBhcmFtZXRlcnMKICAKICAtIENoZWNrIGNvbnZlcmdlbmNlOiB3aGV0aGVyIHNpbXVsYXRlZCBzdGF0aXN0aWNzIGFyZSBjbG9zZSBlbm91Z2ggdG8gb2JzZXJ2ZWQgdGFyZ2V0cwoKSWYgY29udmVyZ2VuY2UgY3JpdGVyaWEgYXJlIG5vdCBtZXQsIGVzdGltYXRpb24gbWF5IGJlIHJlcGVhdGVkIG9yIHJlZmluZWQuIAoKPGJyPgojIyMgQ2hhcHRlciA1CgpJbiBtYW55IGFwcGxpY2F0aW9ucywgaXTigJlzIGJlc3QgdG8gc3RhcnQgd2l0aCBhIHNpbXBsZSBiYXNlbGluZSBtb2RlbCAoZS5nLiBpbmNsdWRpbmcgb25seSBjb3JlIHN0cnVjdHVyYWwgZWZmZWN0cyBsaWtlIG91dC1kZWdyZWUgYW5kIHJlY2lwcm9jaXR5KS4KCkZyb20gdGhlcmUsIGFkZCBvciByZW1vdmUgZWZmZWN0cyAoaW4gc21hbGwgc2V0cywgZS5nLiAx4oCTMyBhdCBhIHRpbWUpLCBhc3Nlc3NpbmcgY29udmVyZ2VuY2UsIGludGVycHJldGFiaWxpdHksIGFuZCBmaXQgYXQgZWFjaCBzdGFnZS4KCkl0IGlzIHdpc2UgdG8gYWx3YXlzIHJldGFpbiBjZXJ0YWluIOKAnGFuY2hvcuKAnSBlZmZlY3RzIChlLmcuIG91dC1kZWdyZWUgb3IgcmF0ZSBwYXJhbWV0ZXJzKSBldmVuIGlmIHRoZXkgYXJlIG5vdCBzdGF0aXN0aWNhbGx5IHNpZ25pZmljYW50LCBiZWNhdXNlIHRoZXkgc3RhYmlsaXplIHRoZSBtb2RlbCBzdHJ1Y3R1cmUuCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiMjIE15IHN0YXRpc3RpY3MKCiMjIyB0cmFuc1RyaXAKVGhlcmUgYXJlIG1hbnkgU3RydWN0dXJhbCBlZmZlY3RzIHlvdSBjYW4gaW5jbHVkZS4gSSB0cmllZCBhcm91bmQgd2l0aCB0cmlhbmd1bGF0aW9uLCBidXQgSSBkaWQgbm90IHRoaW5rIGl0IHJlYWxseSBmaXQgbXkgZ2VuZGVyIHJlc2VhcmNoLiBJdCBjb3VsZCBiZSBpbnRlcmVzdGluZzogaWYgeW91IGhhdmUgQSAtPiBCIC0+IEMsIHdvdWxkIHRoZSBnZW5kZXIgb2YgQiBpbXBhY3Qgd2hldGhlciBBIC0+IEMgd291bGQgY29sbGFib3JhdGUuIAoKYGBge3J9Cm15ZWZmIDwtIGluY2x1ZGVFZmZlY3RzKG15ZWZmLCBlZ29YLCBpbnRlcmFjdGlvbjEgPSAiZ2VuZGVyIiwgdHlwZSA9ICJldmFsIiwgaW5jbHVkZSA9IFQpIApteWVmZiA8LSBzZXRFZmZlY3QobXllZmYsIGFsdFgsIGludGVyYWN0aW9uMSA9ICJnZW5kZXIiLCBpbmNsdWRlID0gVCkgCm15ZWZmIDwtIHNldEVmZmVjdChteWVmZiwgZWdvWGFsdFgsIGludGVyYWN0aW9uMSA9ICJnZW5kZXIiLCBpbmNsdWRlID0gVCkKCm15ZWZmIDwtIGluY2x1ZGVFZmZlY3RzKG15ZWZmLCB0cmFuc1RyaXAsIGluY2x1ZGUgPSBUKQpteWVmZiA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZiwgdHJhbnNUcmlwWCwgaW50ZXJhY3Rpb24xID0gImdlbmRlciIsIHR5cGUgPSAiZXZhbCIsIGluY2x1ZGUgPSBUKQoKbXlBbGdvcml0aG0gPC0gc2llbmFBbGdvcml0aG1DcmVhdGUocHJvam5hbWUgPSAic29jX2luaXQiKQphbnNNMiA8LSBzaWVuYTA3KG15QWxnb3JpdGhtLCBkYXRhID0gbXlkYXRhMywgZWZmZWN0cyA9IG15ZWZmLCByZXR1cm5EZXBzID0gVFJVRSkKIyBpZiBuZWNlc3NhcnkgZXN0aW1hdGUgYWdhaW4hICBhbnNNMSA8LSBzaWVuYTA3KG15QWxnb3JpdGhtLCBkYXRhID0gbXlkYXRhLCBlZmZlY3RzID0gbXllZmYsCiMgcHJldkFucyA9IGFuc00xLCByZXR1cm5EZXBzPVRSVUUpCmFuc00yCgpgYGAKVGhlIG5ldHdvcmsgc2hvd3MgYSBzaWduaWZpY2FudCB0ZW5kZW5jeSB0b3dhcmQgdHJhbnNpdGl2ZSBjbG9zdXJlLCBtZWFuaW5nIHRoYXQg4oCcZnJpZW5kcyBvZiBmcmllbmRz4oCdIGFyZSBtb3JlIGxpa2VseSB0byBiZWNvbWUgY29ubmVjdGVkLiBUaGUgZWZmZWN0IG9mIHRyYW5zaXRpdmUgdHJpcGxldHMgbW9kZXJhdGVkIGJ5IHRoZSBpbnRlcm1lZGlhdGUgcGVyc29u4oCZcyBnZW5kZXIgaXMgcG9zaXRpdmUgYnV0IG5vdCBzaWduaWZpY2FudCwgc3VnZ2VzdGluZyB0aGF0IHRoZSBnZW5kZXIgb2YgdGhlIGludGVybWVkaWF0ZSBoYXMgbm8gaW5mbHVlbmNlIG9uIHdoZXRoZXIgdHJpYWRzIGNsb3NlLgoKRm9ybXVsYToKIVtdKGltYWdlcy9UcmlhZC5wbmcpCkZvciBhbGwgYWx0ZXJzIGosIGlmIGVnbyBpIGlzIHRpZWQgdG8gYW4gaW50ZXJtZWRpYXJ5IGggd2hvIGlzIGEgd29tYW4gKG1hbGUgPSAwLCBmZW1hbGUgPSAxKSBhbmQgaW50ZXJtZWRpYXJ5IGggaGFzIGEgY29ubmVjdGlvbiB0byBhbHRlciBqLCBhbmQgYWx0ZXIgaiBoYXMgYSBjb25uZWN0aW9uIHRvIGVnbyBpLCB0aGVuIHRoYXQgY29uZmlndXJhdGlvbiBhZGRzIDEgdG8gaSdzIHRyYW5zVHJpcFggc3RhdGlzdGljLgoKCiMjIyBpblBvcApgYGB7cn0KIyBmaXJzdCBwdXQgdGhlIHRyaWFkaWMgZWZmZWN0cyBvbjogZG8gbm90IGluY2x1ZGUKbXllZmYgPC0gaW5jbHVkZUVmZmVjdHMobXllZmYsIHRyYW5zVHJpcCwgaW5jbHVkZSA9IEYpCm15ZWZmIDwtIGluY2x1ZGVFZmZlY3RzKG15ZWZmLCB0cmFuc1RyaXBYLCBpbnRlcmFjdGlvbjEgPSAiZ2VuZGVyIiwgdHlwZSA9ICJldmFsIiwgaW5jbHVkZSA9IEYpCgojIEdldCBlZ28sIGFsdCBhbmQgZWdvYWx0IGVmZmVjdHMKbXllZmYgPC0gaW5jbHVkZUVmZmVjdHMobXllZmYsIGVnb1gsIGludGVyYWN0aW9uMSA9ICJnZW5kZXIiLCB0eXBlID0gImV2YWwiLCBpbmNsdWRlID0gVCkgCm15ZWZmIDwtIHNldEVmZmVjdChteWVmZiwgYWx0WCwgaW50ZXJhY3Rpb24xID0gImdlbmRlciIsIGluY2x1ZGUgPSBUKSAKbXllZmYgPC0gc2V0RWZmZWN0KG15ZWZmLCBlZ29YYWx0WCwgaW50ZXJhY3Rpb24xID0gImdlbmRlciIsIGluY2x1ZGUgPSBUKQoKbXllZmYgPC0gaW5jbHVkZUVmZmVjdHMobXllZmYsIGluUG9wLCBpbmNsdWRlID0gVCkKCm15ZWZmIDwtIGluY2x1ZGVJbnRlcmFjdGlvbihteWVmZiwgZWdvWCwgaW5Qb3AsIGludGVyYWN0aW9uMSA9IGMoImdlbmRlciIsICIiKSwgdHlwZSA9ICJldmFsIiwgaW5jbHVkZSA9IFQpCgpteUFsZ29yaXRobSA8LSBzaWVuYUFsZ29yaXRobUNyZWF0ZShwcm9qbmFtZSA9ICJzb2NfaW5pdCIpCmFuc00zIDwtIHNpZW5hMDcobXlBbGdvcml0aG0sIGRhdGEgPSBteWRhdGEzLCBlZmZlY3RzID0gbXllZmYsIHJldHVybkRlcHMgPSBUUlVFKQojIGlmIG5lY2Vzc2FyeSBlc3RpbWF0ZSBhZ2FpbiEgIGFuc00xIDwtIHNpZW5hMDcobXlBbGdvcml0aG0sIGRhdGEgPSBteWRhdGEsIGVmZmVjdHMgPSBteWVmZiwKIyBwcmV2QW5zID0gYW5zTTEsIHJldHVybkRlcHM9VFJVRSkKYW5zTTMKYGBgCjxicj4KCkkgYW0gbm90IHN1cmUgd2hldGhlciBJIGFtIGludGVycHJldGluZyB0aGlzIGNvcnJlY3RseSBidXQ6IApXb21lbiBpbiB0aGUgbmV0d29yayBpbiBvdXIgcHJldmlvdXMgbW9kZWwgcmVjZWl2ZWQgZmV3ZXIgdGllcyB0aGFuIG1lbiBUaGlzIG1vZGVsIG5vdyBhY2NvdW50cyBmb3IgdGhlIHRlbmRlbmN5IG9mIG5vZGVzIHRvIHNlbmQgdGllcyB0byBhbHJlYWR5IHBvcHVsYXIgaW5kaXZpZHVhbHMuIFdlIG5vdyBzZWUgdGhhdCB0aGUgZGlyZWN0IGVmZmVjdCBvZiBnZW5kZXIgb24gcmVjZWl2aW5nIHRpZXMgYW5kIHNlbmRpbmcgdGllcyBpcyBubyBsb25nZXIgc2lnbmlmaWNhbnQuIFRoaXMgaW5kaWNhdGVzIHRoYXQgY3VycmVudCB0aWUgZm9ybWF0aW9uIGlzIG5vdCBhY3RpdmVseSBiaWFzZWQgYWdhaW5zdCB3b21lbjsgaG93ZXZlciwgd29tZW7igJlzIGxvd2VyIG51bWJlciBvZiByZWNlaXZlZCB0aWVzIHJlZmxlY3RzIHByZS1leGlzdGluZyBzdHJ1Y3R1cmFsIGluZXF1YWxpdGllcyBpbiB0aGUgbmV0d29yay4gUG9wdWxhcml0eSBkeW5hbWljcyBhbXBsaWZ5IHRoZXNlIGluaXRpYWwgZGlmZmVyZW5jZXMsIG1lYW5pbmcgdGhhdCB3b21lbiBhcmUgZGlzYWR2YW50YWdlZCBub3QgYmVjYXVzZSBvdGhlcnMgYXZvaWQgZm9ybWluZyB0aWVzIHdpdGggdGhlbSwgYnV0IGJlY2F1c2UgdGhleSBzdGFydCBmcm9tIGEgbG93ZXIgYmFzZWxpbmUgb2YgY29ubmVjdGlvbnMuClRoZSBkaXJlY3QgZWZmZWN0IG9mIGdlbmRlciBvbiBzZW5kaW5nIHRpZXMgaXMgYWxzbyBubyBsb25nZXIgc2lnbmlmaWNhbnQgYWZ0ZXIgYWNjb3VudGluZyBmb3IgcG9wdWxhcml0eSBkeW5hbWljcy4gVGhpcyBpbmRpY2F0ZXMgdGhhdCBnZW5kZXIgZGlmZmVyZW5jZXMgaW4gdGllIGluaXRpYXRpb24gd2VyZSBkcml2ZW4gbm90IGJ5IGdlbmRlciBpdHNlbGYsIGJ1dCBieSBzdHJ1Y3R1cmFsIHRlbmRlbmNpZXMgaW4gdGhlIG5ldHdvcmsg4oCUIHN1Y2ggYXMgdGhlIHByZWZlcmVuY2UgZm9yIGNvbm5lY3RpbmcgdG8gYWxyZWFkeSBwb3B1bGFyIGFsdGVycywgYW1vbmcgd2hvbSBtZW4gYXJlIHByb2JhYmx5IG92ZXJyZXByZXNlbnRlZC4KClRoZSBmb3JtdWxhOgohW10oaW1hZ2VzL2luUG9wLnBuZykKRm9yIGFsbCBhbHRlcidzIChqKTogaWYgYW4gZWdvIChpKSBoYXMgYSB0aWUgdG8gYW4gYWx0ZXIgKGopIHN1bSBmb3IgdGhlIGFsdGVyIChqKSB0aGUgbnVtYmVyIG9mIGl0cyBhbHRlcnMgKGgpIHdoaWNoIGFyZSBub3QgZWdvIChpKSwgYW5kIHRoZW4geW91IGRvIHBsdXMgb25lIGJlY2F1c2UgeW91IGFsc28gd2FudCB0byBjb3VudCB0aGUgb25lIGNvbm5lY3Rpb24gdG8gZWdvIChpKS4gCg==</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("Create_Dataset.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

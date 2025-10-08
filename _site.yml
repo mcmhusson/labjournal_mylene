@@ -20,6 +20,12 @@ navbar:
         href: lab3.html 
       - text: "Week 4"
         href: lab4.html  
+      - text: "Week 5a"
+        href: lab5.html
+      - text: "Week 5b"
+        href: lab5tryouts.html 
+      - text: "Week 5c"
+        href: Create_dataset.html 
         # here, other .Rmds can be added
 
 

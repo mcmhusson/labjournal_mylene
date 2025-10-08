@@ -1,0 +1,680 @@
+---
+title: "Journal 1"
+#bibliography: references.bib
+author: "Mylène Husson"
+---
+
+```{r, echo=TRUE, results='hide', message=FALSE, warning=FALSE}
+library(knitr)
+library(tidyverse)
+library(scholar)
+library(openalexR)
+library(rvest)
+library(jsonlite)
+library(httr)
+library(rvest)
+library(reshape2)
+library(xml2)
+library(openxlsx)
+library(polite)
+library(igraph)
+library(sna)
+library(genderizeR)
+library(RSelenium)
+library(netstat)
+library(pingr)
+library(RSiena)
+library(devtools)
+library(RsienaTwoStep)
+
+# load the functions you need from the packages
+fpackage.check <- function(packages) {
+  lapply(packages, FUN = function(x) {
+    if (!require(x, character.only = TRUE)) {
+      install.packages(x, dependencies = TRUE)
+      library(x, character.only = TRUE)
+    }
+  })
+}
+
+fsave <- function(x, file = NULL, location = "./data/processed/") {
+  ifelse(!dir.exists("data"), dir.create("data"), FALSE)
+  ifelse(!dir.exists("data/processed"), dir.create("data/processed"), FALSE)
+  
+  if (is.null(file)) {
+    file <- deparse(substitute(x))
+  }
+  
+  datename <- substr(gsub("[:-]", "", Sys.time()), 1, 8)
+  totalname <- paste(location, datename, file, ".rda", sep = "")
+  save(x, file = totalname)  # need to fix if file is reloaded as input name, not as x.
+}
+
+fload <- function(filename) {
+  load(filename)
+  get(ls()[ls() != "filename"])
+}
+
+fshowdf <- function(x, ...) {
+  knitr::kable(x, digits = 2, "html", ...) %>%
+    kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
+    kableExtra::scroll_box(width = "100%", height = "300px")
+}
+```
+
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy(position = c('top', 'right'))
+#klippy::klippy(color = 'darkred')
+#klippy::klippy(tooltip_message = 'Click to copy', tooltip_success = 'Done')
+```
+
+Last compiled on `r format(Sys.time(), '%B, %Y')`
+<br>
+
+------------------------------------------------------------------------
+
+## Week 5 Try outs
+<br>
+
+------------------------------------------------------------------------
+### Define data: 
+
+You have s501 at timepoint 1 and s502 for timepoint 2
+Normally you will have to fix your data, but this data is already clean.
+
+```{r}
+?RSiena::s501
+
+s501 #  network at timepoint 1
+s502 # the network at timepoint 2
+
+# dim(s501) shows the number of rows and the number of dimensions
+
+# dimensions are the number of ros and the number of columns in your network, and we have 2 timepoints
+net_soc_array <- array(data = c(s501, s502), dim = c(dim(s501), 2))
+
+# dependent
+net <- sienaDependent(net_soc_array)
+
+```
+<br>
+
+## Include independent var
+you can also include independent variable 
+
+```{r}
+s50a
+
+# we have information on alcohol behaviour for 3 waves
+
+alcohol <- s50a[,1]
+alcohol
+
+alcohol <- coCovar(alcohol) #say it's a time constant variable (I can do this with gender)
+# only at time one, your alcohol score of T1 influences your T2
+
+```
+<br>
+
+### combine into a dataset
+```{r}
+
+# Create siena data object
+mydata <- sienaDataCreate(net, alcohol)
+```
+<br>
+Below provides the Starting values: Includes basic rate parameter (shows you how many you need to get from one to another), outdegree, and reciprocity
+
+```{r}
+myeff <- getEffects(mydata)
+myeff
+```
+
+We want more statistics in the model, can include many from a dataset. 
+Can do it on your rate function, 
+evaluation: the mechanisms for making are the same for breaking as for making  
+(maybe considerations to make a tie to someone are different:  decisions to make a tie are different than to break a tie or create a tie, for instance: time investment may be important). 
+endow: means making
+creation: the costs of making 
+
+We only use the evaluation function: mechanisms to make/ break a tie are similar. 
+
+We should be able for each effect to calculate it for an ego given a network. 
+
+In Chapter 12 are all the formula's (snijders siena Rsiena manual) [we will play around with those next week]
+
+## Look at initial data DOES NOT WORK
+```{r}
+print01Report(mydata)
+```
+
+### Add effects
+```{r}
+# out act for instance meand: people who have many ties are likely to send more ties.
+# you want to include that because tie distributions are skewed.
+# can also campare in/out degrees. (these are control cariables to take into account the skeweness)
+
+
+# inpop means: people who receive a lot of ties, are the people who receive a lot of ties at T2.
+# the start degrees are 0 > no effect
+myeff <- includeEffects(myeff, isolateNet, inPop, outAct)
+
+```
+
+### estimate
+```{r}
+
+# we need to define an algorithm saying how do we want to estimate the model
+# for us it's not important, so leave it as it is. 
+# then we say we are goiing to estimate it: siena07
+# we are going to analyse it iwh my algorithm which we defined above, using mydata en myeff
+# returnDeps = TRUE (for now not important, but it will be important when making goodness of fit measures)
+myAlgorithm <- sienaAlgorithmCreate(projname = "test")
+ansM1 <- siena07(myAlgorithm, data = mydata, effects = myeff, returnDeps = TRUE)
+# if necessary estimate again!  ansM1 <- siena07(myAlgorithm, data = mydata, effects = myeff,
+# prevAns = ansM1, returnDeps=TRUE)
+ansM1
+
+# look at other parameters.
+```
+On average 5.6 steps between agents, we see the eval out degree. 
+Quite important reciprocity. 
+
+For degree: negative means there is a density of less than .5
+
+<br>
+
+------------------------------------------------------------------------
+## Homework
+
+Make the data ready.
+Re-read the manual
+Pick one of the statistics in Chapter 12, which may be relevant for my project
+And try to understand the function
+and persent it next week
+
+<br>
+
+------------------------------------------------------------------------
+## Friday Oktober 3rd
+
+### Step 1
+Getting started
+
+scholars_20240924
+
+```{r}
+# load in the data
+scholars <- fload("./data/processed/scholars_20240924.rda")
+
+# select scholars
+# (sociology, RU)
+demographics <- do.call(rbind.data.frame, scholars$demographics)
+demographics <- demographics %>%
+    mutate(Universiteit1.22 = replace(Universiteit1.22, is.na(Universiteit1.22), ""), Universiteit2.22 = replace(Universiteit2.22,
+        is.na(Universiteit2.22), ""), Universiteit1.24 = replace(Universiteit1.24, is.na(Universiteit1.24),
+        ""), Universiteit2.24 = replace(Universiteit2.24, is.na(Universiteit2.24), ""), discipline.22 = replace(discipline.22,
+        is.na(discipline.22), ""), discipline.24 = replace(discipline.24, is.na(discipline.24), ""))
+
+sample <- which((demographics$Universiteit1.22 == "RU" | demographics$Universiteit2.22 == "RU" | demographics$Universiteit1.24 ==
+    "RU" | demographics$Universiteit2.24 == "RU") & (demographics$discipline.22 == "sociology" | demographics$discipline.24 ==
+    "sociology"))
+
+demographics_soc <- demographics[sample, ]
+scholars_sel <- lapply(scholars, "[", sample)
+
+# construct the empty adjacency matrix
+ids <- demographics_soc$au_id
+wave2 <- wave1 <- matrix(0, nrow = length(ids), ncol = length(ids), dimnames = list(ids, ids))
+
+# filter works
+works <- scholars_sel$work
+
+works_id <- unlist(lapply(works, function(l) l$id))
+works_author <- unlist(lapply(works, function(l) l$author), recursive = FALSE)
+works_year <- unlist(lapply(works, function(l) l$publication_year), recursive = FALSE)
+
+df_works <- tibble(works_id, works_author, works_year)
+
+dups <- which(duplicated(works_id))
+
+df_works <- df_works[-dups, ]
+df_works_w2 <- df_works[df_works$works_year > 2019, ]
+
+# undirected
+# undirected
+for (i in 1:nrow(df_works_w2)) {
+    egos <- df_works_w2$works_author[i][[1]]$au_id
+
+    if (sum(ids %in% egos) > 0) {
+        wave2[which(ids %in% egos), which(ids %in% egos)] <- 1
+    }
+}
+
+fcolnet <- function(data = scholars, university = "RU", discipline = "sociology", waves = list(c(2015,
+    2018), c(2019, 2023)), type = c("first")) {
+
+    # step 1
+    demographics <- do.call(rbind.data.frame, data$demographics)
+    demographics <- demographics %>%
+        mutate(Universiteit1.22 = replace(Universiteit1.22, is.na(Universiteit1.22), ""), Universiteit2.22 = replace(Universiteit2.22,
+            is.na(Universiteit2.22), ""), Universiteit1.24 = replace(Universiteit1.24, is.na(Universiteit1.24),
+            ""), Universiteit2.24 = replace(Universiteit2.24, is.na(Universiteit2.24), ""), discipline.22 = replace(discipline.22,
+            is.na(discipline.22), ""), discipline.24 = replace(discipline.24, is.na(discipline.24), ""))
+
+    sample <- which((demographics$Universiteit1.22 %in% university | demographics$Universiteit2.22 %in%
+        university | demographics$Universiteit1.24 %in% university | demographics$Universiteit2.24 %in%
+        university) & (demographics$discipline.22 %in% discipline | demographics$discipline.24 %in% discipline))
+
+    demographics_soc <- demographics[sample, ]
+    scholars_sel <- lapply(scholars, "[", sample)
+
+    # step 2
+    ids <- demographics_soc$au_id
+    nwaves <- length(waves)
+    nets <- array(0, dim = c(nwaves, length(ids), length(ids)), dimnames = list(wave = 1:nwaves, ids,
+        ids))
+    dimnames(nets)
+
+    # step 3
+    df_works <- tibble(works_id = unlist(lapply(scholars_sel$work, function(l) l$id)), works_author = unlist(lapply(scholars_sel$work,
+        function(l) l$author), recursive = FALSE), works_year = unlist(lapply(scholars_sel$work, function(l) l$publication_year),
+        recursive = FALSE))
+
+    df_works <- df_works[!duplicated(df_works), ]
+
+    # step 4
+    if (type == "first") {
+        for (j in 1:nwaves) {
+            df_works_w <- df_works[df_works$works_year >= waves[[j]][1] & df_works$works_year <= waves[[j]][2],
+                ]
+            for (i in 1:nrow(df_works_w)) {
+                ego <- df_works_w$works_author[i][[1]]$au_id[1]
+                alters <- df_works_w$works_author[i][[1]]$au_id[-1]
+                if (sum(ids %in% ego) > 0 & sum(ids %in% alters) > 0) {
+                  nets[j, which(ids %in% ego), which(ids %in% alters)] <- 1
+                }
+            }
+        }
+    }
+
+    if (type == "last") {
+        for (j in 1:nwaves) {
+            df_works_w <- df_works[df_works$works_year >= waves[[j]][1] & df_works$works_year <= waves[[j]][2],
+                ]
+            for (i in 1:nrow(df_works_w)) {
+                ego <- rev(df_works_w$works_author[i][[1]]$au_id)[1]
+                alters <- rev(df_works_w$works_author[i][[1]]$au_id)[-1]
+                if (sum(ids %in% ego) > 0 & sum(ids %in% alters) > 0) {
+                  nets[j, which(ids %in% ego), which(ids %in% alters)] <- 1
+                }
+            }
+        }
+    }
+
+    if (type == "all") {
+        for (j in 1:nwaves) {
+            df_works_w <- df_works[df_works$works_year >= waves[[j]][1] & df_works$works_year <= waves[[j]][2],
+                ]
+            for (i in 1:nrow(df_works_w)) {
+                egos <- df_works_w$works_author[i][[1]]$au_id
+                if (sum(ids %in% egos) > 0) {
+                  nets[j, which(ids %in% egos), which(ids %in% egos)] <- 1
+                }
+            }
+        }
+    }
+    output <- list()
+    output$data <- scholars_sel
+    output$nets <- nets
+    return(output)
+}
+
+df_scholars <- do.call(rbind, scholars$demographics)
+
+#View(df_scholars)
+
+```
+
+step 2: gender function
+```{r}
+
+my_genderizer <- function(name) {
+  name <- gsub("^/+|/+$", "", name)
+  
+  # Build URL
+  base_url <- "https://nvb.meertens.knaw.nl/naam/is"
+  name_url <- paste0(base_url, "/", name)
+  
+  # Try reading table
+  table <- tryCatch(
+    read_html(name_url) |>
+      html_element("table") |>
+      html_table(),
+    error = function(e) NULL
+  )
+  
+  if (is.null(table)) return(NA)  # return NA if no table found
+  
+  # Replace "--" with "0"
+  table[table == "--"] <- "0"
+  
+  # Convert to numeric
+  val_male   <- suppressWarnings(as.numeric(table[2, 3]))
+  val_female <- suppressWarnings(as.numeric(table[6, 3]))
+  
+  # Decide gender
+  if (is.na(val_male) & is.na(val_female)) {
+    gender <- NA
+  } else if (val_male > val_female) {
+    gender <- "male"
+  } else if (val_female > val_male) {
+    gender <- "female"
+  } else {
+    gender <- NA
+  }
+  
+  return(gender)
+}
+
+soc_pol <- readxl::read_excel("/Users/mylenehusson/Desktop/SocialNetworks/labjournal_mylene/data/20240419Scholarid_soc_pol.xlsx")
+soc_pol_small <- soc_pol[1:20, ]
+soc_pol_small$gender <- NA
+
+soc_pol_small <- soc_pol_small |>
+  mutate(firstname = word(Naam, 1)) 
+
+for (i in seq_len(nrow(soc_pol_small))) {
+  name <- soc_pol_small$firstname[i]
+  gender <- my_genderizer(name)
+
+  soc_pol_small$gender[i] <- gender
+}
+
+#View(soc_pol_small)
+```
+
+
+step 3: add gender
+
+```{r}
+
+df_scholars2 <- df_scholars |>
+  mutate(firstname = word(Naam, 1))  # extract first names
+
+df_scholars2$gender <- NA_character_  # initialize gender column
+
+for (i in seq_len(nrow(df_scholars2))) {
+  name <- df_scholars2$firstname[i]
+  gender <- my_genderizer(name)
+  
+  df_scholars2$gender[i] <- gender
+  Sys.sleep(0.06)  # pause between requests
+}
+
+#View(df_scholars2)
+
+fcolnet_gender <- function(data = scholars,
+                           university = "RU",
+                           discipline = "sociology",
+                           waves = list(c(2015, 2018), c(2019, 2023)),
+                           type = c("first"),
+                           demographics = NULL) {
+  
+  # -------------------------
+  # Step 1: demographics
+  # -------------------------
+  if (is.null(demographics)) {
+    demographics <- do.call(rbind.data.frame, data$demographics)
+  }
+  
+  demographics <- demographics %>%
+    mutate(
+      Universiteit1.22 = replace(Universiteit1.22, is.na(Universiteit1.22), ""),
+      Universiteit2.22 = replace(Universiteit2.22, is.na(Universiteit2.22), ""),
+      Universiteit1.24 = replace(Universiteit1.24, is.na(Universiteit1.24), ""),
+      Universiteit2.24 = replace(Universiteit2.24, is.na(Universiteit2.24), ""),
+      discipline.22    = replace(discipline.22,    is.na(discipline.22),    ""),
+      discipline.24    = replace(discipline.24,    is.na(discipline.24),    "")
+    )
+  
+  sample <- which(
+    (demographics$Universiteit1.22 %in% university |
+       demographics$Universiteit2.22 %in% university |
+       demographics$Universiteit1.24 %in% university |
+       demographics$Universiteit2.24 %in% university) &
+      (demographics$discipline.22 %in% discipline |
+         demographics$discipline.24 %in% discipline)
+  )
+  
+  demographics_soc <- demographics[sample, ]
+  scholars_sel <- lapply(data, "[", sample)
+  
+  # -------------------------
+  # Step 2: initialize network array
+  # -------------------------
+  ids <- demographics_soc$au_id
+  nwaves <- length(waves)
+  nets <- array(
+    0,
+    dim = c(nwaves, length(ids), length(ids)),
+    dimnames = list(wave = 1:nwaves, ids, ids)
+  )
+  
+  # -------------------------
+  # Step 3: works dataframe
+  # -------------------------
+  df_works <- tibble(
+    works_id     = unlist(lapply(scholars_sel$work, function(l) l$id)),
+    works_author = unlist(lapply(scholars_sel$work, function(l) l$author), recursive = FALSE),
+    works_year   = unlist(lapply(scholars_sel$work, function(l) l$publication_year), recursive = FALSE)
+  )
+  
+  df_works <- df_works[!duplicated(df_works), ]
+  
+  # -------------------------
+  # Step 4: build networks
+  # -------------------------
+  if (type == "first") {
+    for (j in 1:nwaves) {
+      df_works_w <- df_works[df_works$works_year >= waves[[j]][1] &
+                               df_works$works_year <= waves[[j]][2], ]
+      for (i in 1:nrow(df_works_w)) {
+        ego <- df_works_w$works_author[i][[1]]$au_id[1]
+        alters <- df_works_w$works_author[i][[1]]$au_id[-1]
+        if (sum(ids %in% ego) > 0 & sum(ids %in% alters) > 0) {
+          nets[j, which(ids %in% ego), which(ids %in% alters)] <- 1
+        }
+      }
+    }
+  }
+  
+  if (type == "last") {
+    for (j in 1:nwaves) {
+      df_works_w <- df_works[df_works$works_year >= waves[[j]][1] &
+                               df_works$works_year <= waves[[j]][2], ]
+      for (i in 1:nrow(df_works_w)) {
+        ego <- rev(df_works_w$works_author[i][[1]]$au_id)[1]
+        alters <- rev(df_works_w$works_author[i][[1]]$au_id)[-1]
+        if (sum(ids %in% ego) > 0 & sum(ids %in% alters) > 0) {
+          nets[j, which(ids %in% ego), which(ids %in% alters)] <- 1
+        }
+      }
+    }
+  }
+  
+  if (type == "all") {
+    for (j in 1:nwaves) {
+      df_works_w <- df_works[df_works$works_year >= waves[[j]][1] &
+                               df_works$works_year <= waves[[j]][2], ]
+      for (i in 1:nrow(df_works_w)) {
+        egos <- df_works_w$works_author[i][[1]]$au_id
+        if (sum(ids %in% egos) > 0) {
+          nets[j, which(ids %in% egos), which(ids %in% egos)] <- 1
+        }
+      }
+    }
+  }
+  
+  # -------------------------
+  # Step 5: output
+  # -------------------------
+  output <- list()
+  output$data <- scholars_sel
+  output$nets <- nets
+  output$demographics <- demographics_soc  # includes gender if passed in
+  
+  return(output)
+}
+
+```
+Now let's try getting it
+```{r}
+result_gender <- fcolnet_gender(
+  data = scholars,
+  university = "RU",
+  discipline = "sociology",
+  demographics = df_scholars2,
+  waves = list(c(2015, 2018), c(2019,2023)),
+  type= c("first")
+)
+
+# Now you can access gender info in the output
+head(result_gender$demographics[, c("au_id", "firstname", "gender")])
+
+```
+
+```{r}
+wave1 <- result_gender$nets[1,,]
+wave2 <- result_gender$nets[2,,]
+
+# filter out the waves of the object: we need to check our input
+dim(wave1)
+dim(wave2)
+
+# you need to have 0 missing values:
+sum(is.na(wave1))
+sum(is.na(wave2))
+
+#check the diagonal: all 50 places should be 0
+sum(diag(wave1)==0)
+sum(diag(wave2)==0)
+
+# everything should be 1 or 0:
+sum(wave1>1)
+sum(wave2>1)
+
+# check if it's not empty: there are people with 1's
+sum(wave1>0)
+sum(wave2>0)
+
+
+net_gender <- array(data = c(wave1, wave2), dim = c(dim(wave1), 2))
+# net_gender
+
+# dependent
+net2 <- sienaDependent(net_gender)
+
+# independent variables
+gender <- result_gender$demographics$gender
+
+gender <- ifelse(gender=="female",1,0)
+gender <- coCovar(gender)
+
+#gender
+
+# Create siena data object
+mydata2 <- sienaDataCreate(net2, gender)
+mydata2
+
+```
+### Step 2
+Effects
+```{r}
+myeff <-getEffects(mydata2)
+```
+### Step 3
+```{r}
+ifelse(!dir.exists("results"), dir.create("results"), FALSE)
+
+print01Report(mydata2, modelname = "./results/soc_init")
+
+```
+
+### Step 4
+do it yourselves
+
+You have effects solely based on network structures, but you can also include effects based on ego characteristics: egox
+
+ego x how many ties people send
+
+egox = Vi (ego characteristic) * Xi+ (the degree)
+if you have 2 ties and ego characteristics = 1 (hoogleraar)
+egox = 1 * 2 = 2
+
+alt x is if you receive ties
+
+egox alt x effect: you sum egox and do that times Vj?
+dan hou je rekening met homophily :)
+
+```{r}
+
+# delete eval from effect 
+myeff <- includeEffects(myeff, egoX, interaction1 = "gender", type = "eval", include = F)   
+
+# creation = maken
+myeff <- setEffect(myeff, egoX, interaction1 = "gender", type = "creation", include = T)   
+
+# endow = behouden
+myeff <- setEffect(myeff, egoX, interaction1 = "gender", type = "endow", include = T)
+
+# delete eval from effect inPop
+myeff <- includeEffects(myeff, inPop, type = "eval", include = F)  
+
+# inPop is indegree outAct is outdegree
+myeff <- setEffect(myeff, inPop, type = "creation", include = T)
+myeff <- setEffect(myeff, inPop, type = "endow", include = T)
+
+# can allso add the altX to the equation
+myeff <- setEffect(myeff, altX, interaction1 = "gender", include = F)  
+
+# can also add egoXaltX
+myeff <- setEffect(myeff, egoXaltX, interaction1 = "gender", include = T)
+
+
+myeff <- includeInteraction(myeff, egoX, inPop, interaction1 = c("gender", ""), type = "eval", include = F)
+myeff <- includeInteraction(myeff, egoX, inPop, interaction1 = c("gender", ""), type = "creation", include = T)
+myeff <- includeInteraction(myeff, egoX, inPop, interaction1 = c("gender", ""), type = "endow", include = T)
+
+
+
+
+
+```
+
+
+### Step 5
+Estimate
+
+```{r}
+myAlgorithm <- sienaAlgorithmCreate(projname = "soc_init")
+ansM1 <- siena07(myAlgorithm, data = mydata2, effects = myeff, returnDeps = TRUE)
+# if necessary estimate again!  ansM1 <- siena07(myAlgorithm, data = mydata, effects = myeff,
+# prevAns = ansM1, returnDeps=TRUE)
+ansM1
+```
+The convergence ratio is low, that's a good sign. This does not mean we have a good model. It does not say that the networks a similar, they are just similar on these two statistics. 
+
+Vrouwen gaan over de tijd heen meer relaties aan dan mannen (ook behouden).
+en dat weegt zwaarder dan dat ze relaties breken dan mannen. 
+
+als je endow en creat apart aanzet:
+zie je dat ze voornamelijk vaker ties behouden
+en niet significant minder vaak ze crereeren 
+
+eval indegree = significant: dus mensen die al veel hebben, trekken over tijd ook veel aan. 
+
+if you look at egoXaltX and look at just egoX and altX:
+women are more likely to send ties rather than receive ties :(
+
+
