@@ -3,6 +3,7 @@ title: "Journal 1"
 #bibliography: references.bib
 author: "Mylène Husson"
 ---
+
 ```{r, echo=TRUE, results='hide', message=FALSE, warning=FALSE}
 library(knitr)
 library(tidyverse)
@@ -472,15 +473,15 @@ ansM1
 <br>
 This means that:
 
-Outdegree:	Significant and negative: there is an overall tendency not to form ties (most people collaborate with few others)
+Outdegree:	Significant and negative (b = -4.1697, SE = 0.0827): there is an overall tendency not to form ties (most people collaborate with few others)
 
-Reciprocity: Significant and positive: mutual collaborations are more likely: if A co-authors with B, B is more likely to co-author with A.
+Reciprocity: Significant and positive (b = 3.7150, SE = 0.1708): mutual collaborations are more likely: if A co-authors with B, B is more likely to co-author with A.
 
-Gender ego:	Significant and positive: Being a woman increases the likelihood of initiating co-authorships.	
+Gender ego:	Significant and positive (b = 0.4094, SE = 0.1549): Being a woman increases the likelihood of initiating co-authorships.	
 
-Gender alter: Significant and negative:	Being a woman decreases the likelihood of being chosen as a co-author.
+Gender alter: Significant and negative (b = -0.2908, SE = 0.0826):	Being a woman decreases the likelihood of being chosen as a co-author.
 
-Gender ego × gender alter: Significant and positive: Suggests same-gender collaborations are more likely than cross-gender ones.
+Gender ego × gender alter: Significant and positive (b = 0.5069, SE = 0.1626) : Suggests same-gender collaborations are more likely than cross-gender ones.
 
 ------------------------------------------------------------------------
 
@@ -526,7 +527,7 @@ It is wise to always retain certain “anchor” effects (e.g. out-degree or rat
 
 ------------------------------------------------------------------------
 
-## My statistics
+## Second analyses
 
 ### transTrip
 There are many Structural effects you can include. I tried around with triangulation, but I did not think it really fit my gender research. It could be interesting: if you have A -> B -> C, would the gender of B impact whether A -> C would collaborate. 
@@ -546,12 +547,16 @@ ansM2 <- siena07(myAlgorithm, data = mydata3, effects = myeff, returnDeps = TRUE
 ansM2
 
 ```
-The network shows a significant tendency toward transitive closure, meaning that “friends of friends” are more likely to become connected. The effect of transitive triplets moderated by the intermediate person’s gender is positive but not significant, suggesting that the gender of the intermediate has no influence on whether triads close.
+The network shows a significant tendency toward transitive closure (b = 1.9166, SE = 0.1786), meaning that “friends of friends” are more likely to become connected. The effect of transitive triplets moderated by the intermediate person’s gender is not significant (b = 0.1580, SE = 0.5294), suggesting that the gender of the intermediate has no influence on whether triads close. If you have A -> B -> C, the gender of B does not impact whether A -> C would collaborate. 
+
+<br>
 
 Formula:
 ![](images/Triad.png)
+<br>
 For all alters j, if ego i is tied to an intermediary h who is a woman (male = 0, female = 1) and intermediary h has a connection to alter j, and alter j has a connection to ego i, then that configuration adds 1 to i's transTripX statistic.
 
+<br>
 
 ### inPop
 ```{r}
@@ -577,9 +582,12 @@ ansM3
 <br>
 
 I am not sure whether I am interpreting this correctly but: 
-Women in the network in our previous model received fewer ties than men This model now accounts for the tendency of nodes to send ties to already popular individuals. We now see that the direct effect of gender on receiving ties and sending ties is no longer significant. This indicates that current tie formation is not actively biased against women; however, women’s lower number of received ties reflects pre-existing structural inequalities in the network. Popularity dynamics amplify these initial differences, meaning that women are disadvantaged not because others avoid forming ties with them, but because they start from a lower baseline of connections.
-The direct effect of gender on sending ties is also no longer significant after accounting for popularity dynamics. This indicates that gender differences in tie initiation were driven not by gender itself, but by structural tendencies in the network — such as the preference for connecting to already popular alters, among whom men are probably overrepresented.
 
+The indegree-popularity effect was significant and positive (b = 0.19, SE = 0.03) uggesting that actors who received more nominations were more likely to attract additional ones.
+
+Women in the network initially received fewer ties than men, but after including the indegree–popularity effect, the main gender effects were no longer significant (gender ego: b = 0.33, SE = 0.22; gender alter: b = –0.14, SE = 0.13). This suggests that the observed gender differences were largely explained by popularity rather than gender itself. The interaction between gender ego and indegree–popularity (b = 0.03, SE = 0.06) was also non-significant, indicating that popularity influences tie formation similarly for men and women. Overall, gender differences in tie initiation appear to stem from structural network dynamics—such as a preference for connecting to already popular alters, among whom men are likely overrepresented—rather than from direct gender-based effects.
+
+<br>
 The formula:
 ![](images/inPop.png)
 For all alter's (j): if an ego (i) has a tie to an alter (j) sum for the alter (j) the number of its alters (h) which are not ego (i), and then you do plus one because you also want to count the one connection to ego (i). 

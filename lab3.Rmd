@@ -180,8 +180,8 @@ options(openalexR.mailto = "mylene.husson@ru.nl")
 url <- "https://api.openalex.org/authors?search=Jochem Tolsma"
 
 # based on what you have learned so far, you would probably first try:
-jt <- read_html("https://api.openalex.org/authors?search=Jochem+Tolsma") %>%
-    html_text2()
+#jt <- read_html("https://api.openalex.org/authors?search=Jochem+Tolsma") %>%
+#    html_text2()
 
 #substr(jt, 1, 100)
 
@@ -193,7 +193,7 @@ jt_json[["results"]][[1]][["display_name"]]
 
 #View(jt_json)
 
-df <- oa_fetch(entity = "author", search = "Jochem Tolsma")
+#df <- oa_fetch(entity = "author", search = "Jochem Tolsma")
 #fshowdf(df)
 
 # can access parts of the list jt_json
