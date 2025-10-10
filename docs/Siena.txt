@@ -6,7 +6,7 @@ Filename is Siena.txt.
 
 This file contains primary output for SIENA project <<Siena>>.
 
-Date and time: 09/10/2025 08:28:47 
+Date and time: 10/10/2025 09:22:09 
 
 RSiena version 1.5.0 (06 07 2025)
 

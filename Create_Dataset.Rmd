@@ -119,8 +119,10 @@ my_genderizer <- function(name) {
   return(gender)
 }
 ```
+
 <br>
 ### Load the data
+
 ```{r}
 # load in the data
 scholars <- fload("./data/processed/scholars_20240924.rda")
@@ -527,7 +529,7 @@ It is wise to always retain certain “anchor” effects (e.g. out-degree or rat
 ### transTrip
 There are many Structural effects you can include. I tried around with triangulation, but I did not think it really fit my gender research. It could be interesting: if you have A -> B -> C, would the gender of B impact whether A -> C would collaborate. 
 
-```{r, eval=F}
+```{r}
 myeff <- includeEffects(myeff, egoX, interaction1 = "gender", type = "eval", include = T) 
 myeff <- setEffect(myeff, altX, interaction1 = "gender", include = T) 
 myeff <- setEffect(myeff, egoXaltX, interaction1 = "gender", include = T)
@@ -554,7 +556,7 @@ For all alters j, if ego i is tied to an intermediary h who is a woman (male = 0
 <br>
 
 ### inPop
-```{r, eval = F}
+```{r}
 # first put the triadic effects on: do not include
 myeff <- includeEffects(myeff, transTrip, include = F)
 myeff <- includeEffects(myeff, transTripX, interaction1 = "gender", type = "eval", include = F)

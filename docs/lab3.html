@@ -368,7 +368,7 @@ div.tocify {
       <a href="lab5tryouts.html">Week 5b</a>
     </li>
     <li>
-      <a href="Create_dataset.html">Week 5c</a>
+      <a href="Create_Dataset.html">Week 5c</a>
     </li>
   </ul>
 </li>
@@ -771,8 +771,7 @@ for (author in author_list) {
   # store the first result in the list
   all_author_data[[author]] &lt;- search[1, ]
 }</code></pre>
-<pre><code>## HTTP status 429 Too Many Requests
-## HTTP status 429 Too Many Requests</code></pre>
+<pre><code>## HTTP status 429 Too Many Requests</code></pre>
 <pre class="r"><code>#View(all_author_data)
 
 # From all_author_data we can now get the works_api_url
@@ -826,6 +825,7 @@ for (author in names(all_author_data)) {
   all_colabs[[author]] &lt;- List_colabs
 }</code></pre>
 <pre><code>## No encoding supplied: defaulting to UTF-8.</code></pre>
+<pre><code>## No encoding supplied: defaulting to UTF-8.</code></pre>
 <pre class="r"><code>#View(all_colabs)
 
 # make it into a dataframe 
@@ -848,7 +848,7 @@ for (author in names(all_colabs)) {
 }
 
 df_colabs</code></pre>
-<pre><code>## # A tibble: 76 × 3
+<pre><code>## # A tibble: 82 × 3
 ##    main_author     publication co_author          
 ##    &lt;chr&gt;                 &lt;int&gt; &lt;chr&gt;              
 ##  1 Agnieszka Kanas           1 A. Kanas           
@@ -861,7 +861,7 @@ df_colabs</code></pre>
 ##  8 Agnieszka Kanas           3 Frank van Tubergen 
 ##  9 Agnieszka Kanas           3 Tanja van der Lippe
 ## 10 Agnieszka Kanas           4 Agnieszka Kanas    
-## # ℹ 66 more rows</code></pre>
+## # ℹ 72 more rows</code></pre>
 <p><br></p>
 <p>We could also get information on number of works counts</p>
 <pre class="r"><code>work_count &lt;- list()
@@ -879,8 +879,9 @@ df_work_count &lt;- data.frame(
 )
 
 head(df_work_count)</code></pre>
-<pre><code>##            author works_count
-## 1 Agnieszka Kanas          37</code></pre>
+<pre><code>##                      author works_count
+## 1           Agnieszka Kanas          37
+## 2 Ana Maria Torres Chedraui           2</code></pre>
 <p><br></p>
 <p>As for gender, I think I understand the code from Daphne from 2 years
 ago But I can’t get it to work, I think this might be because the site
