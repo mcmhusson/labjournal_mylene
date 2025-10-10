@@ -450,7 +450,7 @@ print01Report(mydata3, modelname = "./results/soc_init2")
 ```
 
 ### Include effects
-```{r}
+```{r, eval = F}
 myeff <- includeEffects(myeff, egoX, interaction1 = "gender", type = "eval", include = T)   
 
 # can allso add the altX to the equation
@@ -459,11 +459,6 @@ myeff <- setEffect(myeff, altX, interaction1 = "gender", include = T)
 # can also add egoXaltX
 myeff <- setEffect(myeff, egoXaltX, interaction1 = "gender", include = T)
 
-```
-
-### Estimate
-
-```{r}
 myAlgorithm <- sienaAlgorithmCreate(projname = "soc_init")
 ansM1 <- siena07(myAlgorithm, data = mydata3, effects = myeff, returnDeps = TRUE)
 # if necessary estimate again!  ansM1 <- siena07(myAlgorithm, data = mydata, effects = myeff,
@@ -532,7 +527,7 @@ It is wise to always retain certain “anchor” effects (e.g. out-degree or rat
 ### transTrip
 There are many Structural effects you can include. I tried around with triangulation, but I did not think it really fit my gender research. It could be interesting: if you have A -> B -> C, would the gender of B impact whether A -> C would collaborate. 
 
-```{r}
+```{r, eval=F}
 myeff <- includeEffects(myeff, egoX, interaction1 = "gender", type = "eval", include = T) 
 myeff <- setEffect(myeff, altX, interaction1 = "gender", include = T) 
 myeff <- setEffect(myeff, egoXaltX, interaction1 = "gender", include = T)
@@ -559,7 +554,7 @@ For all alters j, if ego i is tied to an intermediary h who is a woman (male = 0
 <br>
 
 ### inPop
-```{r}
+```{r, eval = F}
 # first put the triadic effects on: do not include
 myeff <- includeEffects(myeff, transTrip, include = F)
 myeff <- includeEffects(myeff, transTripX, interaction1 = "gender", type = "eval", include = F)
