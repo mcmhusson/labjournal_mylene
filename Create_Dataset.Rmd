@@ -3,6 +3,9 @@ title: "Journal 1"
 #bibliography: references.bib
 author: "Mylène Husson"
 ---
+```{r}
+rm(list= ls())
+```
 
 ```{r, echo=TRUE, results='hide', message=FALSE, warning=FALSE}
 library(knitr)
@@ -71,7 +74,10 @@ klippy::klippy(position = c('top', 'right'))
 
 Last compiled on `r format(Sys.time(), '%B, %Y')`
 <br>
+------------------------------------------------------------------------
 
+# Week 5
+<br>
 ------------------------------------------------------------------------
 
 ## Create Dataset
@@ -377,6 +383,7 @@ fcolnet_gender <- function(data = scholars,
   
   return(output)
 }
+
 ```
 ### output
 ```{r}
@@ -389,6 +396,10 @@ result_gender2 <- fcolnet_gender(
 
 # View gender info
 head(result_gender2$demographics[, c("au_id", "firstname", "gender")])
+
+# Save entire result (list containing networks, data, demographics, etc.)
+save(result_gender2, file = "./data/processed/result_gender2.rda")
+
 ```
 ------------------------------------------------------------------------
 

@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Mylène Husson" />
+
+
+<title>Journal 1</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="tweaks.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    My journal
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lab1.html">Week 1</a>
+    </li>
+    <li>
+      <a href="lab2.html">Week 2</a>
+    </li>
+    <li>
+      <a href="lab3.html">Week 3</a>
+    </li>
+    <li>
+      <a href="lab4.html">Week 4</a>
+    </li>
+    <li>
+      <a href="lab5.html">Week 5a</a>
+    </li>
+    <li>
+      <a href="lab5tryouts.html">Week 5b</a>
+    </li>
+    <li>
+      <a href="Create_Dataset.html">Week 5c</a>
+    </li>
+    <li>
+      <a href="lab6.html">Week 6</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Final Project
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="intro.html">Introduction</a>
+    </li>
+    <li>
+      <a href="theory.html">Theory</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://mcmhusson.github.io/labjournal_mylene/">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Journal 1</h1>
+<h4 class="author">Mylène Husson</h4>
+
+</div>
+
+
+<pre class="r"><code>library(knitr)
+library(tidyverse)
+library(scholar)
+library(openalexR)
+library(rvest)
+library(jsonlite)
+library(httr)
+library(rvest)
+library(reshape2)
+library(xml2)
+library(openxlsx)
+library(polite)
+library(igraph)
+library(sna)
+library(genderizeR)
+library(RSelenium)
+library(netstat)
+library(pingr)
+library(RSiena)
+library(devtools)
+library(RsienaTwoStep)
+
+
+# load the functions you need from the packages
+fpackage.check &lt;- function(packages) {
+  lapply(packages, FUN = function(x) {
+    if (!require(x, character.only = TRUE)) {
+      install.packages(x, dependencies = TRUE)
+      library(x, character.only = TRUE)
+    }
+  })
+}
+
+fsave &lt;- function(x, file = NULL, location = &quot;./data/processed/&quot;) {
+  ifelse(!dir.exists(&quot;data&quot;), dir.create(&quot;data&quot;), FALSE)
+  ifelse(!dir.exists(&quot;data/processed&quot;), dir.create(&quot;data/processed&quot;), FALSE)
+  
+  if (is.null(file)) {
+    file &lt;- deparse(substitute(x))
+  }
+  
+  datename &lt;- substr(gsub(&quot;[:-]&quot;, &quot;&quot;, Sys.time()), 1, 8)
+  totalname &lt;- paste(location, datename, file, &quot;.rda&quot;, sep = &quot;&quot;)
+  save(x, file = totalname)  # need to fix if file is reloaded as input name, not as x.
+}
+
+fload &lt;- function(filename) {
+  load(filename)
+  get(ls()[ls() != &quot;filename&quot;])
+}
+
+fshowdf &lt;- function(x, ...) {
+  knitr::kable(x, digits = 2, &quot;html&quot;, ...) %&gt;%
+    kableExtra::kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;%
+    kableExtra::scroll_box(width = &quot;100%&quot;, height = &quot;300px&quot;)
+}</code></pre>
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<p>Last compiled on October, 2025 <br></p>
+<hr />
+<div id="week-6" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Week 6</h1>
+<p><br></p>
+<p>GWESP (21): Figure 4: X axis is S, how many triads would be closed by
+forming this tie Y axis is the value of the statistics If the X axis is
+4 the statistic can only be 4 if alpha is infinity you get statistic 1
+with alpha is 0?</p>
+<p>There is a diminishing effect of closing triads: if you can close one
+triad it’s great, but if you can close two triads with one tie, it’s
+also great, and if you can close three triads with ont tie, it’s still
+great but not that much greater etc.</p>
+<p>The statistic is about additional ties: with this mini step how many
+additional transitive triplets can I make, this additional part has a
+diminishing effect.</p>
+<p><br></p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">## Research idea</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">## Paige: unequalX</td>
+</tr>
+<tr class="even">
+<td align="left">``` r ?sienaDependent</td>
+</tr>
+<tr class="odd">
+<td align="left"># step 1: data #s50a is drinking s50s is smoking mynet1
+&lt;- sienaDependent(array(c(s501, s502, s503), dim=c(50, 50, 3))) mybeh
+&lt;- sienaDependent(s50a, type=“behavior”) smoke &lt;-
+varCovar(s50s)</td>
+</tr>
+<tr class="even">
+<td align="left">mydata &lt;- sienaDataCreate(mynet1, mybeh, smoke)</td>
+</tr>
+<tr class="odd">
+<td align="left"># step 2: look at # print01Report(mydata)</td>
+</tr>
+<tr class="even">
+<td align="left"># step 3: effect</td>
+</tr>
+<tr class="odd">
+<td align="left">myeffects &lt;- getEffects(mydata) myeffects ```</td>
+</tr>
+<tr class="even">
+<td
+align="left"><code>##   name   effectName                      include fix   test  initialValue parm ## 1 mynet1 constant mynet1 rate (period 1) TRUE    FALSE FALSE    4.69604   0 ## 2 mynet1 constant mynet1 rate (period 2) TRUE    FALSE FALSE    4.32885   0 ## 3 mynet1 outdegree (density)             TRUE    FALSE FALSE   -1.46770   0 ## 4 mynet1 reciprocity                     TRUE    FALSE FALSE    0.00000   0 ## 5 mybeh  rate mybeh (period 1)           TRUE    FALSE FALSE    0.70571   0 ## 6 mybeh  rate mybeh (period 2)           TRUE    FALSE FALSE    0.84939   0 ## 7 mybeh  mybeh linear shape              TRUE    FALSE FALSE    0.32237   0 ## 8 mybeh  mybeh quadratic shape           TRUE    FALSE FALSE    0.00000   0</code></td>
+</tr>
+<tr class="odd">
+<td
+align="left"><code>r # include unequal effects myeffects &lt;- includeEffects(myeffects, unequalX, name = "mynet1", interaction1 = "smoke")</code></td>
+</tr>
+<tr class="even">
+<td
+align="left"><code>##   effectNumber effectName    shortName include fix   test  initialValue parm ## 1 501          unequal smoke unequalX  TRUE    FALSE FALSE          0   0</code></td>
+</tr>
+<tr class="odd">
+<td
+align="left"><code>r myeffects &lt;- includeEffects(myeffects, unequalX, name = "mynet1", interaction1 = "mybeh")</code></td>
+</tr>
+<tr class="even">
+<td
+align="left"><code>##   effectNumber effectName    shortName include fix   test  initialValue parm ## 1 314          unequal mybeh unequalX  TRUE    FALSE FALSE          0   0</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>r algo &lt;- sienaAlgorithmCreate()</code></td>
+</tr>
+<tr class="even">
+<td
+align="left"><code>## If you use this algorithm object, siena07 will create/use an output file Siena.txt .</code></td>
+</tr>
+<tr class="odd">
+<td
+align="left"><code>r ans &lt;- siena07(algo, data = mydata, effects = myeffects)</code></td>
+</tr>
+<tr class="even">
+<td
+align="left"><code>## tcltk DLL is linked to '/opt/X11/lib/libX11.6.dylib'</code></td>
+</tr>
+<tr class="odd">
+<td
+align="left"><code>## Package tcltk not available, forcing use of batch mode</code></td>
+</tr>
+<tr class="even">
+<td
+align="left"><code>## ## Start phase 0 ## theta:  4.696  4.329 -1.468  0.000  0.000  0.000  0.706  0.849  0.322  0.000 ## ## Start phase 1 ## Phase 1 Iteration 1 Progress: 0% ## Phase 1 Iteration 2 Progress: 0% ## Phase 1 Iteration 3 Progress: 0% ## Phase 1 Iteration 4 Progress: 0% ## Phase 1 Iteration 5 Progress: 0% ## Phase 1 Iteration 10 Progress: 0% ## Phase 1 Iteration 15 Progress: 0% ## Phase 1 Iteration 20 Progress: 1% ## Phase 1 Iteration 25 Progress: 1% ## Phase 1 Iteration 30 Progress: 1% ## Phase 1 Iteration 35 Progress: 1% ## Phase 1 Iteration 40 Progress: 1% ## Phase 1 Iteration 45 Progress: 1% ## Phase 1 Iteration 50 Progress: 1% ## theta:  5.1647  4.2599 -1.5486  0.4476  0.0298 -0.0490  0.7367  0.8348  0.3728 -0.0501 ## ## Start phase 2.1 ## Phase 2 Subphase 1 Iteration 1 Progress: 16% ## Phase 2 Subphase 1 Iteration 2 Progress: 16% ## theta  5.3610  3.9915 -1.5774  1.0396 -0.0295 -0.0904  0.8122  0.8955  0.4216 -0.0756 ## ac 1.307 2.726 0.511 1.453 0.892 1.111 1.547 1.042 1.321 0.537 ## Phase 2 Subphase 1 Iteration 3 Progress: 16% ## Phase 2 Subphase 1 Iteration 4 Progress: 16% ## theta  6.005  3.664 -1.703  2.346 -0.172 -0.167  0.999  1.082  0.509 -0.203 ## ac 0.983 0.725 0.708 1.407 0.922 0.984 1.097 0.878 1.342 0.643 ## Phase 2 Subphase 1 Iteration 5 Progress: 16% ## Phase 2 Subphase 1 Iteration 6 Progress: 16% ## theta  6.167  3.761 -1.799  2.749 -0.315 -0.170  1.046  1.421  0.495 -0.302 ## ac 0.950 0.737 0.826 1.348 1.108 1.013 1.064 0.898 1.347 0.649 ## Phase 2 Subphase 1 Iteration 7 Progress: 16% ## Phase 2 Subphase 1 Iteration 8 Progress: 16% ## theta  5.810  3.983 -1.896  2.728 -0.364 -0.176  1.146  1.478  0.536 -0.296 ## ac 1.013 0.742 0.868 1.365 1.032 1.002 1.043 0.528 0.800 0.694 ## Phase 2 Subphase 1 Iteration 9 Progress: 16% ## Phase 2 Subphase 1 Iteration 10 Progress: 16% ## theta  5.227  4.105 -1.917  2.735 -0.491 -0.141  1.226  1.684  0.431 -0.249 ## ac 0.896 0.736 0.869 1.334 1.046 0.999 1.064 0.544 0.862 0.730 ## theta  5.742  4.516 -1.938  2.807 -0.484 -0.196  1.179  1.627  0.371 -0.206 ## ac  0.18005  0.00286  0.23977  0.24382  0.25309  0.20279 -0.04463 -0.03269 -0.07498 -0.06876 ## theta:  5.742  4.516 -1.938  2.807 -0.484 -0.196  1.179  1.627  0.371 -0.206 ## ## Start phase 2.2 ## Phase 2 Subphase 2 Iteration 1 Progress: 23% ## Phase 2 Subphase 2 Iteration 2 Progress: 23% ## Phase 2 Subphase 2 Iteration 3 Progress: 23% ## Phase 2 Subphase 2 Iteration 4 Progress: 23% ## Phase 2 Subphase 2 Iteration 5 Progress: 23% ## Phase 2 Subphase 2 Iteration 6 Progress: 23% ## Phase 2 Subphase 2 Iteration 7 Progress: 23% ## Phase 2 Subphase 2 Iteration 8 Progress: 23% ## Phase 2 Subphase 2 Iteration 9 Progress: 23% ## Phase 2 Subphase 2 Iteration 10 Progress: 23% ## theta  5.861  4.617 -1.950  2.801 -0.468 -0.189  1.166  1.677  0.366 -0.198 ## ac -0.0987 -0.0226 -0.2079 -0.0255 -0.0820 -0.0558 -0.0365  0.0110  0.0203 -0.1211 ## theta:  5.861  4.617 -1.950  2.801 -0.468 -0.189  1.166  1.677  0.366 -0.198 ## ## Start phase 2.3 ## Phase 2 Subphase 3 Iteration 1 Progress: 32% ## Phase 2 Subphase 3 Iteration 2 Progress: 32% ## Phase 2 Subphase 3 Iteration 3 Progress: 32% ## Phase 2 Subphase 3 Iteration 4 Progress: 32% ## Phase 2 Subphase 3 Iteration 5 Progress: 32% ## Phase 2 Subphase 3 Iteration 6 Progress: 32% ## Phase 2 Subphase 3 Iteration 7 Progress: 32% ## Phase 2 Subphase 3 Iteration 8 Progress: 32% ## Phase 2 Subphase 3 Iteration 9 Progress: 32% ## Phase 2 Subphase 3 Iteration 10 Progress: 32% ## theta  5.839  4.478 -1.923  2.793 -0.497 -0.188  1.201  1.644  0.366 -0.197 ## ac -0.054987  0.060106 -0.016141 -0.099527  0.003153 -0.081676  0.000811  0.113940  0.000843  0.000527 ## theta:  5.839  4.478 -1.923  2.793 -0.497 -0.188  1.201  1.644  0.366 -0.197 ## ## Start phase 2.4 ## Phase 2 Subphase 4 Iteration 1 Progress: 46% ## Phase 2 Subphase 4 Iteration 2 Progress: 46% ## Phase 2 Subphase 4 Iteration 3 Progress: 46% ## Phase 2 Subphase 4 Iteration 4 Progress: 46% ## Phase 2 Subphase 4 Iteration 5 Progress: 46% ## Phase 2 Subphase 4 Iteration 6 Progress: 46% ## Phase 2 Subphase 4 Iteration 7 Progress: 46% ## Phase 2 Subphase 4 Iteration 8 Progress: 46% ## Phase 2 Subphase 4 Iteration 9 Progress: 46% ## Phase 2 Subphase 4 Iteration 10 Progress: 46% ## theta  5.759  4.519 -1.911  2.792 -0.513 -0.196  1.193  1.645  0.366 -0.200 ## ac -0.019666 -0.000241 -0.002166 -0.048565 -0.058609 -0.072905 -0.066862 -0.037862 -0.006961 -0.051994 ## theta:  5.759  4.519 -1.911  2.792 -0.513 -0.196  1.193  1.645  0.366 -0.200 ## ## Start phase 3 ## Phase 3 Iteration 500 Progress 85% ## Phase 3 Iteration 1000 Progress 100%</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>r ans</code></td>
+</tr>
+<tr class="even">
+<td
+align="left"><code>## Estimates, standard errors and convergence t-ratios ## ##                                            Estimate   Standard   Convergence ##                                                         Error      t-ratio ## Network Dynamics ##    1. rate constant mynet1 rate (period 1)  5.7589  ( 0.9006   )    0.0175 ##    2. rate constant mynet1 rate (period 2)  4.5191  ( 0.6562   )   -0.0123 ##    3. eval outdegree (density)             -1.9113  ( 0.2709   )    0.0310 ##    4. eval reciprocity                      2.7922  ( 0.1916   )    0.0110 ##    5. eval unequal mybeh                   -0.5131  ( 0.4167   )   -0.0224 ##    6. eval unequal smoke                   -0.1964  ( 0.1364   )   -0.0171 ## ## Behavior Dynamics ##    7. rate rate mybeh (period 1)            1.1933  ( 0.3196   )    0.0080 ##    8. rate rate mybeh (period 2)            1.6446  ( 0.4046   )   -0.0004 ##    9. eval mybeh linear shape               0.3663  ( 0.1422   )    0.0587 ##   10. eval mybeh quadratic shape           -0.1999  ( 0.0934   )    0.0589 ## ## Overall maximum convergence ratio:    0.1363 ## ## ## Total of 2767 iteration steps.</code></td>
+</tr>
+<tr class="odd">
+<td
+align="left"><code>r # you can use , prevAns = ans (and that's the estimates of the previous model)</code>
+<br></td>
+</tr>
+<tr class="even">
+<td align="left">So, You can see how your dependent variable changes
+over time. When you calculate for smoke you use the value at time point
+one as observation. When you reach time point 3, you use the value of
+time point 2. But the dependent variable (mybeh) the variable is also
+changes within the ministeps. Tt’s using the value as the value is at
+that moment simulated.</td>
+</tr>
+<tr class="odd">
+<td align="left">rate rate: are the number of steps/options linear shape
+effect: is simply the value of your centered behavioural variable (if it
+is positive, you tried to increase your behaviour)</td>
+</tr>
+<tr class="even">
+<td align="left">We could also construct mybeh as a constant variable:
+then it gives different outcomes due to time point differences. Take
+into account time.</td>
+</tr>
+<tr class="odd">
+<td align="left">That’s a power of Rsiena: you can have a variable as
+dependent and independent and also look at causality better.</td>
+</tr>
+<tr class="even">
+<td align="left"><br></td>
+</tr>
+</tbody>
+</table>
+<div id="my-own-effects" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> My own effects</h2>
+<p><br></p>
+</div>
+<div id="first-analyses" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> First analyses</h2>
+<p><br></p>
+<div id="load-data" class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Load data</h3>
+<p>We created this dataset last week with all scholars and their
+genders</p>
+<pre class="r"><code>load(&quot;./data/processed/result_gender2.rda&quot;)</code></pre>
+</div>
+<div id="check-waves" class="section level3" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Check waves</h3>
+<pre class="r"><code>wave1 &lt;- result_gender2$nets[1,,]
+wave2 &lt;- result_gender2$nets[2,,]
+
+# filter out the waves of the object: we need to check our input
+dim(wave1)</code></pre>
+<pre><code>## [1] 675 675</code></pre>
+<pre class="r"><code>dim(wave2)</code></pre>
+<pre><code>## [1] 675 675</code></pre>
+<pre class="r"><code># you need to have 0 missing values:
+sum(is.na(wave1))</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>sum(is.na(wave2))</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>#check the diagonal: all places should be 0
+sum(diag(wave1)==0)</code></pre>
+<pre><code>## [1] 671</code></pre>
+<pre class="r"><code>sum(diag(wave2)==0)</code></pre>
+<pre><code>## [1] 672</code></pre>
+<pre class="r"><code># a few people did work with themselves:
+diag(wave1) &lt;- 0
+diag(wave2) &lt;- 0
+
+# everything should be 1 or 0:
+sum(wave1&gt;1)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>sum(wave2&gt;1)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code># check if it&#39;s not empty: there are people with 1&#39;s
+sum(wave1&gt;0)</code></pre>
+<pre><code>## [1] 336</code></pre>
+<pre class="r"><code>sum(wave2&gt;0)</code></pre>
+<pre><code>## [1] 573</code></pre>
+<pre class="r"><code>net_gender &lt;- array(data = c(wave1, wave2), dim = c(dim(wave1), 2))
+# net_gender
+
+# dependent
+net2 &lt;- sienaDependent(net_gender)
+
+# independent variables
+gender &lt;- result_gender2$demographics$gender
+
+gender &lt;- ifelse(gender==&quot;female&quot;,1,0)
+gender &lt;- coCovar(gender)
+
+#gender
+
+# Create siena data object
+mydata3 &lt;- sienaDataCreate(net2, gender)
+mydata3</code></pre>
+<pre><code>## Dependent variables:  net2 
+## Number of observations: 2 
+## 
+## Nodeset                  Actors 
+## Number of nodes             675 
+## 
+## Dependent variable net2          
+## Type               oneMode       
+## Observations       2             
+## Nodeset            Actors        
+## Densities          0.00074 0.0013
+## 
+## Constant covariates:  gender</code></pre>
+<pre class="r"><code>myeff &lt;-getEffects(mydata3)
+
+ifelse(!dir.exists(&quot;results&quot;), dir.create(&quot;results&quot;), FALSE)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>print01Report(mydata3, modelname = &quot;./results/soc_init2&quot;)</code></pre>
+</div>
+<div id="include-effects" class="section level3" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> Include
+effects</h3>
+<pre class="r"><code>myeff &lt;- setEffect(myeff, sameX, interaction1 = &quot;gender&quot;, include = T)</code></pre>
+</div>
+<div id="run-model" class="section level3" number="1.2.4">
+<h3><span class="header-section-number">1.2.4</span> run model</h3>
+<pre class="r"><code>myAlgorithm &lt;- sienaAlgorithmCreate(projname = &quot;soc_init2&quot;)</code></pre>
+<pre><code>## If you use this algorithm object, siena07 will create/use an output file soc_init2.txt .</code></pre>
+<pre class="r"><code>ansM0 &lt;- siena07(myAlgorithm, data = mydata3, effects = myeff, returnDeps = TRUE)</code></pre>
+<pre><code>## tcltk DLL is linked to &#39;/opt/X11/lib/libX11.6.dylib&#39;</code></pre>
+<pre><code>## Package tcltk not available, forcing use of batch mode</code></pre>
+<pre><code>## 
+## Start phase 0 
+## theta: -1.74  0.00 
+## 
+## Start phase 1 
+## Phase 1 Iteration 1 Progress: 0%
+## Phase 1 Iteration 2 Progress: 0%
+## Phase 1 Iteration 3 Progress: 0%
+## Phase 1 Iteration 4 Progress: 0%
+## Phase 1 Iteration 5 Progress: 0%
+## Phase 1 Iteration 10 Progress: 0%
+## Phase 1 Iteration 15 Progress: 1%
+## Phase 1 Iteration 20 Progress: 1%
+## Phase 1 Iteration 25 Progress: 1%
+## Phase 1 Iteration 30 Progress: 1%
+## Phase 1 Iteration 35 Progress: 1%
+## Phase 1 Iteration 40 Progress: 2%
+## Phase 1 Iteration 45 Progress: 2%
+## Phase 1 Iteration 50 Progress: 2%
+## theta: -2.14  1.00 
+## 
+## Start phase 2.1
+## Phase 2 Subphase 1 Iteration 1 Progress: 6%
+## Phase 2 Subphase 1 Iteration 2 Progress: 6%
+## theta -2.34  1.40 
+## ac 1.04 1.04 
+## Phase 2 Subphase 1 Iteration 3 Progress: 6%
+## Phase 2 Subphase 1 Iteration 4 Progress: 6%
+## theta -2.95  2.68 
+## ac 1.08 1.17 
+## Phase 2 Subphase 1 Iteration 5 Progress: 6%
+## Phase 2 Subphase 1 Iteration 6 Progress: 6%
+## theta -3.64  4.01 
+## ac 1.132 0.564 
+## Phase 2 Subphase 1 Iteration 7 Progress: 6%
+## Phase 2 Subphase 1 Iteration 8 Progress: 6%
+## theta -4.20  4.07 
+## ac 1.132 0.892 
+## Phase 2 Subphase 1 Iteration 9 Progress: 6%
+## Phase 2 Subphase 1 Iteration 10 Progress: 6%
+## theta -4.19  3.53 
+## ac 1.135 0.892 
+## theta -4.09  3.61 
+## ac  0.884 -0.562 
+## theta: -4.09  3.61 
+## 
+## Start phase 2.2
+## Phase 2 Subphase 2 Iteration 1 Progress: 15%
+## Phase 2 Subphase 2 Iteration 2 Progress: 15%
+## Phase 2 Subphase 2 Iteration 3 Progress: 15%
+## Phase 2 Subphase 2 Iteration 4 Progress: 15%
+## Phase 2 Subphase 2 Iteration 5 Progress: 15%
+## Phase 2 Subphase 2 Iteration 6 Progress: 15%
+## Phase 2 Subphase 2 Iteration 7 Progress: 15%
+## Phase 2 Subphase 2 Iteration 8 Progress: 15%
+## Phase 2 Subphase 2 Iteration 9 Progress: 15%
+## Phase 2 Subphase 2 Iteration 10 Progress: 15%
+## theta -4.10  3.65 
+## ac -0.2483 -0.0351 
+## theta: -4.10  3.65 
+## 
+## Start phase 2.3
+## Phase 2 Subphase 3 Iteration 1 Progress: 25%
+## Phase 2 Subphase 3 Iteration 2 Progress: 25%
+## Phase 2 Subphase 3 Iteration 3 Progress: 25%
+## Phase 2 Subphase 3 Iteration 4 Progress: 25%
+## Phase 2 Subphase 3 Iteration 5 Progress: 25%
+## Phase 2 Subphase 3 Iteration 6 Progress: 25%
+## Phase 2 Subphase 3 Iteration 7 Progress: 25%
+## Phase 2 Subphase 3 Iteration 8 Progress: 25%
+## Phase 2 Subphase 3 Iteration 9 Progress: 25%
+## Phase 2 Subphase 3 Iteration 10 Progress: 25%
+## theta -4.13  3.67 
+## ac -0.000279 -0.185797 
+## theta: -4.13  3.67 
+## 
+## Start phase 2.4
+## Phase 2 Subphase 4 Iteration 1 Progress: 38%
+## Phase 2 Subphase 4 Iteration 2 Progress: 38%
+## Phase 2 Subphase 4 Iteration 3 Progress: 39%
+## Phase 2 Subphase 4 Iteration 4 Progress: 39%
+## Phase 2 Subphase 4 Iteration 5 Progress: 39%
+## Phase 2 Subphase 4 Iteration 6 Progress: 39%
+## Phase 2 Subphase 4 Iteration 7 Progress: 39%
+## Phase 2 Subphase 4 Iteration 8 Progress: 39%
+## Phase 2 Subphase 4 Iteration 9 Progress: 39%
+## Phase 2 Subphase 4 Iteration 10 Progress: 39%
+## theta -4.11  3.65 
+## ac -0.00167 -0.13338 
+## theta: -4.11  3.65 
+## 
+## Start phase 3 
+## Phase 3 Iteration 500 Progress 80%
+## Phase 3 Iteration 1000 Progress 100%</code></pre>
+<pre class="r"><code>ansM0</code></pre>
+<pre><code>## Estimates, standard errors and convergence t-ratios
+## 
+##                               Estimate   Standard   Convergence 
+##                                            Error      t-ratio   
+## 
+## Rate parameters: 
+##   0       Rate parameter       3.5561  ( 0.3401   )             
+## 
+## Other parameters: 
+##   1. eval outdegree (density) -4.1120  ( 0.0810   )    0.0823   
+##   2. eval reciprocity          3.6465  ( 0.1580   )   -0.0179   
+## 
+## Overall maximum convergence ratio:    0.1028 
+## 
+## 
+## Total of 2010 iteration steps.</code></pre>
+<p><br> There is a small but significant effect of homophily</p>
+</div>
+<div id="include-effects-1" class="section level3" number="1.2.5">
+<h3><span class="header-section-number">1.2.5</span> Include
+effects</h3>
+<pre class="r"><code>myeff &lt;- setEffect(myeff, jumpXTransTrip, interaction1 = &quot;gender&quot;, include = T)</code></pre>
+<pre><code>##   effectNumber effectName                         shortName      include fix   test  initialValue
+## 1 370          transitive triplets jumping gender jumpXTransTrip TRUE    FALSE FALSE          0  
+##   parm
+## 1 0</code></pre>
+</div>
+<div id="run-model-1" class="section level3" number="1.2.6">
+<h3><span class="header-section-number">1.2.6</span> run model</h3>
+<pre class="r"><code>myAlgorithm &lt;- sienaAlgorithmCreate(projname = &quot;soc_init2&quot;)</code></pre>
+<pre><code>## If you use this algorithm object, siena07 will create/use an output file soc_init2.txt .</code></pre>
+<pre class="r"><code>ansM1 &lt;- siena07(myAlgorithm, data = mydata3, effects = myeff, returnDeps = TRUE, prevAns = ansM0)</code></pre>
+<pre><code>## tcltk DLL is linked to &#39;/opt/X11/lib/libX11.6.dylib&#39;</code></pre>
+<pre><code>## Package tcltk not available, forcing use of batch mode</code></pre>
+<pre><code>## 
+## Start phase 0 
+## theta: -4.11  3.65  0.00 
+## 
+## Start phase 1 
+## Phase 1 Iteration 1 Progress: 0%
+## Phase 1 Iteration 2 Progress: 0%
+## Phase 1 Iteration 3 Progress: 0%
+## Phase 1 Iteration 4 Progress: 0%
+## Phase 1 Iteration 5 Progress: 0%
+## Phase 1 Iteration 10 Progress: 0%
+## Phase 1 Iteration 15 Progress: 1%
+## Phase 1 Iteration 20 Progress: 1%
+## Phase 1 Iteration 25 Progress: 1%
+## Phase 1 Iteration 30 Progress: 1%
+## Phase 1 Iteration 35 Progress: 1%
+## Phase 1 Iteration 40 Progress: 2%
+## Phase 1 Iteration 45 Progress: 2%
+## Phase 1 Iteration 50 Progress: 2%
+## theta: -4.09  3.63  1.00 
+## 
+## Start phase 2.1
+## Phase 2 Subphase 1 Iteration 1 Progress: 8%
+## Phase 2 Subphase 1 Iteration 2 Progress: 8%
+## theta -4.06  3.62  2.53 
+## ac  0.162 -0.242  1.849 
+## Phase 2 Subphase 1 Iteration 3 Progress: 8%
+## Phase 2 Subphase 1 Iteration 4 Progress: 8%
+## theta -4.07  3.58  4.26 
+## ac 1.51 1.01 1.90 
+## Phase 2 Subphase 1 Iteration 5 Progress: 8%
+## Phase 2 Subphase 1 Iteration 6 Progress: 8%
+## theta -4.16  3.54  3.18 
+## ac 1.435 0.784 1.128 
+## Phase 2 Subphase 1 Iteration 7 Progress: 8%
+## Phase 2 Subphase 1 Iteration 8 Progress: 8%
+## theta -4.19  3.52  3.40 
+## ac 1.477 0.503 0.574 
+## Phase 2 Subphase 1 Iteration 9 Progress: 8%
+## Phase 2 Subphase 1 Iteration 10 Progress: 8%
+## theta -4.22  3.51  3.56 
+## ac  1.4037 -0.0441  0.2498 
+## theta -4.21  3.53  3.95 
+## ac -0.329 -1.102 -1.580 
+## theta: -4.21  3.53  3.95 
+## 
+## Start phase 2.2
+## Phase 2 Subphase 2 Iteration 1 Progress: 16%
+## Phase 2 Subphase 2 Iteration 2 Progress: 16%
+## Phase 2 Subphase 2 Iteration 3 Progress: 16%
+## Phase 2 Subphase 2 Iteration 4 Progress: 16%
+## Phase 2 Subphase 2 Iteration 5 Progress: 16%
+## Phase 2 Subphase 2 Iteration 6 Progress: 16%
+## Phase 2 Subphase 2 Iteration 7 Progress: 16%
+## Phase 2 Subphase 2 Iteration 8 Progress: 16%
+## Phase 2 Subphase 2 Iteration 9 Progress: 16%
+## Phase 2 Subphase 2 Iteration 10 Progress: 16%
+## theta -4.21  3.47  3.83 
+## ac -0.394 -0.350 -0.510 
+## theta: -4.21  3.47  3.83 
+## 
+## Start phase 2.3
+## Phase 2 Subphase 3 Iteration 1 Progress: 26%
+## Phase 2 Subphase 3 Iteration 2 Progress: 26%
+## Phase 2 Subphase 3 Iteration 3 Progress: 26%
+## Phase 2 Subphase 3 Iteration 4 Progress: 26%
+## Phase 2 Subphase 3 Iteration 5 Progress: 26%
+## Phase 2 Subphase 3 Iteration 6 Progress: 26%
+## Phase 2 Subphase 3 Iteration 7 Progress: 26%
+## Phase 2 Subphase 3 Iteration 8 Progress: 26%
+## Phase 2 Subphase 3 Iteration 9 Progress: 26%
+## Phase 2 Subphase 3 Iteration 10 Progress: 26%
+## theta -4.22  3.48  3.81 
+## ac -0.103 -0.308 -0.364 
+## theta: -4.22  3.48  3.81 
+## 
+## Start phase 2.4
+## Phase 2 Subphase 4 Iteration 1 Progress: 40%
+## Phase 2 Subphase 4 Iteration 2 Progress: 40%
+## Phase 2 Subphase 4 Iteration 3 Progress: 40%
+## Phase 2 Subphase 4 Iteration 4 Progress: 40%
+## Phase 2 Subphase 4 Iteration 5 Progress: 40%
+## Phase 2 Subphase 4 Iteration 6 Progress: 40%
+## Phase 2 Subphase 4 Iteration 7 Progress: 40%
+## Phase 2 Subphase 4 Iteration 8 Progress: 40%
+## Phase 2 Subphase 4 Iteration 9 Progress: 40%
+## Phase 2 Subphase 4 Iteration 10 Progress: 40%
+## theta -4.23  3.49  3.84 
+## ac -0.0555 -0.0748 -0.0588 
+## theta: -4.23  3.49  3.84 
+## 
+## Start phase 3 
+## Phase 3 Iteration 200 Progress 70%
+## Phase 3 Iteration 400 Progress 77%
+## Phase 3 Iteration 600 Progress 85%
+## Phase 3 Iteration 800 Progress 92%
+## Phase 3 Iteration 1000 Progress 100%</code></pre>
+<pre class="r"><code>ansM1</code></pre>
+<pre><code>## Estimates, standard errors and convergence t-ratios
+## 
+##                                              Estimate   Standard   Convergence 
+##                                                           Error      t-ratio   
+## 
+## Rate parameters: 
+##   0       Rate parameter                      4.0000  ( 0.4059   )             
+## 
+## Other parameters: 
+##   1. eval outdegree (density)                -4.2288  ( 0.0852   )   -0.1093   
+##   2. eval reciprocity                         3.4894  ( 0.1651   )    0.0160   
+##   3. eval transitive triplets jumping gender  3.8425  ( 0.3275   )    0.0993   
+## 
+## Overall maximum convergence ratio:    0.1940 
+## 
+## 
+## Total of 1694 iteration steps.</code></pre>
+<p><br></p>
+<p>We see that there is diversity in groups: because i still jumps to j
+even if j is not the same gender as i and h. Homophily is still small
+and significant, does not impact the eval transitive triplets jumping
+gender:)</p>
+</div>
+<div id="include-effects-2" class="section level3" number="1.2.7">
+<h3><span class="header-section-number">1.2.7</span> Include
+effects</h3>
+<p>sameXTransTrip</p>
+<pre class="r"><code>myeff &lt;- setEffect(myeff,  sameXTransTrip, interaction1 = &quot;gender&quot;, include = T)</code></pre>
+</div>
+<div id="run-model-2" class="section level3" number="1.2.8">
+<h3><span class="header-section-number">1.2.8</span> run model</h3>
+<pre class="r"><code>myAlgorithm &lt;- sienaAlgorithmCreate(projname = &quot;soc_init2&quot;)</code></pre>
+<pre><code>## If you use this algorithm object, siena07 will create/use an output file soc_init2.txt .</code></pre>
+<pre class="r"><code>ansM2 &lt;- siena07(myAlgorithm, data = mydata3, effects = myeff, returnDeps = TRUE, prevAns = ansM1)</code></pre>
+<pre><code>## tcltk DLL is linked to &#39;/opt/X11/lib/libX11.6.dylib&#39;</code></pre>
+<pre><code>## Package tcltk not available, forcing use of batch mode</code></pre>
+<pre><code>## 
+## Start phase 0 
+## theta: -4.23  3.49  3.84 
+## 
+## Start phase 2.1
+## Phase 2 Subphase 1 Iteration 1 Progress: 8%
+## Phase 2 Subphase 1 Iteration 2 Progress: 8%
+## theta -4.24  3.50  3.81 
+## ac -11.883   0.223   1.583 
+## Phase 2 Subphase 1 Iteration 3 Progress: 8%
+## Phase 2 Subphase 1 Iteration 4 Progress: 8%
+## theta -4.25  3.49  3.78 
+## ac -0.473  0.288  0.849 
+## Phase 2 Subphase 1 Iteration 5 Progress: 8%
+## Phase 2 Subphase 1 Iteration 6 Progress: 8%
+## theta -4.25  3.49  3.80 
+## ac -0.481  0.265  0.654 
+## Phase 2 Subphase 1 Iteration 7 Progress: 8%
+## Phase 2 Subphase 1 Iteration 8 Progress: 8%
+## theta -4.24  3.49  3.86 
+## ac -0.300  0.476  0.797 
+## Phase 2 Subphase 1 Iteration 9 Progress: 8%
+## Phase 2 Subphase 1 Iteration 10 Progress: 8%
+## theta -4.23  3.49  3.90 
+## ac -0.566  0.449  0.506 
+## Phase 2 Subphase 1 Iteration 200 Progress: 16%
+## theta -4.23  3.53  3.83 
+## ac  0.0224 -0.0156 -0.1690 
+## theta -4.23  3.49  3.82 
+## ac -0.00733 -0.04135 -0.21252 
+## theta: -4.23  3.49  3.82 
+## 
+## Start phase 2.2
+## Phase 2 Subphase 2 Iteration 1 Progress: 16%
+## Phase 2 Subphase 2 Iteration 2 Progress: 16%
+## Phase 2 Subphase 2 Iteration 3 Progress: 16%
+## Phase 2 Subphase 2 Iteration 4 Progress: 16%
+## Phase 2 Subphase 2 Iteration 5 Progress: 16%
+## Phase 2 Subphase 2 Iteration 6 Progress: 16%
+## Phase 2 Subphase 2 Iteration 7 Progress: 16%
+## Phase 2 Subphase 2 Iteration 8 Progress: 16%
+## Phase 2 Subphase 2 Iteration 9 Progress: 16%
+## Phase 2 Subphase 2 Iteration 10 Progress: 16%
+## theta -4.20  3.47  3.76 
+## ac -0.0424 -0.0762 -0.2568 
+## theta: -4.20  3.47  3.76 
+## 
+## Start phase 2.3
+## Phase 2 Subphase 3 Iteration 1 Progress: 26%
+## Phase 2 Subphase 3 Iteration 2 Progress: 26%
+## Phase 2 Subphase 3 Iteration 3 Progress: 26%
+## Phase 2 Subphase 3 Iteration 4 Progress: 26%
+## Phase 2 Subphase 3 Iteration 5 Progress: 26%
+## Phase 2 Subphase 3 Iteration 6 Progress: 26%
+## Phase 2 Subphase 3 Iteration 7 Progress: 26%
+## Phase 2 Subphase 3 Iteration 8 Progress: 26%
+## Phase 2 Subphase 3 Iteration 9 Progress: 26%
+## Phase 2 Subphase 3 Iteration 10 Progress: 26%
+## Phase 2 Subphase 3 Iteration 200 Progress: 34%
+## theta -4.21  3.45  3.71 
+## ac -0.13606 -0.00167  0.18987 
+## theta -4.22  3.48  3.81 
+## ac -0.02806 -0.00769  0.15607 
+## theta: -4.22  3.48  3.81 
+## 
+## Start phase 2.4
+## Phase 2 Subphase 4 Iteration 1 Progress: 40%
+## Phase 2 Subphase 4 Iteration 2 Progress: 40%
+## Phase 2 Subphase 4 Iteration 3 Progress: 40%
+## Phase 2 Subphase 4 Iteration 4 Progress: 40%
+## Phase 2 Subphase 4 Iteration 5 Progress: 40%
+## Phase 2 Subphase 4 Iteration 6 Progress: 40%
+## Phase 2 Subphase 4 Iteration 7 Progress: 40%
+## Phase 2 Subphase 4 Iteration 8 Progress: 40%
+## Phase 2 Subphase 4 Iteration 9 Progress: 40%
+## Phase 2 Subphase 4 Iteration 10 Progress: 40%
+## Phase 2 Subphase 4 Iteration 200 Progress: 48%
+## theta -4.22  3.50  3.81 
+## ac  0.1372 -0.1351 -0.0697 
+## Phase 2 Subphase 4 Iteration 400 Progress: 55%
+## theta -4.22  3.48  3.81 
+## ac  0.0339 -0.0377 -0.1099 
+## theta -4.22  3.49  3.81 
+## ac  0.0236 -0.0696 -0.0971 
+## theta: -4.22  3.49  3.81 
+## 
+## Start phase 3 
+## Phase 3 Iteration 100 Progress 66%
+## Phase 3 Iteration 200 Progress 70%
+## Phase 3 Iteration 300 Progress 74%
+## Phase 3 Iteration 400 Progress 77%
+## Phase 3 Iteration 500 Progress 81%
+## Phase 3 Iteration 600 Progress 85%
+## Phase 3 Iteration 700 Progress 89%
+## Phase 3 Iteration 800 Progress 92%
+## Phase 3 Iteration 900 Progress 96%
+## Phase 3 Iteration 1000 Progress 100%</code></pre>
+<pre class="r"><code>ansM2</code></pre>
+<pre><code>## Estimates, standard errors and convergence t-ratios
+## 
+##                                              Estimate   Standard   Convergence 
+##                                                           Error      t-ratio   
+## 
+## Rate parameters: 
+##   0       Rate parameter                      3.9732  ( 0.4095   )             
+## 
+## Other parameters: 
+##   1. eval outdegree (density)                -4.2186  ( 0.0827   )    0.0132   
+##   2. eval reciprocity                         3.4867  ( 0.1534   )   -0.0069   
+##   3. eval transitive triplets jumping gender  3.8086  ( 0.3455   )    0.0089   
+## 
+## Overall maximum convergence ratio:    0.0235 
+## 
+## 
+## Total of 2225 iteration steps.</code></pre>
+<p><br> We now see that if i and h are similar and j is different, i is
+likely to connect with j. AND that when i and j are similar, i is likely
+to connect with j. This indicates that people just really like to close
+triplets? So let’s add that statistic and see if that is the case.</p>
+</div>
+<div id="include-effects-3" class="section level3" number="1.2.9">
+<h3><span class="header-section-number">1.2.9</span> Include
+effects</h3>
+<pre class="r"><code>myeff &lt;- setEffect(myeff, transTrip, include = T)</code></pre>
+</div>
+<div id="run-model-3" class="section level3" number="1.2.10">
+<h3><span class="header-section-number">1.2.10</span> run model</h3>
+<pre class="r"><code>myAlgorithm &lt;- sienaAlgorithmCreate(projname = &quot;soc_init2&quot;)</code></pre>
+<pre><code>## If you use this algorithm object, siena07 will create/use an output file soc_init2.txt .</code></pre>
+<pre class="r"><code>ansM3 &lt;- siena07(myAlgorithm, data = mydata3, effects = myeff, returnDeps = TRUE, prevAns = ansM2 )</code></pre>
+<pre><code>## tcltk DLL is linked to &#39;/opt/X11/lib/libX11.6.dylib&#39;</code></pre>
+<pre><code>## Package tcltk not available, forcing use of batch mode</code></pre>
+<pre><code>## 
+## Start phase 0 
+## theta: -4.22  3.49  3.81 
+## 
+## Start phase 2.1
+## Phase 2 Subphase 1 Iteration 1 Progress: 8%
+## Phase 2 Subphase 1 Iteration 2 Progress: 8%
+## theta -4.21  3.48  3.82 
+## ac -0.890 -0.456 -0.622 
+## Phase 2 Subphase 1 Iteration 3 Progress: 8%
+## Phase 2 Subphase 1 Iteration 4 Progress: 8%
+## theta -4.23  3.49  3.86 
+## ac -0.0736 -0.3307 -0.0436 
+## Phase 2 Subphase 1 Iteration 5 Progress: 8%
+## Phase 2 Subphase 1 Iteration 6 Progress: 8%
+## theta -4.26  3.50  3.93 
+## ac -0.04143 -0.41458  0.00597 
+## Phase 2 Subphase 1 Iteration 7 Progress: 8%
+## Phase 2 Subphase 1 Iteration 8 Progress: 8%
+## theta -4.27  3.50  3.97 
+## ac -0.0386 -0.0564 -0.0444 
+## Phase 2 Subphase 1 Iteration 9 Progress: 8%
+## Phase 2 Subphase 1 Iteration 10 Progress: 8%
+## theta -4.23  3.48  3.91 
+## ac -0.579  0.141 -0.106 
+## theta -4.25  3.53  3.85 
+## ac -0.06775 -0.00304 -0.04830 
+## theta: -4.25  3.53  3.85 
+## 
+## Start phase 2.2
+## Phase 2 Subphase 2 Iteration 1 Progress: 16%
+## Phase 2 Subphase 2 Iteration 2 Progress: 16%
+## Phase 2 Subphase 2 Iteration 3 Progress: 16%
+## Phase 2 Subphase 2 Iteration 4 Progress: 16%
+## Phase 2 Subphase 2 Iteration 5 Progress: 16%
+## Phase 2 Subphase 2 Iteration 6 Progress: 16%
+## Phase 2 Subphase 2 Iteration 7 Progress: 16%
+## Phase 2 Subphase 2 Iteration 8 Progress: 16%
+## Phase 2 Subphase 2 Iteration 9 Progress: 16%
+## Phase 2 Subphase 2 Iteration 10 Progress: 16%
+## theta -4.21  3.48  3.77 
+## ac -0.0529 -0.0252 -0.0839 
+## theta: -4.21  3.48  3.77 
+## 
+## Start phase 2.3
+## Phase 2 Subphase 3 Iteration 1 Progress: 26%
+## Phase 2 Subphase 3 Iteration 2 Progress: 26%
+## Phase 2 Subphase 3 Iteration 3 Progress: 26%
+## Phase 2 Subphase 3 Iteration 4 Progress: 26%
+## Phase 2 Subphase 3 Iteration 5 Progress: 26%
+## Phase 2 Subphase 3 Iteration 6 Progress: 26%
+## Phase 2 Subphase 3 Iteration 7 Progress: 26%
+## Phase 2 Subphase 3 Iteration 8 Progress: 26%
+## Phase 2 Subphase 3 Iteration 9 Progress: 26%
+## Phase 2 Subphase 3 Iteration 10 Progress: 26%
+## Phase 2 Subphase 3 Iteration 200 Progress: 34%
+## theta -4.23  3.49  3.79 
+## ac -0.0257 -0.3016  0.0546 
+## theta -4.22  3.49  3.80 
+## ac  0.0324 -0.0762  0.1140 
+## theta: -4.22  3.49  3.80 
+## 
+## Start phase 2.4
+## Phase 2 Subphase 4 Iteration 1 Progress: 40%
+## Phase 2 Subphase 4 Iteration 2 Progress: 40%
+## Phase 2 Subphase 4 Iteration 3 Progress: 40%
+## Phase 2 Subphase 4 Iteration 4 Progress: 40%
+## Phase 2 Subphase 4 Iteration 5 Progress: 40%
+## Phase 2 Subphase 4 Iteration 6 Progress: 40%
+## Phase 2 Subphase 4 Iteration 7 Progress: 40%
+## Phase 2 Subphase 4 Iteration 8 Progress: 40%
+## Phase 2 Subphase 4 Iteration 9 Progress: 40%
+## Phase 2 Subphase 4 Iteration 10 Progress: 40%
+## Phase 2 Subphase 4 Iteration 200 Progress: 48%
+## theta -4.20  3.47  3.75 
+## ac -0.0241 -0.1772  0.1281 
+## Phase 2 Subphase 4 Iteration 400 Progress: 55%
+## theta -4.24  3.50  3.82 
+## ac -0.0277 -0.0411  0.1136 
+## theta -4.22  3.48  3.81 
+## ac -0.0390 -0.0337  0.0798 
+## theta: -4.22  3.48  3.81 
+## 
+## Start phase 3 
+## Phase 3 Iteration 100 Progress 66%
+## Phase 3 Iteration 200 Progress 70%
+## Phase 3 Iteration 300 Progress 74%
+## Phase 3 Iteration 400 Progress 77%
+## Phase 3 Iteration 500 Progress 81%
+## Phase 3 Iteration 600 Progress 85%
+## Phase 3 Iteration 700 Progress 89%
+## Phase 3 Iteration 800 Progress 92%
+## Phase 3 Iteration 900 Progress 96%
+## Phase 3 Iteration 1000 Progress 100%</code></pre>
+<pre class="r"><code>ansM3</code></pre>
+<pre><code>## Estimates, standard errors and convergence t-ratios
+## 
+##                                              Estimate   Standard   Convergence 
+##                                                           Error      t-ratio   
+## 
+## Rate parameters: 
+##   0       Rate parameter                      3.9738  ( 0.4056   )             
+## 
+## Other parameters: 
+##   1. eval outdegree (density)                -4.2181  ( 0.0794   )   -0.0189   
+##   2. eval reciprocity                         3.4829  ( 0.1775   )    0.0013   
+##   3. eval transitive triplets jumping gender  3.8053  ( 0.3195   )    0.0135   
+## 
+## Overall maximum convergence ratio:    0.0306 
+## 
+## 
+## Total of 2082 iteration steps.</code></pre>
+<pre class="r"><code># with updateTheta, you can tweek your model yourself instead of prevAns (check the manual)</code></pre>
+<p>Now transitive triplets jumping gender is no longer significant,
+people want to close transitive triplets irrespective of gender.</p>
+<p><br></p>
+<hr />
+</div>
+</div>
+<div id="model-plan" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Model plan</h2>
+<p>Model 0: only add jumpXTransTrip to see if it happens (naive without
+control variables)</p>
+<p>Model 1: add sameXTransTrip, to see if i and j are similar they are
+likely to connect</p>
+<p>Model 2: add transTrip to see if people just want to close
+triplets</p>
+<p>Model 3: add sameX to see if homophily is happening</p>
+<p>Model 4: add other control variables</p>
+<p><br></p>
+<hr />
+</div>
+<div id="homework" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Homework</h2>
+<p>Send a paper of SNA in practice you would like to see discussed next
+week</p>
+<p>Give an update on your project</p>
+<p>And present what you are going to work on the next couple of weeks
+weeks?</p>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSm91cm5hbCAxIgojYmlibGlvZ3JhcGh5OiByZWZlcmVuY2VzLmJpYgphdXRob3I6ICJNeWzDqG5lIEh1c3NvbiIKLS0tCgpgYGB7ciwgZWNobz1UUlVFLCByZXN1bHRzPSdoaWRlJywgbWVzc2FnZT1GQUxTRSwgd2FybmluZz1GQUxTRX0KbGlicmFyeShrbml0cikKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkoc2Nob2xhcikKbGlicmFyeShvcGVuYWxleFIpCmxpYnJhcnkocnZlc3QpCmxpYnJhcnkoanNvbmxpdGUpCmxpYnJhcnkoaHR0cikKbGlicmFyeShydmVzdCkKbGlicmFyeShyZXNoYXBlMikKbGlicmFyeSh4bWwyKQpsaWJyYXJ5KG9wZW54bHN4KQpsaWJyYXJ5KHBvbGl0ZSkKbGlicmFyeShpZ3JhcGgpCmxpYnJhcnkoc25hKQpsaWJyYXJ5KGdlbmRlcml6ZVIpCmxpYnJhcnkoUlNlbGVuaXVtKQpsaWJyYXJ5KG5ldHN0YXQpCmxpYnJhcnkocGluZ3IpCmxpYnJhcnkoUlNpZW5hKQpsaWJyYXJ5KGRldnRvb2xzKQpsaWJyYXJ5KFJzaWVuYVR3b1N0ZXApCgoKIyBsb2FkIHRoZSBmdW5jdGlvbnMgeW91IG5lZWQgZnJvbSB0aGUgcGFja2FnZXMKZnBhY2thZ2UuY2hlY2sgPC0gZnVuY3Rpb24ocGFja2FnZXMpIHsKICBsYXBwbHkocGFja2FnZXMsIEZVTiA9IGZ1bmN0aW9uKHgpIHsKICAgIGlmICghcmVxdWlyZSh4LCBjaGFyYWN0ZXIub25seSA9IFRSVUUpKSB7CiAgICAgIGluc3RhbGwucGFja2FnZXMoeCwgZGVwZW5kZW5jaWVzID0gVFJVRSkKICAgICAgbGlicmFyeSh4LCBjaGFyYWN0ZXIub25seSA9IFRSVUUpCiAgICB9CiAgfSkKfQoKZnNhdmUgPC0gZnVuY3Rpb24oeCwgZmlsZSA9IE5VTEwsIGxvY2F0aW9uID0gIi4vZGF0YS9wcm9jZXNzZWQvIikgewogIGlmZWxzZSghZGlyLmV4aXN0cygiZGF0YSIpLCBkaXIuY3JlYXRlKCJkYXRhIiksIEZBTFNFKQogIGlmZWxzZSghZGlyLmV4aXN0cygiZGF0YS9wcm9jZXNzZWQiKSwgZGlyLmNyZWF0ZSgiZGF0YS9wcm9jZXNzZWQiKSwgRkFMU0UpCiAgCiAgaWYgKGlzLm51bGwoZmlsZSkpIHsKICAgIGZpbGUgPC0gZGVwYXJzZShzdWJzdGl0dXRlKHgpKQogIH0KICAKICBkYXRlbmFtZSA8LSBzdWJzdHIoZ3N1YigiWzotXSIsICIiLCBTeXMudGltZSgpKSwgMSwgOCkKICB0b3RhbG5hbWUgPC0gcGFzdGUobG9jYXRpb24sIGRhdGVuYW1lLCBmaWxlLCAiLnJkYSIsIHNlcCA9ICIiKQogIHNhdmUoeCwgZmlsZSA9IHRvdGFsbmFtZSkgICMgbmVlZCB0byBmaXggaWYgZmlsZSBpcyByZWxvYWRlZCBhcyBpbnB1dCBuYW1lLCBub3QgYXMgeC4KfQoKZmxvYWQgPC0gZnVuY3Rpb24oZmlsZW5hbWUpIHsKICBsb2FkKGZpbGVuYW1lKQogIGdldChscygpW2xzKCkgIT0gImZpbGVuYW1lIl0pCn0KCmZzaG93ZGYgPC0gZnVuY3Rpb24oeCwgLi4uKSB7CiAga25pdHI6OmthYmxlKHgsIGRpZ2l0cyA9IDIsICJodG1sIiwgLi4uKSAlPiUKICAgIGthYmxlRXh0cmE6OmthYmxlX3N0eWxpbmcoYm9vdHN0cmFwX29wdGlvbnMgPSBjKCJzdHJpcGVkIiwgImhvdmVyIikpICU+JQogICAga2FibGVFeHRyYTo6c2Nyb2xsX2JveCh3aWR0aCA9ICIxMDAlIiwgaGVpZ2h0ID0gIjMwMHB4IikKfQpgYGAKCmBgYHtyIGtsaXBweSwgZWNobz1GQUxTRSwgaW5jbHVkZT1UUlVFfQprbGlwcHk6OmtsaXBweShwb3NpdGlvbiA9IGMoJ3RvcCcsICdyaWdodCcpKQoja2xpcHB5OjprbGlwcHkoY29sb3IgPSAnZGFya3JlZCcpCiNrbGlwcHk6OmtsaXBweSh0b29sdGlwX21lc3NhZ2UgPSAnQ2xpY2sgdG8gY29weScsIHRvb2x0aXBfc3VjY2VzcyA9ICdEb25lJykKYGBgCgpMYXN0IGNvbXBpbGVkIG9uIGByIGZvcm1hdChTeXMudGltZSgpLCAnJUIsICVZJylgCjxicj4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKIyBXZWVrIDYKPGJyPgoKR1dFU1AgKDIxKToKRmlndXJlIDQ6IApYIGF4aXMgaXMgUywgaG93IG1hbnkgdHJpYWRzIHdvdWxkIGJlIGNsb3NlZCBieSBmb3JtaW5nIHRoaXMgdGllClkgYXhpcyBpcyB0aGUgdmFsdWUgb2YgdGhlIHN0YXRpc3RpY3MKSWYgdGhlIFggYXhpcyBpcyA0IHRoZSBzdGF0aXN0aWMgY2FuIG9ubHkgYmUgNCBpZiBhbHBoYSBpcyBpbmZpbml0eQp5b3UgZ2V0IHN0YXRpc3RpYyAxIHdpdGggYWxwaGEgaXMgMD8KClRoZXJlIGlzIGEgZGltaW5pc2hpbmcgZWZmZWN0IG9mIGNsb3NpbmcgdHJpYWRzOiBpZiB5b3UgY2FuIGNsb3NlIG9uZSB0cmlhZCBpdCdzIGdyZWF0LCBidXQgaWYgeW91IGNhbiBjbG9zZSB0d28gdHJpYWRzIHdpdGggb25lIHRpZSwgaXQncyBhbHNvIGdyZWF0LCBhbmQgaWYgeW91IGNhbiBjbG9zZSB0aHJlZSB0cmlhZHMgd2l0aCBvbnQgdGllLCBpdCdzIHN0aWxsIGdyZWF0IGJ1dCBub3QgdGhhdCBtdWNoIGdyZWF0ZXIgZXRjLgoKVGhlIHN0YXRpc3RpYyBpcyBhYm91dCBhZGRpdGlvbmFsIHRpZXM6IHdpdGggdGhpcyBtaW5pIHN0ZXAgaG93IG1hbnkgYWRkaXRpb25hbCB0cmFuc2l0aXZlIHRyaXBsZXRzIGNhbiBJIG1ha2UsIHRoaXMgYWRkaXRpb25hbCBwYXJ0IGhhcyBhIGRpbWluaXNoaW5nIGVmZmVjdC4gCgo8YnI+CgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KIyMgUmVzZWFyY2ggaWRlYQoKSW5zcGlyZWQgYnkgdGhlIHRyaWFkaWMgc3RhdGlzdGljczoKCkZvciBnZW5kZXIgc2VncmVnYXRpb24gaW4gYSBuZXR3b3JrIHBlb3BsZSBvZnRlbiBsb29rIGF0IGhvbW9waGlseSBhdCB0aGUgZGlhZGljIGxldmVsOiBwZW9wbGUgY29sbGFib3JhdGUgd2l0aCBwZW9wbGUgd2hvIGFyZSBtb3JlIHNpbWlsYXIgdG8gdGhlbS4KQnV0IHBlcmhhcHMgaXQgYWxzbyBoYXBwZW5zIGF0IGEgaGlnaGVyIGxldmVsOiB0cmlhZGljIGxldmVsLiBGb3IgaW5zdGFuY2U6IHRoZSBpbmNvbXBsZXRlIHRyaWFkIGkgPiBoID4gai4gSWYgaSBhbmQgaCBhcmUgYm90aCB3b21lbiwgZG9lcyBpdCBtYXR0ZXIgd2hldGhlciBqIGlzIGFsc28gYSB3b21hbiBmb3IgdGhlIHRyaWFkIHRvIGNsb3NlPwoKSWYgeW91IHRoZW4gY29udHJvbCBmb3IgaG9tb3BoaWx5IG9uIHRoZSBkaWFkaWMgbGV2ZWwsIHlvdSBjYW4gc2VlIHdoZXRoZXIgZm9yIGkgYW5kIGogaXQgZG9lcyBub3QgbWF0dGVyIGlmIHRoZSBvdGhlciBpcyBtYW4gb3Igd2FtYW4sIGJ1dCB0aGF0IHRoZSBpbnRlcm1lZGlhcnkgZW5zdXJlcyB0aGVyZSBpcyBzdGlsbCBob21vcGhpbGx5LiAKClNvIHlvdSBmaXJzdCBzZWUgaWYgdGhlcmUgaXMgYSBzYW1lWCBlZmZlY3QsIHRoZW4gYWRkIHRoZSB0cmlhZGljIGVmZmVjdCwgdGhlbiBpbmNsdWRlIHRoZSBpbnRlcmFjdGlvbiB3aXRoIGdlbmRlci4gCgpZb3UgY2FuIGV2ZW4gaW5jbHVkZSBhbiBpbnRlcmFjdGlvbiBiZXR3ZWVuIHRyYW5zdHJpcCBhbmQgc2FtZVguCgpOb3cgSSBuZWVkIHRvIGZpZ3VyZSBvdXQgaWYgaXQgd2hldGhlciBJIHdhbnQgdG8gYW5hbHlzZSBhIGRpcmVjdGVkIChmaXJzdCBvciBsYXN0KSBvciBhbiB1bmRpcmVjdGVkIG5ldHdvcmsuIAo8YnI+CgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KIyMgUGFpZ2U6IHVuZXF1YWxYCgpgYGB7cn0KP3NpZW5hRGVwZW5kZW50CgojIHN0ZXAgMTogZGF0YQojczUwYSBpcyBkcmlua2luZyBzNTBzIGlzIHNtb2tpbmcKbXluZXQxIDwtIHNpZW5hRGVwZW5kZW50KGFycmF5KGMoczUwMSwgczUwMiwgczUwMyksIGRpbT1jKDUwLCA1MCwgMykpKQpteWJlaCA8LSBzaWVuYURlcGVuZGVudChzNTBhLCB0eXBlPSJiZWhhdmlvciIpCnNtb2tlIDwtIHZhckNvdmFyKHM1MHMpCgpteWRhdGEgPC0gc2llbmFEYXRhQ3JlYXRlKG15bmV0MSwgbXliZWgsIHNtb2tlKQoKIyBzdGVwIDI6IGxvb2sgYXQgCiMgcHJpbnQwMVJlcG9ydChteWRhdGEpCgojIHN0ZXAgMzogZWZmZWN0CgpteWVmZmVjdHMgPC0gZ2V0RWZmZWN0cyhteWRhdGEpCm15ZWZmZWN0cwoKIyBpbmNsdWRlIHVuZXF1YWwgZWZmZWN0cwpteWVmZmVjdHMgPC0gaW5jbHVkZUVmZmVjdHMobXllZmZlY3RzLCB1bmVxdWFsWCwgbmFtZSA9ICJteW5ldDEiLCBpbnRlcmFjdGlvbjEgPSAic21va2UiKQpteWVmZmVjdHMgPC0gaW5jbHVkZUVmZmVjdHMobXllZmZlY3RzLCB1bmVxdWFsWCwgbmFtZSA9ICJteW5ldDEiLCBpbnRlcmFjdGlvbjEgPSAibXliZWgiKQoKYWxnbyA8LSBzaWVuYUFsZ29yaXRobUNyZWF0ZSgpCmFucyA8LSBzaWVuYTA3KGFsZ28sIGRhdGEgPSBteWRhdGEsIGVmZmVjdHMgPSBteWVmZmVjdHMpCmFucwoKIyB5b3UgY2FuIHVzZSAsIHByZXZBbnMgPSBhbnMgKGFuZCB0aGF0J3MgdGhlIGVzdGltYXRlcyBvZiB0aGUgcHJldmlvdXMgbW9kZWwpCgpgYGAKPGJyPgoKU28sIFlvdSBjYW4gc2VlIGhvdyB5b3VyIGRlcGVuZGVudCB2YXJpYWJsZSBjaGFuZ2VzIG92ZXIgdGltZS4gCldoZW4geW91IGNhbGN1bGF0ZSBmb3Igc21va2UgeW91IHVzZSB0aGUgdmFsdWUgYXQgdGltZSBwb2ludCBvbmUgYXMgb2JzZXJ2YXRpb24uIFdoZW4geW91IHJlYWNoIHRpbWUgcG9pbnQgMywgeW91IHVzZSB0aGUgdmFsdWUgb2YgdGltZSBwb2ludCAyLiBCdXQgdGhlIGRlcGVuZGVudCB2YXJpYWJsZSAobXliZWgpIHRoZSB2YXJpYWJsZSBpcyBhbHNvIGNoYW5nZXMgd2l0aGluIHRoZSBtaW5pc3RlcHMuIFR0J3MgdXNpbmcgdGhlIHZhbHVlIGFzIHRoZSB2YWx1ZSBpcyBhdCB0aGF0IG1vbWVudCBzaW11bGF0ZWQuIAoKcmF0ZSByYXRlOiBhcmUgdGhlIG51bWJlciBvZiBzdGVwcy9vcHRpb25zCmxpbmVhciBzaGFwZSBlZmZlY3Q6IGlzIHNpbXBseSB0aGUgdmFsdWUgb2YgeW91ciBjZW50ZXJlZCBiZWhhdmlvdXJhbCB2YXJpYWJsZSAoaWYgaXQgaXMgcG9zaXRpdmUsIHlvdSB0cmllZCB0byBpbmNyZWFzZSB5b3VyIGJlaGF2aW91cikKCldlIGNvdWxkIGFsc28gY29uc3RydWN0IG15YmVoIGFzIGEgY29uc3RhbnQgdmFyaWFibGU6IHRoZW4gaXQgZ2l2ZXMgZGlmZmVyZW50IG91dGNvbWVzIGR1ZSB0byB0aW1lIHBvaW50IGRpZmZlcmVuY2VzLiBUYWtlIGludG8gYWNjb3VudCB0aW1lLiAKClRoYXQncyBhIHBvd2VyIG9mIFJzaWVuYTogeW91IGNhbiBoYXZlIGEgdmFyaWFibGUgYXMgZGVwZW5kZW50IGFuZCBpbmRlcGVuZGVudCBhbmQgYWxzbyBsb29rIGF0IGNhdXNhbGl0eSBiZXR0ZXIuIAoKPGJyPgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiMjIE15IG93biBlZmZlY3RzCjxicj4KCiMjIEZpcnN0IGFuYWx5c2VzCjxicj4KCiMjIyBMb2FkIGRhdGEKV2UgY3JlYXRlZCB0aGlzIGRhdGFzZXQgbGFzdCB3ZWVrIHdpdGggYWxsIHNjaG9sYXJzIGFuZCB0aGVpciBnZW5kZXJzCmBgYHtyfQpsb2FkKCIuL2RhdGEvcHJvY2Vzc2VkL3Jlc3VsdF9nZW5kZXIyLnJkYSIpCmBgYAoKIyMjIENoZWNrIHdhdmVzCmBgYHtyfQp3YXZlMSA8LSByZXN1bHRfZ2VuZGVyMiRuZXRzWzEsLF0Kd2F2ZTIgPC0gcmVzdWx0X2dlbmRlcjIkbmV0c1syLCxdCgojIGZpbHRlciBvdXQgdGhlIHdhdmVzIG9mIHRoZSBvYmplY3Q6IHdlIG5lZWQgdG8gY2hlY2sgb3VyIGlucHV0CmRpbSh3YXZlMSkKZGltKHdhdmUyKQoKIyB5b3UgbmVlZCB0byBoYXZlIDAgbWlzc2luZyB2YWx1ZXM6CnN1bShpcy5uYSh3YXZlMSkpCnN1bShpcy5uYSh3YXZlMikpCgojY2hlY2sgdGhlIGRpYWdvbmFsOiBhbGwgcGxhY2VzIHNob3VsZCBiZSAwCnN1bShkaWFnKHdhdmUxKT09MCkKc3VtKGRpYWcod2F2ZTIpPT0wKQoKIyBhIGZldyBwZW9wbGUgZGlkIHdvcmsgd2l0aCB0aGVtc2VsdmVzOgpkaWFnKHdhdmUxKSA8LSAwCmRpYWcod2F2ZTIpIDwtIDAKCiMgZXZlcnl0aGluZyBzaG91bGQgYmUgMSBvciAwOgpzdW0od2F2ZTE+MSkKc3VtKHdhdmUyPjEpCgojIGNoZWNrIGlmIGl0J3Mgbm90IGVtcHR5OiB0aGVyZSBhcmUgcGVvcGxlIHdpdGggMSdzCnN1bSh3YXZlMT4wKQpzdW0od2F2ZTI+MCkKCgpuZXRfZ2VuZGVyIDwtIGFycmF5KGRhdGEgPSBjKHdhdmUxLCB3YXZlMiksIGRpbSA9IGMoZGltKHdhdmUxKSwgMikpCiMgbmV0X2dlbmRlcgoKIyBkZXBlbmRlbnQKbmV0MiA8LSBzaWVuYURlcGVuZGVudChuZXRfZ2VuZGVyKQoKIyBpbmRlcGVuZGVudCB2YXJpYWJsZXMKZ2VuZGVyIDwtIHJlc3VsdF9nZW5kZXIyJGRlbW9ncmFwaGljcyRnZW5kZXIKCmdlbmRlciA8LSBpZmVsc2UoZ2VuZGVyPT0iZmVtYWxlIiwxLDApCmdlbmRlciA8LSBjb0NvdmFyKGdlbmRlcikKCiNnZW5kZXIKCiMgQ3JlYXRlIHNpZW5hIGRhdGEgb2JqZWN0Cm15ZGF0YTMgPC0gc2llbmFEYXRhQ3JlYXRlKG5ldDIsIGdlbmRlcikKbXlkYXRhMwpgYGAKCmBgYHtyfQpteWVmZiA8LWdldEVmZmVjdHMobXlkYXRhMykKCmlmZWxzZSghZGlyLmV4aXN0cygicmVzdWx0cyIpLCBkaXIuY3JlYXRlKCJyZXN1bHRzIiksIEZBTFNFKQpwcmludDAxUmVwb3J0KG15ZGF0YTMsIG1vZGVsbmFtZSA9ICIuL3Jlc3VsdHMvc29jX2luaXQyIikKYGBgCgojIyMgSW5jbHVkZSBlZmZlY3RzCgpgYGB7ciwgZXZhbCA9IEZ9Cm15ZWZmIDwtIHNldEVmZmVjdChteWVmZiwgc2FtZVgsIGludGVyYWN0aW9uMSA9ICJnZW5kZXIiLCBpbmNsdWRlID0gVCkKYGBgCgojIyMgcnVuIG1vZGVsCmBgYHtyfQoKbXlBbGdvcml0aG0gPC0gc2llbmFBbGdvcml0aG1DcmVhdGUocHJvam5hbWUgPSAic29jX2luaXQyIikKYW5zTTAgPC0gc2llbmEwNyhteUFsZ29yaXRobSwgZGF0YSA9IG15ZGF0YTMsIGVmZmVjdHMgPSBteWVmZiwgcmV0dXJuRGVwcyA9IFRSVUUpCgphbnNNMAoKYGBgCjxicj4KVGhlcmUgaXMgYSBzbWFsbCBidXQgc2lnbmlmaWNhbnQgZWZmZWN0IG9mIGhvbW9waGlseSAKCgojIyMgSW5jbHVkZSBlZmZlY3RzCmBgYHtyfQpteWVmZiA8LSBzZXRFZmZlY3QobXllZmYsIGp1bXBYVHJhbnNUcmlwLCBpbnRlcmFjdGlvbjEgPSAiZ2VuZGVyIiwgaW5jbHVkZSA9IFQpCmBgYAoKIyMjIHJ1biBtb2RlbApgYGB7cn0KCm15QWxnb3JpdGhtIDwtIHNpZW5hQWxnb3JpdGhtQ3JlYXRlKHByb2puYW1lID0gInNvY19pbml0MiIpCmFuc00xIDwtIHNpZW5hMDcobXlBbGdvcml0aG0sIGRhdGEgPSBteWRhdGEzLCBlZmZlY3RzID0gbXllZmYsIHJldHVybkRlcHMgPSBUUlVFLCBwcmV2QW5zID0gYW5zTTApCgphbnNNMQpgYGAKPGJyPgoKV2Ugc2VlIHRoYXQgdGhlcmUgaXMgZGl2ZXJzaXR5IGluIGdyb3VwczogYmVjYXVzZSBpIHN0aWxsIGp1bXBzIHRvIGogZXZlbiBpZiBqIGlzIG5vdCB0aGUgc2FtZSBnZW5kZXIgYXMgaSBhbmQgaC4gSG9tb3BoaWx5IGlzIHN0aWxsIHNtYWxsIGFuZCBzaWduaWZpY2FudCwgZG9lcyBub3QgaW1wYWN0IHRoZSBldmFsIHRyYW5zaXRpdmUgdHJpcGxldHMganVtcGluZyBnZW5kZXI6KQoKCiMjIyBJbmNsdWRlIGVmZmVjdHMgCnNhbWVYVHJhbnNUcmlwCgpgYGB7ciwgZXZhbCA9IEZ9CgpteWVmZiA8LSBzZXRFZmZlY3QobXllZmYsICBzYW1lWFRyYW5zVHJpcCwgaW50ZXJhY3Rpb24xID0gImdlbmRlciIsIGluY2x1ZGUgPSBUKQpgYGAKCiMjIyBydW4gbW9kZWwKYGBge3J9CgpteUFsZ29yaXRobSA8LSBzaWVuYUFsZ29yaXRobUNyZWF0ZShwcm9qbmFtZSA9ICJzb2NfaW5pdDIiKQphbnNNMiA8LSBzaWVuYTA3KG15QWxnb3JpdGhtLCBkYXRhID0gbXlkYXRhMywgZWZmZWN0cyA9IG15ZWZmLCByZXR1cm5EZXBzID0gVFJVRSwgcHJldkFucyA9IGFuc00xKQoKYW5zTTIKYGBgCjxicj4KV2Ugbm93IHNlZSB0aGF0IGlmIGkgYW5kIGggYXJlIHNpbWlsYXIgYW5kIGogaXMgZGlmZmVyZW50LCBpIGlzIGxpa2VseSB0byBjb25uZWN0IHdpdGggai4gQU5EIHRoYXQgd2hlbiBpIGFuZCBqIGFyZSBzaW1pbGFyLCBpIGlzIGxpa2VseSB0byBjb25uZWN0IHdpdGggai4gVGhpcyBpbmRpY2F0ZXMgdGhhdCBwZW9wbGUganVzdCByZWFsbHkgbGlrZSB0byBjbG9zZSB0cmlwbGV0cz8gU28gbGV0J3MgYWRkIHRoYXQgc3RhdGlzdGljIGFuZCBzZWUgaWYgdGhhdCBpcyB0aGUgY2FzZS4gCgojIyMgSW5jbHVkZSBlZmZlY3RzCgpgYGB7ciwgZXZhbCA9IEZ9CgpteWVmZiA8LSBzZXRFZmZlY3QobXllZmYsIHRyYW5zVHJpcCwgaW5jbHVkZSA9IFQpCmBgYAoKIyMjIHJ1biBtb2RlbApgYGB7cn0KCm15QWxnb3JpdGhtIDwtIHNpZW5hQWxnb3JpdGhtQ3JlYXRlKHByb2puYW1lID0gInNvY19pbml0MiIpCmFuc00zIDwtIHNpZW5hMDcobXlBbGdvcml0aG0sIGRhdGEgPSBteWRhdGEzLCBlZmZlY3RzID0gbXllZmYsIHJldHVybkRlcHMgPSBUUlVFLCBwcmV2QW5zID0gYW5zTTIgKQoKYW5zTTMKCiMgd2l0aCB1cGRhdGVUaGV0YSwgeW91IGNhbiB0d2VlayB5b3VyIG1vZGVsIHlvdXJzZWxmIGluc3RlYWQgb2YgcHJldkFucyAoY2hlY2sgdGhlIG1hbnVhbCkKYGBgCk5vdyB0cmFuc2l0aXZlIHRyaXBsZXRzIGp1bXBpbmcgZ2VuZGVyIGlzIG5vIGxvbmdlciBzaWduaWZpY2FudCwgcGVvcGxlIHdhbnQgdG8gY2xvc2UgdHJhbnNpdGl2ZSB0cmlwbGV0cyBpcnJlc3BlY3RpdmUgb2YgZ2VuZGVyLiAKCjxicj4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKIyMgTW9kZWwgcGxhbgoKTW9kZWwgMDogb25seSBhZGQganVtcFhUcmFuc1RyaXAgdG8gc2VlIGlmIGl0IGhhcHBlbnMgKG5haXZlIHdpdGhvdXQgY29udHJvbCB2YXJpYWJsZXMpCgpNb2RlbCAxOiBhZGQgc2FtZVhUcmFuc1RyaXAsIHRvIHNlZSBpZiBpIGFuZCBqIGFyZSBzaW1pbGFyIHRoZXkgYXJlIGxpa2VseSB0byBjb25uZWN0CgpNb2RlbCAyOiBhZGQgdHJhbnNUcmlwIHRvIHNlZSBpZiBwZW9wbGUganVzdCB3YW50IHRvIGNsb3NlIHRyaXBsZXRzCgpNb2RlbCAzOiBhZGQgc2FtZVggdG8gc2VlIGlmIGhvbW9waGlseSBpcyBoYXBwZW5pbmcKCk1vZGVsIDQ6IGFkZCBvdGhlciBjb250cm9sIHZhcmlhYmxlcyAKCjxicj4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKIyMgSG9tZXdvcmsKClNlbmQgYSBwYXBlciBvZiBTTkEgaW4gcHJhY3RpY2UgeW91IHdvdWxkIGxpa2UgdG8gc2VlIGRpc2N1c3NlZCBuZXh0IHdlZWsKCkdpdmUgYW4gdXBkYXRlIG9uIHlvdXIgcHJvamVjdAoKQW5kIHByZXNlbnQgd2hhdCB5b3UgYXJlIGdvaW5nIHRvIHdvcmsgb24gdGhlIG5leHQgY291cGxlIG9mIHdlZWtzCndlZWtzPwoK</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("lab6.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

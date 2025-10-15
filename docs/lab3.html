@@ -370,6 +370,24 @@ div.tocify {
     <li>
       <a href="Create_Dataset.html">Week 5c</a>
     </li>
+    <li>
+      <a href="lab6.html">Week 6</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Final Project
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="intro.html">Introduction</a>
+    </li>
+    <li>
+      <a href="theory.html">Theory</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -718,16 +736,16 @@ List_publi</code></pre>
 ## [25] &quot;Jochem Tolsma&quot;         &quot;Anke Munniksma&quot;        &quot;Peer Scheepers&quot;        &quot;Tobias H. Stark&quot;      
 ## [29] &quot;Jochem Tolsma&quot;         &quot;Jochem Tolsma&quot;         &quot;Nan Dirk De Graaf&quot;     &quot;Lincoln Quillian&quot;     
 ## [33] &quot;J. Tolsma&quot;             &quot;A. Need&quot;               &quot;U. de Jong&quot;            &quot;Josja J Rokven&quot;       
-## [37] &quot;Gijs de Boer&quot;          &quot;Jochem Tolsma&quot;         &quot;Stijn Ruiter&quot;          &quot;J. Tolsma&quot;            
-## [41] &quot;T. W. G. van der Meer&quot; &quot;Anne Maaike Mulders&quot;   &quot;Bas Hofstra&quot;           &quot;Jochem Tolsma&quot;        
+## [37] &quot;Gijs de Boer&quot;          &quot;Jochem Tolsma&quot;         &quot;Stijn Ruiter&quot;          &quot;Anne Maaike Mulders&quot;  
+## [41] &quot;Bas Hofstra&quot;           &quot;Jochem Tolsma&quot;         &quot;J. Tolsma&quot;             &quot;T. W. G. van der Meer&quot;
 ## [45] &quot;Jochem Tolsma&quot;         &quot;Gerbert Kraaykamp&quot;     &quot;Jochem Tolsma&quot;         &quot;Maarten H.J. Wolbers&quot; 
-## [49] &quot;J. Tolsma&quot;             &quot;T.W.G. van der Meer&quot;   &quot;Sara Kinsbergen&quot;       &quot;Jochem Tolsma&quot;        
-## [53] &quot;Stijn Ruiter&quot;          &quot;Thomas Feliciani&quot;      &quot;Andreas Flache&quot;        &quot;Jochem Tolsma&quot;        
-## [57] &quot;Daniël van Wijk&quot;       &quot;Gideon Bolt&quot;           &quot;Jochem Tolsma&quot;         &quot;Joran Laméris&quot;        
-## [61] &quot;John R. Hipp&quot;          &quot;Jochem Tolsma&quot;         &quot;Rob Franken&quot;           &quot;Hidde Bekhuis&quot;        
-## [65] &quot;Jochem Tolsma&quot;         &quot;Sara Kinsbergen&quot;       &quot;Jochem Tolsma&quot;         &quot;Roderick Sluiter&quot;     
-## [69] &quot;Jochem Tolsma&quot;         &quot;Peer Scheepers&quot;        &quot;Joran Laméris&quot;         &quot;Gerbert Kraaykamp&quot;    
-## [73] &quot;Stijn Ruiter&quot;          &quot;Jochem Tolsma&quot;</code></pre>
+## [49] &quot;J. Tolsma&quot;             &quot;T.W.G. van der Meer&quot;   &quot;Thijmen Jeroense&quot;      &quot;Bas Hofstra&quot;          
+## [53] &quot;Niels Spierings&quot;       &quot;Jochem Tolsma&quot;         &quot;Sara Kinsbergen&quot;       &quot;Jochem Tolsma&quot;        
+## [57] &quot;Stijn Ruiter&quot;          &quot;Thomas Feliciani&quot;      &quot;Andreas Flache&quot;        &quot;Jochem Tolsma&quot;        
+## [61] &quot;Joran Laméris&quot;         &quot;John R. Hipp&quot;          &quot;Jochem Tolsma&quot;         &quot;Daniël van Wijk&quot;      
+## [65] &quot;Gideon Bolt&quot;           &quot;Jochem Tolsma&quot;         &quot;Rob Franken&quot;           &quot;Hidde Bekhuis&quot;        
+## [69] &quot;Jochem Tolsma&quot;         &quot;Sara Kinsbergen&quot;       &quot;Jochem Tolsma&quot;         &quot;Roderick Sluiter&quot;     
+## [73] &quot;Jochem Tolsma&quot;         &quot;Peer Scheepers&quot;</code></pre>
 <pre class="r"><code># But you don&#39;t just want to know the people, you want to know the collaborations
 # So we will make a list of authors per paper, and add that list to a list of all people
 
@@ -770,9 +788,9 @@ for (author in author_list) {
   
   # store the first result in the list
   all_author_data[[author]] &lt;- search[1, ]
-}</code></pre>
-<pre><code>## HTTP status 429 Too Many Requests</code></pre>
-<pre class="r"><code>#View(all_author_data)
+}
+
+#View(all_author_data)
 
 # From all_author_data we can now get the works_api_url
 # and use the for loops we made before to get data on who they worked together with.
@@ -824,8 +842,9 @@ for (author in names(all_author_data)) {
   # assign this author&#39;s collaborations to the main list
   all_colabs[[author]] &lt;- List_colabs
 }</code></pre>
-<pre><code>## No encoding supplied: defaulting to UTF-8.</code></pre>
-<pre><code>## No encoding supplied: defaulting to UTF-8.</code></pre>
+<pre><code>## No encoding supplied: defaulting to UTF-8.
+## No encoding supplied: defaulting to UTF-8.
+## No encoding supplied: defaulting to UTF-8.</code></pre>
 <pre class="r"><code>#View(all_colabs)
 
 # make it into a dataframe 
@@ -848,7 +867,7 @@ for (author in names(all_colabs)) {
 }
 
 df_colabs</code></pre>
-<pre><code>## # A tibble: 82 × 3
+<pre><code>## # A tibble: 105 × 3
 ##    main_author     publication co_author          
 ##    &lt;chr&gt;                 &lt;int&gt; &lt;chr&gt;              
 ##  1 Agnieszka Kanas           1 A. Kanas           
@@ -861,7 +880,7 @@ df_colabs</code></pre>
 ##  8 Agnieszka Kanas           3 Frank van Tubergen 
 ##  9 Agnieszka Kanas           3 Tanja van der Lippe
 ## 10 Agnieszka Kanas           4 Agnieszka Kanas    
-## # ℹ 72 more rows</code></pre>
+## # ℹ 95 more rows</code></pre>
 <p><br></p>
 <p>We could also get information on number of works counts</p>
 <pre class="r"><code>work_count &lt;- list()
@@ -881,7 +900,8 @@ df_work_count &lt;- data.frame(
 head(df_work_count)</code></pre>
 <pre><code>##                      author works_count
 ## 1           Agnieszka Kanas          37
-## 2 Ana Maria Torres Chedraui           2</code></pre>
+## 2           Alissa van Zijl           7
+## 3 Ana Maria Torres Chedraui           2</code></pre>
 <p><br></p>
 <p>As for gender, I think I understand the code from Daphne from 2 years
 ago But I can’t get it to work, I think this might be because the site

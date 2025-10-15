@@ -26,9 +26,14 @@ navbar:
         href: lab5tryouts.html 
       - text: "Week 5c"
         href: Create_Dataset.html 
-        # here, other .Rmds can be added
-
-
+      - text: "Week 6"
+        href: lab6.html
+    - text: "Final Project"
+      menu:
+      - text: "Introduction"
+        href: intro.html 
+      - text: "Theory"
+        href: theory.html 
   right:
   - icon: fab fa-github
     href: https://mcmhusson.github.io/labjournal_mylene/

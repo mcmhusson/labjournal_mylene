@@ -73,10 +73,15 @@ Last compiled on `r format(Sys.time(), '%B, %Y')`
 
 ------------------------------------------------------------------------
 
-## Week 5 Try outs
-<br>
+# Week 5
 
+<br>
 ------------------------------------------------------------------------
+## In class
+
+<br>
+------------------------------------------------------------------------
+
 ### Define data: 
 
 You have s501 at timepoint 1 and s502 for timepoint 2
@@ -99,7 +104,7 @@ net <- sienaDependent(net_soc_array)
 ```
 <br>
 
-## Include independent var
+## Indep var
 you can also include independent variable 
 
 ```{r}
@@ -116,7 +121,7 @@ alcohol <- coCovar(alcohol) #say it's a time constant variable (I can do this wi
 ```
 <br>
 
-### combine into a dataset
+## combine into a dataset
 ```{r}
 
 # Create siena data object
@@ -143,7 +148,7 @@ We should be able for each effect to calculate it for an ego given a network.
 
 In Chapter 12 are all the formula's (snijders siena Rsiena manual) [we will play around with those next week]
 
-## Look at initial data DOES NOT WORK
+### First analysis
 ```{r}
 print01Report(mydata)
 ```

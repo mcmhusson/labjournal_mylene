@@ -1,0 +1,329 @@
+---
+title: "Journal 1"
+#bibliography: references.bib
+author: "Mylène Husson"
+---
+
+```{r, echo=TRUE, results='hide', message=FALSE, warning=FALSE}
+library(knitr)
+library(tidyverse)
+library(scholar)
+library(openalexR)
+library(rvest)
+library(jsonlite)
+library(httr)
+library(rvest)
+library(reshape2)
+library(xml2)
+library(openxlsx)
+library(polite)
+library(igraph)
+library(sna)
+library(genderizeR)
+library(RSelenium)
+library(netstat)
+library(pingr)
+library(RSiena)
+library(devtools)
+library(RsienaTwoStep)
+
+
+# load the functions you need from the packages
+fpackage.check <- function(packages) {
+  lapply(packages, FUN = function(x) {
+    if (!require(x, character.only = TRUE)) {
+      install.packages(x, dependencies = TRUE)
+      library(x, character.only = TRUE)
+    }
+  })
+}
+
+fsave <- function(x, file = NULL, location = "./data/processed/") {
+  ifelse(!dir.exists("data"), dir.create("data"), FALSE)
+  ifelse(!dir.exists("data/processed"), dir.create("data/processed"), FALSE)
+  
+  if (is.null(file)) {
+    file <- deparse(substitute(x))
+  }
+  
+  datename <- substr(gsub("[:-]", "", Sys.time()), 1, 8)
+  totalname <- paste(location, datename, file, ".rda", sep = "")
+  save(x, file = totalname)  # need to fix if file is reloaded as input name, not as x.
+}
+
+fload <- function(filename) {
+  load(filename)
+  get(ls()[ls() != "filename"])
+}
+
+fshowdf <- function(x, ...) {
+  knitr::kable(x, digits = 2, "html", ...) %>%
+    kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
+    kableExtra::scroll_box(width = "100%", height = "300px")
+}
+```
+
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy(position = c('top', 'right'))
+#klippy::klippy(color = 'darkred')
+#klippy::klippy(tooltip_message = 'Click to copy', tooltip_success = 'Done')
+```
+
+Last compiled on `r format(Sys.time(), '%B, %Y')`
+<br>
+
+------------------------------------------------------------------------
+
+# Week 6
+<br>
+
+GWESP (21):
+Figure 4: 
+X axis is S, how many triads would be closed by forming this tie
+Y axis is the value of the statistics
+If the X axis is 4 the statistic can only be 4 if alpha is infinity
+you get statistic 1 with alpha is 0?
+
+There is a diminishing effect of closing triads: if you can close one triad it's great, but if you can close two triads with one tie, it's also great, and if you can close three triads with ont tie, it's still great but not that much greater etc.
+
+The statistic is about additional ties: with this mini step how many additional transitive triplets can I make, this additional part has a diminishing effect. 
+
+<br>
+
+------------------------------------------------------------------------
+## Research idea
+
+Inspired by the triadic statistics:
+
+For gender segregation in a network people often look at homophily at the diadic level: people collaborate with people who are more similar to them.
+But perhaps it also happens at a higher level: triadic level. For instance: the incomplete triad i > h > j. If i and h are both women, does it matter whether j is also a woman for the triad to close?
+
+If you then control for homophily on the diadic level, you can see whether for i and j it does not matter if the other is man or waman, but that the intermediary ensures there is still homophilly. 
+
+So you first see if there is a sameX effect, then add the triadic effect, then include the interaction with gender. 
+
+You can even include an interaction between transtrip and sameX.
+
+Now I need to figure out if it whether I want to analyse a directed (first or last) or an undirected network. 
+<br>
+
+------------------------------------------------------------------------
+## Paige: unequalX
+
+```{r}
+?sienaDependent
+
+# step 1: data
+#s50a is drinking s50s is smoking
+mynet1 <- sienaDependent(array(c(s501, s502, s503), dim=c(50, 50, 3)))
+mybeh <- sienaDependent(s50a, type="behavior")
+smoke <- varCovar(s50s)
+
+mydata <- sienaDataCreate(mynet1, mybeh, smoke)
+
+# step 2: look at 
+# print01Report(mydata)
+
+# step 3: effect
+
+myeffects <- getEffects(mydata)
+myeffects
+
+# include unequal effects
+myeffects <- includeEffects(myeffects, unequalX, name = "mynet1", interaction1 = "smoke")
+myeffects <- includeEffects(myeffects, unequalX, name = "mynet1", interaction1 = "mybeh")
+
+algo <- sienaAlgorithmCreate()
+ans <- siena07(algo, data = mydata, effects = myeffects)
+ans
+
+# you can use , prevAns = ans (and that's the estimates of the previous model)
+
+```
+<br>
+
+So, You can see how your dependent variable changes over time. 
+When you calculate for smoke you use the value at time point one as observation. When you reach time point 3, you use the value of time point 2. But the dependent variable (mybeh) the variable is also changes within the ministeps. Tt's using the value as the value is at that moment simulated. 
+
+rate rate: are the number of steps/options
+linear shape effect: is simply the value of your centered behavioural variable (if it is positive, you tried to increase your behaviour)
+
+We could also construct mybeh as a constant variable: then it gives different outcomes due to time point differences. Take into account time. 
+
+That's a power of Rsiena: you can have a variable as dependent and independent and also look at causality better. 
+
+<br>
+
+------------------------------------------------------------------------
+## My own effects
+<br>
+
+## First analyses
+<br>
+
+### Load data
+We created this dataset last week with all scholars and their genders
+```{r}
+load("./data/processed/result_gender2.rda")
+```
+
+### Check waves
+```{r}
+wave1 <- result_gender2$nets[1,,]
+wave2 <- result_gender2$nets[2,,]
+
+# filter out the waves of the object: we need to check our input
+dim(wave1)
+dim(wave2)
+
+# you need to have 0 missing values:
+sum(is.na(wave1))
+sum(is.na(wave2))
+
+#check the diagonal: all places should be 0
+sum(diag(wave1)==0)
+sum(diag(wave2)==0)
+
+# a few people did work with themselves:
+diag(wave1) <- 0
+diag(wave2) <- 0
+
+# everything should be 1 or 0:
+sum(wave1>1)
+sum(wave2>1)
+
+# check if it's not empty: there are people with 1's
+sum(wave1>0)
+sum(wave2>0)
+
+
+net_gender <- array(data = c(wave1, wave2), dim = c(dim(wave1), 2))
+# net_gender
+
+# dependent
+net2 <- sienaDependent(net_gender)
+
+# independent variables
+gender <- result_gender2$demographics$gender
+
+gender <- ifelse(gender=="female",1,0)
+gender <- coCovar(gender)
+
+#gender
+
+# Create siena data object
+mydata3 <- sienaDataCreate(net2, gender)
+mydata3
+```
+
+```{r}
+myeff <-getEffects(mydata3)
+
+ifelse(!dir.exists("results"), dir.create("results"), FALSE)
+print01Report(mydata3, modelname = "./results/soc_init2")
+```
+
+### Include effects
+
+```{r, eval = F}
+myeff <- setEffect(myeff, sameX, interaction1 = "gender", include = T)
+```
+
+### run model
+```{r}
+
+myAlgorithm <- sienaAlgorithmCreate(projname = "soc_init2")
+ansM0 <- siena07(myAlgorithm, data = mydata3, effects = myeff, returnDeps = TRUE)
+
+ansM0
+
+```
+<br>
+There is a small but significant effect of homophily 
+
+
+### Include effects
+```{r}
+myeff <- setEffect(myeff, jumpXTransTrip, interaction1 = "gender", include = T)
+```
+
+### run model
+```{r}
+
+myAlgorithm <- sienaAlgorithmCreate(projname = "soc_init2")
+ansM1 <- siena07(myAlgorithm, data = mydata3, effects = myeff, returnDeps = TRUE, prevAns = ansM0)
+
+ansM1
+```
+<br>
+
+We see that there is diversity in groups: because i still jumps to j even if j is not the same gender as i and h. Homophily is still small and significant, does not impact the eval transitive triplets jumping gender:)
+
+
+### Include effects 
+sameXTransTrip
+
+```{r, eval = F}
+
+myeff <- setEffect(myeff,  sameXTransTrip, interaction1 = "gender", include = T)
+```
+
+### run model
+```{r}
+
+myAlgorithm <- sienaAlgorithmCreate(projname = "soc_init2")
+ansM2 <- siena07(myAlgorithm, data = mydata3, effects = myeff, returnDeps = TRUE, prevAns = ansM1)
+
+ansM2
+```
+<br>
+We now see that if i and h are similar and j is different, i is likely to connect with j. AND that when i and j are similar, i is likely to connect with j. This indicates that people just really like to close triplets? So let's add that statistic and see if that is the case. 
+
+### Include effects
+
+```{r, eval = F}
+
+myeff <- setEffect(myeff, transTrip, include = T)
+```
+
+### run model
+```{r}
+
+myAlgorithm <- sienaAlgorithmCreate(projname = "soc_init2")
+ansM3 <- siena07(myAlgorithm, data = mydata3, effects = myeff, returnDeps = TRUE, prevAns = ansM2 )
+
+ansM3
+
+# with updateTheta, you can tweek your model yourself instead of prevAns (check the manual)
+```
+Now transitive triplets jumping gender is no longer significant, people want to close transitive triplets irrespective of gender. 
+
+<br>
+
+------------------------------------------------------------------------
+
+## Model plan
+
+Model 0: only add jumpXTransTrip to see if it happens (naive without control variables)
+
+Model 1: add sameXTransTrip, to see if i and j are similar they are likely to connect
+
+Model 2: add transTrip to see if people just want to close triplets
+
+Model 3: add sameX to see if homophily is happening
+
+Model 4: add other control variables 
+
+<br>
+
+------------------------------------------------------------------------
+
+## Homework
+
+Send a paper of SNA in practice you would like to see discussed next week
+
+Give an update on your project
+
+And present what you are going to work on the next couple of weeks
+weeks?
+
