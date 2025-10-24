@@ -1,0 +1,371 @@
+---
+title: "Journal 1"
+bibliography: references.bib
+author: "Mylène Husson"
+---
+
+```{r, echo=FALSE, include=TRUE, results='hide', message=FALSE, warning=FALSE}
+library(knitr)
+library(tidyverse)
+library(scholar)
+library(openalexR)
+library(rvest)
+library(jsonlite)
+library(httr)
+library(rvest)
+library(reshape2)
+library(xml2)
+library(openxlsx)
+library(polite)
+library(igraph)
+library(sna)
+library(genderizeR)
+library(RSelenium)
+library(netstat)
+library(pingr)
+library(RSiena)
+library(devtools)
+library(RsienaTwoStep)
+
+
+# load the functions you need from the packages
+fpackage.check <- function(packages) {
+  lapply(packages, FUN = function(x) {
+    if (!require(x, character.only = TRUE)) {
+      install.packages(x, dependencies = TRUE)
+      library(x, character.only = TRUE)
+    }
+  })
+}
+
+fsave <- function(x, file = NULL, location = "./data/processed/") {
+  ifelse(!dir.exists("data"), dir.create("data"), FALSE)
+  ifelse(!dir.exists("data/processed"), dir.create("data/processed"), FALSE)
+  
+  if (is.null(file)) {
+    file <- deparse(substitute(x))
+  }
+  
+  datename <- substr(gsub("[:-]", "", Sys.time()), 1, 8)
+  totalname <- paste(location, datename, file, ".rda", sep = "")
+  save(x, file = totalname)  # need to fix if file is reloaded as input name, not as x.
+}
+
+fload <- function(filename) {
+  load(filename)
+  get(ls()[ls() != "filename"])
+}
+
+fshowdf <- function(x, ...) {
+  knitr::kable(x, digits = 2, "html", ...) %>%
+    kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
+    kableExtra::scroll_box(width = "100%", height = "300px")
+}
+```
+
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy(position = c('top', 'right'))
+#klippy::klippy(color = 'darkred')
+#klippy::klippy(tooltip_message = 'Click to copy', tooltip_success = 'Done')
+```
+
+Last compiled on `r format(Sys.time(), '%B, %Y')`
+<br>
+------------------------------------------------------------------------
+
+# Data construction
+<br>
+
+## Genderize function
+
+To manually add gender to the demographics dataset, I first created a custom function that extracts each researcher’s first name from the original dataset and automatically queries the Nederlandse Voornamenbank (NVB) database. The function retrieves the corresponding gender frequency table and assigns the researcher as male or female based on the most common association for that name. If a name is not found in the NVB database, or if the name field is incomplete or incorrectly formatted, the function returns NA. 
+```{r, eval = F}
+
+my_genderizer <- function(name) {
+  name <- gsub("^/+|/+$", "", name)
+  
+  # Build URL
+  base_url <- "https://nvb.meertens.knaw.nl/naam/is"
+  name_url <- paste0(base_url, "/", name)
+  
+  # Try reading table
+  table <- tryCatch(
+    read_html(name_url) |>
+      html_element("table") |>
+      html_table(),
+    error = function(e) NULL
+  )
+  
+  if (is.null(table)) return(NA)  # return NA if no table found
+  
+  # Replace "--" with "0"
+  table[table == "--"] <- "0"
+  
+  # Convert to numeric
+  val_male   <- suppressWarnings(as.numeric(table[2, 3]))
+  val_female <- suppressWarnings(as.numeric(table[6, 3]))
+  
+  # Decide gender
+  if (is.na(val_male) & is.na(val_female)) {
+    gender <- NA
+  } else if (val_male > val_female) {
+    gender <- "male"
+  } else if (val_female > val_male) {
+    gender <- "female"
+  } else {
+    gender <- NA
+  }
+  
+  return(gender)
+}
+```
+
+## Load in Data
+
+Load in the data
+```{r, eval=F}
+scholars <- fload("./data/processed/scholars_20240924.rda")
+```
+
+Apply Folcnet function to make your nomination network
+```{r, eval = F}
+fcolnet <- function(data = scholars,
+                    university = c("RU","EUR","WUR","UvA","Leiden","VU","UU","UvT","RUG"),
+                    discipline = c("sociology","political science"),
+                    waves = list(c(2015, 2018), c(2019, 2023)),
+                    type = c("last")) {
+
+    # step 1
+    demographics <- do.call(rbind.data.frame, data$demographics)
+    demographics <- demographics %>%
+        mutate(Universiteit1.22 = replace(Universiteit1.22, is.na(Universiteit1.22), ""), Universiteit2.22 = replace(Universiteit2.22,
+            is.na(Universiteit2.22), ""), Universiteit1.24 = replace(Universiteit1.24, is.na(Universiteit1.24),
+            ""), Universiteit2.24 = replace(Universiteit2.24, is.na(Universiteit2.24), ""), discipline.22 = replace(discipline.22,
+            is.na(discipline.22), ""), discipline.24 = replace(discipline.24, is.na(discipline.24), ""))
+
+    sample <- which((demographics$Universiteit1.22 %in% university | demographics$Universiteit2.22 %in%
+        university | demographics$Universiteit1.24 %in% university | demographics$Universiteit2.24 %in%
+        university) & (demographics$discipline.22 %in% discipline | demographics$discipline.24 %in% discipline))
+
+    demographics_soc <- demographics[sample, ]
+    scholars_sel <- lapply(scholars, "[", sample)
+
+    # step 2
+    ids <- demographics_soc$au_id
+    nwaves <- length(waves)
+    nets <- array(0, dim = c(nwaves, length(ids), length(ids)), dimnames = list(wave = 1:nwaves, ids,
+        ids))
+    dimnames(nets)
+
+    # step 3
+    df_works <- tibble(works_id = unlist(lapply(scholars_sel$work, function(l) l$id)), works_author = unlist(lapply(scholars_sel$work,
+        function(l) l$author), recursive = FALSE), works_year = unlist(lapply(scholars_sel$work, function(l) l$publication_year),
+        recursive = FALSE))
+
+    df_works <- df_works[!duplicated(df_works), ]
+
+    # step 4
+    if (type == "first") {
+        for (j in 1:nwaves) {
+            df_works_w <- df_works[df_works$works_year >= waves[[j]][1] & df_works$works_year <= waves[[j]][2],
+                ]
+            for (i in 1:nrow(df_works_w)) {
+                ego <- df_works_w$works_author[i][[1]]$au_id[1]
+                alters <- df_works_w$works_author[i][[1]]$au_id[-1]
+                if (sum(ids %in% ego) > 0 & sum(ids %in% alters) > 0) {
+                  nets[j, which(ids %in% ego), which(ids %in% alters)] <- 1
+                }
+            }
+        }
+    }
+
+    if (type == "last") {
+        for (j in 1:nwaves) {
+            df_works_w <- df_works[df_works$works_year >= waves[[j]][1] & df_works$works_year <= waves[[j]][2],
+                ]
+            for (i in 1:nrow(df_works_w)) {
+                ego <- rev(df_works_w$works_author[i][[1]]$au_id)[1]
+                alters <- rev(df_works_w$works_author[i][[1]]$au_id)[-1]
+                if (sum(ids %in% ego) > 0 & sum(ids %in% alters) > 0) {
+                  nets[j, which(ids %in% ego), which(ids %in% alters)] <- 1
+                }
+            }
+        }
+    }
+
+    if (type == "all") {
+        for (j in 1:nwaves) {
+            df_works_w <- df_works[df_works$works_year >= waves[[j]][1] & df_works$works_year <= waves[[j]][2],
+                ]
+            for (i in 1:nrow(df_works_w)) {
+                egos <- df_works_w$works_author[i][[1]]$au_id
+                if (sum(ids %in% egos) > 0) {
+                  nets[j, which(ids %in% egos), which(ids %in% egos)] <- 1
+                }
+            }
+        }
+    }
+    output <- list()
+    output$data <- scholars_sel
+    output$nets <- nets
+    return(output)
+}
+
+# Save the output
+df <- fcolnet(data = scholars,
+                    university = c("RU","EUR","WUR","UvA","Leiden","VU","UU","UvT","RUG"),
+                    discipline = c("sociology","political science"),
+                    waves = list(c(2015, 2018), c(2019, 2023)),
+                    type = c("last"))
+```
+
+## Apply function
+Apply the mygenderizer function. 
+```{r, eval= F}
+df_scholars <- do.call(rbind, df$data$demographics)
+
+df_gender <- df_scholars |>
+  mutate(firstname = word(Naam, 1))  # extract first names
+
+df_gender$gender <- NA_character_  # initialize gender column
+
+for (i in seq_len(nrow(df_gender))) {
+  name <- df_gender$firstname[i]
+  gender <- my_genderizer(name)
+  
+  df_gender$gender[i] <- gender
+  Sys.sleep(0.06)  # pause between requests
+}
+```
+
+## Attach
+I attach the gender data by overriding the demographic part.
+```{r, eval= F}
+fcolnet_gender <- function(data = df,
+                           waves = list(c(2015, 2018), c(2019, 2023)),
+                           type = "last",
+                           demographics = NULL) {
+  
+  # -------------------------
+  # Step 1: demographics
+  # -------------------------
+  if (is.null(demographics)) {
+    demographics <- do.call(rbind.data.frame, data$demographics)
+  }
+  
+  demographics <- demographics %>%
+    mutate(
+      Universiteit1.22 = replace(Universiteit1.22, is.na(Universiteit1.22), ""),
+      Universiteit2.22 = replace(Universiteit2.22, is.na(Universiteit2.22), ""),
+      Universiteit1.24 = replace(Universiteit1.24, is.na(Universiteit1.24), ""),
+      Universiteit2.24 = replace(Universiteit2.24, is.na(Universiteit2.24), ""),
+      discipline.22    = replace(discipline.22,    is.na(discipline.22),    ""),
+      discipline.24    = replace(discipline.24,    is.na(discipline.24),    "")
+    )
+  
+  # -------------------------
+  # select all scholars
+  # -------------------------
+  sample <- seq_len(nrow(demographics))
+  
+  demographics_all <- demographics[sample, ]
+  scholars_sel <- lapply(data, "[", sample)
+  
+  # -------------------------
+  # Step 2: initialize network array
+  # -------------------------
+  ids <- demographics_all$au_id
+  nwaves <- length(waves)
+  nets <- array(
+    0,
+    dim = c(nwaves, length(ids), length(ids)),
+    dimnames = list(wave = 1:nwaves, ids, ids)
+  )
+  
+  # -------------------------
+  # Step 3: works dataframe
+  # -------------------------
+  df_works <- tibble(
+    works_id     = unlist(lapply(scholars_sel$work, function(l) if(!is.null(l)) l$id else NA)),
+    works_author = unlist(lapply(scholars_sel$work, function(l) if(!is.null(l)) l$author else NA), recursive = FALSE),
+    works_year   = unlist(lapply(scholars_sel$work, function(l) if(!is.null(l)) l$publication_year else NA), recursive = FALSE)
+  ) %>% filter(!is.na(works_id))
+  
+  df_works <- df_works[!duplicated(df_works), ]
+  
+  # -------------------------
+  # Step 4: build networks
+  # -------------------------
+  if (type == "first") {
+    for (j in 1:nwaves) {
+      df_works_w <- df_works[df_works$works_year >= waves[[j]][1] &
+                               df_works$works_year <= waves[[j]][2], ]
+      for (i in 1:nrow(df_works_w)) {
+        ego <- df_works_w$works_author[i][[1]]$au_id[1]
+        alters <- df_works_w$works_author[i][[1]]$au_id[-1]
+        if (sum(ids %in% ego) > 0 & sum(ids %in% alters) > 0) {
+          nets[j, which(ids %in% ego), which(ids %in% alters)] <- 1
+        }
+      }
+    }
+  }
+  
+  if (type == "last") {
+    for (j in 1:nwaves) {
+      df_works_w <- df_works[df_works$works_year >= waves[[j]][1] &
+                               df_works$works_year <= waves[[j]][2], ]
+      for (i in 1:nrow(df_works_w)) {
+        ego <- rev(df_works_w$works_author[i][[1]]$au_id)[1]
+        alters <- rev(df_works_w$works_author[i][[1]]$au_id)[-1]
+        if (sum(ids %in% ego) > 0 & sum(ids %in% alters) > 0) {
+          nets[j, which(ids %in% ego), which(ids %in% alters)] <- 1
+        }
+      }
+    }
+  }
+  
+  if (type == "all") {
+    for (j in 1:nwaves) {
+      df_works_w <- df_works[df_works$works_year >= waves[[j]][1] &
+                               df_works$works_year <= waves[[j]][2], ]
+      for (i in 1:nrow(df_works_w)) {
+        egos <- df_works_w$works_author[i][[1]]$au_id
+        if (sum(ids %in% egos) > 0) {
+          nets[j, which(ids %in% egos), which(ids %in% egos)] <- 1
+        }
+      }
+    }
+  }
+  
+  # -------------------------
+  # Step 5: output
+  # -------------------------
+  output <- list()
+  output$data <- scholars_sel
+  output$nets <- nets
+  output$demographics <- demographics_all  # includes gender if passed in
+  
+  return(output)
+}
+
+result_gender2 <- fcolnet_gender(
+  data = df$data,
+  demographics = df_gender,
+  waves = list(c(2015, 2018), c(2019,2023)),
+  type= "last"
+)
+
+# Save entire result (list containing networks, data, demographics, etc.)
+save(result_gender2, file = "./data/processed/result_gender2.rda")
+```
+```{r}
+load("./data/processed/result_gender2.rda")
+
+# View gender info
+head(result_gender2$demographics[, c("au_id", "firstname", "gender")])
+```
+
+
+
+
+

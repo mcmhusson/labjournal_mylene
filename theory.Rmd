@@ -4,7 +4,7 @@ bibliography: references.bib
 author: "Mylène Husson"
 ---
 
-```{r, globalsettings, echo=FALSE, warning=FALSE, results='hide'}
+```{r, globalsettings, echo=FALSE, include=TRUE, warning=FALSE, results='hide'}
 library(knitr)
 
 knitr::opts_chunk$set(echo = TRUE)
@@ -31,19 +31,30 @@ Last compiled on `r format(Sys.time(), '%B, %Y')`
 
 # Theory
 
-In-group preferences
-More easily introduced
+The first two research questions are descriptive and not hypothesis-driven, but they are essential for establishing the local network landscape. Specifically, examining how frequently different triadic structures occur (RQ1) and how gender is distributed across these triads (RQ2) provides the foundation for understanding the context in which collaboration decisions take place.
 
+The third research question, by contrast, is theory-driven and focuses on the micro-level mechanisms that may influence triadic closure. The social network structure central to this research is an A -> B -> C configuration, in which A and B share the same gender. Whether the gender of C affects A’s likelihood of forming or maintaining a tie with C can be interpreted through intergroup relations theories. The following section outlines how these theories, specifically Contact Theory and Social Identity Theory, apply to this triadic structure and inform competing hypotheses about gendered closure.
 
+## Hypothesis 1
 
+Contact Theory suggests that interactions between members of different social groups can reduce prejudice and foster more positive intergroup attitudes [@Allport]. Suppose researchers A and B are both men, and B has collaborated with researcher C, who is a woman. Even if A initially prefers to work with men (reflecting dyadic homophily), observing that B has successfully collaborated with C may alter A’s perceptions. Through this indirect exposure, A experiences positive contact with an outgroup member via a trusted collaborator, which may increase his willingness to collaborate with C despite initial biases. Such triadic processes can therefore act as micro-level mechanisms that help overcome gender homophily, potentially fostering more cross-gender collaborations and, over time, reducing gender segregation in the network.
 
+H1: In triads of the form A → B → C, actor A is more likely to create or maintain a tie with C, rather than break or refrain from forming one, when C is of a different gender than both A and B.
 
+## Hypothesis 2
 
+Social Identity Theory posits that group membership forms a central part of an individual’s self-concept and can lead to ingroup favoritism and outgroup bias [@Tajfel_Turner]. In this context, the opposite dynamic to that described by Contact Theory may occur. When researchers A and B share the same gender, their shared identity can strengthen their sense of ingroup belonging and mutual trust. As a result, A may be more inclined to collaborate with others of the same gender as B, and more hesitant to collaborate with C if C belongs to a different gender group. Such triadic patterns can reinforce existing gender boundaries in collaboration networks, perpetuating same-gender clustering and contributing to persistent gender segregation at the macro level. Based on the above I set forth this contrasting hypothesis:
 
+H2: In triads of the form A → B → C, actor A is more likely to break or refrain from forming a tie with C, rather than create or maintain one, when C is of a different gender than both A and B.
 
+And a triadic homophily hypothesis:
+H3: In triads of the form A → B → C, actor A is more likely to create or maintain a tie with C, rather than break or refrain from forming one, when C is of the same gender as both A and B.
+
+## Conclusion
+
+Taken together, these intergroup theories offer contrasting predictions about how triadic structures relate to gender segregation in academic collaboration networks. Contact Theory predicts that indirect or mediated cross-gender collaborations—such as when A and B are men and B collaborates with a woman, C—can gradually reduce gender boundaries by promoting positive exposure across groups. Social Identity Theory, by contrast, predicts that individuals are more likely to form and maintain triads that reinforce gender similarity, as collaborating with same-gender peers strengthens trust and shared identity, thereby inhibiting the closure of mixed-gender triads. Testing both perspectives allows for an assessment of whether triadic closure processes in academic collaboration networks serve to bridge or reproduce gender divisions.
 
 
 <br>
-------------------------------------------------------------------------
 
 # References

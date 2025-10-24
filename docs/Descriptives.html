@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Mylène Husson" />
+
+
+<title>Journal 1</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="tweaks.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    My journal
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lab1.html">Week 1</a>
+    </li>
+    <li>
+      <a href="lab2.html">Week 2</a>
+    </li>
+    <li>
+      <a href="lab3.html">Week 3</a>
+    </li>
+    <li>
+      <a href="lab4.html">Week 4</a>
+    </li>
+    <li>
+      <a href="lab5.html">Week 5a</a>
+    </li>
+    <li>
+      <a href="lab5tryouts.html">Week 5b</a>
+    </li>
+    <li>
+      <a href="Create_Dataset.html">Week 5c</a>
+    </li>
+    <li>
+      <a href="lab6.html">Week 6</a>
+    </li>
+    <li>
+      <a href="lab7.html">Week 7</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Final Project
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="intro.html">Introduction</a>
+    </li>
+    <li>
+      <a href="theory.html">Theory</a>
+    </li>
+    <li>
+      <a href="DataMethods.html">Data and Methods</a>
+    </li>
+    <li>
+      <a href="dataconstruction.html">Data Construction</a>
+    </li>
+    <li>
+      <a href="Descriptives.html">Descriptive Analyses</a>
+    </li>
+    <li>
+      <a href="Results.html">Exploratory Analyses</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://mcmhusson.github.io/labjournal_mylene/">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Journal 1</h1>
+<h4 class="author">Mylène Husson</h4>
+
+</div>
+
+
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<p>Last compiled on October, 2025 <br> ————————————————————————</p>
+<div id="descriptive-analyses" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Descriptive
+Analyses</h1>
+<p><br></p>
+<p>For the descriptive analyses, my primary focus is on identifying
+which triads occur in the network data, with particular attention to
+021C and 030T triads (RQ1), as well as examining the gender distribution
+within these specific triads (RQ2). To support the latter, I will also
+visualize the relevant parts of the network. However, before exploring
+these patterns in detail, I will first assess the overall gender
+distribution in the network to gain a clearer understanding of the
+dataset as a whole.</p>
+<p><br></p>
+<p>Load in the data</p>
+<pre class="r"><code>load(&quot;./data/processed/result_gender2.rda&quot;)</code></pre>
+<p><br></p>
+<div id="independent-variable-gender" class="section level2"
+number="1.1">
+<h2><span class="header-section-number">1.1</span> Independent Variable
+Gender</h2>
+<p>In the study population, gender was nearly evenly distributed, with
+49.7% men (n = 335) and 47.0% women (n = 317). A small proportion of
+participants (3.3%, n = 22) had missing gender information.</p>
+<pre class="r"><code>result_gender2$demographics |&gt;
+  mutate(gender = ifelse(is.na(gender), &quot;missing&quot;, gender)) |&gt;
+  count(gender) |&gt;
+  mutate(percent = round(n / sum(n) * 100, 2))</code></pre>
+<pre><code>## # A tibble: 3 × 3
+##   gender      n percent
+##   &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;
+## 1 female    317   47.0 
+## 2 male      335   49.7 
+## 3 missing    22    3.26</code></pre>
+</div>
+<div id="control-variables" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Control
+variables</h2>
+<div id="first-university" class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> First
+university</h3>
+<pre class="r"><code>result_gender2$demographics$Universiteit1.22[result_gender2$demographics$Universiteit1.22 == &quot;&quot;] &lt;- NA
+
+result_gender2$demographics |&gt;
+  mutate(Universiteit1.22 = ifelse(is.na(Universiteit1.22), &quot;missing&quot;, Universiteit1.22)) |&gt;
+  count(Universiteit1.22) |&gt;
+  mutate(percent = round(n / sum(n) * 100, 2))</code></pre>
+<pre><code>## # A tibble: 11 × 3
+##    Universiteit1.22       n percent
+##    &lt;chr&gt;              &lt;int&gt;   &lt;dbl&gt;
+##  1 Bocconi University     1    0.15
+##  2 EUR                   43    6.38
+##  3 Leiden                70   10.4 
+##  4 RU                    90   13.4 
+##  5 RUG                   67    9.94
+##  6 UU                    49    7.27
+##  7 Universiteit Gent      1    0.15
+##  8 UvA                  149   22.1 
+##  9 UvT                   24    3.56
+## 10 VU                   115   17.1 
+## 11 missing               65    9.64</code></pre>
+<pre class="r"><code>result_gender2$demographics$Universiteit1.24[result_gender2$demographics$Universiteit1.24 == &quot;&quot;] &lt;- NA
+result_gender2$demographics |&gt;
+  mutate(Universiteit1.24 = ifelse(is.na(Universiteit1.24), &quot;missing&quot;, Universiteit1.24)) |&gt;
+  count(Universiteit1.24) |&gt;
+  mutate(percent = round(n / sum(n) * 100, 2))</code></pre>
+<pre><code>## # A tibble: 12 × 3
+##    Universiteit1.24          n percent
+##    &lt;chr&gt;                 &lt;int&gt;   &lt;dbl&gt;
+##  1 Bocconi University        1    0.15
+##  2 EUR                      50    7.42
+##  3 Leiden                   68   10.1 
+##  4 RU                       87   12.9 
+##  5 RUG                      68   10.1 
+##  6 UU                       44    6.53
+##  7 Uni Gothenburg            1    0.15
+##  8 University of Cologne     1    0.15
+##  9 UvA                     163   24.2 
+## 10 UvT                      26    3.86
+## 11 VU                      117   17.4 
+## 12 missing                  48    7.12</code></pre>
+<pre class="r"><code># did people change university? Yes, 14 people
+univ_wave22 &lt;- result_gender2$demographics$Universiteit1.22
+univ_wave24 &lt;- result_gender2$demographics$Universiteit1.24
+
+# Combine into a data frame
+df_univ &lt;- data.frame(
+  actor = 1:length(univ_wave22),
+  wave22 = univ_wave22,
+  wave24 = univ_wave24
+)
+
+# Check which actors changed university
+df_univ$changed &lt;- df_univ$wave22 != df_univ$wave24
+
+# Summary
+table(df_univ$changed)</code></pre>
+<pre><code>## 
+## FALSE  TRUE 
+##   547    14</code></pre>
+</div>
+<div id="department" class="section level3" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> department</h3>
+<p>In wave 1 there were 65 missing values for discipline, but in wave 2
+there were none. Over time 65 people appear to have changed discipline.
+This however does not reflect a change of discipline, but the
+disciplines of the 65 people were likely filled in in wave 2 as they
+were not present in wave 1. Therefore, discipline is a constant
+variable, but for the analysis we need to take the disciplines from wave
+2 as those are complete.</p>
+<pre class="r"><code># Replace empty strings with NA
+result_gender2$demographics$discipline.22[result_gender2$demographics$discipline.22 == &quot;&quot;] &lt;- NA
+result_gender2$demographics$discipline.24[result_gender2$demographics$discipline.24 == &quot;&quot;] &lt;- NA
+
+# Replace NA with &quot;missing&quot; and overwrite the variables
+result_gender2$demographics &lt;- result_gender2$demographics |&gt;
+  mutate(
+    discipline.22 = ifelse(is.na(discipline.22), &quot;missing&quot;, discipline.22),
+    discipline.24 = ifelse(is.na(discipline.24), &quot;missing&quot;, discipline.24)
+  )
+
+count(result_gender2$demographics, discipline.22)</code></pre>
+<pre><code>## # A tibble: 3 × 2
+##   discipline.22         n
+##   &lt;chr&gt;             &lt;int&gt;
+## 1 missing              65
+## 2 political science   253
+## 3 sociology           356</code></pre>
+<pre class="r"><code>count(result_gender2$demographics, discipline.24)</code></pre>
+<pre><code>## # A tibble: 2 × 2
+##   discipline.24         n
+##   &lt;chr&gt;             &lt;int&gt;
+## 1 political science   289
+## 2 sociology           385</code></pre>
+<pre class="r"><code># Did discipline change?
+# did people change university? Yes, 14 people
+disc_wave22 &lt;- result_gender2$demographics$discipline.22
+disc_wave24 &lt;- result_gender2$demographics$discipline.24
+
+# Combine into a data frame
+df_disc &lt;- data.frame(
+  actor = 1:length(disc_wave22),
+  wave22 = disc_wave22,
+  wave24 = disc_wave24
+)
+
+# Check which actors changed university
+df_disc$changed &lt;- df_disc$wave22 != df_disc$wave24
+
+# Summary
+table(df_disc$changed)</code></pre>
+<pre><code>## 
+## FALSE  TRUE 
+##   609    65</code></pre>
+</div>
+</div>
+<div id="triad-census" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Triad census</h2>
+<div id="check-waves" class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Check waves</h3>
+<p>Everything checked out, except that a few individuals collaborated
+with themselves. Because self-collaboration is not meaningful in the
+context of this study, I set the corresponding diagonal values in the
+adjacency matrix to 0, ensuring that no individual is shown as
+collaborating with themselves.</p>
+<pre class="r"><code>wave1 &lt;- result_gender2$nets[1,,]
+wave2 &lt;- result_gender2$nets[2,,]
+
+# filter out the waves of the object: we need to check our input
+dim(wave1)
+dim(wave2)
+
+# you need to have 0 missing values:
+sum(is.na(wave1))
+sum(is.na(wave2))
+
+#check the diagonal: all places should be 0
+sum(diag(wave1)==0)
+sum(diag(wave2)==0)
+
+# a few people did work with themselves:
+diag(wave1) &lt;- 0
+diag(wave2) &lt;- 0
+
+# everything should be 1 or 0:
+sum(wave1&gt;1)
+sum(wave2&gt;1)
+
+# check if it&#39;s not empty: there are people with 1&#39;s
+sum(wave1&gt;0)
+sum(wave2&gt;0)</code></pre>
+</div>
+<div id="triad-census-1" class="section level3" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Triad Census</h3>
+<p>The two tables below provides findings for RQ1, which examines
+whether and which triadic structures appeared in the network.</p>
+<p>In Wave 1, 021C triads occurred 190 times, while 030T triads appeared
+23 times. This indicates that cyclic or intermediary triads (021C) were
+much more common than transitive triads (030T) during the first
+observation period.</p>
+<pre class="r"><code># convert to igraph
+g1 &lt;- graph_from_adjacency_matrix(wave1, mode = &quot;directed&quot;)
+g2 &lt;- graph_from_adjacency_matrix(wave2, mode = &quot;directed&quot;)
+
+# Compute triad census (igraph version)
+triads &lt;- triad_census(g1)
+
+# Define triad types
+triad_types &lt;- c(
+  &quot;003&quot;, &quot;012&quot;, &quot;102&quot;, &quot;021D&quot;, &quot;021U&quot;, &quot;021C&quot;, 
+  &quot;111D&quot;, &quot;111U&quot;, &quot;030T&quot;, &quot;030C&quot;, &quot;201&quot;, 
+  &quot;120D&quot;, &quot;120U&quot;, &quot;120C&quot;, &quot;210&quot;, &quot;300&quot;
+)
+
+# Combine into a data frame
+triad_table &lt;- data.frame(
+  Triad = triad_types,
+  Count = as.numeric(triads)
+)
+
+triad_table</code></pre>
+<pre><code>##    Triad    Count
+## 1    003 50611379
+## 2    012   159304
+## 3    102    31974
+## 4   021D      127
+## 5   021U      168
+## 6   021C      190
+## 7   111D      111
+## 8   111U      100
+## 9   030T       23
+## 10  030C        2
+## 11   201       19
+## 12  120D       10
+## 13  120U        7
+## 14  120C        4
+## 15   210        6
+## 16   300        0</code></pre>
+<p>In Wave 2, both triad types appeared more frequently: 021C occurred
+287 times, and 030T appeared 56 times. While this increase suggests an
+expansion of triadic structures, the growth may partly reflect the
+addition of new individuals to the network rather than a substantive
+change in the underlying collaboration patterns.</p>
+<p>Therefore, the answer to RQ1 is that both 021C and 030T triadic
+structures are present in the network in both waves, with 021C
+consistently being the most frequent of the two. The rise in their
+occurrence from Wave 1 to Wave 2 points to a general increase in triadic
+connectivity, likely driven by network expansion rather than a shift in
+structural tendencies.</p>
+<pre class="r"><code># Compute triad census (igraph version)
+triads &lt;- triad_census(g2)
+
+# Define triad types
+triad_types &lt;- c(
+  &quot;003&quot;, &quot;012&quot;, &quot;102&quot;, &quot;021D&quot;, &quot;021U&quot;, &quot;021C&quot;, 
+  &quot;111D&quot;, &quot;111U&quot;, &quot;030T&quot;, &quot;030C&quot;, &quot;201&quot;, 
+  &quot;120D&quot;, &quot;120U&quot;, &quot;120C&quot;, &quot;210&quot;, &quot;300&quot;
+)
+
+# Combine into a data frame
+triad_table &lt;- data.frame(
+  Triad = triad_types,
+  Count = as.numeric(triads)
+)
+
+triad_table</code></pre>
+<pre><code>##    Triad    Count
+## 1    003 50463584
+## 2    012   295767
+## 3    102    42648
+## 4   021D      192
+## 5   021U      557
+## 6   021C      287
+## 7   111D      180
+## 8   111U       83
+## 9   030T       56
+## 10  030C        1
+## 11   201       15
+## 12  120D       19
+## 13  120U       13
+## 14  120C       11
+## 15   210        9
+## 16   300        2</code></pre>
+</div>
+</div>
+<div id="gendered-triads-wave-1" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Gendered triads wave
+1</h2>
+<p>To identify the gender configuration in the triads, I first needed to
+create a dataset in which the configurations are linked to actual nodes,
+rather than simply counting the number of configurations as a triad
+census does.</p>
+<p>Creating this dataset is computationally intensive because, for each
+person, every possible triad combination must be recorded. Since
+individuals must be connected to at least one other person to be part of
+a possible triad, isolates can be removed from the dataset. This reduces
+the dataset to 231 people in the first wave, which significantly speeds
+up the for-each loop.</p>
+<pre class="r"><code>row_sums &lt;- rowSums(wave1)
+col_sums &lt;- colSums(wave1)
+# sum(row_sums != 0 | col_sums != 0)
+# 231 people remain</code></pre>
+<div id="wave-1-df" class="section level3" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Wave 1 df</h3>
+<pre class="r"><code>row_sums &lt;- rowSums(wave1)
+col_sums &lt;- colSums(wave1)
+nonzero_ties &lt;- which(row_sums != 0 | col_sums != 0)
+
+gender &lt;- result_gender2$demographics$gender
+
+triads &lt;- c(&quot;003&quot;, &quot;012&quot;, &quot;102&quot;, &quot;021D&quot;, &quot;021U&quot;, &quot;021C&quot;, &quot;111D&quot;, &quot;111U&quot;, &quot;030T&quot;, &quot;030C&quot;, &quot;201&quot;, &quot;120D&quot;, &quot;120U&quot;, &quot;120C&quot;, &quot;210&quot;, &quot;300&quot;)
+
+df &lt;- data.frame()
+
+df &lt;- foreach(a1 = nonzero_ties, i = iterators::icount(), .combine = &quot;rbind&quot;) %:%
+  foreach(a2 = nonzero_ties, j = iterators::icount(), .combine = &quot;rbind&quot;) %:%
+  foreach(a3 = nonzero_ties, k = iterators::icount(), .combine = &quot;rbind&quot;) %do% {
+    
+    # Print progress for each a1 only
+    if (j == 1 &amp;&amp; k == 1) {  # only print once per a1
+      print(paste0(&quot;Processing outer node a1=&quot;, a1, &quot; (i=&quot;, i, &quot;)&quot;))
+    }
+    
+    if (i &gt; j &amp; j &gt; k) {  # iteration counts still control loop order
+      data.frame(
+        i = a1, j = a2, k = a3,           # use a1, a2, a3 as node IDs
+        gender_i = gender[a1],             # original node IDs for indexing
+        gender_j = gender[a2],
+        gender_k = gender[a3],
+        t1_ij = as.character(wave1[a1, a2]),
+        t1_ji = as.character(wave1[a2, a1]),
+        t1_ik = as.character(wave1[a1, a3]),
+        t1_ki = as.character(wave1[a3, a1]),
+        t1_jk = as.character(wave1[a2, a3]),
+        t1_kj = as.character(wave1[a3, a2]),
+        type = triads[which(sna::triad.census(wave1[c(a1, a2, a3), c(a1, a2, a3)]) == 1)]
+      )
+    }
+  }
+
+# Optional: create triad name
+df$name &lt;- paste0(df$i, &quot;.&quot;, df$j, &quot;.&quot;, df$k)
+
+write.csv(df, &quot;./data/processed/wave1excel.csv&quot;, row.names = FALSE)</code></pre>
+<p>Load the file</p>
+<pre class="r"><code>wave1excel &lt;- read.csv(&quot;./data/processed/wave1excel.csv&quot;)</code></pre>
+</div>
+<div id="analysis-wave-1" class="section level3" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> Analysis Wave
+1</h3>
+<p>021C</p>
+<pre class="r"><code># only keep the triangles we are interested in
+# also filter the people with gender = NA out (was one person)
+df_filtered &lt;- subset(
+  wave1excel,
+  type %in% c(&quot;021C&quot;, &quot;030T&quot;) &amp;
+    !is.na(gender_i) &amp;
+    !is.na(gender_j) &amp;
+    !is.na(gender_k)
+)
+
+write.csv(df, &quot;./data/processed/df_filtered.csv&quot;, row.names = FALSE)
+
+# Initialize counters
+ffm &lt;- 0
+mmf &lt;- 0
+mmm &lt;- 0
+fff &lt;- 0
+
+# i am so sorry for this for loop :) I know it is horrible to look at but it works and I understand it
+for (idx in 1:nrow(df_filtered)) {
+  # Tie variables
+  t_ij &lt;- df_filtered$t1_ij[idx]
+  t_ji &lt;- df_filtered$t1_ji[idx]
+  t_ik &lt;- df_filtered$t1_ik[idx]
+  t_ki &lt;- df_filtered$t1_ki[idx]
+  t_jk &lt;- df_filtered$t1_jk[idx]
+  t_kj &lt;- df_filtered$t1_kj[idx]
+  
+  # Gender variables
+  g_i &lt;- df_filtered$gender_i[idx]
+  g_j &lt;- df_filtered$gender_j[idx]
+  g_k &lt;- df_filtered$gender_k[idx]
+  
+  # 1) i -&gt; j -&gt; k, open: i -&gt; k must be 0 or NA
+  if (t_ij == 1 &amp; t_jk == 1 &amp; !(t_ik == 1)) {
+    if (g_i == &quot;female&quot; &amp; g_j == &quot;female&quot; &amp; g_k == &quot;male&quot;) ffm &lt;- ffm + 1
+    if (g_i == &quot;male&quot; &amp; g_j == &quot;male&quot; &amp; g_k == &quot;female&quot;) mmf &lt;- mmf + 1
+    if (g_i == &quot;male&quot; &amp; g_j == &quot;male&quot; &amp; g_k == &quot;male&quot;) mmm &lt;- mmm + 1
+    if (g_i == &quot;female&quot; &amp; g_j == &quot;female&quot; &amp; g_k == &quot;female&quot;) fff &lt;- fff + 1
+  }
+  
+  # 2) i -&gt; k -&gt; j, open: i -&gt; j must be 0 or NA
+  if (t_ik == 1 &amp; t_kj == 1 &amp; !(t_ij == 1)) {
+    if (g_i == &quot;female&quot; &amp; g_k == &quot;female&quot; &amp; g_j == &quot;male&quot;) ffm &lt;- ffm + 1
+    if (g_i == &quot;male&quot; &amp; g_k == &quot;male&quot; &amp; g_j == &quot;female&quot;) mmf &lt;- mmf + 1
+    if (g_i == &quot;male&quot; &amp; g_k == &quot;male&quot; &amp; g_j == &quot;male&quot;) mmm &lt;- mmm + 1
+    if (g_i == &quot;female&quot; &amp; g_k == &quot;female&quot; &amp; g_j == &quot;female&quot;) fff &lt;- fff + 1
+  }
+  
+  # 3) j -&gt; i -&gt; k, open: j -&gt; k must be 0 or NA
+  if (t_ji == 1 &amp; t_ik == 1 &amp; !(t_jk == 1)) {
+    if (g_j == &quot;female&quot; &amp; g_i == &quot;female&quot; &amp; g_k == &quot;male&quot;) ffm &lt;- ffm + 1
+    if (g_j == &quot;male&quot; &amp; g_i == &quot;male&quot; &amp; g_k == &quot;female&quot;) mmf &lt;- mmf + 1
+    if (g_j == &quot;male&quot; &amp; g_i == &quot;male&quot; &amp; g_k == &quot;male&quot;) mmm &lt;- mmm + 1
+    if (g_j == &quot;female&quot; &amp; g_i == &quot;female&quot; &amp; g_k == &quot;female&quot;) fff &lt;- fff + 1
+  }
+  
+  # 4) j -&gt; k -&gt; i, open: j -&gt; i must be 0 or NA
+  if (t_jk == 1 &amp; t_ki == 1 &amp; !(t_ji == 1)) {
+    if (g_j == &quot;female&quot; &amp; g_k == &quot;female&quot; &amp; g_i == &quot;male&quot;) ffm &lt;- ffm + 1
+    if (g_j == &quot;male&quot; &amp; g_k == &quot;male&quot; &amp; g_i == &quot;female&quot;) mmf &lt;- mmf + 1
+    if (g_j == &quot;male&quot; &amp; g_k == &quot;male&quot; &amp; g_i == &quot;male&quot;) mmm &lt;- mmm + 1
+    if (g_j == &quot;female&quot; &amp; g_k == &quot;female&quot; &amp; g_i == &quot;female&quot;) fff &lt;- fff + 1
+  }
+  
+  # 5) k -&gt; i -&gt; j, open: k -&gt; j must be 0 or NA
+  if (t_ki == 1 &amp; t_ij == 1 &amp; !(t_kj == 1)) {
+    if (g_k == &quot;female&quot; &amp; g_i == &quot;female&quot; &amp; g_j == &quot;male&quot;) ffm &lt;- ffm + 1
+    if (g_k == &quot;male&quot; &amp; g_i == &quot;male&quot; &amp; g_j == &quot;female&quot;) mmf &lt;- mmf + 1
+    if (g_k == &quot;male&quot; &amp; g_i == &quot;male&quot; &amp; g_j == &quot;male&quot;) mmm &lt;- mmm + 1
+    if (g_k == &quot;female&quot; &amp; g_i == &quot;female&quot; &amp; g_j == &quot;female&quot;) fff &lt;- fff + 1
+  }
+  
+  # 6) k -&gt; j -&gt; i, open: k -&gt; i must be 0 or NA
+  if (t_kj == 1 &amp; t_ji == 1 &amp; !(t_ki == 1)) {
+    if (g_k == &quot;female&quot; &amp; g_j == &quot;female&quot; &amp; g_i == &quot;male&quot;) ffm &lt;- ffm + 1
+    if (g_k == &quot;male&quot; &amp; g_j == &quot;male&quot; &amp; g_i == &quot;female&quot;) mmf &lt;- mmf + 1
+    if (g_k == &quot;male&quot; &amp; g_j == &quot;male&quot; &amp; g_i == &quot;male&quot;) mmm &lt;- mmm + 1
+    if (g_k == &quot;female&quot; &amp; g_j == &quot;female&quot; &amp; g_i == &quot;female&quot;) fff &lt;- fff + 1
+  }
+}
+
+# Print results
+ffm</code></pre>
+<pre><code>## [1] 8</code></pre>
+<pre class="r"><code>mmf</code></pre>
+<pre><code>## [1] 16</code></pre>
+<pre class="r"><code>mmm</code></pre>
+<pre><code>## [1] 75</code></pre>
+<pre class="r"><code>fff</code></pre>
+<pre><code>## [1] 14</code></pre>
+<p>030T</p>
+<pre class="r"><code># Initialize counters
+ffmclosed &lt;- 0
+mmfclosed &lt;- 0
+mmmclosed &lt;- 0
+fffclosed &lt;- 0
+
+for (idx in 1:nrow(df_filtered)) {
+  # Assign tie variables for readability
+  t_ij &lt;- df_filtered$t1_ij[idx]
+  t_ji &lt;- df_filtered$t1_ji[idx]
+  t_ik &lt;- df_filtered$t1_ik[idx]
+  t_ki &lt;- df_filtered$t1_ki[idx]
+  t_jk &lt;- df_filtered$t1_jk[idx]
+  t_kj &lt;- df_filtered$t1_kj[idx]
+  
+  # Assign gender variables for readability
+  g_i &lt;- df_filtered$gender_i[idx]
+  g_j &lt;- df_filtered$gender_j[idx]
+  g_k &lt;- df_filtered$gender_k[idx]
+  
+  # 1) i -&gt; j -&gt; k, closed: i -&gt; k exists
+  if (t_ij == 1 &amp; t_jk == 1 &amp; t_ik == 1) {
+    if (g_i == &quot;female&quot; &amp; g_j == &quot;female&quot; &amp; g_k == &quot;male&quot;) ffmclosed &lt;- ffmclosed + 1
+    if (g_i == &quot;male&quot; &amp; g_j == &quot;male&quot; &amp; g_k == &quot;female&quot;) mmfclosed &lt;- mmfclosed + 1
+    if (g_i == &quot;male&quot; &amp; g_j == &quot;male&quot; &amp; g_k == &quot;male&quot;) mmmclosed &lt;- mmmclosed + 1
+    if (g_i == &quot;female&quot; &amp; g_j == &quot;female&quot; &amp; g_k == &quot;female&quot;) fffclosed &lt;- fffclosed + 1
+  }
+  
+  # 2) i -&gt; k -&gt; j, closed: i -&gt; j exists
+  if (t_ik == 1 &amp; t_kj == 1 &amp; t_ij == 1) {
+    if (g_i == &quot;female&quot; &amp; g_k == &quot;female&quot; &amp; g_j == &quot;male&quot;) ffmclosed &lt;- ffmclosed + 1
+    if (g_i == &quot;male&quot; &amp; g_k == &quot;male&quot; &amp; g_j == &quot;female&quot;) mmfclosed &lt;- mmfclosed + 1
+    if (g_i == &quot;male&quot; &amp; g_k == &quot;male&quot; &amp; g_j == &quot;male&quot;) mmmclosed &lt;- mmmclosed + 1
+    if (g_i == &quot;female&quot; &amp; g_k == &quot;female&quot; &amp; g_j == &quot;female&quot;) fffclosed &lt;- fffclosed + 1
+  }
+  
+  # 3) j -&gt; i -&gt; k, closed: j -&gt; k exists
+  if (t_ji == 1 &amp; t_ik == 1 &amp; t_jk == 1) {
+    if (g_j == &quot;female&quot; &amp; g_i == &quot;female&quot; &amp; g_k == &quot;male&quot;) ffmclosed &lt;- ffmclosed + 1
+    if (g_j == &quot;male&quot; &amp; g_i == &quot;male&quot; &amp; g_k == &quot;female&quot;) mmfclosed &lt;- mmfclosed + 1
+    if (g_j == &quot;male&quot; &amp; g_i == &quot;male&quot; &amp; g_k == &quot;male&quot;) mmmclosed &lt;- mmmclosed + 1
+    if (g_j == &quot;female&quot; &amp; g_i == &quot;female&quot; &amp; g_k == &quot;female&quot;) fffclosed &lt;- fffclosed + 1
+  }
+  
+  # 4) j -&gt; k -&gt; i, closed: j -&gt; i exists
+  if (t_jk == 1 &amp; t_ki == 1 &amp; t_ji == 1) {
+    if (g_j == &quot;female&quot; &amp; g_k == &quot;female&quot; &amp; g_i == &quot;male&quot;) ffmclosed &lt;- ffmclosed + 1
+    if (g_j == &quot;male&quot; &amp; g_k == &quot;male&quot; &amp; g_i == &quot;female&quot;) mmfclosed &lt;- mmfclosed + 1
+    if (g_j == &quot;male&quot; &amp; g_k == &quot;male&quot; &amp; g_i == &quot;male&quot;) mmmclosed &lt;- mmmclosed + 1
+    if (g_j == &quot;female&quot; &amp; g_k == &quot;female&quot; &amp; g_i == &quot;female&quot;) fffclosed &lt;- fffclosed + 1
+  }
+  
+  # 5) k -&gt; i -&gt; j, closed: k -&gt; j exists
+  if (t_ki == 1 &amp; t_ij == 1 &amp; t_kj == 1) {
+    if (g_k == &quot;female&quot; &amp; g_i == &quot;female&quot; &amp; g_j == &quot;male&quot;) ffmclosed &lt;- ffmclosed + 1
+    if (g_k == &quot;male&quot; &amp; g_i == &quot;male&quot; &amp; g_j == &quot;female&quot;) mmfclosed &lt;- mmfclosed + 1
+    if (g_k == &quot;male&quot; &amp; g_i == &quot;male&quot; &amp; g_j == &quot;male&quot;) mmmclosed &lt;- mmmclosed + 1
+    if (g_k == &quot;female&quot; &amp; g_i == &quot;female&quot; &amp; g_j == &quot;female&quot;) fffclosed &lt;- fffclosed + 1
+  }
+  
+  # 6) k -&gt; j -&gt; i, closed: k -&gt; i exists
+  if (t_kj == 1 &amp; t_ji == 1 &amp; t_ki == 1) {
+    if (g_k == &quot;female&quot; &amp; g_j == &quot;female&quot; &amp; g_i == &quot;male&quot;) ffmclosed &lt;- ffmclosed + 1
+    if (g_k == &quot;male&quot; &amp; g_j == &quot;male&quot; &amp; g_i == &quot;female&quot;) mmfclosed &lt;- mmfclosed + 1
+    if (g_k == &quot;male&quot; &amp; g_j == &quot;male&quot; &amp; g_i == &quot;male&quot;) mmmclosed &lt;- mmmclosed + 1
+    if (g_k == &quot;female&quot; &amp; g_j == &quot;female&quot; &amp; g_i == &quot;female&quot;) fffclosed &lt;- fffclosed + 1
+  }
+}
+
+# Print results
+ffmclosed</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>mmfclosed</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>mmmclosed</code></pre>
+<pre><code>## [1] 9</code></pre>
+<pre class="r"><code>fffclosed</code></pre>
+<pre><code>## [1] 5</code></pre>
+</div>
+<div id="results-wave-1" class="section level3" number="1.4.3">
+<h3><span class="header-section-number">1.4.3</span> Results wave 1</h3>
+<p>Based on the analyses above, the second research question can be
+addressed. This research question was descriptive, focusing on how
+gender is distributed across the triadic structures 021C and 031T
+observed in the network. <img src="images/dis_prop_gender3.png" /></p>
+<p>Although the overall network was approximately gender balanced (47.0%
+female and 49.7% male), the composition of the 021C and 031T triadic
+types in Wave 1 reveals a clear over-representation of all-male groups.
+In 021C triads, nearly 40% were composed entirely of men, compared to
+only 7% all-female triads. A similar pattern appears in 031T triads,
+where 39% were all-male and 22% all-female. Triads in which i and j were
+the same gender but the third node (h) differed (i.e., ffm or mmf) were
+considerably less frequent, particularly those with a female majority
+(ffm).</p>
+<p>For 031T triads specifically, gender homophily appears especially
+pronounced. Approximately 61% of these triads consist entirely of one
+gender (either all-male or all-female), while only around 8% are of the
+ffm or mmf type. Given the overall gender balance of the network, this
+indicates that transitive or tightly interconnected triads tend to form
+within same-gender groups rather than across them, particularly in
+all-male triads.</p>
+<p><br></p>
+</div>
+</div>
+<div id="gendered-triads-wave-2" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Gendered triads wave
+2</h2>
+<div id="wave-2-df" class="section level3" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> Wave 2 df</h3>
+<p>This takes a very long time so I have to see whether I have time to
+run this in the background some day.</p>
+<pre class="r"><code>row_sums &lt;- rowSums(wave2)
+col_sums &lt;- colSums(wave2)
+nonzero_ties &lt;- which(row_sums != 0 | col_sums != 0)
+
+gender &lt;- result_gender2$demographics$gender
+
+triads &lt;- c(&quot;003&quot;, &quot;012&quot;, &quot;102&quot;, &quot;021D&quot;, &quot;021U&quot;, &quot;021C&quot;, &quot;111D&quot;, &quot;111U&quot;, &quot;030T&quot;, &quot;030C&quot;, &quot;201&quot;, &quot;120D&quot;, &quot;120U&quot;, &quot;120C&quot;, &quot;210&quot;, &quot;300&quot;)
+
+df2 &lt;- data.frame()
+
+df2 &lt;- foreach(a1 = nonzero_ties, i = iterators::icount(), .combine = &quot;rbind&quot;) %:%
+  foreach(a2 = nonzero_ties, j = iterators::icount(), .combine = &quot;rbind&quot;) %:%
+  foreach(a3 = nonzero_ties, k = iterators::icount(), .combine = &quot;rbind&quot;) %do% {
+    
+    # Print progress for each a1 only
+    if (j == 1 &amp;&amp; k == 1) {  # only print once per a1
+      print(paste0(&quot;Processing outer node a1=&quot;, a1, &quot; (i=&quot;, i, &quot;)&quot;))
+    }
+    
+    if (i &gt; j &amp; j &gt; k) {  # iteration counts still control loop order
+      data.frame(
+        i = a1, j = a2, k = a3,           # use a1, a2, a3 as node IDs
+        gender_i = gender[a1],             # original node IDs for indexing
+        gender_j = gender[a2],
+        gender_k = gender[a3],
+        t1_ij = as.character(wave2[a1, a2]),
+        t1_ji = as.character(wave2[a2, a1]),
+        t1_ik = as.character(wave2[a1, a3]),
+        t1_ki = as.character(wave2[a3, a1]),
+        t1_jk = as.character(wave2[a2, a3]),
+        t1_kj = as.character(wave2[a3, a2]),
+        type = triads[which(sna::triad.census(wave2[c(a1, a2, a3), c(a1, a2, a3)]) == 1)]
+      )
+    }
+  }
+
+# Optional: create triad name
+df2$name &lt;- paste0(df2$i, &quot;.&quot;, df2$j, &quot;.&quot;, df2$k)</code></pre>
+</div>
+<div id="analysis-wave-2" class="section level3" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> Analysis Wave
+2</h3>
+<p>Open</p>
+<pre class="r"><code># only keep the triangles we are interested in
+# also filter the people with gender = NA out
+df_filtered2 &lt;- subset(
+  triads_output_wave2,
+  type %in% c(&quot;021C&quot;, &quot;030T&quot;) &amp;
+    !is.na(gender_i) &amp;
+    !is.na(gender_j) &amp;
+    !is.na(gender_k)
+)
+
+# Initialize counters
+ffm2 &lt;- 0
+mmf2 &lt;- 0
+mmm2 &lt;- 0
+fff2 &lt;- 0
+
+# i am so sorry for this for loop :) I know it is horrible to look at but it works and I understand it
+for (idx in 1:nrow(df_filtered2)) {
+  # Tie variables
+  t_ij &lt;- df_filtered$t1_ij[idx]
+  t_ji &lt;- df_filtered$t1_ji[idx]
+  t_ik &lt;- df_filtered$t1_ik[idx]
+  t_ki &lt;- df_filtered$t1_ki[idx]
+  t_jk &lt;- df_filtered$t1_jk[idx]
+  t_kj &lt;- df_filtered$t1_kj[idx]
+  
+  # Gender variables
+  g_i &lt;- df_filtered$gender_i[idx]
+  g_j &lt;- df_filtered$gender_j[idx]
+  g_k &lt;- df_filtered$gender_k[idx]
+  
+  # 1) i -&gt; j -&gt; k, open: i -&gt; k must be 0 or NA
+  if (t_ij == 1 &amp; t_jk == 1 &amp; !(t_ik == 1)) {
+    if (g_i == &quot;female&quot; &amp; g_j == &quot;female&quot; &amp; g_k == &quot;male&quot;) ffm2 &lt;- ffm2 + 1
+    if (g_i == &quot;male&quot; &amp; g_j == &quot;male&quot; &amp; g_k == &quot;female&quot;) mmf2 &lt;- mmf2 + 1
+    if (g_i == &quot;male&quot; &amp; g_j == &quot;male&quot; &amp; g_k == &quot;male&quot;) mmm2 &lt;- mmm2 + 1
+    if (g_i == &quot;female&quot; &amp; g_j == &quot;female&quot; &amp; g_k == &quot;female&quot;) fff2 &lt;- fff2 + 1
+  }
+  
+  # 2) i -&gt; k -&gt; j, open: i -&gt; j must be 0 or NA
+  if (t_ik == 1 &amp; t_kj == 1 &amp; !(t_ij == 1)) {
+    if (g_i == &quot;female&quot; &amp; g_k == &quot;female&quot; &amp; g_j == &quot;male&quot;) ffm2 &lt;- ffm2 + 1
+    if (g_i == &quot;male&quot; &amp; g_k == &quot;male&quot; &amp; g_j == &quot;female&quot;) mmf2 &lt;- mmf2 + 1
+    if (g_i == &quot;male&quot; &amp; g_k == &quot;male&quot; &amp; g_j == &quot;male&quot;) mmm2 &lt;- mmm2 + 1
+    if (g_i == &quot;female&quot; &amp; g_k == &quot;female&quot; &amp; g_j == &quot;female&quot;) fff2 &lt;- fff2 + 1
+  }
+  
+  # 3) j -&gt; i -&gt; k, open: j -&gt; k must be 0 or NA
+  if (t_ji == 1 &amp; t_ik == 1 &amp; !(t_jk == 1)) {
+    if (g_j == &quot;female&quot; &amp; g_i == &quot;female&quot; &amp; g_k == &quot;male&quot;) ffm2 &lt;- ffm2 + 1
+    if (g_j == &quot;male&quot; &amp; g_i == &quot;male&quot; &amp; g_k == &quot;female&quot;) mmf2 &lt;- mmf2 + 1
+    if (g_j == &quot;male&quot; &amp; g_i == &quot;male&quot; &amp; g_k == &quot;male&quot;) mmm2 &lt;- mmm2 + 1
+    if (g_j == &quot;female&quot; &amp; g_i == &quot;female&quot; &amp; g_k == &quot;female&quot;) fff2 &lt;- fff2 + 1
+  }
+  
+  # 4) j -&gt; k -&gt; i, open: j -&gt; i must be 0 or NA
+  if (t_jk == 1 &amp; t_ki == 1 &amp; !(t_ji == 1)) {
+    if (g_j == &quot;female&quot; &amp; g_k == &quot;female&quot; &amp; g_i == &quot;male&quot;) ffm2 &lt;- ffm2 + 1
+    if (g_j == &quot;male&quot; &amp; g_k == &quot;male&quot; &amp; g_i == &quot;female&quot;) mmf2 &lt;- mmf2 + 1
+    if (g_j == &quot;male&quot; &amp; g_k == &quot;male&quot; &amp; g_i == &quot;male&quot;) mmm2 &lt;- mmm2 + 1
+    if (g_j == &quot;female&quot; &amp; g_k == &quot;female&quot; &amp; g_i == &quot;female&quot;) fff2 &lt;- fff2 + 1
+  }
+  
+  # 5) k -&gt; i -&gt; j, open: k -&gt; j must be 0 or NA
+  if (t_ki == 1 &amp; t_ij == 1 &amp; !(t_kj == 1)) {
+    if (g_k == &quot;female&quot; &amp; g_i == &quot;female&quot; &amp; g_j == &quot;male&quot;) ffm2 &lt;- ffm2 + 1
+    if (g_k == &quot;male&quot; &amp; g_i == &quot;male&quot; &amp; g_j == &quot;female&quot;) mmf2 &lt;- mmf2 + 1
+    if (g_k == &quot;male&quot; &amp; g_i == &quot;male&quot; &amp; g_j == &quot;male&quot;) mmm2 &lt;- mmm2 + 1
+    if (g_k == &quot;female&quot; &amp; g_i == &quot;female&quot; &amp; g_j == &quot;female&quot;) fff2 &lt;- fff2 + 1
+  }
+  
+  # 6) k -&gt; j -&gt; i, open: k -&gt; i must be 0 or NA
+  if (t_kj == 1 &amp; t_ji == 1 &amp; !(t_ki == 1)) {
+    if (g_k == &quot;female&quot; &amp; g_j == &quot;female&quot; &amp; g_i == &quot;male&quot;) ffm2 &lt;- ffm2 + 1
+    if (g_k == &quot;male&quot; &amp; g_j == &quot;male&quot; &amp; g_i == &quot;female&quot;) mmf2 &lt;- mmf2 + 1
+    if (g_k == &quot;male&quot; &amp; g_j == &quot;male&quot; &amp; g_i == &quot;male&quot;) mmm2 &lt;- mmm2 + 1
+    if (g_k == &quot;female&quot; &amp; g_j == &quot;female&quot; &amp; g_i == &quot;female&quot;) fff2 &lt;- fff2 + 1
+  }
+}
+
+# Print results
+ffm2
+mmf2
+mmm2
+fff2</code></pre>
+<p>Closed</p>
+<pre class="r"><code># Initialize counters
+ffmclosed2 &lt;- 0
+mmfclosed2 &lt;- 0
+mmmclosed2 &lt;- 0
+fffclosed2 &lt;- 0
+
+for (idx in 1:nrow(df_filtered2)) {
+  # Assign tie variables for readability
+  t_ij &lt;- df_filtered$t1_ij[idx]
+  t_ji &lt;- df_filtered$t1_ji[idx]
+  t_ik &lt;- df_filtered$t1_ik[idx]
+  t_ki &lt;- df_filtered$t1_ki[idx]
+  t_jk &lt;- df_filtered$t1_jk[idx]
+  t_kj &lt;- df_filtered$t1_kj[idx]
+  
+  # Assign gender variables for readability
+  g_i &lt;- df_filtered$gender_i[idx]
+  g_j &lt;- df_filtered$gender_j[idx]
+  g_k &lt;- df_filtered$gender_k[idx]
+  
+  # 1) i -&gt; j -&gt; k, closed: i -&gt; k exists
+  if (t_ij == 1 &amp; t_jk == 1 &amp; t_ik == 1) {
+    if (g_i == &quot;female&quot; &amp; g_j == &quot;female&quot; &amp; g_k == &quot;male&quot;) ffmclosed2 &lt;- ffmclosed2 + 1
+    if (g_i == &quot;male&quot; &amp; g_j == &quot;male&quot; &amp; g_k == &quot;female&quot;) mmfclosed2 &lt;- mmfclosed2 + 1
+    if (g_i == &quot;male&quot; &amp; g_j == &quot;male&quot; &amp; g_k == &quot;male&quot;) mmmclosed2 &lt;- mmmclosed2 + 1
+    if (g_i == &quot;female&quot; &amp; g_j == &quot;female&quot; &amp; g_k == &quot;female&quot;) fffclosed2 &lt;- fffclosed2 + 1
+  }
+  
+  # 2) i -&gt; k -&gt; j, closed: i -&gt; j exists
+  if (t_ik == 1 &amp; t_kj == 1 &amp; t_ij == 1) {
+    if (g_i == &quot;female&quot; &amp; g_k == &quot;female&quot; &amp; g_j == &quot;male&quot;) ffmclosed2 &lt;- ffmclosed2 + 1
+    if (g_i == &quot;male&quot; &amp; g_k == &quot;male&quot; &amp; g_j == &quot;female&quot;) mmfclosed2 &lt;- mmfclosed2 + 1
+    if (g_i == &quot;male&quot; &amp; g_k == &quot;male&quot; &amp; g_j == &quot;male&quot;) mmmclosed2 &lt;- mmmclosed2 + 1
+    if (g_i == &quot;female&quot; &amp; g_k == &quot;female&quot; &amp; g_j == &quot;female&quot;) fffclosed2 &lt;- fffclosed2 + 1
+  }
+  
+  # 3) j -&gt; i -&gt; k, closed: j -&gt; k exists
+  if (t_ji == 1 &amp; t_ik == 1 &amp; t_jk == 1) {
+    if (g_j == &quot;female&quot; &amp; g_i == &quot;female&quot; &amp; g_k == &quot;male&quot;) ffmclosed2 &lt;- ffmclosed2 + 1
+    if (g_j == &quot;male&quot; &amp; g_i == &quot;male&quot; &amp; g_k == &quot;female&quot;) mmfclosed2 &lt;- mmfclosed2 + 1
+    if (g_j == &quot;male&quot; &amp; g_i == &quot;male&quot; &amp; g_k == &quot;male&quot;) mmmclosed2 &lt;- mmmclosed2 + 1
+    if (g_j == &quot;female&quot; &amp; g_i == &quot;female&quot; &amp; g_k == &quot;female&quot;) fffclosed2 &lt;- fffclosed2 + 1
+  }
+  
+  # 4) j -&gt; k -&gt; i, closed: j -&gt; i exists
+  if (t_jk == 1 &amp; t_ki == 1 &amp; t_ji == 1) {
+    if (g_j == &quot;female&quot; &amp; g_k == &quot;female&quot; &amp; g_i == &quot;male&quot;) ffmclosed2 &lt;- ffmclosed2 + 1
+    if (g_j == &quot;male&quot; &amp; g_k == &quot;male&quot; &amp; g_i == &quot;female&quot;) mmfclosed2 &lt;- mmfclosed2 + 1
+    if (g_j == &quot;male&quot; &amp; g_k == &quot;male&quot; &amp; g_i == &quot;male&quot;) mmmclosed2 &lt;- mmmclosed2 + 1
+    if (g_j == &quot;female&quot; &amp; g_k == &quot;female&quot; &amp; g_i == &quot;female&quot;) fffclosed2 &lt;- fffclosed2 + 1
+  }
+  
+  # 5) k -&gt; i -&gt; j, closed: k -&gt; j exists
+  if (t_ki == 1 &amp; t_ij == 1 &amp; t_kj == 1) {
+    if (g_k == &quot;female&quot; &amp; g_i == &quot;female&quot; &amp; g_j == &quot;male&quot;) ffmclosed2 &lt;- ffmclosed2 + 1
+    if (g_k == &quot;male&quot; &amp; g_i == &quot;male&quot; &amp; g_j == &quot;female&quot;) mmfclosed2 &lt;- mmfclosed2 + 1
+    if (g_k == &quot;male&quot; &amp; g_i == &quot;male&quot; &amp; g_j == &quot;male&quot;) mmmclosed2 &lt;- mmmclosed2 + 1
+    if (g_k == &quot;female&quot; &amp; g_i == &quot;female&quot; &amp; g_j == &quot;female&quot;) fffclosed2 &lt;- fffclosed2 + 1
+  }
+  
+  # 6) k -&gt; j -&gt; i, closed: k -&gt; i exists
+  if (t_kj == 1 &amp; t_ji == 1 &amp; t_ki == 1) {
+    if (g_k == &quot;female&quot; &amp; g_j == &quot;female&quot; &amp; g_i == &quot;male&quot;) ffmclosed2 &lt;- ffmclosed2 + 1
+    if (g_k == &quot;male&quot; &amp; g_j == &quot;male&quot; &amp; g_i == &quot;female&quot;) mmfclosed2 &lt;- mmfclosed2 + 1
+    if (g_k == &quot;male&quot; &amp; g_j == &quot;male&quot; &amp; g_i == &quot;male&quot;) mmmclosed2 &lt;- mmmclosed2 + 1
+    if (g_k == &quot;female&quot; &amp; g_j == &quot;female&quot; &amp; g_i == &quot;female&quot;) fffclosed2 &lt;- fffclosed2 + 1
+  }
+}
+
+# Print results
+ffmclosed2
+mmfclosed2
+mmmclosed2
+fffclosed2</code></pre>
+</div>
+</div>
+<div id="visualisation" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Visualisation</h2>
+<div id="adjacency-matrix" class="section level3" number="1.6.1">
+<h3><span class="header-section-number">1.6.1</span> Adjacency
+matrix</h3>
+<p>Now, to visualize the network of 021C triads and 030T triads I turn
+the dataset “df_filtered” from wave 1 back into an adjaceny matrix and
+create a gender list for those people.</p>
+<pre class="r"><code># Assuming your dataframe is called df_filtered
+df3 &lt;- df_filtered
+
+# Identify all unique node IDs from i, j, k
+nodes &lt;- sort(unique(c(df3$i, df3$j, df3$k)))
+
+# Create empty adjacency matrix
+adj_mat &lt;- matrix(0, nrow = length(nodes), ncol = length(nodes))
+rownames(adj_mat) &lt;- nodes
+colnames(adj_mat) &lt;- nodes
+
+# Fill adjacency matrix
+for (row in 1:nrow(df3)) {
+  i &lt;- df3$i[row]
+  j &lt;- df3$j[row]
+  k &lt;- df3$k[row]
+  
+  # Make sure to only assign if the column exists in the matrix
+  if (df3$t1_ij[row] == 1) adj_mat[as.character(i), as.character(j)] &lt;- 1
+  if (df3$t1_ji[row] == 1) adj_mat[as.character(j), as.character(i)] &lt;- 1
+  if (df3$t1_ik[row] == 1) adj_mat[as.character(i), as.character(k)] &lt;- 1
+  if (df3$t1_ki[row] == 1) adj_mat[as.character(k), as.character(i)] &lt;- 1
+  if (df3$t1_jk[row] == 1) adj_mat[as.character(j), as.character(k)] &lt;- 1
+  if (df3$t1_kj[row] == 1) adj_mat[as.character(k), as.character(j)] &lt;- 1
+}
+
+# View adjacency matrix
+# View(adj_mat)
+
+#check
+#row_sums &lt;- rowSums(adj_mat)
+#col_sums &lt;- colSums(adj_mat)
+#sum(row_sums == 0 &amp; col_sums == 0)
+
+# Create gender vector matching the order of nodes in adj_mat
+gender_vec &lt;- sapply(rownames(adj_mat), function(node) {
+  node &lt;- as.character(node)
+  
+  # Check which column contains this node
+  if (node %in% df3$i) {
+    df3$gender_i[which(df3$i == node)[1]]  # first occurrence
+  } else if (node %in% df3$j) {
+    df3$gender_j[which(df3$j == node)[1]]
+  } else if (node %in% df3$k) {
+    df3$gender_k[which(df3$k == node)[1]]
+  } else {
+    NA  # fallback
+  }
+})
+
+# Check the result
+# View(gender_vec)</code></pre>
+</div>
+<div id="graph" class="section level3" number="1.6.2">
+<h3><span class="header-section-number">1.6.2</span> Graph</h3>
+<p>Figure 1 visualizes the gender distribution in the network of
+individuals involved in 021C and 030T triads. Men appear more frequently
+in the network and are spread widely across various clusters. Several
+male-dominated clusters are visible, suggesting a stronger male presence
+in the formation of these triads. While women are less numerous, they
+also form noticeable clusters, often on the network’s periphery.
+Overall, the structure suggests gendered patterns of connection, with
+men occupying more central and interconnected positions, and women
+appearing more often in smaller, more localized groups.</p>
+<pre class="r"><code># Create igraph object from adjacency matrix
+g &lt;- graph_from_adjacency_matrix(adj_mat, mode = &quot;directed&quot;, diag = FALSE)
+
+# Map gender to colors
+# Adjust the values in gender_vec if they are not exactly &quot;male&quot;/&quot;female&quot;
+node_colors &lt;- ifelse(gender_vec == &quot;female&quot;, &quot;darkorange&quot;, &quot;lightblue&quot;)
+
+# Plot the graph
+plot(g,
+     vertex.color = node_colors,   # gender colors
+     vertex.label = NA,            # remove labels
+     vertex.size = 5,              # small nodes
+     edge.arrow.size = 0.2,        # smaller arrowheads
+     layout = layout_with_fr(g),   # pass the graph
+     main = &quot;Figure 1. Visualisation gender distribution in 021C and 030T triads in wave 1&quot;)
+
+# Add legend
+legend(&quot;topleft&quot;,                     # position of legend
+       legend = c(&quot;Female&quot;, &quot;Male&quot;),  # labels
+       col = c(&quot;darkorange&quot;, &quot;lightblue&quot;),# colors
+       pch = 19,                      # solid circle
+       pt.cex = 1.5,                  # size of the circles in legend
+       bty = &quot;n&quot;)                     # no box around legend</code></pre>
+<p><img src="Descriptives_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSm91cm5hbCAxIgpiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliCmF1dGhvcjogIk15bMOobmUgSHVzc29uIgotLS0KCmBgYHtyLCBlY2hvPUZBTFNFLCBpbmNsdWRlPVRSVUUsIHJlc3VsdHM9J2hpZGUnLCBtZXNzYWdlPUZBTFNFLCB3YXJuaW5nPUZBTFNFfQpsaWJyYXJ5KGtuaXRyKQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShzY2hvbGFyKQpsaWJyYXJ5KG9wZW5hbGV4UikKbGlicmFyeShydmVzdCkKbGlicmFyeShqc29ubGl0ZSkKbGlicmFyeShodHRyKQpsaWJyYXJ5KHJ2ZXN0KQpsaWJyYXJ5KHJlc2hhcGUyKQpsaWJyYXJ5KHhtbDIpCmxpYnJhcnkob3Blbnhsc3gpCmxpYnJhcnkocG9saXRlKQpsaWJyYXJ5KGlncmFwaCkKbGlicmFyeShzbmEpCmxpYnJhcnkoZ2VuZGVyaXplUikKbGlicmFyeShSU2VsZW5pdW0pCmxpYnJhcnkobmV0c3RhdCkKbGlicmFyeShwaW5ncikKbGlicmFyeShSU2llbmEpCmxpYnJhcnkoZGV2dG9vbHMpCmxpYnJhcnkoUnNpZW5hVHdvU3RlcCkKCgojIGxvYWQgdGhlIGZ1bmN0aW9ucyB5b3UgbmVlZCBmcm9tIHRoZSBwYWNrYWdlcwpmcGFja2FnZS5jaGVjayA8LSBmdW5jdGlvbihwYWNrYWdlcykgewogIGxhcHBseShwYWNrYWdlcywgRlVOID0gZnVuY3Rpb24oeCkgewogICAgaWYgKCFyZXF1aXJlKHgsIGNoYXJhY3Rlci5vbmx5ID0gVFJVRSkpIHsKICAgICAgaW5zdGFsbC5wYWNrYWdlcyh4LCBkZXBlbmRlbmNpZXMgPSBUUlVFKQogICAgICBsaWJyYXJ5KHgsIGNoYXJhY3Rlci5vbmx5ID0gVFJVRSkKICAgIH0KICB9KQp9Cgpmc2F2ZSA8LSBmdW5jdGlvbih4LCBmaWxlID0gTlVMTCwgbG9jYXRpb24gPSAiLi9kYXRhL3Byb2Nlc3NlZC8iKSB7CiAgaWZlbHNlKCFkaXIuZXhpc3RzKCJkYXRhIiksIGRpci5jcmVhdGUoImRhdGEiKSwgRkFMU0UpCiAgaWZlbHNlKCFkaXIuZXhpc3RzKCJkYXRhL3Byb2Nlc3NlZCIpLCBkaXIuY3JlYXRlKCJkYXRhL3Byb2Nlc3NlZCIpLCBGQUxTRSkKICAKICBpZiAoaXMubnVsbChmaWxlKSkgewogICAgZmlsZSA8LSBkZXBhcnNlKHN1YnN0aXR1dGUoeCkpCiAgfQogIAogIGRhdGVuYW1lIDwtIHN1YnN0cihnc3ViKCJbOi1dIiwgIiIsIFN5cy50aW1lKCkpLCAxLCA4KQogIHRvdGFsbmFtZSA8LSBwYXN0ZShsb2NhdGlvbiwgZGF0ZW5hbWUsIGZpbGUsICIucmRhIiwgc2VwID0gIiIpCiAgc2F2ZSh4LCBmaWxlID0gdG90YWxuYW1lKSAgIyBuZWVkIHRvIGZpeCBpZiBmaWxlIGlzIHJlbG9hZGVkIGFzIGlucHV0IG5hbWUsIG5vdCBhcyB4Lgp9CgpmbG9hZCA8LSBmdW5jdGlvbihmaWxlbmFtZSkgewogIGxvYWQoZmlsZW5hbWUpCiAgZ2V0KGxzKClbbHMoKSAhPSAiZmlsZW5hbWUiXSkKfQoKZnNob3dkZiA8LSBmdW5jdGlvbih4LCAuLi4pIHsKICBrbml0cjo6a2FibGUoeCwgZGlnaXRzID0gMiwgImh0bWwiLCAuLi4pICU+JQogICAga2FibGVFeHRyYTo6a2FibGVfc3R5bGluZyhib290c3RyYXBfb3B0aW9ucyA9IGMoInN0cmlwZWQiLCAiaG92ZXIiKSkgJT4lCiAgICBrYWJsZUV4dHJhOjpzY3JvbGxfYm94KHdpZHRoID0gIjEwMCUiLCBoZWlnaHQgPSAiMzAwcHgiKQp9CmBgYAoKYGBge3Iga2xpcHB5LCBlY2hvPUZBTFNFLCBpbmNsdWRlPVRSVUV9CmtsaXBweTo6a2xpcHB5KHBvc2l0aW9uID0gYygndG9wJywgJ3JpZ2h0JykpCiNrbGlwcHk6OmtsaXBweShjb2xvciA9ICdkYXJrcmVkJykKI2tsaXBweTo6a2xpcHB5KHRvb2x0aXBfbWVzc2FnZSA9ICdDbGljayB0byBjb3B5JywgdG9vbHRpcF9zdWNjZXNzID0gJ0RvbmUnKQpgYGAKCkxhc3QgY29tcGlsZWQgb24gYHIgZm9ybWF0KFN5cy50aW1lKCksICclQiwgJVknKWAKPGJyPgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiMgRGVzY3JpcHRpdmUgQW5hbHlzZXMKPGJyPgoKRm9yIHRoZSBkZXNjcmlwdGl2ZSBhbmFseXNlcywgbXkgcHJpbWFyeSBmb2N1cyBpcyBvbiBpZGVudGlmeWluZyB3aGljaCB0cmlhZHMgb2NjdXIgaW4gdGhlIG5ldHdvcmsgZGF0YSwgd2l0aCBwYXJ0aWN1bGFyIGF0dGVudGlvbiB0byAwMjFDIGFuZCAwMzBUIHRyaWFkcyAoUlExKSwgYXMgd2VsbCBhcyBleGFtaW5pbmcgdGhlIGdlbmRlciBkaXN0cmlidXRpb24gd2l0aGluIHRoZXNlIHNwZWNpZmljIHRyaWFkcyAoUlEyKS4gVG8gc3VwcG9ydCB0aGUgbGF0dGVyLCBJIHdpbGwgYWxzbyB2aXN1YWxpemUgdGhlIHJlbGV2YW50IHBhcnRzIG9mIHRoZSBuZXR3b3JrLiBIb3dldmVyLCBiZWZvcmUgZXhwbG9yaW5nIHRoZXNlIHBhdHRlcm5zIGluIGRldGFpbCwgSSB3aWxsIGZpcnN0IGFzc2VzcyB0aGUgb3ZlcmFsbCBnZW5kZXIgZGlzdHJpYnV0aW9uIGluIHRoZSBuZXR3b3JrIHRvIGdhaW4gYSBjbGVhcmVyIHVuZGVyc3RhbmRpbmcgb2YgdGhlIGRhdGFzZXQgYXMgYSB3aG9sZS4KCjxicj4KCkxvYWQgaW4gdGhlIGRhdGEKYGBge3J9CmxvYWQoIi4vZGF0YS9wcm9jZXNzZWQvcmVzdWx0X2dlbmRlcjIucmRhIikKYGBgCgo8YnI+CgojIyBJbmRlcGVuZGVudCBWYXJpYWJsZSBHZW5kZXIKCkluIHRoZSBzdHVkeSBwb3B1bGF0aW9uLCBnZW5kZXIgd2FzIG5lYXJseSBldmVubHkgZGlzdHJpYnV0ZWQsIHdpdGggNDkuNyUgbWVuIChuID0gMzM1KSBhbmQgNDcuMCUgd29tZW4gKG4gPSAzMTcpLiBBIHNtYWxsIHByb3BvcnRpb24gb2YgcGFydGljaXBhbnRzICgzLjMlLCBuID0gMjIpIGhhZCBtaXNzaW5nIGdlbmRlciBpbmZvcm1hdGlvbi4KYGBge3J9CnJlc3VsdF9nZW5kZXIyJGRlbW9ncmFwaGljcyB8PgogIG11dGF0ZShnZW5kZXIgPSBpZmVsc2UoaXMubmEoZ2VuZGVyKSwgIm1pc3NpbmciLCBnZW5kZXIpKSB8PgogIGNvdW50KGdlbmRlcikgfD4KICBtdXRhdGUocGVyY2VudCA9IHJvdW5kKG4gLyBzdW0obikgKiAxMDAsIDIpKQpgYGAKCiMjIENvbnRyb2wgdmFyaWFibGVzIAoKIyMjIEZpcnN0IHVuaXZlcnNpdHkKYGBge3J9CnJlc3VsdF9nZW5kZXIyJGRlbW9ncmFwaGljcyRVbml2ZXJzaXRlaXQxLjIyW3Jlc3VsdF9nZW5kZXIyJGRlbW9ncmFwaGljcyRVbml2ZXJzaXRlaXQxLjIyID09ICIiXSA8LSBOQQoKcmVzdWx0X2dlbmRlcjIkZGVtb2dyYXBoaWNzIHw+CiAgbXV0YXRlKFVuaXZlcnNpdGVpdDEuMjIgPSBpZmVsc2UoaXMubmEoVW5pdmVyc2l0ZWl0MS4yMiksICJtaXNzaW5nIiwgVW5pdmVyc2l0ZWl0MS4yMikpIHw+CiAgY291bnQoVW5pdmVyc2l0ZWl0MS4yMikgfD4KICBtdXRhdGUocGVyY2VudCA9IHJvdW5kKG4gLyBzdW0obikgKiAxMDAsIDIpKQoKcmVzdWx0X2dlbmRlcjIkZGVtb2dyYXBoaWNzJFVuaXZlcnNpdGVpdDEuMjRbcmVzdWx0X2dlbmRlcjIkZGVtb2dyYXBoaWNzJFVuaXZlcnNpdGVpdDEuMjQgPT0gIiJdIDwtIE5BCnJlc3VsdF9nZW5kZXIyJGRlbW9ncmFwaGljcyB8PgogIG11dGF0ZShVbml2ZXJzaXRlaXQxLjI0ID0gaWZlbHNlKGlzLm5hKFVuaXZlcnNpdGVpdDEuMjQpLCAibWlzc2luZyIsIFVuaXZlcnNpdGVpdDEuMjQpKSB8PgogIGNvdW50KFVuaXZlcnNpdGVpdDEuMjQpIHw+CiAgbXV0YXRlKHBlcmNlbnQgPSByb3VuZChuIC8gc3VtKG4pICogMTAwLCAyKSkKCiMgZGlkIHBlb3BsZSBjaGFuZ2UgdW5pdmVyc2l0eT8gWWVzLCAxNCBwZW9wbGUKdW5pdl93YXZlMjIgPC0gcmVzdWx0X2dlbmRlcjIkZGVtb2dyYXBoaWNzJFVuaXZlcnNpdGVpdDEuMjIKdW5pdl93YXZlMjQgPC0gcmVzdWx0X2dlbmRlcjIkZGVtb2dyYXBoaWNzJFVuaXZlcnNpdGVpdDEuMjQKCiMgQ29tYmluZSBpbnRvIGEgZGF0YSBmcmFtZQpkZl91bml2IDwtIGRhdGEuZnJhbWUoCiAgYWN0b3IgPSAxOmxlbmd0aCh1bml2X3dhdmUyMiksCiAgd2F2ZTIyID0gdW5pdl93YXZlMjIsCiAgd2F2ZTI0ID0gdW5pdl93YXZlMjQKKQoKIyBDaGVjayB3aGljaCBhY3RvcnMgY2hhbmdlZCB1bml2ZXJzaXR5CmRmX3VuaXYkY2hhbmdlZCA8LSBkZl91bml2JHdhdmUyMiAhPSBkZl91bml2JHdhdmUyNAoKIyBTdW1tYXJ5CnRhYmxlKGRmX3VuaXYkY2hhbmdlZCkKYGBgCgojIyMgZGVwYXJ0bWVudApJbiB3YXZlIDEgdGhlcmUgd2VyZSA2NSBtaXNzaW5nIHZhbHVlcyBmb3IgZGlzY2lwbGluZSwgYnV0IGluIHdhdmUgMiB0aGVyZSB3ZXJlIG5vbmUuIE92ZXIgdGltZSA2NSBwZW9wbGUgYXBwZWFyIHRvIGhhdmUgY2hhbmdlZCBkaXNjaXBsaW5lLiBUaGlzIGhvd2V2ZXIgZG9lcyBub3QgcmVmbGVjdCBhIGNoYW5nZSBvZiBkaXNjaXBsaW5lLCBidXQgdGhlIGRpc2NpcGxpbmVzIG9mIHRoZSA2NSBwZW9wbGUgd2VyZSBsaWtlbHkgZmlsbGVkIGluIGluIHdhdmUgMiBhcyB0aGV5IHdlcmUgbm90IHByZXNlbnQgaW4gd2F2ZSAxLiBUaGVyZWZvcmUsIGRpc2NpcGxpbmUgaXMgYSBjb25zdGFudCB2YXJpYWJsZSwgYnV0IGZvciB0aGUgYW5hbHlzaXMgd2UgbmVlZCB0byB0YWtlIHRoZSBkaXNjaXBsaW5lcyBmcm9tIHdhdmUgMiBhcyB0aG9zZSBhcmUgY29tcGxldGUuIApgYGB7cn0KCiMgUmVwbGFjZSBlbXB0eSBzdHJpbmdzIHdpdGggTkEKcmVzdWx0X2dlbmRlcjIkZGVtb2dyYXBoaWNzJGRpc2NpcGxpbmUuMjJbcmVzdWx0X2dlbmRlcjIkZGVtb2dyYXBoaWNzJGRpc2NpcGxpbmUuMjIgPT0gIiJdIDwtIE5BCnJlc3VsdF9nZW5kZXIyJGRlbW9ncmFwaGljcyRkaXNjaXBsaW5lLjI0W3Jlc3VsdF9nZW5kZXIyJGRlbW9ncmFwaGljcyRkaXNjaXBsaW5lLjI0ID09ICIiXSA8LSBOQQoKIyBSZXBsYWNlIE5BIHdpdGggIm1pc3NpbmciIGFuZCBvdmVyd3JpdGUgdGhlIHZhcmlhYmxlcwpyZXN1bHRfZ2VuZGVyMiRkZW1vZ3JhcGhpY3MgPC0gcmVzdWx0X2dlbmRlcjIkZGVtb2dyYXBoaWNzIHw+CiAgbXV0YXRlKAogICAgZGlzY2lwbGluZS4yMiA9IGlmZWxzZShpcy5uYShkaXNjaXBsaW5lLjIyKSwgIm1pc3NpbmciLCBkaXNjaXBsaW5lLjIyKSwKICAgIGRpc2NpcGxpbmUuMjQgPSBpZmVsc2UoaXMubmEoZGlzY2lwbGluZS4yNCksICJtaXNzaW5nIiwgZGlzY2lwbGluZS4yNCkKICApCgpjb3VudChyZXN1bHRfZ2VuZGVyMiRkZW1vZ3JhcGhpY3MsIGRpc2NpcGxpbmUuMjIpCmNvdW50KHJlc3VsdF9nZW5kZXIyJGRlbW9ncmFwaGljcywgZGlzY2lwbGluZS4yNCkKCiMgRGlkIGRpc2NpcGxpbmUgY2hhbmdlPwojIGRpZCBwZW9wbGUgY2hhbmdlIHVuaXZlcnNpdHk/IFllcywgMTQgcGVvcGxlCmRpc2Nfd2F2ZTIyIDwtIHJlc3VsdF9nZW5kZXIyJGRlbW9ncmFwaGljcyRkaXNjaXBsaW5lLjIyCmRpc2Nfd2F2ZTI0IDwtIHJlc3VsdF9nZW5kZXIyJGRlbW9ncmFwaGljcyRkaXNjaXBsaW5lLjI0CgojIENvbWJpbmUgaW50byBhIGRhdGEgZnJhbWUKZGZfZGlzYyA8LSBkYXRhLmZyYW1lKAogIGFjdG9yID0gMTpsZW5ndGgoZGlzY193YXZlMjIpLAogIHdhdmUyMiA9IGRpc2Nfd2F2ZTIyLAogIHdhdmUyNCA9IGRpc2Nfd2F2ZTI0CikKCiMgQ2hlY2sgd2hpY2ggYWN0b3JzIGNoYW5nZWQgdW5pdmVyc2l0eQpkZl9kaXNjJGNoYW5nZWQgPC0gZGZfZGlzYyR3YXZlMjIgIT0gZGZfZGlzYyR3YXZlMjQKCiMgU3VtbWFyeQp0YWJsZShkZl9kaXNjJGNoYW5nZWQpCgoKYGBgCgoKCiMjIFRyaWFkIGNlbnN1cwoKIyMjIENoZWNrIHdhdmVzCgpFdmVyeXRoaW5nIGNoZWNrZWQgb3V0LCBleGNlcHQgdGhhdCBhIGZldyBpbmRpdmlkdWFscyBjb2xsYWJvcmF0ZWQgd2l0aCB0aGVtc2VsdmVzLiBCZWNhdXNlIHNlbGYtY29sbGFib3JhdGlvbiBpcyBub3QgbWVhbmluZ2Z1bCBpbiB0aGUgY29udGV4dCBvZiB0aGlzIHN0dWR5LCBJIHNldCB0aGUgY29ycmVzcG9uZGluZyBkaWFnb25hbCB2YWx1ZXMgaW4gdGhlIGFkamFjZW5jeSBtYXRyaXggdG8gMCwgZW5zdXJpbmcgdGhhdCBubyBpbmRpdmlkdWFsIGlzIHNob3duIGFzIGNvbGxhYm9yYXRpbmcgd2l0aCB0aGVtc2VsdmVzLgoKYGBge3IgZWNobz1UUlVFLCBpbmNsdWRlPVRSVUUsIHJlc3VsdHM9J2hpZGUnfQp3YXZlMSA8LSByZXN1bHRfZ2VuZGVyMiRuZXRzWzEsLF0Kd2F2ZTIgPC0gcmVzdWx0X2dlbmRlcjIkbmV0c1syLCxdCgojIGZpbHRlciBvdXQgdGhlIHdhdmVzIG9mIHRoZSBvYmplY3Q6IHdlIG5lZWQgdG8gY2hlY2sgb3VyIGlucHV0CmRpbSh3YXZlMSkKZGltKHdhdmUyKQoKIyB5b3UgbmVlZCB0byBoYXZlIDAgbWlzc2luZyB2YWx1ZXM6CnN1bShpcy5uYSh3YXZlMSkpCnN1bShpcy5uYSh3YXZlMikpCgojY2hlY2sgdGhlIGRpYWdvbmFsOiBhbGwgcGxhY2VzIHNob3VsZCBiZSAwCnN1bShkaWFnKHdhdmUxKT09MCkKc3VtKGRpYWcod2F2ZTIpPT0wKQoKIyBhIGZldyBwZW9wbGUgZGlkIHdvcmsgd2l0aCB0aGVtc2VsdmVzOgpkaWFnKHdhdmUxKSA8LSAwCmRpYWcod2F2ZTIpIDwtIDAKCiMgZXZlcnl0aGluZyBzaG91bGQgYmUgMSBvciAwOgpzdW0od2F2ZTE+MSkKc3VtKHdhdmUyPjEpCgojIGNoZWNrIGlmIGl0J3Mgbm90IGVtcHR5OiB0aGVyZSBhcmUgcGVvcGxlIHdpdGggMSdzCnN1bSh3YXZlMT4wKQpzdW0od2F2ZTI+MCkKYGBgCgojIyMgVHJpYWQgQ2Vuc3VzCgpUaGUgdHdvIHRhYmxlcyBiZWxvdyBwcm92aWRlcyBmaW5kaW5ncyBmb3IgUlExLCB3aGljaCBleGFtaW5lcyB3aGV0aGVyIGFuZCB3aGljaCB0cmlhZGljIHN0cnVjdHVyZXMgYXBwZWFyZWQgaW4gdGhlIG5ldHdvcmsuIAoKSW4gV2F2ZSAxLCAwMjFDIHRyaWFkcyBvY2N1cnJlZCAxOTAgdGltZXMsIHdoaWxlIDAzMFQgdHJpYWRzIGFwcGVhcmVkIDIzIHRpbWVzLiBUaGlzIGluZGljYXRlcyB0aGF0IGN5Y2xpYyBvciBpbnRlcm1lZGlhcnkgdHJpYWRzICgwMjFDKSB3ZXJlIG11Y2ggbW9yZSBjb21tb24gdGhhbiB0cmFuc2l0aXZlIHRyaWFkcyAoMDMwVCkgZHVyaW5nIHRoZSBmaXJzdCBvYnNlcnZhdGlvbiBwZXJpb2QuCgpgYGB7cn0KIyBjb252ZXJ0IHRvIGlncmFwaApnMSA8LSBncmFwaF9mcm9tX2FkamFjZW5jeV9tYXRyaXgod2F2ZTEsIG1vZGUgPSAiZGlyZWN0ZWQiKQpnMiA8LSBncmFwaF9mcm9tX2FkamFjZW5jeV9tYXRyaXgod2F2ZTIsIG1vZGUgPSAiZGlyZWN0ZWQiKQoKIyBDb21wdXRlIHRyaWFkIGNlbnN1cyAoaWdyYXBoIHZlcnNpb24pCnRyaWFkcyA8LSB0cmlhZF9jZW5zdXMoZzEpCgojIERlZmluZSB0cmlhZCB0eXBlcwp0cmlhZF90eXBlcyA8LSBjKAogICIwMDMiLCAiMDEyIiwgIjEwMiIsICIwMjFEIiwgIjAyMVUiLCAiMDIxQyIsIAogICIxMTFEIiwgIjExMVUiLCAiMDMwVCIsICIwMzBDIiwgIjIwMSIsIAogICIxMjBEIiwgIjEyMFUiLCAiMTIwQyIsICIyMTAiLCAiMzAwIgopCgojIENvbWJpbmUgaW50byBhIGRhdGEgZnJhbWUKdHJpYWRfdGFibGUgPC0gZGF0YS5mcmFtZSgKICBUcmlhZCA9IHRyaWFkX3R5cGVzLAogIENvdW50ID0gYXMubnVtZXJpYyh0cmlhZHMpCikKCnRyaWFkX3RhYmxlCgpgYGAKCkluIFdhdmUgMiwgYm90aCB0cmlhZCB0eXBlcyBhcHBlYXJlZCBtb3JlIGZyZXF1ZW50bHk6IDAyMUMgb2NjdXJyZWQgMjg3IHRpbWVzLCBhbmQgMDMwVCBhcHBlYXJlZCA1NiB0aW1lcy4gV2hpbGUgdGhpcyBpbmNyZWFzZSBzdWdnZXN0cyBhbiBleHBhbnNpb24gb2YgdHJpYWRpYyBzdHJ1Y3R1cmVzLCB0aGUgZ3Jvd3RoIG1heSBwYXJ0bHkgcmVmbGVjdCB0aGUgYWRkaXRpb24gb2YgbmV3IGluZGl2aWR1YWxzIHRvIHRoZSBuZXR3b3JrIHJhdGhlciB0aGFuIGEgc3Vic3RhbnRpdmUgY2hhbmdlIGluIHRoZSB1bmRlcmx5aW5nIGNvbGxhYm9yYXRpb24gcGF0dGVybnMuCgpUaGVyZWZvcmUsIHRoZSBhbnN3ZXIgdG8gUlExIGlzIHRoYXQgYm90aCAwMjFDIGFuZCAwMzBUIHRyaWFkaWMgc3RydWN0dXJlcyBhcmUgcHJlc2VudCBpbiB0aGUgbmV0d29yayBpbiBib3RoIHdhdmVzLCB3aXRoIDAyMUMgY29uc2lzdGVudGx5IGJlaW5nIHRoZSBtb3N0IGZyZXF1ZW50IG9mIHRoZSB0d28uIFRoZSByaXNlIGluIHRoZWlyIG9jY3VycmVuY2UgZnJvbSBXYXZlIDEgdG8gV2F2ZSAyIHBvaW50cyB0byBhIGdlbmVyYWwgaW5jcmVhc2UgaW4gdHJpYWRpYyBjb25uZWN0aXZpdHksIGxpa2VseSBkcml2ZW4gYnkgbmV0d29yayBleHBhbnNpb24gcmF0aGVyIHRoYW4gYSBzaGlmdCBpbiBzdHJ1Y3R1cmFsIHRlbmRlbmNpZXMuCgpgYGB7cn0KIyBDb21wdXRlIHRyaWFkIGNlbnN1cyAoaWdyYXBoIHZlcnNpb24pCnRyaWFkcyA8LSB0cmlhZF9jZW5zdXMoZzIpCgojIERlZmluZSB0cmlhZCB0eXBlcwp0cmlhZF90eXBlcyA8LSBjKAogICIwMDMiLCAiMDEyIiwgIjEwMiIsICIwMjFEIiwgIjAyMVUiLCAiMDIxQyIsIAogICIxMTFEIiwgIjExMVUiLCAiMDMwVCIsICIwMzBDIiwgIjIwMSIsIAogICIxMjBEIiwgIjEyMFUiLCAiMTIwQyIsICIyMTAiLCAiMzAwIgopCgojIENvbWJpbmUgaW50byBhIGRhdGEgZnJhbWUKdHJpYWRfdGFibGUgPC0gZGF0YS5mcmFtZSgKICBUcmlhZCA9IHRyaWFkX3R5cGVzLAogIENvdW50ID0gYXMubnVtZXJpYyh0cmlhZHMpCikKCnRyaWFkX3RhYmxlCmBgYAoKIyMgR2VuZGVyZWQgdHJpYWRzIHdhdmUgMQoKVG8gaWRlbnRpZnkgdGhlIGdlbmRlciBjb25maWd1cmF0aW9uIGluIHRoZSB0cmlhZHMsIEkgZmlyc3QgbmVlZGVkIHRvIGNyZWF0ZSBhIGRhdGFzZXQgaW4gd2hpY2ggdGhlIGNvbmZpZ3VyYXRpb25zIGFyZSBsaW5rZWQgdG8gYWN0dWFsIG5vZGVzLCByYXRoZXIgdGhhbiBzaW1wbHkgY291bnRpbmcgdGhlIG51bWJlciBvZiBjb25maWd1cmF0aW9ucyBhcyBhIHRyaWFkIGNlbnN1cyBkb2VzLgoKQ3JlYXRpbmcgdGhpcyBkYXRhc2V0IGlzIGNvbXB1dGF0aW9uYWxseSBpbnRlbnNpdmUgYmVjYXVzZSwgZm9yIGVhY2ggcGVyc29uLCBldmVyeSBwb3NzaWJsZSB0cmlhZCBjb21iaW5hdGlvbiBtdXN0IGJlIHJlY29yZGVkLiBTaW5jZSBpbmRpdmlkdWFscyBtdXN0IGJlIGNvbm5lY3RlZCB0byBhdCBsZWFzdCBvbmUgb3RoZXIgcGVyc29uIHRvIGJlIHBhcnQgb2YgYSBwb3NzaWJsZSB0cmlhZCwgaXNvbGF0ZXMgY2FuIGJlIHJlbW92ZWQgZnJvbSB0aGUgZGF0YXNldC4gVGhpcyByZWR1Y2VzIHRoZSBkYXRhc2V0IHRvIDIzMSBwZW9wbGUgaW4gdGhlIGZpcnN0IHdhdmUsIHdoaWNoIHNpZ25pZmljYW50bHkgc3BlZWRzIHVwIHRoZSBmb3ItZWFjaCBsb29wLiAKYGBge3J9CnJvd19zdW1zIDwtIHJvd1N1bXMod2F2ZTEpCmNvbF9zdW1zIDwtIGNvbFN1bXMod2F2ZTEpCiMgc3VtKHJvd19zdW1zICE9IDAgfCBjb2xfc3VtcyAhPSAwKQojIDIzMSBwZW9wbGUgcmVtYWluCgpgYGAKCiMjIyBXYXZlIDEgZGYKCmBgYHtyLCBldmFsID0gRkFMU0V9CnJvd19zdW1zIDwtIHJvd1N1bXMod2F2ZTEpCmNvbF9zdW1zIDwtIGNvbFN1bXMod2F2ZTEpCm5vbnplcm9fdGllcyA8LSB3aGljaChyb3dfc3VtcyAhPSAwIHwgY29sX3N1bXMgIT0gMCkKCmdlbmRlciA8LSByZXN1bHRfZ2VuZGVyMiRkZW1vZ3JhcGhpY3MkZ2VuZGVyCgp0cmlhZHMgPC0gYygiMDAzIiwgIjAxMiIsICIxMDIiLCAiMDIxRCIsICIwMjFVIiwgIjAyMUMiLCAiMTExRCIsICIxMTFVIiwgIjAzMFQiLCAiMDMwQyIsICIyMDEiLCAiMTIwRCIsICIxMjBVIiwgIjEyMEMiLCAiMjEwIiwgIjMwMCIpCgpkZiA8LSBkYXRhLmZyYW1lKCkKCmRmIDwtIGZvcmVhY2goYTEgPSBub256ZXJvX3RpZXMsIGkgPSBpdGVyYXRvcnM6Omljb3VudCgpLCAuY29tYmluZSA9ICJyYmluZCIpICU6JQogIGZvcmVhY2goYTIgPSBub256ZXJvX3RpZXMsIGogPSBpdGVyYXRvcnM6Omljb3VudCgpLCAuY29tYmluZSA9ICJyYmluZCIpICU6JQogIGZvcmVhY2goYTMgPSBub256ZXJvX3RpZXMsIGsgPSBpdGVyYXRvcnM6Omljb3VudCgpLCAuY29tYmluZSA9ICJyYmluZCIpICVkbyUgewogICAgCiAgICAjIFByaW50IHByb2dyZXNzIGZvciBlYWNoIGExIG9ubHkKICAgIGlmIChqID09IDEgJiYgayA9PSAxKSB7ICAjIG9ubHkgcHJpbnQgb25jZSBwZXIgYTEKICAgICAgcHJpbnQocGFzdGUwKCJQcm9jZXNzaW5nIG91dGVyIG5vZGUgYTE9IiwgYTEsICIgKGk9IiwgaSwgIikiKSkKICAgIH0KICAgIAogICAgaWYgKGkgPiBqICYgaiA+IGspIHsgICMgaXRlcmF0aW9uIGNvdW50cyBzdGlsbCBjb250cm9sIGxvb3Agb3JkZXIKICAgICAgZGF0YS5mcmFtZSgKICAgICAgICBpID0gYTEsIGogPSBhMiwgayA9IGEzLCAgICAgICAgICAgIyB1c2UgYTEsIGEyLCBhMyBhcyBub2RlIElEcwogICAgICAgIGdlbmRlcl9pID0gZ2VuZGVyW2ExXSwgICAgICAgICAgICAgIyBvcmlnaW5hbCBub2RlIElEcyBmb3IgaW5kZXhpbmcKICAgICAgICBnZW5kZXJfaiA9IGdlbmRlclthMl0sCiAgICAgICAgZ2VuZGVyX2sgPSBnZW5kZXJbYTNdLAogICAgICAgIHQxX2lqID0gYXMuY2hhcmFjdGVyKHdhdmUxW2ExLCBhMl0pLAogICAgICAgIHQxX2ppID0gYXMuY2hhcmFjdGVyKHdhdmUxW2EyLCBhMV0pLAogICAgICAgIHQxX2lrID0gYXMuY2hhcmFjdGVyKHdhdmUxW2ExLCBhM10pLAogICAgICAgIHQxX2tpID0gYXMuY2hhcmFjdGVyKHdhdmUxW2EzLCBhMV0pLAogICAgICAgIHQxX2prID0gYXMuY2hhcmFjdGVyKHdhdmUxW2EyLCBhM10pLAogICAgICAgIHQxX2tqID0gYXMuY2hhcmFjdGVyKHdhdmUxW2EzLCBhMl0pLAogICAgICAgIHR5cGUgPSB0cmlhZHNbd2hpY2goc25hOjp0cmlhZC5jZW5zdXMod2F2ZTFbYyhhMSwgYTIsIGEzKSwgYyhhMSwgYTIsIGEzKV0pID09IDEpXQogICAgICApCiAgICB9CiAgfQoKIyBPcHRpb25hbDogY3JlYXRlIHRyaWFkIG5hbWUKZGYkbmFtZSA8LSBwYXN0ZTAoZGYkaSwgIi4iLCBkZiRqLCAiLiIsIGRmJGspCgp3cml0ZS5jc3YoZGYsICIuL2RhdGEvcHJvY2Vzc2VkL3dhdmUxZXhjZWwuY3N2Iiwgcm93Lm5hbWVzID0gRkFMU0UpCmBgYAoKTG9hZCB0aGUgZmlsZQpgYGB7cn0Kd2F2ZTFleGNlbCA8LSByZWFkLmNzdigiLi9kYXRhL3Byb2Nlc3NlZC93YXZlMWV4Y2VsLmNzdiIpCmBgYAoKCiMjIyBBbmFseXNpcyBXYXZlIDEKCjAyMUMKYGBge3J9CiMgb25seSBrZWVwIHRoZSB0cmlhbmdsZXMgd2UgYXJlIGludGVyZXN0ZWQgaW4KIyBhbHNvIGZpbHRlciB0aGUgcGVvcGxlIHdpdGggZ2VuZGVyID0gTkEgb3V0ICh3YXMgb25lIHBlcnNvbikKZGZfZmlsdGVyZWQgPC0gc3Vic2V0KAogIHdhdmUxZXhjZWwsCiAgdHlwZSAlaW4lIGMoIjAyMUMiLCAiMDMwVCIpICYKICAgICFpcy5uYShnZW5kZXJfaSkgJgogICAgIWlzLm5hKGdlbmRlcl9qKSAmCiAgICAhaXMubmEoZ2VuZGVyX2spCikKCndyaXRlLmNzdihkZiwgIi4vZGF0YS9wcm9jZXNzZWQvZGZfZmlsdGVyZWQuY3N2Iiwgcm93Lm5hbWVzID0gRkFMU0UpCgojIEluaXRpYWxpemUgY291bnRlcnMKZmZtIDwtIDAKbW1mIDwtIDAKbW1tIDwtIDAKZmZmIDwtIDAKCiMgaSBhbSBzbyBzb3JyeSBmb3IgdGhpcyBmb3IgbG9vcCA6KSBJIGtub3cgaXQgaXMgaG9ycmlibGUgdG8gbG9vayBhdCBidXQgaXQgd29ya3MgYW5kIEkgdW5kZXJzdGFuZCBpdApmb3IgKGlkeCBpbiAxOm5yb3coZGZfZmlsdGVyZWQpKSB7CiAgIyBUaWUgdmFyaWFibGVzCiAgdF9paiA8LSBkZl9maWx0ZXJlZCR0MV9paltpZHhdCiAgdF9qaSA8LSBkZl9maWx0ZXJlZCR0MV9qaVtpZHhdCiAgdF9payA8LSBkZl9maWx0ZXJlZCR0MV9pa1tpZHhdCiAgdF9raSA8LSBkZl9maWx0ZXJlZCR0MV9raVtpZHhdCiAgdF9qayA8LSBkZl9maWx0ZXJlZCR0MV9qa1tpZHhdCiAgdF9raiA8LSBkZl9maWx0ZXJlZCR0MV9raltpZHhdCiAgCiAgIyBHZW5kZXIgdmFyaWFibGVzCiAgZ19pIDwtIGRmX2ZpbHRlcmVkJGdlbmRlcl9pW2lkeF0KICBnX2ogPC0gZGZfZmlsdGVyZWQkZ2VuZGVyX2pbaWR4XQogIGdfayA8LSBkZl9maWx0ZXJlZCRnZW5kZXJfa1tpZHhdCiAgCiAgIyAxKSBpIC0+IGogLT4gaywgb3BlbjogaSAtPiBrIG11c3QgYmUgMCBvciBOQQogIGlmICh0X2lqID09IDEgJiB0X2prID09IDEgJiAhKHRfaWsgPT0gMSkpIHsKICAgIGlmIChnX2kgPT0gImZlbWFsZSIgJiBnX2ogPT0gImZlbWFsZSIgJiBnX2sgPT0gIm1hbGUiKSBmZm0gPC0gZmZtICsgMQogICAgaWYgKGdfaSA9PSAibWFsZSIgJiBnX2ogPT0gIm1hbGUiICYgZ19rID09ICJmZW1hbGUiKSBtbWYgPC0gbW1mICsgMQogICAgaWYgKGdfaSA9PSAibWFsZSIgJiBnX2ogPT0gIm1hbGUiICYgZ19rID09ICJtYWxlIikgbW1tIDwtIG1tbSArIDEKICAgIGlmIChnX2kgPT0gImZlbWFsZSIgJiBnX2ogPT0gImZlbWFsZSIgJiBnX2sgPT0gImZlbWFsZSIpIGZmZiA8LSBmZmYgKyAxCiAgfQogIAogICMgMikgaSAtPiBrIC0+IGosIG9wZW46IGkgLT4gaiBtdXN0IGJlIDAgb3IgTkEKICBpZiAodF9payA9PSAxICYgdF9raiA9PSAxICYgISh0X2lqID09IDEpKSB7CiAgICBpZiAoZ19pID09ICJmZW1hbGUiICYgZ19rID09ICJmZW1hbGUiICYgZ19qID09ICJtYWxlIikgZmZtIDwtIGZmbSArIDEKICAgIGlmIChnX2kgPT0gIm1hbGUiICYgZ19rID09ICJtYWxlIiAmIGdfaiA9PSAiZmVtYWxlIikgbW1mIDwtIG1tZiArIDEKICAgIGlmIChnX2kgPT0gIm1hbGUiICYgZ19rID09ICJtYWxlIiAmIGdfaiA9PSAibWFsZSIpIG1tbSA8LSBtbW0gKyAxCiAgICBpZiAoZ19pID09ICJmZW1hbGUiICYgZ19rID09ICJmZW1hbGUiICYgZ19qID09ICJmZW1hbGUiKSBmZmYgPC0gZmZmICsgMQogIH0KICAKICAjIDMpIGogLT4gaSAtPiBrLCBvcGVuOiBqIC0+IGsgbXVzdCBiZSAwIG9yIE5BCiAgaWYgKHRfamkgPT0gMSAmIHRfaWsgPT0gMSAmICEodF9qayA9PSAxKSkgewogICAgaWYgKGdfaiA9PSAiZmVtYWxlIiAmIGdfaSA9PSAiZmVtYWxlIiAmIGdfayA9PSAibWFsZSIpIGZmbSA8LSBmZm0gKyAxCiAgICBpZiAoZ19qID09ICJtYWxlIiAmIGdfaSA9PSAibWFsZSIgJiBnX2sgPT0gImZlbWFsZSIpIG1tZiA8LSBtbWYgKyAxCiAgICBpZiAoZ19qID09ICJtYWxlIiAmIGdfaSA9PSAibWFsZSIgJiBnX2sgPT0gIm1hbGUiKSBtbW0gPC0gbW1tICsgMQogICAgaWYgKGdfaiA9PSAiZmVtYWxlIiAmIGdfaSA9PSAiZmVtYWxlIiAmIGdfayA9PSAiZmVtYWxlIikgZmZmIDwtIGZmZiArIDEKICB9CiAgCiAgIyA0KSBqIC0+IGsgLT4gaSwgb3BlbjogaiAtPiBpIG11c3QgYmUgMCBvciBOQQogIGlmICh0X2prID09IDEgJiB0X2tpID09IDEgJiAhKHRfamkgPT0gMSkpIHsKICAgIGlmIChnX2ogPT0gImZlbWFsZSIgJiBnX2sgPT0gImZlbWFsZSIgJiBnX2kgPT0gIm1hbGUiKSBmZm0gPC0gZmZtICsgMQogICAgaWYgKGdfaiA9PSAibWFsZSIgJiBnX2sgPT0gIm1hbGUiICYgZ19pID09ICJmZW1hbGUiKSBtbWYgPC0gbW1mICsgMQogICAgaWYgKGdfaiA9PSAibWFsZSIgJiBnX2sgPT0gIm1hbGUiICYgZ19pID09ICJtYWxlIikgbW1tIDwtIG1tbSArIDEKICAgIGlmIChnX2ogPT0gImZlbWFsZSIgJiBnX2sgPT0gImZlbWFsZSIgJiBnX2kgPT0gImZlbWFsZSIpIGZmZiA8LSBmZmYgKyAxCiAgfQogIAogICMgNSkgayAtPiBpIC0+IGosIG9wZW46IGsgLT4gaiBtdXN0IGJlIDAgb3IgTkEKICBpZiAodF9raSA9PSAxICYgdF9paiA9PSAxICYgISh0X2tqID09IDEpKSB7CiAgICBpZiAoZ19rID09ICJmZW1hbGUiICYgZ19pID09ICJmZW1hbGUiICYgZ19qID09ICJtYWxlIikgZmZtIDwtIGZmbSArIDEKICAgIGlmIChnX2sgPT0gIm1hbGUiICYgZ19pID09ICJtYWxlIiAmIGdfaiA9PSAiZmVtYWxlIikgbW1mIDwtIG1tZiArIDEKICAgIGlmIChnX2sgPT0gIm1hbGUiICYgZ19pID09ICJtYWxlIiAmIGdfaiA9PSAibWFsZSIpIG1tbSA8LSBtbW0gKyAxCiAgICBpZiAoZ19rID09ICJmZW1hbGUiICYgZ19pID09ICJmZW1hbGUiICYgZ19qID09ICJmZW1hbGUiKSBmZmYgPC0gZmZmICsgMQogIH0KICAKICAjIDYpIGsgLT4gaiAtPiBpLCBvcGVuOiBrIC0+IGkgbXVzdCBiZSAwIG9yIE5BCiAgaWYgKHRfa2ogPT0gMSAmIHRfamkgPT0gMSAmICEodF9raSA9PSAxKSkgewogICAgaWYgKGdfayA9PSAiZmVtYWxlIiAmIGdfaiA9PSAiZmVtYWxlIiAmIGdfaSA9PSAibWFsZSIpIGZmbSA8LSBmZm0gKyAxCiAgICBpZiAoZ19rID09ICJtYWxlIiAmIGdfaiA9PSAibWFsZSIgJiBnX2kgPT0gImZlbWFsZSIpIG1tZiA8LSBtbWYgKyAxCiAgICBpZiAoZ19rID09ICJtYWxlIiAmIGdfaiA9PSAibWFsZSIgJiBnX2kgPT0gIm1hbGUiKSBtbW0gPC0gbW1tICsgMQogICAgaWYgKGdfayA9PSAiZmVtYWxlIiAmIGdfaiA9PSAiZmVtYWxlIiAmIGdfaSA9PSAiZmVtYWxlIikgZmZmIDwtIGZmZiArIDEKICB9Cn0KCiMgUHJpbnQgcmVzdWx0cwpmZm0KbW1mCm1tbQpmZmYKYGBgCjAzMFQKYGBge3J9CiMgSW5pdGlhbGl6ZSBjb3VudGVycwpmZm1jbG9zZWQgPC0gMAptbWZjbG9zZWQgPC0gMAptbW1jbG9zZWQgPC0gMApmZmZjbG9zZWQgPC0gMAoKZm9yIChpZHggaW4gMTpucm93KGRmX2ZpbHRlcmVkKSkgewogICMgQXNzaWduIHRpZSB2YXJpYWJsZXMgZm9yIHJlYWRhYmlsaXR5CiAgdF9paiA8LSBkZl9maWx0ZXJlZCR0MV9paltpZHhdCiAgdF9qaSA8LSBkZl9maWx0ZXJlZCR0MV9qaVtpZHhdCiAgdF9payA8LSBkZl9maWx0ZXJlZCR0MV9pa1tpZHhdCiAgdF9raSA8LSBkZl9maWx0ZXJlZCR0MV9raVtpZHhdCiAgdF9qayA8LSBkZl9maWx0ZXJlZCR0MV9qa1tpZHhdCiAgdF9raiA8LSBkZl9maWx0ZXJlZCR0MV9raltpZHhdCiAgCiAgIyBBc3NpZ24gZ2VuZGVyIHZhcmlhYmxlcyBmb3IgcmVhZGFiaWxpdHkKICBnX2kgPC0gZGZfZmlsdGVyZWQkZ2VuZGVyX2lbaWR4XQogIGdfaiA8LSBkZl9maWx0ZXJlZCRnZW5kZXJfaltpZHhdCiAgZ19rIDwtIGRmX2ZpbHRlcmVkJGdlbmRlcl9rW2lkeF0KICAKICAjIDEpIGkgLT4gaiAtPiBrLCBjbG9zZWQ6IGkgLT4gayBleGlzdHMKICBpZiAodF9paiA9PSAxICYgdF9qayA9PSAxICYgdF9payA9PSAxKSB7CiAgICBpZiAoZ19pID09ICJmZW1hbGUiICYgZ19qID09ICJmZW1hbGUiICYgZ19rID09ICJtYWxlIikgZmZtY2xvc2VkIDwtIGZmbWNsb3NlZCArIDEKICAgIGlmIChnX2kgPT0gIm1hbGUiICYgZ19qID09ICJtYWxlIiAmIGdfayA9PSAiZmVtYWxlIikgbW1mY2xvc2VkIDwtIG1tZmNsb3NlZCArIDEKICAgIGlmIChnX2kgPT0gIm1hbGUiICYgZ19qID09ICJtYWxlIiAmIGdfayA9PSAibWFsZSIpIG1tbWNsb3NlZCA8LSBtbW1jbG9zZWQgKyAxCiAgICBpZiAoZ19pID09ICJmZW1hbGUiICYgZ19qID09ICJmZW1hbGUiICYgZ19rID09ICJmZW1hbGUiKSBmZmZjbG9zZWQgPC0gZmZmY2xvc2VkICsgMQogIH0KICAKICAjIDIpIGkgLT4gayAtPiBqLCBjbG9zZWQ6IGkgLT4gaiBleGlzdHMKICBpZiAodF9payA9PSAxICYgdF9raiA9PSAxICYgdF9paiA9PSAxKSB7CiAgICBpZiAoZ19pID09ICJmZW1hbGUiICYgZ19rID09ICJmZW1hbGUiICYgZ19qID09ICJtYWxlIikgZmZtY2xvc2VkIDwtIGZmbWNsb3NlZCArIDEKICAgIGlmIChnX2kgPT0gIm1hbGUiICYgZ19rID09ICJtYWxlIiAmIGdfaiA9PSAiZmVtYWxlIikgbW1mY2xvc2VkIDwtIG1tZmNsb3NlZCArIDEKICAgIGlmIChnX2kgPT0gIm1hbGUiICYgZ19rID09ICJtYWxlIiAmIGdfaiA9PSAibWFsZSIpIG1tbWNsb3NlZCA8LSBtbW1jbG9zZWQgKyAxCiAgICBpZiAoZ19pID09ICJmZW1hbGUiICYgZ19rID09ICJmZW1hbGUiICYgZ19qID09ICJmZW1hbGUiKSBmZmZjbG9zZWQgPC0gZmZmY2xvc2VkICsgMQogIH0KICAKICAjIDMpIGogLT4gaSAtPiBrLCBjbG9zZWQ6IGogLT4gayBleGlzdHMKICBpZiAodF9qaSA9PSAxICYgdF9payA9PSAxICYgdF9qayA9PSAxKSB7CiAgICBpZiAoZ19qID09ICJmZW1hbGUiICYgZ19pID09ICJmZW1hbGUiICYgZ19rID09ICJtYWxlIikgZmZtY2xvc2VkIDwtIGZmbWNsb3NlZCArIDEKICAgIGlmIChnX2ogPT0gIm1hbGUiICYgZ19pID09ICJtYWxlIiAmIGdfayA9PSAiZmVtYWxlIikgbW1mY2xvc2VkIDwtIG1tZmNsb3NlZCArIDEKICAgIGlmIChnX2ogPT0gIm1hbGUiICYgZ19pID09ICJtYWxlIiAmIGdfayA9PSAibWFsZSIpIG1tbWNsb3NlZCA8LSBtbW1jbG9zZWQgKyAxCiAgICBpZiAoZ19qID09ICJmZW1hbGUiICYgZ19pID09ICJmZW1hbGUiICYgZ19rID09ICJmZW1hbGUiKSBmZmZjbG9zZWQgPC0gZmZmY2xvc2VkICsgMQogIH0KICAKICAjIDQpIGogLT4gayAtPiBpLCBjbG9zZWQ6IGogLT4gaSBleGlzdHMKICBpZiAodF9qayA9PSAxICYgdF9raSA9PSAxICYgdF9qaSA9PSAxKSB7CiAgICBpZiAoZ19qID09ICJmZW1hbGUiICYgZ19rID09ICJmZW1hbGUiICYgZ19pID09ICJtYWxlIikgZmZtY2xvc2VkIDwtIGZmbWNsb3NlZCArIDEKICAgIGlmIChnX2ogPT0gIm1hbGUiICYgZ19rID09ICJtYWxlIiAmIGdfaSA9PSAiZmVtYWxlIikgbW1mY2xvc2VkIDwtIG1tZmNsb3NlZCArIDEKICAgIGlmIChnX2ogPT0gIm1hbGUiICYgZ19rID09ICJtYWxlIiAmIGdfaSA9PSAibWFsZSIpIG1tbWNsb3NlZCA8LSBtbW1jbG9zZWQgKyAxCiAgICBpZiAoZ19qID09ICJmZW1hbGUiICYgZ19rID09ICJmZW1hbGUiICYgZ19pID09ICJmZW1hbGUiKSBmZmZjbG9zZWQgPC0gZmZmY2xvc2VkICsgMQogIH0KICAKICAjIDUpIGsgLT4gaSAtPiBqLCBjbG9zZWQ6IGsgLT4gaiBleGlzdHMKICBpZiAodF9raSA9PSAxICYgdF9paiA9PSAxICYgdF9raiA9PSAxKSB7CiAgICBpZiAoZ19rID09ICJmZW1hbGUiICYgZ19pID09ICJmZW1hbGUiICYgZ19qID09ICJtYWxlIikgZmZtY2xvc2VkIDwtIGZmbWNsb3NlZCArIDEKICAgIGlmIChnX2sgPT0gIm1hbGUiICYgZ19pID09ICJtYWxlIiAmIGdfaiA9PSAiZmVtYWxlIikgbW1mY2xvc2VkIDwtIG1tZmNsb3NlZCArIDEKICAgIGlmIChnX2sgPT0gIm1hbGUiICYgZ19pID09ICJtYWxlIiAmIGdfaiA9PSAibWFsZSIpIG1tbWNsb3NlZCA8LSBtbW1jbG9zZWQgKyAxCiAgICBpZiAoZ19rID09ICJmZW1hbGUiICYgZ19pID09ICJmZW1hbGUiICYgZ19qID09ICJmZW1hbGUiKSBmZmZjbG9zZWQgPC0gZmZmY2xvc2VkICsgMQogIH0KICAKICAjIDYpIGsgLT4gaiAtPiBpLCBjbG9zZWQ6IGsgLT4gaSBleGlzdHMKICBpZiAodF9raiA9PSAxICYgdF9qaSA9PSAxICYgdF9raSA9PSAxKSB7CiAgICBpZiAoZ19rID09ICJmZW1hbGUiICYgZ19qID09ICJmZW1hbGUiICYgZ19pID09ICJtYWxlIikgZmZtY2xvc2VkIDwtIGZmbWNsb3NlZCArIDEKICAgIGlmIChnX2sgPT0gIm1hbGUiICYgZ19qID09ICJtYWxlIiAmIGdfaSA9PSAiZmVtYWxlIikgbW1mY2xvc2VkIDwtIG1tZmNsb3NlZCArIDEKICAgIGlmIChnX2sgPT0gIm1hbGUiICYgZ19qID09ICJtYWxlIiAmIGdfaSA9PSAibWFsZSIpIG1tbWNsb3NlZCA8LSBtbW1jbG9zZWQgKyAxCiAgICBpZiAoZ19rID09ICJmZW1hbGUiICYgZ19qID09ICJmZW1hbGUiICYgZ19pID09ICJmZW1hbGUiKSBmZmZjbG9zZWQgPC0gZmZmY2xvc2VkICsgMQogIH0KfQoKIyBQcmludCByZXN1bHRzCmZmbWNsb3NlZAptbWZjbG9zZWQKbW1tY2xvc2VkCmZmZmNsb3NlZApgYGAKIyMjIFJlc3VsdHMgd2F2ZSAxCgpCYXNlZCBvbiB0aGUgYW5hbHlzZXMgYWJvdmUsIHRoZSBzZWNvbmQgcmVzZWFyY2ggcXVlc3Rpb24gY2FuIGJlIGFkZHJlc3NlZC4gVGhpcyByZXNlYXJjaCBxdWVzdGlvbiB3YXMgZGVzY3JpcHRpdmUsIGZvY3VzaW5nIG9uIGhvdyBnZW5kZXIgaXMgZGlzdHJpYnV0ZWQgYWNyb3NzIHRoZSB0cmlhZGljIHN0cnVjdHVyZXMgMDIxQyBhbmQgMDMxVCBvYnNlcnZlZCBpbiB0aGUgbmV0d29yay4KIVtdKGltYWdlcy9kaXNfcHJvcF9nZW5kZXIzLnBuZykKCkFsdGhvdWdoIHRoZSBvdmVyYWxsIG5ldHdvcmsgd2FzIGFwcHJveGltYXRlbHkgZ2VuZGVyIGJhbGFuY2VkICg0Ny4wJSBmZW1hbGUgYW5kIDQ5LjclIG1hbGUpLCB0aGUgY29tcG9zaXRpb24gb2YgdGhlIDAyMUMgYW5kIDAzMVQgdHJpYWRpYyB0eXBlcyBpbiBXYXZlIDEgcmV2ZWFscyBhIGNsZWFyIG92ZXItcmVwcmVzZW50YXRpb24gb2YgYWxsLW1hbGUgZ3JvdXBzLiBJbiAwMjFDIHRyaWFkcywgbmVhcmx5IDQwJSB3ZXJlIGNvbXBvc2VkIGVudGlyZWx5IG9mIG1lbiwgY29tcGFyZWQgdG8gb25seSA3JSBhbGwtZmVtYWxlIHRyaWFkcy4gQSBzaW1pbGFyIHBhdHRlcm4gYXBwZWFycyBpbiAwMzFUIHRyaWFkcywgd2hlcmUgMzklIHdlcmUgYWxsLW1hbGUgYW5kIDIyJSBhbGwtZmVtYWxlLiBUcmlhZHMgaW4gd2hpY2ggaSBhbmQgaiB3ZXJlIHRoZSBzYW1lIGdlbmRlciBidXQgdGhlIHRoaXJkIG5vZGUgKGgpIGRpZmZlcmVkIChpLmUuLCBmZm0gb3IgbW1mKSB3ZXJlIGNvbnNpZGVyYWJseSBsZXNzIGZyZXF1ZW50LCBwYXJ0aWN1bGFybHkgdGhvc2Ugd2l0aCBhIGZlbWFsZSBtYWpvcml0eSAoZmZtKS4KCkZvciAwMzFUIHRyaWFkcyBzcGVjaWZpY2FsbHksIGdlbmRlciBob21vcGhpbHkgYXBwZWFycyBlc3BlY2lhbGx5IHByb25vdW5jZWQuIEFwcHJveGltYXRlbHkgNjElIG9mIHRoZXNlIHRyaWFkcyBjb25zaXN0IGVudGlyZWx5IG9mIG9uZSBnZW5kZXIgKGVpdGhlciBhbGwtbWFsZSBvciBhbGwtZmVtYWxlKSwgd2hpbGUgb25seSBhcm91bmQgOCUgYXJlIG9mIHRoZSBmZm0gb3IgbW1mIHR5cGUuIEdpdmVuIHRoZSBvdmVyYWxsIGdlbmRlciBiYWxhbmNlIG9mIHRoZSBuZXR3b3JrLCB0aGlzIGluZGljYXRlcyB0aGF0IHRyYW5zaXRpdmUgb3IgdGlnaHRseSBpbnRlcmNvbm5lY3RlZCB0cmlhZHMgdGVuZCB0byBmb3JtIHdpdGhpbiBzYW1lLWdlbmRlciBncm91cHMgcmF0aGVyIHRoYW4gYWNyb3NzIHRoZW0sIHBhcnRpY3VsYXJseSBpbiBhbGwtbWFsZSB0cmlhZHMuCgo8YnI+CgojIyBHZW5kZXJlZCB0cmlhZHMgd2F2ZSAyCgojIyMgV2F2ZSAyIGRmClRoaXMgdGFrZXMgYSB2ZXJ5IGxvbmcgdGltZSBzbyBJIGhhdmUgdG8gc2VlIHdoZXRoZXIgSSBoYXZlIHRpbWUgdG8gcnVuIHRoaXMgaW4gdGhlIGJhY2tncm91bmQgc29tZSBkYXkuIAoKYGBge3IsIGV2YWwgPSBGQUxTRX0Kcm93X3N1bXMgPC0gcm93U3Vtcyh3YXZlMikKY29sX3N1bXMgPC0gY29sU3Vtcyh3YXZlMikKbm9uemVyb190aWVzIDwtIHdoaWNoKHJvd19zdW1zICE9IDAgfCBjb2xfc3VtcyAhPSAwKQoKZ2VuZGVyIDwtIHJlc3VsdF9nZW5kZXIyJGRlbW9ncmFwaGljcyRnZW5kZXIKCnRyaWFkcyA8LSBjKCIwMDMiLCAiMDEyIiwgIjEwMiIsICIwMjFEIiwgIjAyMVUiLCAiMDIxQyIsICIxMTFEIiwgIjExMVUiLCAiMDMwVCIsICIwMzBDIiwgIjIwMSIsICIxMjBEIiwgIjEyMFUiLCAiMTIwQyIsICIyMTAiLCAiMzAwIikKCmRmMiA8LSBkYXRhLmZyYW1lKCkKCmRmMiA8LSBmb3JlYWNoKGExID0gbm9uemVyb190aWVzLCBpID0gaXRlcmF0b3JzOjppY291bnQoKSwgLmNvbWJpbmUgPSAicmJpbmQiKSAlOiUKICBmb3JlYWNoKGEyID0gbm9uemVyb190aWVzLCBqID0gaXRlcmF0b3JzOjppY291bnQoKSwgLmNvbWJpbmUgPSAicmJpbmQiKSAlOiUKICBmb3JlYWNoKGEzID0gbm9uemVyb190aWVzLCBrID0gaXRlcmF0b3JzOjppY291bnQoKSwgLmNvbWJpbmUgPSAicmJpbmQiKSAlZG8lIHsKICAgIAogICAgIyBQcmludCBwcm9ncmVzcyBmb3IgZWFjaCBhMSBvbmx5CiAgICBpZiAoaiA9PSAxICYmIGsgPT0gMSkgeyAgIyBvbmx5IHByaW50IG9uY2UgcGVyIGExCiAgICAgIHByaW50KHBhc3RlMCgiUHJvY2Vzc2luZyBvdXRlciBub2RlIGExPSIsIGExLCAiIChpPSIsIGksICIpIikpCiAgICB9CiAgICAKICAgIGlmIChpID4gaiAmIGogPiBrKSB7ICAjIGl0ZXJhdGlvbiBjb3VudHMgc3RpbGwgY29udHJvbCBsb29wIG9yZGVyCiAgICAgIGRhdGEuZnJhbWUoCiAgICAgICAgaSA9IGExLCBqID0gYTIsIGsgPSBhMywgICAgICAgICAgICMgdXNlIGExLCBhMiwgYTMgYXMgbm9kZSBJRHMKICAgICAgICBnZW5kZXJfaSA9IGdlbmRlclthMV0sICAgICAgICAgICAgICMgb3JpZ2luYWwgbm9kZSBJRHMgZm9yIGluZGV4aW5nCiAgICAgICAgZ2VuZGVyX2ogPSBnZW5kZXJbYTJdLAogICAgICAgIGdlbmRlcl9rID0gZ2VuZGVyW2EzXSwKICAgICAgICB0MV9paiA9IGFzLmNoYXJhY3Rlcih3YXZlMlthMSwgYTJdKSwKICAgICAgICB0MV9qaSA9IGFzLmNoYXJhY3Rlcih3YXZlMlthMiwgYTFdKSwKICAgICAgICB0MV9payA9IGFzLmNoYXJhY3Rlcih3YXZlMlthMSwgYTNdKSwKICAgICAgICB0MV9raSA9IGFzLmNoYXJhY3Rlcih3YXZlMlthMywgYTFdKSwKICAgICAgICB0MV9qayA9IGFzLmNoYXJhY3Rlcih3YXZlMlthMiwgYTNdKSwKICAgICAgICB0MV9raiA9IGFzLmNoYXJhY3Rlcih3YXZlMlthMywgYTJdKSwKICAgICAgICB0eXBlID0gdHJpYWRzW3doaWNoKHNuYTo6dHJpYWQuY2Vuc3VzKHdhdmUyW2MoYTEsIGEyLCBhMyksIGMoYTEsIGEyLCBhMyldKSA9PSAxKV0KICAgICAgKQogICAgfQogIH0KCiMgT3B0aW9uYWw6IGNyZWF0ZSB0cmlhZCBuYW1lCmRmMiRuYW1lIDwtIHBhc3RlMChkZjIkaSwgIi4iLCBkZjIkaiwgIi4iLCBkZjIkaykKCgpgYGAKCiMjIyBBbmFseXNpcyBXYXZlIDIKCk9wZW4KYGBge3IsIGV2YWwgPSBGQUxTRX0KCiMgb25seSBrZWVwIHRoZSB0cmlhbmdsZXMgd2UgYXJlIGludGVyZXN0ZWQgaW4KIyBhbHNvIGZpbHRlciB0aGUgcGVvcGxlIHdpdGggZ2VuZGVyID0gTkEgb3V0CmRmX2ZpbHRlcmVkMiA8LSBzdWJzZXQoCiAgdHJpYWRzX291dHB1dF93YXZlMiwKICB0eXBlICVpbiUgYygiMDIxQyIsICIwMzBUIikgJgogICAgIWlzLm5hKGdlbmRlcl9pKSAmCiAgICAhaXMubmEoZ2VuZGVyX2opICYKICAgICFpcy5uYShnZW5kZXJfaykKKQoKIyBJbml0aWFsaXplIGNvdW50ZXJzCmZmbTIgPC0gMAptbWYyIDwtIDAKbW1tMiA8LSAwCmZmZjIgPC0gMAoKIyBpIGFtIHNvIHNvcnJ5IGZvciB0aGlzIGZvciBsb29wIDopIEkga25vdyBpdCBpcyBob3JyaWJsZSB0byBsb29rIGF0IGJ1dCBpdCB3b3JrcyBhbmQgSSB1bmRlcnN0YW5kIGl0CmZvciAoaWR4IGluIDE6bnJvdyhkZl9maWx0ZXJlZDIpKSB7CiAgIyBUaWUgdmFyaWFibGVzCiAgdF9paiA8LSBkZl9maWx0ZXJlZCR0MV9paltpZHhdCiAgdF9qaSA8LSBkZl9maWx0ZXJlZCR0MV9qaVtpZHhdCiAgdF9payA8LSBkZl9maWx0ZXJlZCR0MV9pa1tpZHhdCiAgdF9raSA8LSBkZl9maWx0ZXJlZCR0MV9raVtpZHhdCiAgdF9qayA8LSBkZl9maWx0ZXJlZCR0MV9qa1tpZHhdCiAgdF9raiA8LSBkZl9maWx0ZXJlZCR0MV9raltpZHhdCiAgCiAgIyBHZW5kZXIgdmFyaWFibGVzCiAgZ19pIDwtIGRmX2ZpbHRlcmVkJGdlbmRlcl9pW2lkeF0KICBnX2ogPC0gZGZfZmlsdGVyZWQkZ2VuZGVyX2pbaWR4XQogIGdfayA8LSBkZl9maWx0ZXJlZCRnZW5kZXJfa1tpZHhdCiAgCiAgIyAxKSBpIC0+IGogLT4gaywgb3BlbjogaSAtPiBrIG11c3QgYmUgMCBvciBOQQogIGlmICh0X2lqID09IDEgJiB0X2prID09IDEgJiAhKHRfaWsgPT0gMSkpIHsKICAgIGlmIChnX2kgPT0gImZlbWFsZSIgJiBnX2ogPT0gImZlbWFsZSIgJiBnX2sgPT0gIm1hbGUiKSBmZm0yIDwtIGZmbTIgKyAxCiAgICBpZiAoZ19pID09ICJtYWxlIiAmIGdfaiA9PSAibWFsZSIgJiBnX2sgPT0gImZlbWFsZSIpIG1tZjIgPC0gbW1mMiArIDEKICAgIGlmIChnX2kgPT0gIm1hbGUiICYgZ19qID09ICJtYWxlIiAmIGdfayA9PSAibWFsZSIpIG1tbTIgPC0gbW1tMiArIDEKICAgIGlmIChnX2kgPT0gImZlbWFsZSIgJiBnX2ogPT0gImZlbWFsZSIgJiBnX2sgPT0gImZlbWFsZSIpIGZmZjIgPC0gZmZmMiArIDEKICB9CiAgCiAgIyAyKSBpIC0+IGsgLT4gaiwgb3BlbjogaSAtPiBqIG11c3QgYmUgMCBvciBOQQogIGlmICh0X2lrID09IDEgJiB0X2tqID09IDEgJiAhKHRfaWogPT0gMSkpIHsKICAgIGlmIChnX2kgPT0gImZlbWFsZSIgJiBnX2sgPT0gImZlbWFsZSIgJiBnX2ogPT0gIm1hbGUiKSBmZm0yIDwtIGZmbTIgKyAxCiAgICBpZiAoZ19pID09ICJtYWxlIiAmIGdfayA9PSAibWFsZSIgJiBnX2ogPT0gImZlbWFsZSIpIG1tZjIgPC0gbW1mMiArIDEKICAgIGlmIChnX2kgPT0gIm1hbGUiICYgZ19rID09ICJtYWxlIiAmIGdfaiA9PSAibWFsZSIpIG1tbTIgPC0gbW1tMiArIDEKICAgIGlmIChnX2kgPT0gImZlbWFsZSIgJiBnX2sgPT0gImZlbWFsZSIgJiBnX2ogPT0gImZlbWFsZSIpIGZmZjIgPC0gZmZmMiArIDEKICB9CiAgCiAgIyAzKSBqIC0+IGkgLT4gaywgb3BlbjogaiAtPiBrIG11c3QgYmUgMCBvciBOQQogIGlmICh0X2ppID09IDEgJiB0X2lrID09IDEgJiAhKHRfamsgPT0gMSkpIHsKICAgIGlmIChnX2ogPT0gImZlbWFsZSIgJiBnX2kgPT0gImZlbWFsZSIgJiBnX2sgPT0gIm1hbGUiKSBmZm0yIDwtIGZmbTIgKyAxCiAgICBpZiAoZ19qID09ICJtYWxlIiAmIGdfaSA9PSAibWFsZSIgJiBnX2sgPT0gImZlbWFsZSIpIG1tZjIgPC0gbW1mMiArIDEKICAgIGlmIChnX2ogPT0gIm1hbGUiICYgZ19pID09ICJtYWxlIiAmIGdfayA9PSAibWFsZSIpIG1tbTIgPC0gbW1tMiArIDEKICAgIGlmIChnX2ogPT0gImZlbWFsZSIgJiBnX2kgPT0gImZlbWFsZSIgJiBnX2sgPT0gImZlbWFsZSIpIGZmZjIgPC0gZmZmMiArIDEKICB9CiAgCiAgIyA0KSBqIC0+IGsgLT4gaSwgb3BlbjogaiAtPiBpIG11c3QgYmUgMCBvciBOQQogIGlmICh0X2prID09IDEgJiB0X2tpID09IDEgJiAhKHRfamkgPT0gMSkpIHsKICAgIGlmIChnX2ogPT0gImZlbWFsZSIgJiBnX2sgPT0gImZlbWFsZSIgJiBnX2kgPT0gIm1hbGUiKSBmZm0yIDwtIGZmbTIgKyAxCiAgICBpZiAoZ19qID09ICJtYWxlIiAmIGdfayA9PSAibWFsZSIgJiBnX2kgPT0gImZlbWFsZSIpIG1tZjIgPC0gbW1mMiArIDEKICAgIGlmIChnX2ogPT0gIm1hbGUiICYgZ19rID09ICJtYWxlIiAmIGdfaSA9PSAibWFsZSIpIG1tbTIgPC0gbW1tMiArIDEKICAgIGlmIChnX2ogPT0gImZlbWFsZSIgJiBnX2sgPT0gImZlbWFsZSIgJiBnX2kgPT0gImZlbWFsZSIpIGZmZjIgPC0gZmZmMiArIDEKICB9CiAgCiAgIyA1KSBrIC0+IGkgLT4gaiwgb3BlbjogayAtPiBqIG11c3QgYmUgMCBvciBOQQogIGlmICh0X2tpID09IDEgJiB0X2lqID09IDEgJiAhKHRfa2ogPT0gMSkpIHsKICAgIGlmIChnX2sgPT0gImZlbWFsZSIgJiBnX2kgPT0gImZlbWFsZSIgJiBnX2ogPT0gIm1hbGUiKSBmZm0yIDwtIGZmbTIgKyAxCiAgICBpZiAoZ19rID09ICJtYWxlIiAmIGdfaSA9PSAibWFsZSIgJiBnX2ogPT0gImZlbWFsZSIpIG1tZjIgPC0gbW1mMiArIDEKICAgIGlmIChnX2sgPT0gIm1hbGUiICYgZ19pID09ICJtYWxlIiAmIGdfaiA9PSAibWFsZSIpIG1tbTIgPC0gbW1tMiArIDEKICAgIGlmIChnX2sgPT0gImZlbWFsZSIgJiBnX2kgPT0gImZlbWFsZSIgJiBnX2ogPT0gImZlbWFsZSIpIGZmZjIgPC0gZmZmMiArIDEKICB9CiAgCiAgIyA2KSBrIC0+IGogLT4gaSwgb3BlbjogayAtPiBpIG11c3QgYmUgMCBvciBOQQogIGlmICh0X2tqID09IDEgJiB0X2ppID09IDEgJiAhKHRfa2kgPT0gMSkpIHsKICAgIGlmIChnX2sgPT0gImZlbWFsZSIgJiBnX2ogPT0gImZlbWFsZSIgJiBnX2kgPT0gIm1hbGUiKSBmZm0yIDwtIGZmbTIgKyAxCiAgICBpZiAoZ19rID09ICJtYWxlIiAmIGdfaiA9PSAibWFsZSIgJiBnX2kgPT0gImZlbWFsZSIpIG1tZjIgPC0gbW1mMiArIDEKICAgIGlmIChnX2sgPT0gIm1hbGUiICYgZ19qID09ICJtYWxlIiAmIGdfaSA9PSAibWFsZSIpIG1tbTIgPC0gbW1tMiArIDEKICAgIGlmIChnX2sgPT0gImZlbWFsZSIgJiBnX2ogPT0gImZlbWFsZSIgJiBnX2kgPT0gImZlbWFsZSIpIGZmZjIgPC0gZmZmMiArIDEKICB9Cn0KCiMgUHJpbnQgcmVzdWx0cwpmZm0yCm1tZjIKbW1tMgpmZmYyCmBgYApDbG9zZWQKYGBge3IsIGV2YWwgPSBGQUxTRX0KIyBJbml0aWFsaXplIGNvdW50ZXJzCmZmbWNsb3NlZDIgPC0gMAptbWZjbG9zZWQyIDwtIDAKbW1tY2xvc2VkMiA8LSAwCmZmZmNsb3NlZDIgPC0gMAoKZm9yIChpZHggaW4gMTpucm93KGRmX2ZpbHRlcmVkMikpIHsKICAjIEFzc2lnbiB0aWUgdmFyaWFibGVzIGZvciByZWFkYWJpbGl0eQogIHRfaWogPC0gZGZfZmlsdGVyZWQkdDFfaWpbaWR4XQogIHRfamkgPC0gZGZfZmlsdGVyZWQkdDFfamlbaWR4XQogIHRfaWsgPC0gZGZfZmlsdGVyZWQkdDFfaWtbaWR4XQogIHRfa2kgPC0gZGZfZmlsdGVyZWQkdDFfa2lbaWR4XQogIHRfamsgPC0gZGZfZmlsdGVyZWQkdDFfamtbaWR4XQogIHRfa2ogPC0gZGZfZmlsdGVyZWQkdDFfa2pbaWR4XQogIAogICMgQXNzaWduIGdlbmRlciB2YXJpYWJsZXMgZm9yIHJlYWRhYmlsaXR5CiAgZ19pIDwtIGRmX2ZpbHRlcmVkJGdlbmRlcl9pW2lkeF0KICBnX2ogPC0gZGZfZmlsdGVyZWQkZ2VuZGVyX2pbaWR4XQogIGdfayA8LSBkZl9maWx0ZXJlZCRnZW5kZXJfa1tpZHhdCiAgCiAgIyAxKSBpIC0+IGogLT4gaywgY2xvc2VkOiBpIC0+IGsgZXhpc3RzCiAgaWYgKHRfaWogPT0gMSAmIHRfamsgPT0gMSAmIHRfaWsgPT0gMSkgewogICAgaWYgKGdfaSA9PSAiZmVtYWxlIiAmIGdfaiA9PSAiZmVtYWxlIiAmIGdfayA9PSAibWFsZSIpIGZmbWNsb3NlZDIgPC0gZmZtY2xvc2VkMiArIDEKICAgIGlmIChnX2kgPT0gIm1hbGUiICYgZ19qID09ICJtYWxlIiAmIGdfayA9PSAiZmVtYWxlIikgbW1mY2xvc2VkMiA8LSBtbWZjbG9zZWQyICsgMQogICAgaWYgKGdfaSA9PSAibWFsZSIgJiBnX2ogPT0gIm1hbGUiICYgZ19rID09ICJtYWxlIikgbW1tY2xvc2VkMiA8LSBtbW1jbG9zZWQyICsgMQogICAgaWYgKGdfaSA9PSAiZmVtYWxlIiAmIGdfaiA9PSAiZmVtYWxlIiAmIGdfayA9PSAiZmVtYWxlIikgZmZmY2xvc2VkMiA8LSBmZmZjbG9zZWQyICsgMQogIH0KICAKICAjIDIpIGkgLT4gayAtPiBqLCBjbG9zZWQ6IGkgLT4gaiBleGlzdHMKICBpZiAodF9payA9PSAxICYgdF9raiA9PSAxICYgdF9paiA9PSAxKSB7CiAgICBpZiAoZ19pID09ICJmZW1hbGUiICYgZ19rID09ICJmZW1hbGUiICYgZ19qID09ICJtYWxlIikgZmZtY2xvc2VkMiA8LSBmZm1jbG9zZWQyICsgMQogICAgaWYgKGdfaSA9PSAibWFsZSIgJiBnX2sgPT0gIm1hbGUiICYgZ19qID09ICJmZW1hbGUiKSBtbWZjbG9zZWQyIDwtIG1tZmNsb3NlZDIgKyAxCiAgICBpZiAoZ19pID09ICJtYWxlIiAmIGdfayA9PSAibWFsZSIgJiBnX2ogPT0gIm1hbGUiKSBtbW1jbG9zZWQyIDwtIG1tbWNsb3NlZDIgKyAxCiAgICBpZiAoZ19pID09ICJmZW1hbGUiICYgZ19rID09ICJmZW1hbGUiICYgZ19qID09ICJmZW1hbGUiKSBmZmZjbG9zZWQyIDwtIGZmZmNsb3NlZDIgKyAxCiAgfQogIAogICMgMykgaiAtPiBpIC0+IGssIGNsb3NlZDogaiAtPiBrIGV4aXN0cwogIGlmICh0X2ppID09IDEgJiB0X2lrID09IDEgJiB0X2prID09IDEpIHsKICAgIGlmIChnX2ogPT0gImZlbWFsZSIgJiBnX2kgPT0gImZlbWFsZSIgJiBnX2sgPT0gIm1hbGUiKSBmZm1jbG9zZWQyIDwtIGZmbWNsb3NlZDIgKyAxCiAgICBpZiAoZ19qID09ICJtYWxlIiAmIGdfaSA9PSAibWFsZSIgJiBnX2sgPT0gImZlbWFsZSIpIG1tZmNsb3NlZDIgPC0gbW1mY2xvc2VkMiArIDEKICAgIGlmIChnX2ogPT0gIm1hbGUiICYgZ19pID09ICJtYWxlIiAmIGdfayA9PSAibWFsZSIpIG1tbWNsb3NlZDIgPC0gbW1tY2xvc2VkMiArIDEKICAgIGlmIChnX2ogPT0gImZlbWFsZSIgJiBnX2kgPT0gImZlbWFsZSIgJiBnX2sgPT0gImZlbWFsZSIpIGZmZmNsb3NlZDIgPC0gZmZmY2xvc2VkMiArIDEKICB9CiAgCiAgIyA0KSBqIC0+IGsgLT4gaSwgY2xvc2VkOiBqIC0+IGkgZXhpc3RzCiAgaWYgKHRfamsgPT0gMSAmIHRfa2kgPT0gMSAmIHRfamkgPT0gMSkgewogICAgaWYgKGdfaiA9PSAiZmVtYWxlIiAmIGdfayA9PSAiZmVtYWxlIiAmIGdfaSA9PSAibWFsZSIpIGZmbWNsb3NlZDIgPC0gZmZtY2xvc2VkMiArIDEKICAgIGlmIChnX2ogPT0gIm1hbGUiICYgZ19rID09ICJtYWxlIiAmIGdfaSA9PSAiZmVtYWxlIikgbW1mY2xvc2VkMiA8LSBtbWZjbG9zZWQyICsgMQogICAgaWYgKGdfaiA9PSAibWFsZSIgJiBnX2sgPT0gIm1hbGUiICYgZ19pID09ICJtYWxlIikgbW1tY2xvc2VkMiA8LSBtbW1jbG9zZWQyICsgMQogICAgaWYgKGdfaiA9PSAiZmVtYWxlIiAmIGdfayA9PSAiZmVtYWxlIiAmIGdfaSA9PSAiZmVtYWxlIikgZmZmY2xvc2VkMiA8LSBmZmZjbG9zZWQyICsgMQogIH0KICAKICAjIDUpIGsgLT4gaSAtPiBqLCBjbG9zZWQ6IGsgLT4gaiBleGlzdHMKICBpZiAodF9raSA9PSAxICYgdF9paiA9PSAxICYgdF9raiA9PSAxKSB7CiAgICBpZiAoZ19rID09ICJmZW1hbGUiICYgZ19pID09ICJmZW1hbGUiICYgZ19qID09ICJtYWxlIikgZmZtY2xvc2VkMiA8LSBmZm1jbG9zZWQyICsgMQogICAgaWYgKGdfayA9PSAibWFsZSIgJiBnX2kgPT0gIm1hbGUiICYgZ19qID09ICJmZW1hbGUiKSBtbWZjbG9zZWQyIDwtIG1tZmNsb3NlZDIgKyAxCiAgICBpZiAoZ19rID09ICJtYWxlIiAmIGdfaSA9PSAibWFsZSIgJiBnX2ogPT0gIm1hbGUiKSBtbW1jbG9zZWQyIDwtIG1tbWNsb3NlZDIgKyAxCiAgICBpZiAoZ19rID09ICJmZW1hbGUiICYgZ19pID09ICJmZW1hbGUiICYgZ19qID09ICJmZW1hbGUiKSBmZmZjbG9zZWQyIDwtIGZmZmNsb3NlZDIgKyAxCiAgfQogIAogICMgNikgayAtPiBqIC0+IGksIGNsb3NlZDogayAtPiBpIGV4aXN0cwogIGlmICh0X2tqID09IDEgJiB0X2ppID09IDEgJiB0X2tpID09IDEpIHsKICAgIGlmIChnX2sgPT0gImZlbWFsZSIgJiBnX2ogPT0gImZlbWFsZSIgJiBnX2kgPT0gIm1hbGUiKSBmZm1jbG9zZWQyIDwtIGZmbWNsb3NlZDIgKyAxCiAgICBpZiAoZ19rID09ICJtYWxlIiAmIGdfaiA9PSAibWFsZSIgJiBnX2kgPT0gImZlbWFsZSIpIG1tZmNsb3NlZDIgPC0gbW1mY2xvc2VkMiArIDEKICAgIGlmIChnX2sgPT0gIm1hbGUiICYgZ19qID09ICJtYWxlIiAmIGdfaSA9PSAibWFsZSIpIG1tbWNsb3NlZDIgPC0gbW1tY2xvc2VkMiArIDEKICAgIGlmIChnX2sgPT0gImZlbWFsZSIgJiBnX2ogPT0gImZlbWFsZSIgJiBnX2kgPT0gImZlbWFsZSIpIGZmZmNsb3NlZDIgPC0gZmZmY2xvc2VkMiArIDEKICB9Cn0KCiMgUHJpbnQgcmVzdWx0cwpmZm1jbG9zZWQyCm1tZmNsb3NlZDIKbW1tY2xvc2VkMgpmZmZjbG9zZWQyCmBgYAoKIyMgVmlzdWFsaXNhdGlvbgoKIyMjIEFkamFjZW5jeSBtYXRyaXgKCk5vdywgdG8gdmlzdWFsaXplIHRoZSBuZXR3b3JrIG9mIDAyMUMgdHJpYWRzIGFuZCAwMzBUIHRyaWFkcyBJIHR1cm4gdGhlIGRhdGFzZXQgImRmX2ZpbHRlcmVkIiBmcm9tIHdhdmUgMSBiYWNrIGludG8gYW4gYWRqYWNlbnkgbWF0cml4IGFuZCBjcmVhdGUgYSBnZW5kZXIgbGlzdCBmb3IgdGhvc2UgcGVvcGxlLiAKCmBgYHtyfQojIEFzc3VtaW5nIHlvdXIgZGF0YWZyYW1lIGlzIGNhbGxlZCBkZl9maWx0ZXJlZApkZjMgPC0gZGZfZmlsdGVyZWQKCiMgSWRlbnRpZnkgYWxsIHVuaXF1ZSBub2RlIElEcyBmcm9tIGksIGosIGsKbm9kZXMgPC0gc29ydCh1bmlxdWUoYyhkZjMkaSwgZGYzJGosIGRmMyRrKSkpCgojIENyZWF0ZSBlbXB0eSBhZGphY2VuY3kgbWF0cml4CmFkal9tYXQgPC0gbWF0cml4KDAsIG5yb3cgPSBsZW5ndGgobm9kZXMpLCBuY29sID0gbGVuZ3RoKG5vZGVzKSkKcm93bmFtZXMoYWRqX21hdCkgPC0gbm9kZXMKY29sbmFtZXMoYWRqX21hdCkgPC0gbm9kZXMKCiMgRmlsbCBhZGphY2VuY3kgbWF0cml4CmZvciAocm93IGluIDE6bnJvdyhkZjMpKSB7CiAgaSA8LSBkZjMkaVtyb3ddCiAgaiA8LSBkZjMkaltyb3ddCiAgayA8LSBkZjMka1tyb3ddCiAgCiAgIyBNYWtlIHN1cmUgdG8gb25seSBhc3NpZ24gaWYgdGhlIGNvbHVtbiBleGlzdHMgaW4gdGhlIG1hdHJpeAogIGlmIChkZjMkdDFfaWpbcm93XSA9PSAxKSBhZGpfbWF0W2FzLmNoYXJhY3RlcihpKSwgYXMuY2hhcmFjdGVyKGopXSA8LSAxCiAgaWYgKGRmMyR0MV9qaVtyb3ddID09IDEpIGFkal9tYXRbYXMuY2hhcmFjdGVyKGopLCBhcy5jaGFyYWN0ZXIoaSldIDwtIDEKICBpZiAoZGYzJHQxX2lrW3Jvd10gPT0gMSkgYWRqX21hdFthcy5jaGFyYWN0ZXIoaSksIGFzLmNoYXJhY3RlcihrKV0gPC0gMQogIGlmIChkZjMkdDFfa2lbcm93XSA9PSAxKSBhZGpfbWF0W2FzLmNoYXJhY3RlcihrKSwgYXMuY2hhcmFjdGVyKGkpXSA8LSAxCiAgaWYgKGRmMyR0MV9qa1tyb3ddID09IDEpIGFkal9tYXRbYXMuY2hhcmFjdGVyKGopLCBhcy5jaGFyYWN0ZXIoayldIDwtIDEKICBpZiAoZGYzJHQxX2tqW3Jvd10gPT0gMSkgYWRqX21hdFthcy5jaGFyYWN0ZXIoayksIGFzLmNoYXJhY3RlcihqKV0gPC0gMQp9CgojIFZpZXcgYWRqYWNlbmN5IG1hdHJpeAojIFZpZXcoYWRqX21hdCkKCiNjaGVjawojcm93X3N1bXMgPC0gcm93U3VtcyhhZGpfbWF0KQojY29sX3N1bXMgPC0gY29sU3VtcyhhZGpfbWF0KQojc3VtKHJvd19zdW1zID09IDAgJiBjb2xfc3VtcyA9PSAwKQoKIyBDcmVhdGUgZ2VuZGVyIHZlY3RvciBtYXRjaGluZyB0aGUgb3JkZXIgb2Ygbm9kZXMgaW4gYWRqX21hdApnZW5kZXJfdmVjIDwtIHNhcHBseShyb3duYW1lcyhhZGpfbWF0KSwgZnVuY3Rpb24obm9kZSkgewogIG5vZGUgPC0gYXMuY2hhcmFjdGVyKG5vZGUpCiAgCiAgIyBDaGVjayB3aGljaCBjb2x1bW4gY29udGFpbnMgdGhpcyBub2RlCiAgaWYgKG5vZGUgJWluJSBkZjMkaSkgewogICAgZGYzJGdlbmRlcl9pW3doaWNoKGRmMyRpID09IG5vZGUpWzFdXSAgIyBmaXJzdCBvY2N1cnJlbmNlCiAgfSBlbHNlIGlmIChub2RlICVpbiUgZGYzJGopIHsKICAgIGRmMyRnZW5kZXJfalt3aGljaChkZjMkaiA9PSBub2RlKVsxXV0KICB9IGVsc2UgaWYgKG5vZGUgJWluJSBkZjMkaykgewogICAgZGYzJGdlbmRlcl9rW3doaWNoKGRmMyRrID09IG5vZGUpWzFdXQogIH0gZWxzZSB7CiAgICBOQSAgIyBmYWxsYmFjawogIH0KfSkKCiMgQ2hlY2sgdGhlIHJlc3VsdAojIFZpZXcoZ2VuZGVyX3ZlYykKCmBgYAoKIyMjIEdyYXBoCgpGaWd1cmUgMSB2aXN1YWxpemVzIHRoZSBnZW5kZXIgZGlzdHJpYnV0aW9uIGluIHRoZSBuZXR3b3JrIG9mIGluZGl2aWR1YWxzIGludm9sdmVkIGluIDAyMUMgYW5kIDAzMFQgdHJpYWRzLiBNZW4gYXBwZWFyIG1vcmUgZnJlcXVlbnRseSBpbiB0aGUgbmV0d29yayBhbmQgYXJlIHNwcmVhZCB3aWRlbHkgYWNyb3NzIHZhcmlvdXMgY2x1c3RlcnMuIFNldmVyYWwgbWFsZS1kb21pbmF0ZWQgY2x1c3RlcnMgYXJlIHZpc2libGUsIHN1Z2dlc3RpbmcgYSBzdHJvbmdlciBtYWxlIHByZXNlbmNlIGluIHRoZSBmb3JtYXRpb24gb2YgdGhlc2UgdHJpYWRzLiBXaGlsZSB3b21lbiBhcmUgbGVzcyBudW1lcm91cywgdGhleSBhbHNvIGZvcm0gbm90aWNlYWJsZSBjbHVzdGVycywgb2Z0ZW4gb24gdGhlIG5ldHdvcmvigJlzIHBlcmlwaGVyeS4gT3ZlcmFsbCwgdGhlIHN0cnVjdHVyZSBzdWdnZXN0cyBnZW5kZXJlZCBwYXR0ZXJucyBvZiBjb25uZWN0aW9uLCB3aXRoIG1lbiBvY2N1cHlpbmcgbW9yZSBjZW50cmFsIGFuZCBpbnRlcmNvbm5lY3RlZCBwb3NpdGlvbnMsIGFuZCB3b21lbiBhcHBlYXJpbmcgbW9yZSBvZnRlbiBpbiBzbWFsbGVyLCBtb3JlIGxvY2FsaXplZCBncm91cHMuCgpgYGB7cn0KCiMgQ3JlYXRlIGlncmFwaCBvYmplY3QgZnJvbSBhZGphY2VuY3kgbWF0cml4CmcgPC0gZ3JhcGhfZnJvbV9hZGphY2VuY3lfbWF0cml4KGFkal9tYXQsIG1vZGUgPSAiZGlyZWN0ZWQiLCBkaWFnID0gRkFMU0UpCgojIE1hcCBnZW5kZXIgdG8gY29sb3JzCiMgQWRqdXN0IHRoZSB2YWx1ZXMgaW4gZ2VuZGVyX3ZlYyBpZiB0aGV5IGFyZSBub3QgZXhhY3RseSAibWFsZSIvImZlbWFsZSIKbm9kZV9jb2xvcnMgPC0gaWZlbHNlKGdlbmRlcl92ZWMgPT0gImZlbWFsZSIsICJkYXJrb3JhbmdlIiwgImxpZ2h0Ymx1ZSIpCgojIFBsb3QgdGhlIGdyYXBoCnBsb3QoZywKICAgICB2ZXJ0ZXguY29sb3IgPSBub2RlX2NvbG9ycywgICAjIGdlbmRlciBjb2xvcnMKICAgICB2ZXJ0ZXgubGFiZWwgPSBOQSwgICAgICAgICAgICAjIHJlbW92ZSBsYWJlbHMKICAgICB2ZXJ0ZXguc2l6ZSA9IDUsICAgICAgICAgICAgICAjIHNtYWxsIG5vZGVzCiAgICAgZWRnZS5hcnJvdy5zaXplID0gMC4yLCAgICAgICAgIyBzbWFsbGVyIGFycm93aGVhZHMKICAgICBsYXlvdXQgPSBsYXlvdXRfd2l0aF9mcihnKSwgICAjIHBhc3MgdGhlIGdyYXBoCiAgICAgbWFpbiA9ICJGaWd1cmUgMS4gVmlzdWFsaXNhdGlvbiBnZW5kZXIgZGlzdHJpYnV0aW9uIGluIDAyMUMgYW5kIDAzMFQgdHJpYWRzIGluIHdhdmUgMSIpCgojIEFkZCBsZWdlbmQKbGVnZW5kKCJ0b3BsZWZ0IiwgICAgICAgICAgICAgICAgICAgICAjIHBvc2l0aW9uIG9mIGxlZ2VuZAogICAgICAgbGVnZW5kID0gYygiRmVtYWxlIiwgIk1hbGUiKSwgICMgbGFiZWxzCiAgICAgICBjb2wgPSBjKCJkYXJrb3JhbmdlIiwgImxpZ2h0Ymx1ZSIpLCMgY29sb3JzCiAgICAgICBwY2ggPSAxOSwgICAgICAgICAgICAgICAgICAgICAgIyBzb2xpZCBjaXJjbGUKICAgICAgIHB0LmNleCA9IDEuNSwgICAgICAgICAgICAgICAgICAjIHNpemUgb2YgdGhlIGNpcmNsZXMgaW4gbGVnZW5kCiAgICAgICBidHkgPSAibiIpICAgICAgICAgICAgICAgICAgICAgIyBubyBib3ggYXJvdW5kIGxlZ2VuZApgYGAKCg==</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("Descriptives.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

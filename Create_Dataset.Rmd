@@ -85,7 +85,7 @@ Last compiled on `r format(Sys.time(), '%B, %Y')`
 
 ------------------------------------------------------------------------
 ### Genderize function
-```{r}
+```{r, eval = F}
 
 my_genderizer <- function(name) {
   name <- gsub("^/+|/+$", "", name)
@@ -129,7 +129,7 @@ my_genderizer <- function(name) {
 <br>
 ### Load the data
 
-```{r}
+```{r, eval = F}
 # load in the data
 scholars <- fload("./data/processed/scholars_20240924.rda")
 
@@ -260,7 +260,7 @@ df_scholars <- do.call(rbind, scholars$demographics)
 ```
 <br>
 ### Attach gender
-```{r}
+```{r, eval = F}
 df_scholars_gender <- df_scholars |>
   mutate(firstname = word(Naam, 1))  # extract first names
 
@@ -386,7 +386,7 @@ fcolnet_gender <- function(data = scholars,
 
 ```
 ### output
-```{r}
+```{r, eval = F}
 result_gender2 <- fcolnet_gender(
   data = scholars,
   demographics = df_scholars_gender,
@@ -408,33 +408,35 @@ save(result_gender2, file = "./data/processed/result_gender2.rda")
 
 ### Check waves
 ```{r}
+
+load("./data/processed/result_gender2.rda")
+
 wave1 <- result_gender2$nets[1,,]
 wave2 <- result_gender2$nets[2,,]
 
 # filter out the waves of the object: we need to check our input
-dim(wave1)
-dim(wave2)
+#dim(wave1)
+#dim(wave2)
 
 # you need to have 0 missing values:
-sum(is.na(wave1))
-sum(is.na(wave2))
+#sum(is.na(wave1))
+#sum(is.na(wave2))
 
 #check the diagonal: all places should be 0
-sum(diag(wave1)==0)
-sum(diag(wave2)==0)
+#sum(diag(wave1)==0)
+#sum(diag(wave2)==0)
 
 # a few people did work with themselves:
-diag(wave1) <- 0
-diag(wave2) <- 0
+#diag(wave1) <- 0
+#diag(wave2) <- 0
 
 # everything should be 1 or 0:
-sum(wave1>1)
-sum(wave2>1)
+#sum(wave1>1)
+#sum(wave2>1)
 
 # check if it's not empty: there are people with 1's
-sum(wave1>0)
-sum(wave2>0)
-
+#sum(wave1>0)
+#sum(wave2>0)
 
 net_gender <- array(data = c(wave1, wave2), dim = c(dim(wave1), 2))
 # net_gender
@@ -540,7 +542,7 @@ It is wise to always retain certain “anchor” effects (e.g. out-degree or rat
 ### transTrip
 There are many Structural effects you can include. I tried around with triangulation, but I did not think it really fit my gender research. It could be interesting: if you have A -> B -> C, would the gender of B impact whether A -> C would collaborate. 
 
-```{r}
+```{r, eval = F}
 myeff <- includeEffects(myeff, egoX, interaction1 = "gender", type = "eval", include = T) 
 myeff <- setEffect(myeff, altX, interaction1 = "gender", include = T) 
 myeff <- setEffect(myeff, egoXaltX, interaction1 = "gender", include = T)
@@ -567,7 +569,7 @@ For all alters j, if ego i is tied to an intermediary h who is a woman (male = 0
 <br>
 
 ### inPop
-```{r}
+```{r, eval = F}
 # first put the triadic effects on: do not include
 myeff <- includeEffects(myeff, transTrip, include = F)
 myeff <- includeEffects(myeff, transTripX, interaction1 = "gender", type = "eval", include = F)

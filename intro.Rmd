@@ -4,7 +4,7 @@ bibliography: references.bib
 author: "Mylène Husson"
 ---
 
-```{r, globalsettings, echo=FALSE, warning=FALSE, results='hide'}
+```{r, globalsettings, echo=FALSE, include=TRUE, warning=FALSE, results='hide'}
 library(knitr)
 
 knitr::opts_chunk$set(echo = TRUE)
@@ -31,10 +31,11 @@ Last compiled on `r format(Sys.time(), '%B, %Y')`
 
 # Introduction
 
-<br>
-------------------------------------------------------------------------
-Gender segregation persists within academia [@powell2018gender], reinforcing structural inequalities by limiting men’s and women’s access to influential networks, mentorship opportunities, and high-status collaborations. Understanding the causes of this segregation is therefore crucial to addressing and ultimately overcoming these disparities.
-A key mechanism contributing to gender segregation is gender homophily: the tendency for researchers to preferentially collaborate with colleagues of the same gender [@wang2023homophily]. Homophily is a fundamental principle in social network analysis, influencing the structure and evolution of networks by shaping the composition of ties between individuals. As Jochem Tolsma discusses in Social Network Analysis for Social Scientists [@SNASS], selective association can lead to the formation of tightly-knit clusters with shared characteristics, such as gender. Over time, these patterns reinforce existing social divisions, as individuals within a cluster are more likely to interact with one another than with those outside their group. This contributes to increased segregation, limiting cross-group interactions and perpetuating disparities in access to resources, opportunities, and information.
+Gender segregation persists within academia [@powell2018gender], reinforcing structural inequalities by limiting men’s and women’s equal access to influential networks, mentorship opportunities, and high-status collaborations. Understanding the causes of this macro level segregation is crucial to addressing and ultimately overcoming these disparities.
+
+Coleman argued that to understand the causes of macro-level social phenomena, we must examine the micro-level mechanisms through which individual actions and interactions generate large-scale outcomes [@Coleman]. In this paper, I apply Social Network Analysis (SNA) to academic collaboration networks, as it provides a powerful framework for linking micro-level interactions to macro-level structures [@SNASS]. It allows me to examine researchers at the individual level (nodes), whom they collaborate with (ties), and, at the macro level, the overall structure of the network. By studying how researchers form, maintain, or avoid ties, we can trace the micro-level behaviors that aggregate into macro-level patterns, including disciplinary clustering, collaboration inequalities, or gender segregation [@SNASS]. In this way, SNA operationalizes Coleman’s insight by linking individual decisions and interactions to emergent structural outcomes in academic networks.
+
+A key mechanism behind gender segregation is gender homophily: the tendency for researchers to preferentially collaborate with colleagues of the same gender [@wang2023homophily]. Homophily is a fundamental principle in social network analysis, influencing the structure and evolution of networks by shaping the composition of ties between individuals. As Jochem Tolsma discusses in Social Network Analysis for Social Scientists [@SNASS], selective association can lead to the formation of tightly-knit clusters with shared characteristics, such as gender. Over time, these patterns reinforce existing social divisions, as individuals within a cluster are more likely to interact with one another than with those outside their group. This contributes to increased segregation, limiting cross-group interactions and perpetuating disparities in access to resources, opportunities, and information.
 
 In academic contexts, homophily shapes co-authorship networks, fostering gendered clusters that restrict access to mentorship, resources, and high-impact collaborations, thereby sustaining inequalities across fields. Empirical evidence supports the presence of gender homophily in research collaborations [@wang2023homophily]. Analysis of the JSTOR corpus shows that this pattern cannot be fully explained by disciplinary or demographic factors; even after accounting for these, researchers still preferentially co-author with same-gender colleagues. 
 
@@ -42,29 +43,26 @@ This is all at the dyadic level, focusing on collaborations between pairs of ind
 
 ![](images/diadic2.png)
 
-While most prior research has focused on dyadic relationships—collaborations between pairs of researchers—this study extends the analysis to triadic structures, where three researchers are interconnected. Dyadic analyses capture individual-level preferences, such as a tendency for researchers to collaborate with colleagues of the same gender. However, they cannot fully capture higher-order network dynamics, where the structure of existing collaborations may influence the formation of new ties.
+However, researchers do not operate in isolation; they exist within a network of existing collaborations. Their decisions about whom to collaborate with may not only be influenced by individual preferences but also by the people they are already connected to. While dyadic homophily shapes many individual collaboration choices, it is also important to consider the broader network context in which these choices occur. This study therefore focuses on triadic structures rather than just dyads. A triad occurs when researcher A has collaborated with B, and B has collaborated with C [@SNASS]. Through this indirect connection, A may come into contact with C, and this exposure could influence A’s decision to collaborate with C. 
 
-Triadic structures are particularly important in social network analysis because they often exhibit triadic closure: if researcher A collaborates with B, and B collaborates with C, there is an increased likelihood that A will collaborate with C as well. Triadic closure is not just a function of dyadic preference—it reflects how network structure mediates relationship formation, potentially amplifying gender homophily and reinforcing segregation within academic networks.
-
-This study focuses on triads where two researchers, A and B, share the same gender, examining whether the gender of a potential third collaborator (C) affects the likelihood of the triad closing. By analyzing these patterns, we can uncover whether gendered clusters persist and expand beyond individual dyadic choices, highlighting a higher-order mechanism of inequality in academic collaborations.
-
-To investigate these dynamics, the following research questions are posed:
-
-RQ1. How prevalent are triadic collaborations in academic co-authorship networks?
-This establishes the baseline: understanding whether triads are common enough to meaningfully influence network structure.
-
-RQ2. Do these triads exhibit gender homophily?
-This examines the composition of triads, testing whether same-gender clustering exists beyond dyadic preferences.
-
-RQ3. Are triads with same-gender initial collaborators (A and B) more likely to close when the potential third collaborator (C) is of the same gender, compared to when C is of a different gender?
-This tests whether gender homophily is amplified through triadic closure, revealing higher-order structural mechanisms that could reinforce gender segregation in academic collaborations.
-
-By addressing these questions, this research extends the analysis of gender homophily from dyadic interactions to network-level processes, providing a more comprehensive understanding of how gendered collaboration patterns emerge and persist.
+In this study, I specifically investigate whether the gender of C affects A’s willingness to collaborate, particularly when A and B are of the same gender. Drawing on theories of intergroup relations, such as Contact Theory and Social Identity Theory, the analysis examines how indirect connections can either reinforce or bridge gender boundaries in academic collaboration networks.
 
 ![](images/triadic2.png)
 
+Contact Theory helps explain how indirect exposure to cross-gender collaborators through shared partners may reduce bias and foster new collaborations, while Social Identity emphasizes how in-group preferences or perceived competition can limit such ties. By situating triadic connections within these theoretical perspectives, we can better assess whether indirect cross-gender contacts act as bridges that promote integration or whether they instead reproduce gender-segregated collaboration structures.
+
+Thus, while researchers may exhibit a micro-level tendency to collaborate with others of the same gender, these individual preferences are embedded within a broader network structure that may amplify or constrain them. To examine how such dynamics unfold, I analyse the triadic network structures described above using social network data on N researchers from sociology and politicology departments across N Dutch universities. The dataset consists of two waves: wave one  (2015-2018) and wave two (2019-2023). To assess how gender shapes tie formation and maintenance within these triadic configurations, I first examine the prevalence of different triadic structures in the data and then analyse the gender composition of the two most central to my research (021C and 030T). This leads to the following two descriptive research questions:
+
+RQ1: How frequently do different types of triadic structures occur within the collaboration network?
+
+RQ2: How is gender distributed across the triadic structures, specifically triads 021C and 030T, observed in the network?
+
+Next, using the R package RSiena [@Rsiena] I will be able to analyse whether if A and B have the same gender, C’s gender matters for A to make a connection to C. My explanatory research question is:
+
+RQ3: To what extent does the gender of a potential third collaborator (C) influence triad closure when the initial two collaborators (A and B) share the same gender?
+
+
 <br>
-------------------------------------------------------------------------
 
 # References
 

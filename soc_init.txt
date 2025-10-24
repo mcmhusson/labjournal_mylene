@@ -6933,3 +6933,135 @@ covariance/correlation matrix of X can be found using
 summary(ans) within R, or by using the 'verbose' option in Siena07.
  
 Total computation time 1.81 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 24/10/2025 17:19:20
+New results follow.
+-----------------------------------
+
+RSiena version 1.5.0 (06 Jul 25)
+
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 690299.
+Effects object used: myeff 
+Model Type:
+ Standard actor-oriented model 
+Estimation method: conditional moment estimation.
+Conditioning variable is the total number of observed changes ("distance") 
+in the network variable.
+Distance for simulations is   77 .
+Standard errors are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Initial value of gain parameter is  0.2000000.
+Reduction factor for gain parameter is  0.5000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  0. Rate parameter                           3.1457
+  1. eval:  outdegree (density)                            -1.5385
+  2. eval:  reciprocity                                     0.0000
+  3. endow:  indegree - popularity                          0.0000
+  4. creation:  indegree - popularity                       0.0000
+  5. endow:  gender ego                                     0.0000
+  6. creation:  gender ego                                  0.0000
+  7. eval:  gender ego x gender alter                       0.0000
+  8. endow:  gender ego x indegree - popularity             0.0000
+  9. creation:  gender ego x indegree - popularity          0.0000
+
+
+Values of target statistics are
+  1. Number of ties                                                      76.0000
+  2. Number of reciprocated ties                                         12.0000
+  3. Lost ties: Sum of squared indegrees                                 60.0000
+  4. New ties: Sum of squared indegrees                                 311.0000
+  5. Lost ties: Sum outdegrees x gender                                  -6.4000
+  6. New ties: Sum outdegrees x gender                                    7.3600
+  7. Sum gender ego x gender alter                                        0.2704
+  8. gender ego x indegree - popularity                                 -17.2000
+  9. gender ego x indegree - popularity                                  36.2800
+These were calculated from the data.
+
+ 9 parameters, 9 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 2867 iterations.
+Parameter estimates based on 1867 iterations,
+basic rate parameter as well as 
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1.   0.4920   7.5338   0.0653 
+  2.  -0.2340   4.5548  -0.0514 
+  3.   0.6360  17.5749   0.0362 
+  4.  19.1770 175.7427   0.1091 
+  5.  -0.1109   1.4413  -0.0770 
+  6.   0.2411   3.1608   0.0763 
+  7.  -0.0935   2.0862  -0.0448 
+  8.  -0.4847   6.1991  -0.0782 
+  9.   5.3630  38.5877   0.1390 
+
+Good convergence is indicated by the t-ratios being close to zero.
+
+Overall maximum convergence ratio =  0.1898 .
+
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 2867 iteration steps.
+
+
+@3
+Estimates and standard errors
+                             
+Rate parameters:
+ 0. Rate parameter                            3.8817  (   0.6762)
+
+Other parameters:
+ 1. eval:  outdegree (density)                                    -2.8631  (   0.4503)
+ 2. eval:  reciprocity                                             1.7606  (   0.5389)
+ 3. endow: indegree - popularity                                   0.3859  (   0.2055)
+ 4. creat: indegree - popularity                                   0.1911  (   0.0438)
+ 5. endow: gender ego                                              6.5767  (   3.0985)
+ 6. creat: gender ego                                             -3.2563  (   2.2050)
+ 7. eval:  gender ego x gender alter                               0.4329  (   0.5681)
+ 8. endow: gender ego x indegree - popularity                     -0.2897  (   0.4144)
+ 9. creat: gender ego x indegree - popularity                      0.0851  (   0.0892)
+
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+     0.203     -0.131     -0.080      0.002     -0.143     -0.212      0.027      0.059     -0.002
+    -0.541      0.290      0.039      0.000      0.615     -0.058     -0.007     -0.086      0.008
+    -0.867      0.353      0.042     -0.003      0.049      0.056     -0.012     -0.018      0.002
+     0.100     -0.007     -0.297      0.002      0.004      0.002      0.002      0.001     -0.001
+    -0.103      0.369      0.076      0.027      9.601     -5.555      0.124     -0.860      0.099
+    -0.213     -0.049      0.124      0.022     -0.813      4.862     -0.271      0.217     -0.088
+     0.107     -0.024     -0.105      0.063      0.070     -0.216      0.323      0.047      0.022
+     0.319     -0.384     -0.209      0.031     -0.670      0.238      0.200      0.172     -0.008
+    -0.056      0.157      0.091     -0.169      0.357     -0.446      0.431     -0.217      0.008
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 2.29 seconds.

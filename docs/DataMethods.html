@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Mylène Husson" />
+
+
+<title>Journal 1</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="tweaks.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    My journal
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lab1.html">Week 1</a>
+    </li>
+    <li>
+      <a href="lab2.html">Week 2</a>
+    </li>
+    <li>
+      <a href="lab3.html">Week 3</a>
+    </li>
+    <li>
+      <a href="lab4.html">Week 4</a>
+    </li>
+    <li>
+      <a href="lab5.html">Week 5a</a>
+    </li>
+    <li>
+      <a href="lab5tryouts.html">Week 5b</a>
+    </li>
+    <li>
+      <a href="Create_Dataset.html">Week 5c</a>
+    </li>
+    <li>
+      <a href="lab6.html">Week 6</a>
+    </li>
+    <li>
+      <a href="lab7.html">Week 7</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Final Project
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="intro.html">Introduction</a>
+    </li>
+    <li>
+      <a href="theory.html">Theory</a>
+    </li>
+    <li>
+      <a href="DataMethods.html">Data and Methods</a>
+    </li>
+    <li>
+      <a href="dataconstruction.html">Data Construction</a>
+    </li>
+    <li>
+      <a href="Descriptives.html">Descriptive Analyses</a>
+    </li>
+    <li>
+      <a href="Results.html">Exploratory Analyses</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://mcmhusson.github.io/labjournal_mylene/">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Journal 1</h1>
+<h4 class="author">Mylène Husson</h4>
+
+</div>
+
+
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<p>Last compiled on October, 2025 <br> ————————————————————————</p>
+<div id="data-and-methods" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Data and Methods</h1>
+<p><br></p>
+<div id="data" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Data</h2>
+<p>To test the hypotheses, I use social network data on N researchers
+from the Sociology and Political Science departments across N Dutch
+universities. These data were collected in 2022 and 2024 as part of a
+larger project mapping collaborations among Dutch university scholars in
+these disciplines.</p>
+<p>The data collection proceeded in two main steps. First, all staff
+members of Sociology and Political Science departments at Dutch
+universities were identified, and their names, affiliations, academic
+positions, and Google Scholar IDs were recorded. Second, publication
+data were retrieved from OpenAlex, a nonprofit open-science database
+<span class="citation">(Priem, Piwowar, and Orr 2022)</span>. It is
+important to note that the collection years (2022 and 2024) do not
+define the analytical waves. Researchers can determine the temporal
+boundaries of the waves themselves. In this study, I focus on two
+four-year periods: 2015–2018 (Wave 1) and 2019–2023 (Wave 2).
+Collaboration networks were constructed by identifying co-authorships
+within each wave. These co-authorships can be represented as either
+undirected or directed networks. In the case of a directed network,
+directionality can be defined from the first-named author to others or
+from the last-named author to others. I adopt the latter approach, as it
+reflects academic hierarchies in which senior scholars—typically listed
+last—are more likely to initiate collaborations.</p>
+<p>After constructing the co-authorship networks, the overall structure
+of the data can be described as a complete, or “socionet,” network,
+following the framework outlined by Jochem Tolsma in SNA for Social
+Scientists <span class="citation">(Tolsma and Hofstra 2022)</span>. In
+this framework, such networks are defined by clearly specified
+boundaries and complete information on all actors and their
+relationships within those boundaries. In the present case, the network
+boundary is defined by all researchers affiliated with Sociology and
+Politicology departments at Dutch universities. The dataset includes all
+individuals within this defined academic context and all known
+collaborations among them. Because both the population of actors and
+their intra-boundary ties are fully captured, the data constitute a
+complete, or socionet, network in Tolsma’s terms.</p>
+<p>Besides collaboration ties, the data also includes node-level
+attributes. These encompass time-varying characteristics, such as each
+researcher’s position and university affiliation, and time-constant
+characteristics, such as name and discipline.</p>
+<div id="covariate-gender" class="section level3" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Covariate
+Gender</h3>
+<p>In this study, I manually included gender as a (usually)
+time-constant characteristic. Each researcher’s gender was inferred from
+their first name using the Nederlandse Voornamenbank (NVB) of the
+Meertens Institute. First, I extracted the first name from each
+researcher’s full name and applied a custom R function I developed. This
+function automatically queried the NVB database, retrieved the
+corresponding gender frequency table, and assigned the researcher as
+male or female based on the most common association. If a name was not
+found in the NVB database or if the name field was incomplete or
+incorrectly formatted, the function returned NA. As a result, 22
+researchers have missing gender values in the final demographic
+dataset.</p>
+</div>
+<div id="control-covariates" class="section level3" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Control
+covariates</h3>
+<p>To account for other factors that may influence the formation or
+closure of triads, I include controls for university affiliation,
+discipline, and position. These variables are already available in the
+dataset.</p>
+<p><br></p>
+</div>
+</div>
+<div id="methods" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Methods</h2>
+<p><br></p>
+<div id="descriptive" class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Descriptive</h3>
+<p>For the descriptive research questions I will first perform a triad
+census to see which triad configurations appear in this network, with a
+focus to the triad configurations I am most interested in namely A -&gt;
+B -&gt; C (021C) and the closed one in which A sends a tie to C namely A
+-&gt; B - &gt; C &lt;- A (030T). Second, I will analyze how frequently
+these specific triads occur in the configurations shown below.</p>
+<p><img src="images/Des.png" /></p>
+<p>Based on these configurations, I can calculate the frequency of
+different gender compositions within the triads. By comparing these
+observed frequencies to the expected frequencies given the overall
+proportion of men and women in the network, I can assess whether certain
+gendered open or closed triads occur more or less often than expected by
+chance.</p>
+</div>
+<div id="explanatory" class="section level3" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Explanatory</h3>
+<p>The explanatory hypotheses will be addressed using Stochastic
+Actor-Oriented Models (SAOMs) with RSiena (<span class="citation">Ripley
+et al. (2011)</span>). SAOMs model network evolution over time by
+simulating probabilistic changes in ties based on specified network
+statistics, which function as independent variables. RSiena
+distinguishes between structural effects (network-level tendencies,
+e.g., reciprocity, popularity, or triadic closure) and covariate effects
+(node characteristics, e.g., gender, prestige). To test the hypotheses,
+I will focus on two RSiena statistics: “jumpXTransTrip” and
+“sameXTransTrip”, both interacting with gender.</p>
+<p>“jumpXTransTrip” captures the tendency of actors to close a triad by
+forming a tie to a node of a different attribute, reflecting
+cross-gender closure or bridging tendencies. In other words, if a focal
+actor i is connected to h, and h is connected to j, then jumpXTransTrip
+increases the probability that i will form or maintain a tie to j when i
+and h share the same gender and j has a different gender.</p>
+<p>The corresponding statistic captures the tendency for an actor i to
+form or maintain a tie to another actor j when a third actor h serves as
+a connecting intermediary. Specifically, for all potential alters j (who
+are not h), the statistic examines whether there is an existing tie from
+i to j, a tie from i to h, and a tie from h to j (if the triad is
+already closed). It then restricts attention to cases where actor i and
+intermediary h share the same gender, while j differs in gender.</p>
+<p>In the actor-oriented framework, this statistic contributes to the
+model’s evaluation function by increasing (or decreasing) the
+probability that actor i will make a micro-step to create or maintain a
+tie to j, depending on the estimated parameter. A positive coefficient
+for this effect means that, holding other effects constant, actor i is
+more likely to form or keep a tie to an out-group member j (of a
+different gender) when j is connected through an intermediary h who
+shares i’s gender. In other words, the statistic operationalizes a
+mechanism of indirect or mediated cross-gender closure: it measures how
+exposure to an out-group member through a same-gender collaborator
+affects tie formation dynamics.</p>
+<p><img src="images/JumpXTransTrip.png" /></p>
+<p>In contrast, the “homXTransTrip” statistic measures the tendency of
+actors to form closed triads with others who share the same attribute,
+in this case, gender, capturing homophilic closure.</p>
+<p>The corresponding formula examines, for all alter j’s, whether there
+is a tie from i to j, a tie from i to h and a tie from h to j, and then
+restricts attention to cases where node i, j and node h are of the same
+gender. Again, this statistic contributes to the model’s evaluation
+function by increasing (or decreasing) the probability that actor i will
+make a micro-step to create or maintain a tie to j, depending on the
+estimated parameter.</p>
+<p><img src="images/HomXTransTrip.png" /></p>
+<p>By interacting these statistics with gender, I can test whether A
+-&gt; B -&gt; C triads are more likely to close based on the gender of C
+relative to A and B. This allows me to assess whether triadic closure
+processes in the collaboration network tend to reinforce gender
+similarity or facilitate cross-gender connections.</p>
+<p>ADAPT:::: In Model 1, I will introduce the jumpXTransTrip statistic
+interacted with gender to conduct an initial exploration of the first
+hypothesis. Model 2 will additionally include sameXTransTrip to examine
+the second hypothesis. Next, I will assess the Goodness of Fit to
+determine whether the variables in the model adequately capture the
+observed triadic closure patterns represented by the TransTrip
+statistic. Based on these results, and guided by the theoretical
+expectation that actors may form closed triads regardless of gender, I
+will include a control for generic triadic closure in Model 3. In Model
+4, I will further add control covariates for same university and same
+department (and possibly position). to account for other factors that
+may influence tie formation. Finally, the Goodness of Fit of the full
+model (Model 5) will be evaluated and reported.</p>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1 class="unnumbered">References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
+<div id="ref-openalex" class="csl-entry">
+Priem, J., H. Piwowar, and R. Orr. 2022. <span>“OpenAlex: A Fully-Open
+Index of Scholarly Works, Authors, Venues, Institutions, and
+Concepts.”</span> <em>arXiv</em>. <a
+href="https://arxiv.org/abs/2205.01833">https://arxiv.org/abs/2205.01833</a>.
+</div>
+<div id="ref-Rsiena" class="csl-entry">
+Ripley, R. M., Snijders, T. A. B., Z. Boda, A. Vörös, and P. Preciado.
+2011. <em>Manual for RSiena</em>. University of Oxford, Department of
+Statistics, Nuffield College.
+</div>
+<div id="ref-SNASS" class="csl-entry">
+Tolsma, J., and B. Hofstra. 2022. <em>Social Network Analysis for Social
+Scientists</em>. <a
+href="https://jtolsma.nl/SNASS/">https://jtolsma.nl/SNASS/</a>.
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSm91cm5hbCAxIgpiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliCmF1dGhvcjogIk15bMOobmUgSHVzc29uIgotLS0KCmBgYHtyLCBlY2hvPUZBTFNFLCBpbmNsdWRlPVRSVUUsIHJlc3VsdHM9J2hpZGUnLCBtZXNzYWdlPUZBTFNFLCB3YXJuaW5nPUZBTFNFfQpsaWJyYXJ5KGtuaXRyKQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShzY2hvbGFyKQpsaWJyYXJ5KG9wZW5hbGV4UikKbGlicmFyeShydmVzdCkKbGlicmFyeShqc29ubGl0ZSkKbGlicmFyeShodHRyKQpsaWJyYXJ5KHJ2ZXN0KQpsaWJyYXJ5KHJlc2hhcGUyKQpsaWJyYXJ5KHhtbDIpCmxpYnJhcnkob3Blbnhsc3gpCmxpYnJhcnkocG9saXRlKQpsaWJyYXJ5KGlncmFwaCkKbGlicmFyeShzbmEpCmxpYnJhcnkoZ2VuZGVyaXplUikKbGlicmFyeShSU2VsZW5pdW0pCmxpYnJhcnkobmV0c3RhdCkKbGlicmFyeShwaW5ncikKbGlicmFyeShSU2llbmEpCmxpYnJhcnkoZGV2dG9vbHMpCmxpYnJhcnkoUnNpZW5hVHdvU3RlcCkKCgojIGxvYWQgdGhlIGZ1bmN0aW9ucyB5b3UgbmVlZCBmcm9tIHRoZSBwYWNrYWdlcwpmcGFja2FnZS5jaGVjayA8LSBmdW5jdGlvbihwYWNrYWdlcykgewogIGxhcHBseShwYWNrYWdlcywgRlVOID0gZnVuY3Rpb24oeCkgewogICAgaWYgKCFyZXF1aXJlKHgsIGNoYXJhY3Rlci5vbmx5ID0gVFJVRSkpIHsKICAgICAgaW5zdGFsbC5wYWNrYWdlcyh4LCBkZXBlbmRlbmNpZXMgPSBUUlVFKQogICAgICBsaWJyYXJ5KHgsIGNoYXJhY3Rlci5vbmx5ID0gVFJVRSkKICAgIH0KICB9KQp9Cgpmc2F2ZSA8LSBmdW5jdGlvbih4LCBmaWxlID0gTlVMTCwgbG9jYXRpb24gPSAiLi9kYXRhL3Byb2Nlc3NlZC8iKSB7CiAgaWZlbHNlKCFkaXIuZXhpc3RzKCJkYXRhIiksIGRpci5jcmVhdGUoImRhdGEiKSwgRkFMU0UpCiAgaWZlbHNlKCFkaXIuZXhpc3RzKCJkYXRhL3Byb2Nlc3NlZCIpLCBkaXIuY3JlYXRlKCJkYXRhL3Byb2Nlc3NlZCIpLCBGQUxTRSkKICAKICBpZiAoaXMubnVsbChmaWxlKSkgewogICAgZmlsZSA8LSBkZXBhcnNlKHN1YnN0aXR1dGUoeCkpCiAgfQogIAogIGRhdGVuYW1lIDwtIHN1YnN0cihnc3ViKCJbOi1dIiwgIiIsIFN5cy50aW1lKCkpLCAxLCA4KQogIHRvdGFsbmFtZSA8LSBwYXN0ZShsb2NhdGlvbiwgZGF0ZW5hbWUsIGZpbGUsICIucmRhIiwgc2VwID0gIiIpCiAgc2F2ZSh4LCBmaWxlID0gdG90YWxuYW1lKSAgIyBuZWVkIHRvIGZpeCBpZiBmaWxlIGlzIHJlbG9hZGVkIGFzIGlucHV0IG5hbWUsIG5vdCBhcyB4Lgp9CgpmbG9hZCA8LSBmdW5jdGlvbihmaWxlbmFtZSkgewogIGxvYWQoZmlsZW5hbWUpCiAgZ2V0KGxzKClbbHMoKSAhPSAiZmlsZW5hbWUiXSkKfQoKZnNob3dkZiA8LSBmdW5jdGlvbih4LCAuLi4pIHsKICBrbml0cjo6a2FibGUoeCwgZGlnaXRzID0gMiwgImh0bWwiLCAuLi4pICU+JQogICAga2FibGVFeHRyYTo6a2FibGVfc3R5bGluZyhib290c3RyYXBfb3B0aW9ucyA9IGMoInN0cmlwZWQiLCAiaG92ZXIiKSkgJT4lCiAgICBrYWJsZUV4dHJhOjpzY3JvbGxfYm94KHdpZHRoID0gIjEwMCUiLCBoZWlnaHQgPSAiMzAwcHgiKQp9CmBgYAoKYGBge3Iga2xpcHB5LCBlY2hvPUZBTFNFLCBpbmNsdWRlPVRSVUV9CmtsaXBweTo6a2xpcHB5KHBvc2l0aW9uID0gYygndG9wJywgJ3JpZ2h0JykpCiNrbGlwcHk6OmtsaXBweShjb2xvciA9ICdkYXJrcmVkJykKI2tsaXBweTo6a2xpcHB5KHRvb2x0aXBfbWVzc2FnZSA9ICdDbGljayB0byBjb3B5JywgdG9vbHRpcF9zdWNjZXNzID0gJ0RvbmUnKQpgYGAKCkxhc3QgY29tcGlsZWQgb24gYHIgZm9ybWF0KFN5cy50aW1lKCksICclQiwgJVknKWAKPGJyPgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiMgRGF0YSBhbmQgTWV0aG9kcwo8YnI+CgojIyBEYXRhClRvIHRlc3QgdGhlIGh5cG90aGVzZXMsIEkgdXNlIHNvY2lhbCBuZXR3b3JrIGRhdGEgb24gTiByZXNlYXJjaGVycyBmcm9tIHRoZSBTb2Npb2xvZ3kgYW5kIFBvbGl0aWNhbCBTY2llbmNlIGRlcGFydG1lbnRzIGFjcm9zcyBOIER1dGNoIHVuaXZlcnNpdGllcy4gVGhlc2UgZGF0YSB3ZXJlIGNvbGxlY3RlZCBpbiAyMDIyIGFuZCAyMDI0IGFzIHBhcnQgb2YgYSBsYXJnZXIgcHJvamVjdCBtYXBwaW5nIGNvbGxhYm9yYXRpb25zIGFtb25nIER1dGNoIHVuaXZlcnNpdHkgc2Nob2xhcnMgaW4gdGhlc2UgZGlzY2lwbGluZXMuCgpUaGUgZGF0YSBjb2xsZWN0aW9uIHByb2NlZWRlZCBpbiB0d28gbWFpbiBzdGVwcy4gRmlyc3QsIGFsbCBzdGFmZiBtZW1iZXJzIG9mIFNvY2lvbG9neSBhbmQgUG9saXRpY2FsIFNjaWVuY2UgZGVwYXJ0bWVudHMgYXQgRHV0Y2ggdW5pdmVyc2l0aWVzIHdlcmUgaWRlbnRpZmllZCwgYW5kIHRoZWlyIG5hbWVzLCBhZmZpbGlhdGlvbnMsIGFjYWRlbWljIHBvc2l0aW9ucywgYW5kIEdvb2dsZSBTY2hvbGFyIElEcyB3ZXJlIHJlY29yZGVkLiBTZWNvbmQsIHB1YmxpY2F0aW9uIGRhdGEgd2VyZSByZXRyaWV2ZWQgZnJvbSBPcGVuQWxleCwgYSBub25wcm9maXQgb3Blbi1zY2llbmNlIGRhdGFiYXNlIFtAb3BlbmFsZXhdLgpJdCBpcyBpbXBvcnRhbnQgdG8gbm90ZSB0aGF0IHRoZSBjb2xsZWN0aW9uIHllYXJzICgyMDIyIGFuZCAyMDI0KSBkbyBub3QgZGVmaW5lIHRoZSBhbmFseXRpY2FsIHdhdmVzLiBSZXNlYXJjaGVycyBjYW4gZGV0ZXJtaW5lIHRoZSB0ZW1wb3JhbCBib3VuZGFyaWVzIG9mIHRoZSB3YXZlcyB0aGVtc2VsdmVzLiBJbiB0aGlzIHN0dWR5LCBJIGZvY3VzIG9uIHR3byBmb3VyLXllYXIgcGVyaW9kczogMjAxNeKAkzIwMTggKFdhdmUgMSkgYW5kIDIwMTnigJMyMDIzIChXYXZlIDIpLgpDb2xsYWJvcmF0aW9uIG5ldHdvcmtzIHdlcmUgY29uc3RydWN0ZWQgYnkgaWRlbnRpZnlpbmcgY28tYXV0aG9yc2hpcHMgd2l0aGluIGVhY2ggd2F2ZS4gVGhlc2UgY28tYXV0aG9yc2hpcHMgY2FuIGJlIHJlcHJlc2VudGVkIGFzIGVpdGhlciB1bmRpcmVjdGVkIG9yIGRpcmVjdGVkIG5ldHdvcmtzLiBJbiB0aGUgY2FzZSBvZiBhIGRpcmVjdGVkIG5ldHdvcmssIGRpcmVjdGlvbmFsaXR5IGNhbiBiZSBkZWZpbmVkIGZyb20gdGhlIGZpcnN0LW5hbWVkIGF1dGhvciB0byBvdGhlcnMgb3IgZnJvbSB0aGUgbGFzdC1uYW1lZCBhdXRob3IgdG8gb3RoZXJzLiBJIGFkb3B0IHRoZSBsYXR0ZXIgYXBwcm9hY2gsIGFzIGl0IHJlZmxlY3RzIGFjYWRlbWljIGhpZXJhcmNoaWVzIGluIHdoaWNoIHNlbmlvciBzY2hvbGFyc+KAlHR5cGljYWxseSBsaXN0ZWQgbGFzdOKAlGFyZSBtb3JlIGxpa2VseSB0byBpbml0aWF0ZSBjb2xsYWJvcmF0aW9ucy4KCkFmdGVyIGNvbnN0cnVjdGluZyB0aGUgY28tYXV0aG9yc2hpcCBuZXR3b3JrcywgdGhlIG92ZXJhbGwgc3RydWN0dXJlIG9mIHRoZSBkYXRhIGNhbiBiZSBkZXNjcmliZWQgYXMgYSBjb21wbGV0ZSwgb3Ig4oCcc29jaW9uZXQs4oCdIG5ldHdvcmssIGZvbGxvd2luZyB0aGUgZnJhbWV3b3JrIG91dGxpbmVkIGJ5IEpvY2hlbSBUb2xzbWEgaW4gU05BIGZvciBTb2NpYWwgU2NpZW50aXN0cyBbQFNOQVNTXS4gSW4gdGhpcyBmcmFtZXdvcmssIHN1Y2ggbmV0d29ya3MgYXJlIGRlZmluZWQgYnkgY2xlYXJseSBzcGVjaWZpZWQgYm91bmRhcmllcyBhbmQgY29tcGxldGUgaW5mb3JtYXRpb24gb24gYWxsIGFjdG9ycyBhbmQgdGhlaXIgcmVsYXRpb25zaGlwcyB3aXRoaW4gdGhvc2UgYm91bmRhcmllcy4gSW4gdGhlIHByZXNlbnQgY2FzZSwgdGhlIG5ldHdvcmsgYm91bmRhcnkgaXMgZGVmaW5lZCBieSBhbGwgcmVzZWFyY2hlcnMgYWZmaWxpYXRlZCB3aXRoIFNvY2lvbG9neSBhbmQgUG9saXRpY29sb2d5IGRlcGFydG1lbnRzIGF0IER1dGNoIHVuaXZlcnNpdGllcy4gVGhlIGRhdGFzZXQgaW5jbHVkZXMgYWxsIGluZGl2aWR1YWxzIHdpdGhpbiB0aGlzIGRlZmluZWQgYWNhZGVtaWMgY29udGV4dCBhbmQgYWxsIGtub3duIGNvbGxhYm9yYXRpb25zIGFtb25nIHRoZW0uIEJlY2F1c2UgYm90aCB0aGUgcG9wdWxhdGlvbiBvZiBhY3RvcnMgYW5kIHRoZWlyIGludHJhLWJvdW5kYXJ5IHRpZXMgYXJlIGZ1bGx5IGNhcHR1cmVkLCB0aGUgZGF0YSBjb25zdGl0dXRlIGEgY29tcGxldGUsIG9yIHNvY2lvbmV0LCBuZXR3b3JrIGluIFRvbHNtYeKAmXMgdGVybXMuCgpCZXNpZGVzIGNvbGxhYm9yYXRpb24gdGllcywgdGhlIGRhdGEgYWxzbyBpbmNsdWRlcyBub2RlLWxldmVsIGF0dHJpYnV0ZXMuIFRoZXNlIGVuY29tcGFzcyB0aW1lLXZhcnlpbmcgY2hhcmFjdGVyaXN0aWNzLCBzdWNoIGFzIGVhY2ggcmVzZWFyY2hlcuKAmXMgcG9zaXRpb24gYW5kIHVuaXZlcnNpdHkgYWZmaWxpYXRpb24sIGFuZCB0aW1lLWNvbnN0YW50IGNoYXJhY3RlcmlzdGljcywgc3VjaCBhcyBuYW1lIGFuZCBkaXNjaXBsaW5lLgoKIyMjIENvdmFyaWF0ZSBHZW5kZXIKCkluIHRoaXMgc3R1ZHksIEkgbWFudWFsbHkgaW5jbHVkZWQgZ2VuZGVyIGFzIGEgKHVzdWFsbHkpIHRpbWUtY29uc3RhbnQgY2hhcmFjdGVyaXN0aWMuIEVhY2ggcmVzZWFyY2hlcuKAmXMgZ2VuZGVyIHdhcyBpbmZlcnJlZCBmcm9tIHRoZWlyIGZpcnN0IG5hbWUgdXNpbmcgdGhlIE5lZGVybGFuZHNlIFZvb3JuYW1lbmJhbmsgKE5WQikgb2YgdGhlIE1lZXJ0ZW5zIEluc3RpdHV0ZS4gRmlyc3QsIEkgZXh0cmFjdGVkIHRoZSBmaXJzdCBuYW1lIGZyb20gZWFjaCByZXNlYXJjaGVy4oCZcyBmdWxsIG5hbWUgYW5kIGFwcGxpZWQgYSBjdXN0b20gUiBmdW5jdGlvbiBJIGRldmVsb3BlZC4gVGhpcyBmdW5jdGlvbiBhdXRvbWF0aWNhbGx5IHF1ZXJpZWQgdGhlIE5WQiBkYXRhYmFzZSwgcmV0cmlldmVkIHRoZSBjb3JyZXNwb25kaW5nIGdlbmRlciBmcmVxdWVuY3kgdGFibGUsIGFuZCBhc3NpZ25lZCB0aGUgcmVzZWFyY2hlciBhcyBtYWxlIG9yIGZlbWFsZSBiYXNlZCBvbiB0aGUgbW9zdCBjb21tb24gYXNzb2NpYXRpb24uIElmIGEgbmFtZSB3YXMgbm90IGZvdW5kIGluIHRoZSBOVkIgZGF0YWJhc2Ugb3IgaWYgdGhlIG5hbWUgZmllbGQgd2FzIGluY29tcGxldGUgb3IgaW5jb3JyZWN0bHkgZm9ybWF0dGVkLCB0aGUgZnVuY3Rpb24gcmV0dXJuZWQgTkEuIEFzIGEgcmVzdWx0LCAyMiByZXNlYXJjaGVycyBoYXZlIG1pc3NpbmcgZ2VuZGVyIHZhbHVlcyBpbiB0aGUgZmluYWwgZGVtb2dyYXBoaWMgZGF0YXNldC4KCiMjIyBDb250cm9sIGNvdmFyaWF0ZXMKClRvIGFjY291bnQgZm9yIG90aGVyIGZhY3RvcnMgdGhhdCBtYXkgaW5mbHVlbmNlIHRoZSBmb3JtYXRpb24gb3IgY2xvc3VyZSBvZiB0cmlhZHMsIEkgaW5jbHVkZSBjb250cm9scyBmb3IgdW5pdmVyc2l0eSBhZmZpbGlhdGlvbiwgZGlzY2lwbGluZSwgYW5kIHBvc2l0aW9uLiBUaGVzZSB2YXJpYWJsZXMgYXJlIGFscmVhZHkgYXZhaWxhYmxlIGluIHRoZSBkYXRhc2V0LgoKPGJyPgoKIyMgTWV0aG9kcwoKPGJyPgoKIyMjIERlc2NyaXB0aXZlIAoKRm9yIHRoZSBkZXNjcmlwdGl2ZSByZXNlYXJjaCBxdWVzdGlvbnMgSSB3aWxsIGZpcnN0IHBlcmZvcm0gYSB0cmlhZCBjZW5zdXMgdG8gc2VlIHdoaWNoIHRyaWFkIGNvbmZpZ3VyYXRpb25zIGFwcGVhciBpbiB0aGlzIG5ldHdvcmssIHdpdGggYSBmb2N1cyB0byB0aGUgdHJpYWQgY29uZmlndXJhdGlvbnMgSSBhbSBtb3N0IGludGVyZXN0ZWQgaW4gbmFtZWx5IEEgLT4gQiAtPiBDICgwMjFDKSBhbmQgdGhlIGNsb3NlZCBvbmUgaW4gd2hpY2ggQSBzZW5kcyBhIHRpZSB0byBDIG5hbWVseSBBIC0+IEIgLSA+IEMgPC0gQSAoMDMwVCkuIFNlY29uZCwgSSB3aWxsIGFuYWx5emUgaG93IGZyZXF1ZW50bHkgdGhlc2Ugc3BlY2lmaWMgdHJpYWRzIG9jY3VyIGluIHRoZSBjb25maWd1cmF0aW9ucyBzaG93biBiZWxvdy4KCiFbXShpbWFnZXMvRGVzLnBuZykKCkJhc2VkIG9uIHRoZXNlIGNvbmZpZ3VyYXRpb25zLCBJIGNhbiBjYWxjdWxhdGUgdGhlIGZyZXF1ZW5jeSBvZiBkaWZmZXJlbnQgZ2VuZGVyIGNvbXBvc2l0aW9ucyB3aXRoaW4gdGhlIHRyaWFkcy4gQnkgY29tcGFyaW5nIHRoZXNlIG9ic2VydmVkIGZyZXF1ZW5jaWVzIHRvIHRoZSBleHBlY3RlZCBmcmVxdWVuY2llcyBnaXZlbiB0aGUgb3ZlcmFsbCBwcm9wb3J0aW9uIG9mIG1lbiBhbmQgd29tZW4gaW4gdGhlIG5ldHdvcmssIEkgY2FuIGFzc2VzcyB3aGV0aGVyIGNlcnRhaW4gZ2VuZGVyZWQgb3BlbiBvciBjbG9zZWQgdHJpYWRzIG9jY3VyIG1vcmUgb3IgbGVzcyBvZnRlbiB0aGFuIGV4cGVjdGVkIGJ5IGNoYW5jZS4KCiMjIyBFeHBsYW5hdG9yeQoKVGhlIGV4cGxhbmF0b3J5IGh5cG90aGVzZXMgd2lsbCBiZSBhZGRyZXNzZWQgdXNpbmcgU3RvY2hhc3RpYyBBY3Rvci1PcmllbnRlZCBNb2RlbHMgKFNBT01zKSB3aXRoIFJTaWVuYSAoQFJzaWVuYSkuIFNBT01zIG1vZGVsIG5ldHdvcmsgZXZvbHV0aW9uIG92ZXIgdGltZSBieSBzaW11bGF0aW5nIHByb2JhYmlsaXN0aWMgY2hhbmdlcyBpbiB0aWVzIGJhc2VkIG9uIHNwZWNpZmllZCBuZXR3b3JrIHN0YXRpc3RpY3MsIHdoaWNoIGZ1bmN0aW9uIGFzIGluZGVwZW5kZW50IHZhcmlhYmxlcy4gUlNpZW5hIGRpc3Rpbmd1aXNoZXMgYmV0d2VlbiBzdHJ1Y3R1cmFsIGVmZmVjdHMgKG5ldHdvcmstbGV2ZWwgdGVuZGVuY2llcywgZS5nLiwgcmVjaXByb2NpdHksIHBvcHVsYXJpdHksIG9yIHRyaWFkaWMgY2xvc3VyZSkgYW5kIGNvdmFyaWF0ZSBlZmZlY3RzIChub2RlIGNoYXJhY3RlcmlzdGljcywgZS5nLiwgZ2VuZGVyLCBwcmVzdGlnZSkuIApUbyB0ZXN0IHRoZSBoeXBvdGhlc2VzLCBJIHdpbGwgZm9jdXMgb24gdHdvIFJTaWVuYSBzdGF0aXN0aWNzOiDigJxqdW1wWFRyYW5zVHJpcOKAnSBhbmQg4oCcc2FtZVhUcmFuc1RyaXDigJ0sIGJvdGggaW50ZXJhY3Rpbmcgd2l0aCBnZW5kZXIuIAoK4oCcanVtcFhUcmFuc1RyaXDigJ0gY2FwdHVyZXMgdGhlIHRlbmRlbmN5IG9mIGFjdG9ycyB0byBjbG9zZSBhIHRyaWFkIGJ5IGZvcm1pbmcgYSB0aWUgdG8gYSBub2RlIG9mIGEgZGlmZmVyZW50IGF0dHJpYnV0ZSwgcmVmbGVjdGluZyBjcm9zcy1nZW5kZXIgY2xvc3VyZSBvciBicmlkZ2luZyB0ZW5kZW5jaWVzLiBJbiBvdGhlciB3b3JkcywgaWYgYSBmb2NhbCBhY3RvciBpIGlzIGNvbm5lY3RlZCB0byBoLCBhbmQgaCBpcyBjb25uZWN0ZWQgdG8gaiwgdGhlbiBqdW1wWFRyYW5zVHJpcCBpbmNyZWFzZXMgdGhlIHByb2JhYmlsaXR5IHRoYXQgaSB3aWxsIGZvcm0gb3IgbWFpbnRhaW4gYSB0aWUgdG8gaiB3aGVuIGkgYW5kIGggc2hhcmUgdGhlIHNhbWUgZ2VuZGVyIGFuZCBqIGhhcyBhIGRpZmZlcmVudCBnZW5kZXIuCgpUaGUgY29ycmVzcG9uZGluZyBzdGF0aXN0aWMgY2FwdHVyZXMgdGhlIHRlbmRlbmN5IGZvciBhbiBhY3RvciBpIHRvIGZvcm0gb3IgbWFpbnRhaW4gYSB0aWUgdG8gYW5vdGhlciBhY3RvciBqIHdoZW4gYSB0aGlyZCBhY3RvciBoIHNlcnZlcyBhcyBhIGNvbm5lY3RpbmcgaW50ZXJtZWRpYXJ5LiBTcGVjaWZpY2FsbHksIGZvciBhbGwgcG90ZW50aWFsIGFsdGVycyBqICh3aG8gYXJlIG5vdCBoKSwgdGhlIHN0YXRpc3RpYyBleGFtaW5lcyB3aGV0aGVyIHRoZXJlIGlzIGFuIGV4aXN0aW5nIHRpZSBmcm9tIGkgdG8gaiwgYSB0aWUgZnJvbSBpIHRvIGgsIGFuZCBhIHRpZSBmcm9tIGggdG8gaiAoaWYgdGhlIHRyaWFkIGlzIGFscmVhZHkgY2xvc2VkKS4gSXQgdGhlbiByZXN0cmljdHMgYXR0ZW50aW9uIHRvIGNhc2VzIHdoZXJlIGFjdG9yIGkgYW5kIGludGVybWVkaWFyeSBoIHNoYXJlIHRoZSBzYW1lIGdlbmRlciwgd2hpbGUgaiBkaWZmZXJzIGluIGdlbmRlci4KCkluIHRoZSBhY3Rvci1vcmllbnRlZCBmcmFtZXdvcmssIHRoaXMgc3RhdGlzdGljIGNvbnRyaWJ1dGVzIHRvIHRoZSBtb2RlbOKAmXMgZXZhbHVhdGlvbiBmdW5jdGlvbiBieSBpbmNyZWFzaW5nIChvciBkZWNyZWFzaW5nKSB0aGUgcHJvYmFiaWxpdHkgdGhhdCBhY3RvciBpIHdpbGwgbWFrZSBhIG1pY3JvLXN0ZXAgdG8gY3JlYXRlIG9yIG1haW50YWluIGEgdGllIHRvIGosIGRlcGVuZGluZyBvbiB0aGUgZXN0aW1hdGVkIHBhcmFtZXRlci4gQSBwb3NpdGl2ZSBjb2VmZmljaWVudCBmb3IgdGhpcyBlZmZlY3QgbWVhbnMgdGhhdCwgaG9sZGluZyBvdGhlciBlZmZlY3RzIGNvbnN0YW50LCBhY3RvciBpIGlzIG1vcmUgbGlrZWx5IHRvIGZvcm0gb3Iga2VlcCBhIHRpZSB0byBhbiBvdXQtZ3JvdXAgbWVtYmVyIGogKG9mIGEgZGlmZmVyZW50IGdlbmRlcikgd2hlbiBqIGlzIGNvbm5lY3RlZCB0aHJvdWdoIGFuIGludGVybWVkaWFyeSBoIHdobyBzaGFyZXMgaeKAmXMgZ2VuZGVyLiBJbiBvdGhlciB3b3JkcywgdGhlIHN0YXRpc3RpYyBvcGVyYXRpb25hbGl6ZXMgYSBtZWNoYW5pc20gb2YgaW5kaXJlY3Qgb3IgbWVkaWF0ZWQgY3Jvc3MtZ2VuZGVyIGNsb3N1cmU6IGl0IG1lYXN1cmVzIGhvdyBleHBvc3VyZSB0byBhbiBvdXQtZ3JvdXAgbWVtYmVyIHRocm91Z2ggYSBzYW1lLWdlbmRlciBjb2xsYWJvcmF0b3IgYWZmZWN0cyB0aWUgZm9ybWF0aW9uIGR5bmFtaWNzLgoKIVtdKGltYWdlcy9KdW1wWFRyYW5zVHJpcC5wbmcpCgpJbiBjb250cmFzdCwgdGhlIOKAnGhvbVhUcmFuc1RyaXDigJ0gc3RhdGlzdGljIG1lYXN1cmVzIHRoZSB0ZW5kZW5jeSBvZiBhY3RvcnMgdG8gZm9ybSBjbG9zZWQgdHJpYWRzIHdpdGggb3RoZXJzIHdobyBzaGFyZSB0aGUgc2FtZSBhdHRyaWJ1dGUsIGluIHRoaXMgY2FzZSwgZ2VuZGVyLCBjYXB0dXJpbmcgaG9tb3BoaWxpYyBjbG9zdXJlLgoKVGhlIGNvcnJlc3BvbmRpbmcgZm9ybXVsYSBleGFtaW5lcywgZm9yIGFsbCBhbHRlciBq4oCZcywgd2hldGhlciB0aGVyZSBpcyBhIHRpZSBmcm9tIGkgdG8gaiwgYSB0aWUgZnJvbSBpIHRvIGggYW5kIGEgdGllIGZyb20gaCB0byBqLCBhbmQgdGhlbiByZXN0cmljdHMgYXR0ZW50aW9uIHRvIGNhc2VzIHdoZXJlIG5vZGUgaSwgaiBhbmQgbm9kZSBoIGFyZSBvZiB0aGUgc2FtZSBnZW5kZXIuIEFnYWluLCB0aGlzIHN0YXRpc3RpYyBjb250cmlidXRlcyB0byB0aGUgbW9kZWzigJlzIGV2YWx1YXRpb24gZnVuY3Rpb24gYnkgaW5jcmVhc2luZyAob3IgZGVjcmVhc2luZykgdGhlIHByb2JhYmlsaXR5IHRoYXQgYWN0b3IgaSB3aWxsIG1ha2UgYSBtaWNyby1zdGVwIHRvIGNyZWF0ZSBvciBtYWludGFpbiBhIHRpZSB0byBqLCBkZXBlbmRpbmcgb24gdGhlIGVzdGltYXRlZCBwYXJhbWV0ZXIuCgohW10oaW1hZ2VzL0hvbVhUcmFuc1RyaXAucG5nKQoKQnkgaW50ZXJhY3RpbmcgdGhlc2Ugc3RhdGlzdGljcyB3aXRoIGdlbmRlciwgSSBjYW4gdGVzdCB3aGV0aGVyIEEgLT4gQiAtPiBDIHRyaWFkcyBhcmUgbW9yZSBsaWtlbHkgdG8gY2xvc2UgYmFzZWQgb24gdGhlIGdlbmRlciBvZiBDIHJlbGF0aXZlIHRvIEEgYW5kIEIuIFRoaXMgYWxsb3dzIG1lIHRvIGFzc2VzcyB3aGV0aGVyIHRyaWFkaWMgY2xvc3VyZSBwcm9jZXNzZXMgaW4gdGhlIGNvbGxhYm9yYXRpb24gbmV0d29yayB0ZW5kIHRvIHJlaW5mb3JjZSBnZW5kZXIgc2ltaWxhcml0eSBvciBmYWNpbGl0YXRlIGNyb3NzLWdlbmRlciBjb25uZWN0aW9ucy4KCkFEQVBUOjo6OgpJbiBNb2RlbCAxLCBJIHdpbGwgaW50cm9kdWNlIHRoZSBqdW1wWFRyYW5zVHJpcCBzdGF0aXN0aWMgaW50ZXJhY3RlZCB3aXRoIGdlbmRlciB0byBjb25kdWN0IGFuIGluaXRpYWwgZXhwbG9yYXRpb24gb2YgdGhlIGZpcnN0IGh5cG90aGVzaXMuIE1vZGVsIDIgd2lsbCBhZGRpdGlvbmFsbHkgaW5jbHVkZSBzYW1lWFRyYW5zVHJpcCB0byBleGFtaW5lIHRoZSBzZWNvbmQgaHlwb3RoZXNpcy4gTmV4dCwgSSB3aWxsIGFzc2VzcyB0aGUgR29vZG5lc3Mgb2YgRml0IHRvIGRldGVybWluZSB3aGV0aGVyIHRoZSB2YXJpYWJsZXMgaW4gdGhlIG1vZGVsIGFkZXF1YXRlbHkgY2FwdHVyZSB0aGUgb2JzZXJ2ZWQgdHJpYWRpYyBjbG9zdXJlIHBhdHRlcm5zIHJlcHJlc2VudGVkIGJ5IHRoZSBUcmFuc1RyaXAgc3RhdGlzdGljLiBCYXNlZCBvbiB0aGVzZSByZXN1bHRzLCBhbmQgZ3VpZGVkIGJ5IHRoZSB0aGVvcmV0aWNhbCBleHBlY3RhdGlvbiB0aGF0IGFjdG9ycyBtYXkgZm9ybSBjbG9zZWQgdHJpYWRzIHJlZ2FyZGxlc3Mgb2YgZ2VuZGVyLCBJIHdpbGwgaW5jbHVkZSBhIGNvbnRyb2wgZm9yIGdlbmVyaWMgdHJpYWRpYyBjbG9zdXJlIGluIE1vZGVsIDMuIEluIE1vZGVsIDQsIEkgd2lsbCBmdXJ0aGVyIGFkZCBjb250cm9sIGNvdmFyaWF0ZXMgZm9yIHNhbWUgdW5pdmVyc2l0eSBhbmQgc2FtZSBkZXBhcnRtZW50IChhbmQgcG9zc2libHkgcG9zaXRpb24pLiB0byBhY2NvdW50IGZvciBvdGhlciBmYWN0b3JzIHRoYXQgbWF5IGluZmx1ZW5jZSB0aWUgZm9ybWF0aW9uLiBGaW5hbGx5LCB0aGUgR29vZG5lc3Mgb2YgRml0IG9mIHRoZSBmdWxsIG1vZGVsIChNb2RlbCA1KSB3aWxsIGJlIGV2YWx1YXRlZCBhbmQgcmVwb3J0ZWQuCgo8YnI+CgojIFJlZmVyZW5jZXMK</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("DataMethods.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

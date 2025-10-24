@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Mylène Husson" />
+
+
+<title>Journal 1</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="tweaks.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    My journal
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lab1.html">Week 1</a>
+    </li>
+    <li>
+      <a href="lab2.html">Week 2</a>
+    </li>
+    <li>
+      <a href="lab3.html">Week 3</a>
+    </li>
+    <li>
+      <a href="lab4.html">Week 4</a>
+    </li>
+    <li>
+      <a href="lab5.html">Week 5a</a>
+    </li>
+    <li>
+      <a href="lab5tryouts.html">Week 5b</a>
+    </li>
+    <li>
+      <a href="Create_Dataset.html">Week 5c</a>
+    </li>
+    <li>
+      <a href="lab6.html">Week 6</a>
+    </li>
+    <li>
+      <a href="lab7.html">Week 7</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Final Project
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="intro.html">Introduction</a>
+    </li>
+    <li>
+      <a href="theory.html">Theory</a>
+    </li>
+    <li>
+      <a href="DataMethods.html">Data and Methods</a>
+    </li>
+    <li>
+      <a href="dataconstruction.html">Data Construction</a>
+    </li>
+    <li>
+      <a href="Descriptives.html">Descriptive Analyses</a>
+    </li>
+    <li>
+      <a href="Results.html">Exploratory Analyses</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://mcmhusson.github.io/labjournal_mylene/">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Journal 1</h1>
+<h4 class="author">Mylène Husson</h4>
+
+</div>
+
+
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<p>Last compiled on October, 2025 <br> ————————————————————————</p>
+<div id="exploratory-analyses" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Exploratory
+Analyses</h1>
+<p><br></p>
+<p>Load in the data</p>
+<pre class="r"><code>load(&quot;./data/processed/result_gender2.rda&quot;)
+
+# create waves
+wave1 &lt;- result_gender2$nets[1,,]
+wave2 &lt;- result_gender2$nets[2,,]</code></pre>
+<p><br></p>
+<p>For the exploratory analyses, I examine whether A → B → C triads are
+more likely to be closed or maintained by A, depending on the gender
+composition of the triad. Specifically, I investigate whether A is more
+likely to create or maintain a tie to C when C is of a different gender
+than A and B (H1), or when C is of the same gender as A and B (H2).</p>
+<p>In RSiena, network dynamics are modeled as actors making decisions at
+each time step to either create new ties, maintain existing ties, break
+existing ties, or choose not to form ties. Thus, when referring to A
+creating or maintaining a tie to C, this is contrasted with A breaking
+or not creating a tie to C. In other words, the hypotheses test whether
+ties are more likely to be present (through creation or maintenance)
+rather than absent (through dissolution or non-creation) based on the
+gender composition of the triad.</p>
+<p>As previously described in the Data and Methods section, the models
+will be created as follows: <img src="images/model.png" /></p>
+<p><br></p>
+<div id="prepare-for-analysis" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Prepare for
+analysis</h2>
+<pre class="r"><code>wave1 &lt;- result_gender2$nets[1,,]
+wave2 &lt;- result_gender2$nets[2,,]
+
+# a few people did work with themselves:
+diag(wave1) &lt;- 0
+diag(wave2) &lt;- 0
+
+
+net_gender &lt;- array(data = c(wave1, wave2), dim = c(dim(wave1), 2))
+# net_gender
+
+# dependent
+net2 &lt;- sienaDependent(net_gender)
+
+# independent variables
+
+# Gender
+gender &lt;- result_gender2$demographics$gender
+gender &lt;- ifelse(is.na(gender), NA, 
+                 ifelse(gender == &quot;female&quot;, 1, 0))
+gender &lt;- coCovar(gender)
+
+
+# University
+# because I will only use this as a control using sameX
+# and sameX merely checks whether two nodes have the same value of X
+# and does not look at the order in which the universities are
+# I can just make it a factor
+
+result_gender2$demographics$Universiteit1.24[result_gender2$demographics$Universiteit1.24 == &quot;&quot;] &lt;- NA
+
+university_vector &lt;- 
+as.numeric(as.factor(result_gender2$demographics$`Universiteit1.22`))
+
+university &lt;- coCovar(university_vector) 
+
+# Discipline
+# Because discipline is literally time constant between 2022 and 2024
+# (it said 65 people switched, but those were just missings in 2022 which were identified in 2024)
+# and 2024 is complete
+# I will use the data from 2024.
+
+discipline &lt;- as.numeric(as.factor(result_gender2$demographics$`discipline.24`))
+discipline &lt;- ifelse(is.na(discipline), NA,
+                     ifelse(discipline == &quot;2&quot;, 1, 0))
+discipline &lt;- coCovar(discipline) 
+
+# Create siena data object
+mydata3 &lt;- sienaDataCreate(net2, gender, university, discipline)
+#mydata3
+
+myeff &lt;-getEffects(mydata3)
+
+ifelse(!dir.exists(&quot;results&quot;), dir.create(&quot;results&quot;), FALSE)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>print01Report(mydata3, modelname = &quot;./results/result_gender&quot;)</code></pre>
+</div>
+<div id="model-1" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Model 1</h2>
+<div id="include-effects" class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Include
+effects</h3>
+<pre class="r"><code>myeff &lt;- setEffect(myeff, jumpXTransTrip, interaction1 = &quot;gender&quot;, include = T)
+myeff &lt;- setEffect(myeff, homXTransTrip, interaction1 = &quot;gender&quot;, include = T)</code></pre>
+</div>
+<div id="run-model" class="section level3" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Run model</h3>
+<pre class="r"><code>myAlgorithm &lt;- sienaAlgorithmCreate(projname = &quot;result_gender&quot;)
+ansM1 &lt;- siena07(myAlgorithm, data = mydata3, effects = myeff, returnDeps = TRUE)
+
+save(ansM1, file = &quot;ansM1.RData&quot;)</code></pre>
+<pre class="r"><code>load(&quot;ansM1.RData&quot;)
+ansM1</code></pre>
+<pre><code>## Estimates, standard errors and convergence t-ratios
+## 
+##                                              Estimate   Standard   Convergence 
+##                                                           Error      t-ratio   
+## 
+## Rate parameters: 
+##   0       Rate parameter                      4.2091  ( 0.4527   )             
+## 
+## Other parameters: 
+##   1. eval outdegree (density)                -4.2400  ( 0.0815   )   0.1078    
+##   2. eval reciprocity                         3.3305  ( 0.1757   )   0.0831    
+##   3. eval transitive triplets homog. gender   1.6051  ( 0.2446   )   0.1411    
+##   4. eval transitive triplets jumping gender  3.4905  ( 0.3503   )   0.0617    
+## 
+## Overall maximum convergence ratio:    0.1606 
+## 
+## 
+## Total of 1946 iteration steps.</code></pre>
+</div>
+<div id="interpretation" class="section level3" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> Interpretation</h3>
+<p>In this model the structural effects reciprocity and density were
+included, as is standard in RSiena. The RSiena model results indicate
+that the network is relatively sparse, as shown by the significant
+negative outdegree effect (b = -4.24, SE = 0.08), meaning that actors
+generally form few ties overall. However, ties that do form are highly
+reciprocal, as the reciprocity effect is significant and positive (b =
+3.33, SE = 0.18).</p>
+<p>I am particularly interested in the jumpXTransTrip and the
+homXTransTrip effects as those will help me answer my hypotheses. Both
+effects are positive and statistically significant.</p>
+<p>The jumpXTransTrip effect was 3.49 (SE = 0.35). This indicates that
+in A -&gt; B -&gt; C triads, actor A is likely to form or maintain a tie
+with C (rather than dissolve or refrain from forming one) when C is of a
+different gender than both A and B. This result supports Hypothesis 1,
+as it aligns with the predictions of Contact Theory, and contradicts
+Hypothesis 2: when C is a different gender than A and B, A wants to
+collaborate with C despite a gender difference.</p>
+<p>The homXTransTrip effect was 1.61 (SE = 0.24). This indicates that in
+A -&gt; B -&gt; C triads, actor A is likely to form or maintain a tie
+with C (rather than dissolve or refrain from forming one) when C is of
+the same gender as both A and B. This result supports Hypothesis 3 and
+aligns with Social Identity Theory, suggesting that A likes
+collaborating within gender-homogeneous triads.</p>
+<p>Taken together, these first findings suggest that triadic closure in
+the network occurs both across and within gender groups. On the one
+hand, the positive jumpXTransTrip effect shows that A forms ties to
+out-group members in mediated triads, consistent with Contact Theory. On
+the other hand, the positive homXTransTrip effect indicates that A also
+favors same-gender triads, consistent with Social Identity Theory.
+Overall, this pattern suggests that A’s collaboration decisions in
+triadic structures may not be constrained by gender: A is likely to
+collaborate with C regardless of whether C shares A’s and B’s
+gender.</p>
+<p>While the estimated effects in this model are statistically
+significant, this alone does not guarantee that the model accurately
+represents the structures observed in the network. Significance
+indicates that particular covariates are associated with tie formation,
+but it does not show whether the model reproduces the overall patterns
+of relationships among nodes. Goodness-of-Fit (GOF) tests are therefore
+essential: they compare the simulated networks generated by the model to
+the observed network across key structural features, such as outdegree
+distributions (reflecting individual activity), indegree distributions
+(capturing popularity), and triadic configurations (which relate to the
+tendency of groups to form clusters or reciprocal relationships). By
+evaluating these aspects, GOF tests reveal whether Model 1 is able to
+realistically replicate the network’s fundamental structural properties,
+helping us determine whether the model provides a meaningful
+representation of the social processes under study or merely captures
+isolated covariate effects.</p>
+</div>
+<div id="gof-indegree-popularity" class="section level3" number="1.2.4">
+<h3><span class="header-section-number">1.2.4</span> GOF Indegree
+popularity</h3>
+<p>The goodness-of-fit graph for the indegree distribution indicates
+that the current model does not adequately capture the network’s
+indegree structure (p = 0). The model underestimates the number of
+actors with no incoming ties and overestimates the number of actors with
+one or two incoming ties. These are the most notable misestimations and
+suggest that including an indegree popularity effect could improve model
+fit.</p>
+<pre class="r"><code>gofi1 &lt;- sienaGOF(ansM1, IndegreeDistribution, verbose = FALSE, join = TRUE, varName = &quot;net2&quot;, cumulative = F)
+
+save(gofi1, file = &quot;gofi1.RData&quot;)</code></pre>
+<pre class="r"><code>load(&quot;gofi1.RData&quot;)
+plot(gofi1, violin = F)</code></pre>
+<p><img src="Results_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="gof-outdegree-activity" class="section level3" number="1.2.5">
+<h3><span class="header-section-number">1.2.5</span> GOF Outdegree
+activity</h3>
+<p>Similarly, the goodness-of-fit graph for the outdegree distribution
+shows that the model fails to reproduce the observed outdegree structure
+(p = 0). The model underestimates the number of actors who send no ties
+and overestimates those who send only one tie. It again underestimates
+actors sending three or four ties. These patterns suggest that adding an
+outdegree activity effect could improve the model.</p>
+<pre class="r"><code>gofi2 &lt;- sienaGOF(ansM1, OutdegreeDistribution, verbose = FALSE, join = TRUE, varName = &quot;net2&quot;, cumulative = F)
+save(gofi2, file = &quot;gofi2.RData&quot;)</code></pre>
+<pre class="r"><code>load(&quot;gofi2.RData&quot;)
+plot(gofi2, violin = F)</code></pre>
+<p><img src="Results_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="gof-triad-census" class="section level3" number="1.2.6">
+<h3><span class="header-section-number">1.2.6</span> GOF triad
+census</h3>
+<p>The graph below shows that the model does not adequately reproduce
+the local triadic structures of the observed network (p = 0).</p>
+<p>The first three triad types (003, 012, 102) are well captured by the
+model. These configurations represent disconnected or minimally
+connected triads, and the good fit likely reflects the inclusion of
+outdegree (density) and reciprocity effects.</p>
+<p>However, the model underestimates both 021D (two nodes receiving ties
+from the same node) and 021U (two nodes sending ties to the same node),
+suggesting that it does not fully capture patterns of high activity or
+popularity. Including explicit effects for outdegree activity and
+indegree popularity could improve the fit for these structures.</p>
+<p>In contrast, the 021C configuration (A -&gt;B, B-&gt;C) is well
+reproduced, indicating that the jumpXtransTrip and homXtransTrip terms
+successfully account for simple sequential closure within and across
+covariate-defined groups.</p>
+<p>The model struggles with several more complex triads. The 111D triad,
+which combines a mutual tie with an additional asymmetric tie, is
+clearly misfit, suggesting that while reciprocity is captured at the
+dyadic level, the model fails to extend this pattern to triads where
+mutual and asymmetric ties coexist. Similarly, the 030T (transitive) and
+030C (cyclic) triads are poorly reproduced, indicating that the current
+transitivity terms do not fully capture the observed extent of
+hierarchical and cyclic closure.</p>
+<p>Mixed reciprocity–transitivity configurations such as 120D and 120C
+are also underestimated, confirming that the model does not adequately
+capture overlapping patterns of mutual and asymmetric ties. The fully
+mutual 300 triad is likewise poorly reproduced.</p>
+<p>In conclusion, these results suggest that the current model captures
+basic triadic structures but fails to reproduce more complex patterns of
+activity, popularity, and closure. To address these gaps, I will first
+include ego-level statistics such as indegree popularity and outdegree
+activity. Next, I will incorporate dyadic covariate effects, for
+example, gender homophily using sameX terms. Finally, I will add
+enhanced triadic terms, including TransTrip and cyclic closure effects,
+to better reflect the full spectrum of observed triadic structures.</p>
+<pre class="r"><code>gofi3 &lt;- sienaGOF(ansM1, TriadCensus, verbose = FALSE, join = TRUE, varName = &quot;net2&quot;)
+save(gofi3, file = &quot;gofi3.RData&quot;)</code></pre>
+<pre class="r"><code>load(&quot;gofi3.RData&quot;)
+plot(gofi3, violin = F, center = T, scale = T)</code></pre>
+<p><img src="Results_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+<div id="conclusion" class="section level3" number="1.2.7">
+<h3><span class="header-section-number">1.2.7</span> Conclusion</h3>
+<p>Although the model shows significant effects of jumpXtransTrip and
+homXtransTrip, it fails to adequately capture several key structures in
+the observed network, highlighting the need for refinement. To address
+these shortcomings, I will first incorporate ego-level statistics, such
+as indegree popularity and outdegree activity, to better account for
+node-level patterns. Next, I will include dyadic covariate effects, such
+as gender homophily via sameX terms, to reflect tendencies in pairwise
+interactions. Finally, I will extend the model with enhanced triadic
+terms, including TransTrip and cyclic closure effects, to more
+accurately represent the full range of observed triadic structures.</p>
+</div>
+</div>
+<div id="model-2" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Model 2</h2>
+<div id="include-effects-1" class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Include
+effects</h3>
+<pre class="r"><code>myeff &lt;- setEffect(myeff, outAct, include = T)
+myeff &lt;- setEffect(myeff, inPop, include = T)</code></pre>
+</div>
+<div id="run-model-1" class="section level3" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Run model</h3>
+<pre class="r"><code>myAlgorithm &lt;- sienaAlgorithmCreate(projname = &quot;result_gender&quot;)
+ansM2 &lt;- siena07(myAlgorithm, data = mydata3, effects = myeff, returnDeps = TRUE, prevAns = ansM1 )
+
+save(ansM2, file = &quot;ansM2.RData&quot;)</code></pre>
+<pre class="r"><code>load(&quot;ansM2.RData&quot;)
+ansM2</code></pre>
+<pre><code>## Estimates, standard errors and convergence t-ratios
+## 
+##                                              Estimate   Standard   Convergence 
+##                                                           Error      t-ratio   
+## 
+## Rate parameters: 
+##   0       Rate parameter                      4.3068  ( 0.8799   )             
+## 
+## Other parameters: 
+##   1. eval outdegree (density)                -5.0583  ( 0.1646   )    0.4222   
+##   2. eval reciprocity                         3.4252  ( 0.1865   )   -0.0799   
+##   3. eval indegree - popularity               0.1793  ( 0.0281   )    0.4577   
+##   4. eval outdegree - activity                0.1215  ( 0.0221   )    0.1506   
+##   5. eval transitive triplets homog. gender   0.9495  ( 0.2312   )   -0.0118   
+##   6. eval transitive triplets jumping gender  2.4098  ( 0.4063   )   -0.0448   
+## 
+## Overall maximum convergence ratio:    0.4945 
+## 
+## 
+## Total of 2669 iteration steps.</code></pre>
+</div>
+<div id="interpretation-1" class="section level3" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Interpretation</h3>
+<p>In this model 2, the network remains sparse, as indicated by the
+significant negative outdegree (density) effect (b = -5.06, SE = 0.16),
+while reciprocity continues to be significant and positive (b = 3.32, SE
+= 0.19).</p>
+<p>The inclusion of indegree popularity (b = 0.18, SE = 0.03) and
+outdegree activity (b = 0.12, SE = 0.02) shows that some actors are
+consistently popular or active.</p>
+<p>The transitive triplet effects remain positive and significant:
+same-gender (b = 0.95, SE = 0.23) and jumping-gender (b = 2.41, SE =
+0.41) triads continue to form, supporting hypotheses 1 and 3. The
+slightly smaller magnitudes compared to Model 1 suggest that part of the
+triadic closure is explained by popularity and activity rather than
+gender-specific mechanisms alone.</p>
+</div>
+<div id="gof-indegree" class="section level3" number="1.3.4">
+<h3><span class="header-section-number">1.3.4</span> GOF indegree</h3>
+<p>This model, which includes indegree popularity and outdegree
+activity, appears to better capture the indegree distribution in the
+network compared to Model 1. However, the fit is still not good, as
+indicated by a p-value of 0. This model still underestimates the number
+of noedes with no incoming ties and overestimates nodes with one or two
+incoming ties.</p>
+<pre class="r"><code>gofi4 &lt;- sienaGOF(ansM2, IndegreeDistribution, verbose = FALSE, join = TRUE, varName = &quot;net2&quot;, cumulative = F)
+
+save(gofi4, file = &quot;gofi4.RData&quot;)</code></pre>
+<pre class="r"><code>load(&quot;gofi4.RData&quot;)
+plot(gofi4, violin = F)</code></pre>
+<p><img src="Results_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+<div id="gof-outdegree" class="section level3" number="1.3.5">
+<h3><span class="header-section-number">1.3.5</span> GOF outdegree</h3>
+<p>For the outdegree distribution, including indegree popularity and
+outdegree activity does not substantially improve fit compared to Model
+1. The GOF test indicates a p-value of 0, showing that the model still
+poorly represents the distribution of outgoing ties in the observed
+network. Specifically, it underestimates the number of actors with no
+outgoing ties and overestimates actors with one or two outgoing
+ties.</p>
+<pre class="r"><code>gofi5 &lt;- sienaGOF(ansM2, OutdegreeDistribution, verbose = FALSE, join = TRUE, varName = &quot;net2&quot;, cumulative = F)
+save(gofi5, file = &quot;gofi5.RData&quot;)</code></pre>
+<pre class="r"><code>load(&quot;gofi5.RData&quot;)
+plot(gofi5, violin = F)</code></pre>
+<p><img src="Results_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+</div>
+<div id="gof-triad-census-1" class="section level3" number="1.3.6">
+<h3><span class="header-section-number">1.3.6</span> GOF triad
+census</h3>
+<p>The Goodness-of-Fit plot for the updated model indicates clear
+improvements over the previous model, particularly for triads related to
+activity and popularity. Overall, this model captures the triadic
+structure of the observed network a bit more accurately than Model 1 (p
+= 0.002).</p>
+<p>The fit for the 021D and 021U triads, where two nodes either receive
+ties from the same actor or send ties to the same actor, shows marked
+improvement, reflecting the inclusion of the outdegree activity and
+indegree popularity effects. Simple sequential triads, such as 021C
+(A→B, B→C), also remain well reproduced, indicating that the
+jumpXTransTrip and homXTransTrip terms continue to capture mediated
+closure both across and within gender groups. The overall distribution
+of basic disconnected triads (003, 012, 102) is likewise still well
+represented. Importantly, 111D triads, which combine mutual and
+asymmetric ties, are now quite well captured, suggesting that the model
+successfully extends dyadic reciprocity to slightly more complex
+configurations.</p>
+<p>Some misfit remains for higher-order structures. Transitive (030T)
+and cyclic (030C) triads are still somewhat underestimated, indicating
+that additional hierarchical or cyclic closure mechanisms may not yet be
+fully captured. Mixed configurations of reciprocity and transitivity
+(120D, 120C) and fully mutual triads (300) also remain imperfectly
+reproduced.</p>
+<p>Overall, the updated model provides a substantially better fit to
+degree-related triads and captures key closure processes in the network.
+While it now accounts well for reciprocity and basic triadic patterns,
+additional higher-order or mixed-effect terms may be necessary to fully
+reproduce the more complex structures present in the observed
+network.</p>
+<pre class="r"><code>gofi6 &lt;- sienaGOF(ansM2, TriadCensus, verbose = FALSE, join = TRUE, varName = &quot;net2&quot;)
+save(gofi6, file = &quot;gofi6.RData&quot;)</code></pre>
+<pre class="r"><code>load(&quot;gofi6.RData&quot;)
+plot(gofi6, violin = F, center = T, scale = T)</code></pre>
+<p><img src="Results_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+### Conclusion</p>
+<p>These results suggest that the indegree and outdegree distributions
+are now better represented in the model. To further improve the fit, the
+next model will control for dyadic-level homophily, including gender,
+university affiliation, and discipline. These covariates may help
+explain residual variation in tie formation and reception beyond the
+structural effects of activity and popularity. To better capture the
+more complex triadic configurations that remain underestimated, such as
+cyclic and transitive patterns, I will subsequently include transitive
+triplet and cyclic closure effects in later model iterations.</p>
+</div>
+</div>
+<div id="model-3" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Model 3</h2>
+<div id="include-effects-2" class="section level3" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Include
+effects</h3>
+<pre class="r"><code>myeff &lt;- setEffect(myeff, sameX, interaction1 = &quot;gender&quot;, include = T)
+myeff &lt;- setEffect(myeff, sameX, interaction1 = &quot;university&quot;, include = T)
+myeff &lt;- setEffect(myeff, sameX, interaction1 = &quot;discipline&quot;, include = T)</code></pre>
+</div>
+<div id="run-model-2" class="section level3" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> Run model</h3>
+<pre class="r"><code>myAlgorithm &lt;- sienaAlgorithmCreate(projname = &quot;result_gender&quot;)
+ansM3 &lt;- siena07(myAlgorithm, data = mydata3, effects = myeff, returnDeps = TRUE, prevAns = ansM2 )
+
+save(ansM3, file = &quot;ansM3.RData&quot;)</code></pre>
+<pre class="r"><code>load(&quot;ansM3.RData&quot;)
+ansM3</code></pre>
+<pre><code>## Estimates, standard errors and convergence t-ratios
+## 
+##                                              Estimate   Standard   Convergence 
+##                                                           Error      t-ratio   
+## 
+## Rate parameters: 
+##   0       Rate parameter                      4.1796  ( 0.4565   )             
+## 
+## Other parameters: 
+##   1. eval outdegree (density)                -8.7397  ( 0.3115   )   -0.0192   
+##   2. eval reciprocity                         2.3461  ( 0.1510   )   -0.0644   
+##   3. eval indegree - popularity               0.1634  ( 0.0369   )   -0.0243   
+##   4. eval outdegree - activity                0.1410  ( 0.0238   )   -0.0680   
+##   5. eval same gender                         0.2028  ( 0.0801   )   -0.0184   
+##   6. eval transitive triplets homog. gender   0.4553  ( 0.2204   )   -0.0190   
+##   7. eval transitive triplets jumping gender  1.6834  ( 0.3999   )    0.0369   
+##   8. eval same university                     2.2679  ( 0.1136   )    0.0028   
+##   9. eval same discipline                     2.6743  ( 0.2733   )   -0.0115   
+## 
+## Overall maximum convergence ratio:    0.1685 
+## 
+## 
+## Total of 2684 iteration steps.</code></pre>
+</div>
+<div id="interpretation-2" class="section level3" number="1.4.3">
+<h3><span class="header-section-number">1.4.3</span> Interpretation</h3>
+<p>Just like in Model 1 and Model 2, the negative outdegree (density)
+parameter (b = -8.74, SE = 0.31) indicates that, overall, ties are
+unlikely to form without considering other structural or attribute-based
+effects. Reciprocity (b = 2.35, SE = 0.15) remains significant and
+positive, suggesting that mutual connections are substantially more
+likely than one-way ties, reflecting a common social tendency for
+individuals to reciprocate interactions.</p>
+<p>Regarding individual-level activity, both indegree popularity (b =
+0.16, SE = 0.04) and outdegree activity (b = 0.14, SE = 0.02) are
+positive. This indicates that popular individuals are likely to become
+even more popular, while individuals who send many ties are likely to
+continue forming ties.</p>
+<p>Dyadic homophily effects based on gender, university, and discipline
+are also evident. Same-gender ties (b = 0.20, SE = 0.08) show a modest
+but significant preference for connections among individuals of the same
+gender. Institutional and disciplinary homophily are particularly
+strong: ties between individuals from the same university (b = 2.27, SE
+= 0.11) or the same discipline (b = 2.67, SE = 0.27) are highly
+probable, indicating that shared organizational or academic context is a
+dominant factor in network formation.</p>
+<p>Focusing on the hypothesized effects, they have become slightly less
+positive compared to Model 2 but remain significant. The effect of
+jumpXtransTrip remains substantial (b = 1.68, SE = 0.40), indicating
+that in configurations A → B → C where A and B are of the same gender, A
+is still likely to form a tie to C when C is of a different gender. This
+finding supports Hypothesis 1 which is based on Contact theory but
+contradicts Hypothesis 2, which is based on Social Identity Theory
+(SIT).</p>
+<p>The homXtransTrip effect also remains significant, reflecting that A
+is likely to close or maintain a triad by sending a tie to C when C is
+of the same gender. This effect is however quite lower than before,
+which may partly result the dyadic homophily effect, A’s preference for
+same-gender connections, rather than reinforcement from group belonging
+with B. Nevertheless, the effect is still significant alligning with
+Hypothesis 3 regarding SIT, suggesting that gender-homogeneous triadic
+closure is still relevant in the network.</p>
+</div>
+<div id="gof-indegree-1" class="section level3" number="1.4.4">
+<h3><span class="header-section-number">1.4.4</span> GOF indegree</h3>
+<p>Model 3 still fails to accurately capture the indegree distribution
+in the observed network (p = 0). It consistently underestimates the
+number of nodes with no incoming ties and overestimates nodes with one
+or two incoming ties.</p>
+<pre class="r"><code>gofi7 &lt;- sienaGOF(ansM3, IndegreeDistribution, verbose = FALSE, join = TRUE, varName = &quot;net2&quot;, cumulative = F)
+
+save(gofi7, file = &quot;gofi7.RData&quot;)</code></pre>
+<pre class="r"><code>load(&quot;gofi7.RData&quot;)
+plot(gofi7, violin = F)</code></pre>
+<p><img src="Results_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+</div>
+<div id="gof-outdegree-1" class="section level3" number="1.4.5">
+<h3><span class="header-section-number">1.4.5</span> GOF outdegree</h3>
+<p>Similarly, Model 3 does not adequately represent the outdegree
+distribution (p = 0). It underestimates nodes with no outgoing ties,
+overestimates nodes with a single outgoing tie, and again underestimates
+nodes with three outgoing ties.</p>
+<pre class="r"><code>gofi8 &lt;- sienaGOF(ansM3, OutdegreeDistribution, verbose = FALSE, join = TRUE, varName = &quot;net2&quot;, cumulative = F)
+save(gofi8, file = &quot;gofi8.RData&quot;)</code></pre>
+<pre class="r"><code>load(&quot;gofi8.RData&quot;)
+plot(gofi8, violin = F)</code></pre>
+<p><img src="Results_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+</div>
+<div id="gof-triad-census-2" class="section level3" number="1.4.6">
+<h3><span class="header-section-number">1.4.6</span> GOF triad
+census</h3>
+<p>The Goodness-of-Fit plot for Model 3 shows a mixed pattern in
+capturing triadic structures compared to Model 2. Overall, the model fit
+remains low (p = 0.002). Several aspects of the triadic structure remain
+stable, while some show noticeable improvement and others have
+worsened.</p>
+<p>Most notably, 030T triangles, representing cyclic triads, are better
+captured. This could be because the inclusion of dyadic homophily terms
+for gender, discipline, and university increases the likelihood of ties
+between nodes sharing these attributes. As a result, if A collaborates
+with B and B with C, C is more likely to send a tie back to A when all
+three share gender, discipline, or university affiliation. This
+improvement indicates that attribute-driven tie probabilities, in
+combination with the existing transitive and jump effects based on
+gender, help the model better reproduce cyclic triads that were
+previously underestimated.</p>
+<p>In contrast, 120C and 120D configurations, which represent star-like
+triads with a central sender or receiver, are now less well captured.
+This could be because the strong homophily effects favor ties between
+similar nodes, reducing the formation of these centralized triads when
+nodes differ in attributes. Consequently, the underrepresentation of
+these ties indicates that the model now captures cycles more effectively
+at the expense of certain star-like structures.</p>
+<pre class="r"><code>gofi9 &lt;- sienaGOF(ansM3, TriadCensus, verbose = FALSE, join = TRUE, varName = &quot;net2&quot;)
+save(gofi9, file = &quot;gofi9.RData&quot;)</code></pre>
+<pre class="r"><code>load(&quot;gofi9.RData&quot;)
+plot(gofi9, violin = F, center = T, scale = T)</code></pre>
+<p><img src="Results_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+</div>
+<div id="conclusion-1" class="section level3" number="1.4.7">
+<h3><span class="header-section-number">1.4.7</span> Conclusion</h3>
+<p>In this model I added the dyadic gender homophily effect to bring
+more nuance to the evaluation of my hypotheses by controlling for
+individuals’ initial tendency to collaborate with others of the same
+gender. The inclusion of same-university and same-discipline effects
+further ensured that these factors did not confound the main effects of
+interest. However, the Goodness-of-Fit indices indicate that these
+additions did not substantially improve the model’s overall fit to the
+observed network.</p>
+</div>
+</div>
+<div id="model-4" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Model 4</h2>
+<div id="include-effects-3" class="section level3" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> Include
+effects</h3>
+<pre class="r"><code>myeff &lt;- setEffect(myeff, transTrip, include = T)</code></pre>
+</div>
+<div id="run-model-3" class="section level3" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> Run model</h3>
+<pre class="r"><code>myAlgorithm &lt;- sienaAlgorithmCreate(projname = &quot;result_gender&quot;)
+ansM4 &lt;- siena07(myAlgorithm, data = mydata3, effects = myeff, returnDeps = TRUE, prevAns = ansM3 )
+
+save(ansM4, file = &quot;ansM4.RData&quot;)</code></pre>
+<pre class="r"><code>load(&quot;ansM4.RData&quot;)
+ansM4</code></pre>
+<pre><code>## Estimates, standard errors and convergence t-ratios
+## 
+##                                               Estimate   Standard   Convergence 
+##                                                            Error      t-ratio   
+## 
+## Rate parameters: 
+##   0        Rate parameter                      4.1459  ( 0.4728   )             
+## 
+## Other parameters: 
+##    1. eval outdegree (density)                -8.6978  ( 0.4365   )    0.0503   
+##    2. eval reciprocity                         2.2415  ( 0.1708   )   -0.0294   
+##    3. eval transitive triplets                 1.1925  ( 0.2448   )   -0.0063   
+##    4. eval indegree - popularity               0.1581  ( 0.0257   )    0.0522   
+##    5. eval outdegree - activity                0.1235  ( 0.0281   )    0.0309   
+##    6. eval same gender                         0.3016  ( 0.0890   )    0.0659   
+##    7. eval transitive triplets homog. gender  -0.6363  ( 0.3023   )    0.0209   
+##    8. eval transitive triplets jumping gender -0.7931  ( 0.6783   )   -0.0380   
+##    9. eval same university                     2.2349  ( 0.1492   )    0.0077   
+##   10. eval same discipline                     2.6401  ( 0.3027   )    0.0413   
+## 
+## Overall maximum convergence ratio:    0.1166 
+## 
+## 
+## Total of 2891 iteration steps.</code></pre>
+</div>
+<div id="interpretation-3" class="section level3" number="1.5.3">
+<h3><span class="header-section-number">1.5.3</span> Interpretation</h3>
+</div>
+<div id="gof-indegree-2" class="section level3" number="1.5.4">
+<h3><span class="header-section-number">1.5.4</span> GOF indegree</h3>
+<pre class="r"><code>gofi10 &lt;- sienaGOF(ansM4, IndegreeDistribution, verbose = FALSE, join = TRUE, varName = &quot;net2&quot;, cumulative = F)
+
+save(gofi10, file = &quot;gofi10.RData&quot;)</code></pre>
+<pre class="r"><code>#load(&quot;gofi10.RData&quot;)
+#plot(gofi10, violin = F)</code></pre>
+</div>
+<div id="gof-outdegree-2" class="section level3" number="1.5.5">
+<h3><span class="header-section-number">1.5.5</span> GOF outdegree</h3>
+<pre class="r"><code>gofi11 &lt;- sienaGOF(ansM4, OutdegreeDistribution, verbose = FALSE, join = TRUE, varName = &quot;net2&quot;, cumulative = F)
+save(gofi11, file = &quot;gofi8.RData&quot;)</code></pre>
+<pre class="r"><code>#load(&quot;gofi11.RData&quot;)
+#plot(gofi11, violin = F)</code></pre>
+</div>
+<div id="gof-triad-census-3" class="section level3" number="1.5.6">
+<h3><span class="header-section-number">1.5.6</span> GOF triad
+census</h3>
+<pre class="r"><code>gofi12 &lt;- sienaGOF(ansM4, TriadCensus, verbose = FALSE, join = TRUE, varName = &quot;net2&quot;)
+save(gofi12, file = &quot;gofi12.RData&quot;)</code></pre>
+<pre class="r"><code>#load(&quot;gofi12.RData&quot;)
+#plot(gofi12, violin = F, center = T, scale = T)</code></pre>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSm91cm5hbCAxIgpiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliCmF1dGhvcjogIk15bMOobmUgSHVzc29uIgotLS0KCmBgYHtyLCBlY2hvPUZBTFNFLCBpbmNsdWRlPVRSVUUsIHJlc3VsdHM9J2hpZGUnLCBtZXNzYWdlPUZBTFNFLCB3YXJuaW5nPUZBTFNFfQpsaWJyYXJ5KGtuaXRyKQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShzY2hvbGFyKQpsaWJyYXJ5KG9wZW5hbGV4UikKbGlicmFyeShydmVzdCkKbGlicmFyeShqc29ubGl0ZSkKbGlicmFyeShodHRyKQpsaWJyYXJ5KHJ2ZXN0KQpsaWJyYXJ5KHJlc2hhcGUyKQpsaWJyYXJ5KHhtbDIpCmxpYnJhcnkob3Blbnhsc3gpCmxpYnJhcnkocG9saXRlKQpsaWJyYXJ5KGlncmFwaCkKbGlicmFyeShzbmEpCmxpYnJhcnkoZ2VuZGVyaXplUikKbGlicmFyeShSU2VsZW5pdW0pCmxpYnJhcnkobmV0c3RhdCkKbGlicmFyeShwaW5ncikKbGlicmFyeShSU2llbmEpCmxpYnJhcnkoZGV2dG9vbHMpCmxpYnJhcnkoUnNpZW5hVHdvU3RlcCkKCgojIGxvYWQgdGhlIGZ1bmN0aW9ucyB5b3UgbmVlZCBmcm9tIHRoZSBwYWNrYWdlcwpmcGFja2FnZS5jaGVjayA8LSBmdW5jdGlvbihwYWNrYWdlcykgewogIGxhcHBseShwYWNrYWdlcywgRlVOID0gZnVuY3Rpb24oeCkgewogICAgaWYgKCFyZXF1aXJlKHgsIGNoYXJhY3Rlci5vbmx5ID0gVFJVRSkpIHsKICAgICAgaW5zdGFsbC5wYWNrYWdlcyh4LCBkZXBlbmRlbmNpZXMgPSBUUlVFKQogICAgICBsaWJyYXJ5KHgsIGNoYXJhY3Rlci5vbmx5ID0gVFJVRSkKICAgIH0KICB9KQp9Cgpmc2F2ZSA8LSBmdW5jdGlvbih4LCBmaWxlID0gTlVMTCwgbG9jYXRpb24gPSAiLi9kYXRhL3Byb2Nlc3NlZC8iKSB7CiAgaWZlbHNlKCFkaXIuZXhpc3RzKCJkYXRhIiksIGRpci5jcmVhdGUoImRhdGEiKSwgRkFMU0UpCiAgaWZlbHNlKCFkaXIuZXhpc3RzKCJkYXRhL3Byb2Nlc3NlZCIpLCBkaXIuY3JlYXRlKCJkYXRhL3Byb2Nlc3NlZCIpLCBGQUxTRSkKICAKICBpZiAoaXMubnVsbChmaWxlKSkgewogICAgZmlsZSA8LSBkZXBhcnNlKHN1YnN0aXR1dGUoeCkpCiAgfQogIAogIGRhdGVuYW1lIDwtIHN1YnN0cihnc3ViKCJbOi1dIiwgIiIsIFN5cy50aW1lKCkpLCAxLCA4KQogIHRvdGFsbmFtZSA8LSBwYXN0ZShsb2NhdGlvbiwgZGF0ZW5hbWUsIGZpbGUsICIucmRhIiwgc2VwID0gIiIpCiAgc2F2ZSh4LCBmaWxlID0gdG90YWxuYW1lKSAgIyBuZWVkIHRvIGZpeCBpZiBmaWxlIGlzIHJlbG9hZGVkIGFzIGlucHV0IG5hbWUsIG5vdCBhcyB4Lgp9CgpmbG9hZCA8LSBmdW5jdGlvbihmaWxlbmFtZSkgewogIGxvYWQoZmlsZW5hbWUpCiAgZ2V0KGxzKClbbHMoKSAhPSAiZmlsZW5hbWUiXSkKfQoKZnNob3dkZiA8LSBmdW5jdGlvbih4LCAuLi4pIHsKICBrbml0cjo6a2FibGUoeCwgZGlnaXRzID0gMiwgImh0bWwiLCAuLi4pICU+JQogICAga2FibGVFeHRyYTo6a2FibGVfc3R5bGluZyhib290c3RyYXBfb3B0aW9ucyA9IGMoInN0cmlwZWQiLCAiaG92ZXIiKSkgJT4lCiAgICBrYWJsZUV4dHJhOjpzY3JvbGxfYm94KHdpZHRoID0gIjEwMCUiLCBoZWlnaHQgPSAiMzAwcHgiKQp9CmBgYAoKYGBge3Iga2xpcHB5LCBlY2hvPUZBTFNFLCBpbmNsdWRlPVRSVUV9CmtsaXBweTo6a2xpcHB5KHBvc2l0aW9uID0gYygndG9wJywgJ3JpZ2h0JykpCiNrbGlwcHk6OmtsaXBweShjb2xvciA9ICdkYXJrcmVkJykKI2tsaXBweTo6a2xpcHB5KHRvb2x0aXBfbWVzc2FnZSA9ICdDbGljayB0byBjb3B5JywgdG9vbHRpcF9zdWNjZXNzID0gJ0RvbmUnKQpgYGAKCkxhc3QgY29tcGlsZWQgb24gYHIgZm9ybWF0KFN5cy50aW1lKCksICclQiwgJVknKWAKPGJyPgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiMgRXhwbG9yYXRvcnkgQW5hbHlzZXMKPGJyPgoKTG9hZCBpbiB0aGUgZGF0YQpgYGB7cn0KbG9hZCgiLi9kYXRhL3Byb2Nlc3NlZC9yZXN1bHRfZ2VuZGVyMi5yZGEiKQoKIyBjcmVhdGUgd2F2ZXMKd2F2ZTEgPC0gcmVzdWx0X2dlbmRlcjIkbmV0c1sxLCxdCndhdmUyIDwtIHJlc3VsdF9nZW5kZXIyJG5ldHNbMiwsXQpgYGAKCjxicj4KCkZvciB0aGUgZXhwbG9yYXRvcnkgYW5hbHlzZXMsIEkgZXhhbWluZSB3aGV0aGVyIEEg4oaSIEIg4oaSIEMgdHJpYWRzIGFyZSBtb3JlIGxpa2VseSB0byBiZSBjbG9zZWQgb3IgbWFpbnRhaW5lZCBieSBBLCBkZXBlbmRpbmcgb24gdGhlIGdlbmRlciBjb21wb3NpdGlvbiBvZiB0aGUgdHJpYWQuIFNwZWNpZmljYWxseSwgSSBpbnZlc3RpZ2F0ZSB3aGV0aGVyIEEgaXMgbW9yZSBsaWtlbHkgdG8gY3JlYXRlIG9yIG1haW50YWluIGEgdGllIHRvIEMgd2hlbiBDIGlzIG9mIGEgZGlmZmVyZW50IGdlbmRlciB0aGFuIEEgYW5kIEIgKEgxKSwgb3Igd2hlbiBDIGlzIG9mIHRoZSBzYW1lIGdlbmRlciBhcyBBIGFuZCBCIChIMikuCgpJbiBSU2llbmEsIG5ldHdvcmsgZHluYW1pY3MgYXJlIG1vZGVsZWQgYXMgYWN0b3JzIG1ha2luZyBkZWNpc2lvbnMgYXQgZWFjaCB0aW1lIHN0ZXAgdG8gZWl0aGVyIGNyZWF0ZSBuZXcgdGllcywgbWFpbnRhaW4gZXhpc3RpbmcgdGllcywgYnJlYWsgZXhpc3RpbmcgdGllcywgb3IgY2hvb3NlIG5vdCB0byBmb3JtIHRpZXMuIFRodXMsIHdoZW4gcmVmZXJyaW5nIHRvIEEgY3JlYXRpbmcgb3IgbWFpbnRhaW5pbmcgYSB0aWUgdG8gQywgdGhpcyBpcyBjb250cmFzdGVkIHdpdGggQSBicmVha2luZyBvciBub3QgY3JlYXRpbmcgYSB0aWUgdG8gQy4gSW4gb3RoZXIgd29yZHMsIHRoZSBoeXBvdGhlc2VzIHRlc3Qgd2hldGhlciB0aWVzIGFyZSBtb3JlIGxpa2VseSB0byBiZSBwcmVzZW50ICh0aHJvdWdoIGNyZWF0aW9uIG9yIG1haW50ZW5hbmNlKSByYXRoZXIgdGhhbiBhYnNlbnQgKHRocm91Z2ggZGlzc29sdXRpb24gb3Igbm9uLWNyZWF0aW9uKSBiYXNlZCBvbiB0aGUgZ2VuZGVyIGNvbXBvc2l0aW9uIG9mIHRoZSB0cmlhZC4KCkFzIHByZXZpb3VzbHkgZGVzY3JpYmVkIGluIHRoZSBEYXRhIGFuZCBNZXRob2RzIHNlY3Rpb24sIHRoZSBtb2RlbHMgd2lsbCBiZSBjcmVhdGVkIGFzIGZvbGxvd3M6CiFbXShpbWFnZXMvbW9kZWwucG5nKQoKPGJyPgoKIyMgUHJlcGFyZSBmb3IgYW5hbHlzaXMKYGBge3J9CndhdmUxIDwtIHJlc3VsdF9nZW5kZXIyJG5ldHNbMSwsXQp3YXZlMiA8LSByZXN1bHRfZ2VuZGVyMiRuZXRzWzIsLF0KCiMgYSBmZXcgcGVvcGxlIGRpZCB3b3JrIHdpdGggdGhlbXNlbHZlczoKZGlhZyh3YXZlMSkgPC0gMApkaWFnKHdhdmUyKSA8LSAwCgoKbmV0X2dlbmRlciA8LSBhcnJheShkYXRhID0gYyh3YXZlMSwgd2F2ZTIpLCBkaW0gPSBjKGRpbSh3YXZlMSksIDIpKQojIG5ldF9nZW5kZXIKCiMgZGVwZW5kZW50Cm5ldDIgPC0gc2llbmFEZXBlbmRlbnQobmV0X2dlbmRlcikKCiMgaW5kZXBlbmRlbnQgdmFyaWFibGVzCgojIEdlbmRlcgpnZW5kZXIgPC0gcmVzdWx0X2dlbmRlcjIkZGVtb2dyYXBoaWNzJGdlbmRlcgpnZW5kZXIgPC0gaWZlbHNlKGlzLm5hKGdlbmRlciksIE5BLCAKICAgICAgICAgICAgICAgICBpZmVsc2UoZ2VuZGVyID09ICJmZW1hbGUiLCAxLCAwKSkKZ2VuZGVyIDwtIGNvQ292YXIoZ2VuZGVyKQoKCiMgVW5pdmVyc2l0eQojIGJlY2F1c2UgSSB3aWxsIG9ubHkgdXNlIHRoaXMgYXMgYSBjb250cm9sIHVzaW5nIHNhbWVYCiMgYW5kIHNhbWVYIG1lcmVseSBjaGVja3Mgd2hldGhlciB0d28gbm9kZXMgaGF2ZSB0aGUgc2FtZSB2YWx1ZSBvZiBYCiMgYW5kIGRvZXMgbm90IGxvb2sgYXQgdGhlIG9yZGVyIGluIHdoaWNoIHRoZSB1bml2ZXJzaXRpZXMgYXJlCiMgSSBjYW4ganVzdCBtYWtlIGl0IGEgZmFjdG9yCgpyZXN1bHRfZ2VuZGVyMiRkZW1vZ3JhcGhpY3MkVW5pdmVyc2l0ZWl0MS4yNFtyZXN1bHRfZ2VuZGVyMiRkZW1vZ3JhcGhpY3MkVW5pdmVyc2l0ZWl0MS4yNCA9PSAiIl0gPC0gTkEKCnVuaXZlcnNpdHlfdmVjdG9yIDwtIAphcy5udW1lcmljKGFzLmZhY3RvcihyZXN1bHRfZ2VuZGVyMiRkZW1vZ3JhcGhpY3MkYFVuaXZlcnNpdGVpdDEuMjJgKSkKCnVuaXZlcnNpdHkgPC0gY29Db3Zhcih1bml2ZXJzaXR5X3ZlY3RvcikgCgojIERpc2NpcGxpbmUKIyBCZWNhdXNlIGRpc2NpcGxpbmUgaXMgbGl0ZXJhbGx5IHRpbWUgY29uc3RhbnQgYmV0d2VlbiAyMDIyIGFuZCAyMDI0CiMgKGl0IHNhaWQgNjUgcGVvcGxlIHN3aXRjaGVkLCBidXQgdGhvc2Ugd2VyZSBqdXN0IG1pc3NpbmdzIGluIDIwMjIgd2hpY2ggd2VyZSBpZGVudGlmaWVkIGluIDIwMjQpCiMgYW5kIDIwMjQgaXMgY29tcGxldGUKIyBJIHdpbGwgdXNlIHRoZSBkYXRhIGZyb20gMjAyNC4KCmRpc2NpcGxpbmUgPC0gYXMubnVtZXJpYyhhcy5mYWN0b3IocmVzdWx0X2dlbmRlcjIkZGVtb2dyYXBoaWNzJGBkaXNjaXBsaW5lLjI0YCkpCmRpc2NpcGxpbmUgPC0gaWZlbHNlKGlzLm5hKGRpc2NpcGxpbmUpLCBOQSwKICAgICAgICAgICAgICAgICAgICAgaWZlbHNlKGRpc2NpcGxpbmUgPT0gIjIiLCAxLCAwKSkKZGlzY2lwbGluZSA8LSBjb0NvdmFyKGRpc2NpcGxpbmUpIAoKIyBDcmVhdGUgc2llbmEgZGF0YSBvYmplY3QKbXlkYXRhMyA8LSBzaWVuYURhdGFDcmVhdGUobmV0MiwgZ2VuZGVyLCB1bml2ZXJzaXR5LCBkaXNjaXBsaW5lKQojbXlkYXRhMwoKbXllZmYgPC1nZXRFZmZlY3RzKG15ZGF0YTMpCgppZmVsc2UoIWRpci5leGlzdHMoInJlc3VsdHMiKSwgZGlyLmNyZWF0ZSgicmVzdWx0cyIpLCBGQUxTRSkKcHJpbnQwMVJlcG9ydChteWRhdGEzLCBtb2RlbG5hbWUgPSAiLi9yZXN1bHRzL3Jlc3VsdF9nZW5kZXIiKQpgYGAKCgojIyBNb2RlbCAxCgojIyMgSW5jbHVkZSBlZmZlY3RzIApgYGB7ciwgZXZhbCA9IEZ9Cm15ZWZmIDwtIHNldEVmZmVjdChteWVmZiwganVtcFhUcmFuc1RyaXAsIGludGVyYWN0aW9uMSA9ICJnZW5kZXIiLCBpbmNsdWRlID0gVCkKbXllZmYgPC0gc2V0RWZmZWN0KG15ZWZmLCBob21YVHJhbnNUcmlwLCBpbnRlcmFjdGlvbjEgPSAiZ2VuZGVyIiwgaW5jbHVkZSA9IFQpCmBgYAojIyMgUnVuIG1vZGVsCmBgYHtyLCBldmFsID0gRkFMU0V9Cm15QWxnb3JpdGhtIDwtIHNpZW5hQWxnb3JpdGhtQ3JlYXRlKHByb2puYW1lID0gInJlc3VsdF9nZW5kZXIiKQphbnNNMSA8LSBzaWVuYTA3KG15QWxnb3JpdGhtLCBkYXRhID0gbXlkYXRhMywgZWZmZWN0cyA9IG15ZWZmLCByZXR1cm5EZXBzID0gVFJVRSkKCnNhdmUoYW5zTTEsIGZpbGUgPSAiYW5zTTEuUkRhdGEiKQpgYGAKCmBgYHtyfQpsb2FkKCJhbnNNMS5SRGF0YSIpCmFuc00xCmBgYAoKIyMjIEludGVycHJldGF0aW9uIAoKSW4gdGhpcyBtb2RlbCB0aGUgc3RydWN0dXJhbCBlZmZlY3RzIHJlY2lwcm9jaXR5IGFuZCBkZW5zaXR5IHdlcmUgaW5jbHVkZWQsIGFzIGlzIHN0YW5kYXJkIGluIFJTaWVuYS4gVGhlIFJTaWVuYSBtb2RlbCByZXN1bHRzIGluZGljYXRlIHRoYXQgdGhlIG5ldHdvcmsgaXMgcmVsYXRpdmVseSBzcGFyc2UsIGFzIHNob3duIGJ5IHRoZSBzaWduaWZpY2FudCBuZWdhdGl2ZSBvdXRkZWdyZWUgZWZmZWN0IChiID0gLTQuMjQsIFNFID0gMC4wOCksIG1lYW5pbmcgdGhhdCBhY3RvcnMgZ2VuZXJhbGx5IGZvcm0gZmV3IHRpZXMgb3ZlcmFsbC4gSG93ZXZlciwgdGllcyB0aGF0IGRvIGZvcm0gYXJlIGhpZ2hseSByZWNpcHJvY2FsLCBhcyB0aGUgcmVjaXByb2NpdHkgZWZmZWN0IGlzIHNpZ25pZmljYW50IGFuZCBwb3NpdGl2ZSAoYiA9IDMuMzMsIFNFID0gMC4xOCkuCgpJIGFtIHBhcnRpY3VsYXJseSBpbnRlcmVzdGVkIGluIHRoZSBqdW1wWFRyYW5zVHJpcCBhbmQgdGhlIGhvbVhUcmFuc1RyaXAgZWZmZWN0cyBhcyB0aG9zZSB3aWxsIGhlbHAgbWUgYW5zd2VyIG15IGh5cG90aGVzZXMuIEJvdGggZWZmZWN0cyBhcmUgcG9zaXRpdmUgYW5kIHN0YXRpc3RpY2FsbHkgc2lnbmlmaWNhbnQuIAoKVGhlIGp1bXBYVHJhbnNUcmlwIGVmZmVjdCB3YXMgMy40OSAoU0UgPSAwLjM1KS4gVGhpcyBpbmRpY2F0ZXMgdGhhdCBpbiBBIC0+IEIgLT4gQyB0cmlhZHMsIGFjdG9yIEEgaXMgbGlrZWx5IHRvIGZvcm0gb3IgbWFpbnRhaW4gYSB0aWUgd2l0aCBDIChyYXRoZXIgdGhhbiBkaXNzb2x2ZSBvciByZWZyYWluIGZyb20gZm9ybWluZyBvbmUpIHdoZW4gQyBpcyBvZiBhIGRpZmZlcmVudCBnZW5kZXIgdGhhbiBib3RoIEEgYW5kIEIuIFRoaXMgcmVzdWx0IHN1cHBvcnRzIEh5cG90aGVzaXMgMSwgYXMgaXQgYWxpZ25zIHdpdGggdGhlIHByZWRpY3Rpb25zIG9mIENvbnRhY3QgVGhlb3J5LCBhbmQgY29udHJhZGljdHMgSHlwb3RoZXNpcyAyOiB3aGVuIEMgaXMgYSBkaWZmZXJlbnQgZ2VuZGVyIHRoYW4gQSBhbmQgQiwgQSB3YW50cyB0byBjb2xsYWJvcmF0ZSB3aXRoIEMgZGVzcGl0ZSBhIGdlbmRlciBkaWZmZXJlbmNlLgoKVGhlIGhvbVhUcmFuc1RyaXAgZWZmZWN0IHdhcyAxLjYxIChTRSA9IDAuMjQpLiBUaGlzIGluZGljYXRlcyB0aGF0IGluIEEgLT4gQiAtPiBDIHRyaWFkcywgYWN0b3IgQSBpcyBsaWtlbHkgdG8gZm9ybSBvciBtYWludGFpbiBhIHRpZSB3aXRoIEMgKHJhdGhlciB0aGFuIGRpc3NvbHZlIG9yIHJlZnJhaW4gZnJvbSBmb3JtaW5nIG9uZSkgd2hlbiBDIGlzIG9mIHRoZSBzYW1lIGdlbmRlciBhcyBib3RoIEEgYW5kIEIuIFRoaXMgcmVzdWx0IHN1cHBvcnRzIEh5cG90aGVzaXMgMyBhbmQgYWxpZ25zIHdpdGggU29jaWFsIElkZW50aXR5IFRoZW9yeSwgc3VnZ2VzdGluZyB0aGF0IEEgbGlrZXMgY29sbGFib3JhdGluZyB3aXRoaW4gZ2VuZGVyLWhvbW9nZW5lb3VzIHRyaWFkcy4KClRha2VuIHRvZ2V0aGVyLCB0aGVzZSBmaXJzdCBmaW5kaW5ncyBzdWdnZXN0IHRoYXQgdHJpYWRpYyBjbG9zdXJlIGluIHRoZSBuZXR3b3JrIG9jY3VycyBib3RoIGFjcm9zcyBhbmQgd2l0aGluIGdlbmRlciBncm91cHMuIE9uIHRoZSBvbmUgaGFuZCwgdGhlIHBvc2l0aXZlIGp1bXBYVHJhbnNUcmlwIGVmZmVjdCBzaG93cyB0aGF0IEEgZm9ybXMgdGllcyB0byBvdXQtZ3JvdXAgbWVtYmVycyBpbiBtZWRpYXRlZCB0cmlhZHMsIGNvbnNpc3RlbnQgd2l0aCBDb250YWN0IFRoZW9yeS4gT24gdGhlIG90aGVyIGhhbmQsIHRoZSBwb3NpdGl2ZSBob21YVHJhbnNUcmlwIGVmZmVjdCBpbmRpY2F0ZXMgdGhhdCBBIGFsc28gZmF2b3JzIHNhbWUtZ2VuZGVyIHRyaWFkcywgY29uc2lzdGVudCB3aXRoIFNvY2lhbCBJZGVudGl0eSBUaGVvcnkuIE92ZXJhbGwsIHRoaXMgcGF0dGVybiBzdWdnZXN0cyB0aGF0IEHigJlzIGNvbGxhYm9yYXRpb24gZGVjaXNpb25zIGluIHRyaWFkaWMgc3RydWN0dXJlcyBtYXkgbm90IGJlIGNvbnN0cmFpbmVkIGJ5IGdlbmRlcjogQSBpcyBsaWtlbHkgdG8gY29sbGFib3JhdGUgd2l0aCBDIHJlZ2FyZGxlc3Mgb2Ygd2hldGhlciBDIHNoYXJlcyBBJ3MgYW5kIEIncyBnZW5kZXIuCgpXaGlsZSB0aGUgZXN0aW1hdGVkIGVmZmVjdHMgaW4gdGhpcyBtb2RlbCBhcmUgc3RhdGlzdGljYWxseSBzaWduaWZpY2FudCwgdGhpcyBhbG9uZSBkb2VzIG5vdCBndWFyYW50ZWUgdGhhdCB0aGUgbW9kZWwgYWNjdXJhdGVseSByZXByZXNlbnRzIHRoZSBzdHJ1Y3R1cmVzIG9ic2VydmVkIGluIHRoZSBuZXR3b3JrLiBTaWduaWZpY2FuY2UgaW5kaWNhdGVzIHRoYXQgcGFydGljdWxhciBjb3ZhcmlhdGVzIGFyZSBhc3NvY2lhdGVkIHdpdGggdGllIGZvcm1hdGlvbiwgYnV0IGl0IGRvZXMgbm90IHNob3cgd2hldGhlciB0aGUgbW9kZWwgcmVwcm9kdWNlcyB0aGUgb3ZlcmFsbCBwYXR0ZXJucyBvZiByZWxhdGlvbnNoaXBzIGFtb25nIG5vZGVzLiBHb29kbmVzcy1vZi1GaXQgKEdPRikgdGVzdHMgYXJlIHRoZXJlZm9yZSBlc3NlbnRpYWw6IHRoZXkgY29tcGFyZSB0aGUgc2ltdWxhdGVkIG5ldHdvcmtzIGdlbmVyYXRlZCBieSB0aGUgbW9kZWwgdG8gdGhlIG9ic2VydmVkIG5ldHdvcmsgYWNyb3NzIGtleSBzdHJ1Y3R1cmFsIGZlYXR1cmVzLCBzdWNoIGFzIG91dGRlZ3JlZSBkaXN0cmlidXRpb25zIChyZWZsZWN0aW5nIGluZGl2aWR1YWwgYWN0aXZpdHkpLCBpbmRlZ3JlZSBkaXN0cmlidXRpb25zIChjYXB0dXJpbmcgcG9wdWxhcml0eSksIGFuZCB0cmlhZGljIGNvbmZpZ3VyYXRpb25zICh3aGljaCByZWxhdGUgdG8gdGhlIHRlbmRlbmN5IG9mIGdyb3VwcyB0byBmb3JtIGNsdXN0ZXJzIG9yIHJlY2lwcm9jYWwgcmVsYXRpb25zaGlwcykuIEJ5IGV2YWx1YXRpbmcgdGhlc2UgYXNwZWN0cywgR09GIHRlc3RzIHJldmVhbCB3aGV0aGVyIE1vZGVsIDEgaXMgYWJsZSB0byByZWFsaXN0aWNhbGx5IHJlcGxpY2F0ZSB0aGUgbmV0d29ya+KAmXMgZnVuZGFtZW50YWwgc3RydWN0dXJhbCBwcm9wZXJ0aWVzLCBoZWxwaW5nIHVzIGRldGVybWluZSB3aGV0aGVyIHRoZSBtb2RlbCBwcm92aWRlcyBhIG1lYW5pbmdmdWwgcmVwcmVzZW50YXRpb24gb2YgdGhlIHNvY2lhbCBwcm9jZXNzZXMgdW5kZXIgc3R1ZHkgb3IgbWVyZWx5IGNhcHR1cmVzIGlzb2xhdGVkIGNvdmFyaWF0ZSBlZmZlY3RzLgoKIyMjIEdPRiBJbmRlZ3JlZSBwb3B1bGFyaXR5IAoKVGhlIGdvb2RuZXNzLW9mLWZpdCBncmFwaCBmb3IgdGhlIGluZGVncmVlIGRpc3RyaWJ1dGlvbiBpbmRpY2F0ZXMgdGhhdCB0aGUgY3VycmVudCBtb2RlbCBkb2VzIG5vdCBhZGVxdWF0ZWx5IGNhcHR1cmUgdGhlIG5ldHdvcmvigJlzIGluZGVncmVlIHN0cnVjdHVyZSAocCA9IDApLiBUaGUgbW9kZWwgdW5kZXJlc3RpbWF0ZXMgdGhlIG51bWJlciBvZiBhY3RvcnMgd2l0aCBubyBpbmNvbWluZyB0aWVzIGFuZCBvdmVyZXN0aW1hdGVzIHRoZSBudW1iZXIgb2YgYWN0b3JzIHdpdGggb25lIG9yIHR3byBpbmNvbWluZyB0aWVzLiBUaGVzZSBhcmUgdGhlIG1vc3Qgbm90YWJsZSBtaXNlc3RpbWF0aW9ucyBhbmQgc3VnZ2VzdCB0aGF0IGluY2x1ZGluZyBhbiBpbmRlZ3JlZSBwb3B1bGFyaXR5IGVmZmVjdCBjb3VsZCBpbXByb3ZlIG1vZGVsIGZpdC4KCmBgYHtyLCBldmFsID0gRn0KZ29maTEgPC0gc2llbmFHT0YoYW5zTTEsIEluZGVncmVlRGlzdHJpYnV0aW9uLCB2ZXJib3NlID0gRkFMU0UsIGpvaW4gPSBUUlVFLCB2YXJOYW1lID0gIm5ldDIiLCBjdW11bGF0aXZlID0gRikKCnNhdmUoZ29maTEsIGZpbGUgPSAiZ29maTEuUkRhdGEiKQpgYGAKCmBgYHtyfQpsb2FkKCJnb2ZpMS5SRGF0YSIpCnBsb3QoZ29maTEsIHZpb2xpbiA9IEYpCmBgYAoKIyMjIEdPRiBPdXRkZWdyZWUgYWN0aXZpdHkKClNpbWlsYXJseSwgdGhlIGdvb2RuZXNzLW9mLWZpdCBncmFwaCBmb3IgdGhlIG91dGRlZ3JlZSBkaXN0cmlidXRpb24gc2hvd3MgdGhhdCB0aGUgbW9kZWwgZmFpbHMgdG8gcmVwcm9kdWNlIHRoZSBvYnNlcnZlZCBvdXRkZWdyZWUgc3RydWN0dXJlIChwID0gMCkuIFRoZSBtb2RlbCB1bmRlcmVzdGltYXRlcyB0aGUgbnVtYmVyIG9mIGFjdG9ycyB3aG8gc2VuZCBubyB0aWVzIGFuZCBvdmVyZXN0aW1hdGVzIHRob3NlIHdobyBzZW5kIG9ubHkgb25lIHRpZS4gSXQgYWdhaW4gdW5kZXJlc3RpbWF0ZXMgYWN0b3JzIHNlbmRpbmcgdGhyZWUgb3IgZm91ciB0aWVzLiBUaGVzZSBwYXR0ZXJucyBzdWdnZXN0IHRoYXQgYWRkaW5nIGFuIG91dGRlZ3JlZSBhY3Rpdml0eSBlZmZlY3QgY291bGQgaW1wcm92ZSB0aGUgbW9kZWwuCgpgYGB7ciwgZXZhbCA9IEZ9CmdvZmkyIDwtIHNpZW5hR09GKGFuc00xLCBPdXRkZWdyZWVEaXN0cmlidXRpb24sIHZlcmJvc2UgPSBGQUxTRSwgam9pbiA9IFRSVUUsIHZhck5hbWUgPSAibmV0MiIsIGN1bXVsYXRpdmUgPSBGKQpzYXZlKGdvZmkyLCBmaWxlID0gImdvZmkyLlJEYXRhIikKYGBgCgpgYGB7cn0KbG9hZCgiZ29maTIuUkRhdGEiKQpwbG90KGdvZmkyLCB2aW9saW4gPSBGKQpgYGAKCgojIyMgR09GIHRyaWFkIGNlbnN1cwoKVGhlIGdyYXBoIGJlbG93IHNob3dzIHRoYXQgdGhlIG1vZGVsIGRvZXMgbm90IGFkZXF1YXRlbHkgcmVwcm9kdWNlIHRoZSBsb2NhbCB0cmlhZGljIHN0cnVjdHVyZXMgb2YgdGhlIG9ic2VydmVkIG5ldHdvcmsgKHAgPSAwKS4KClRoZSBmaXJzdCB0aHJlZSB0cmlhZCB0eXBlcyAoMDAzLCAwMTIsIDEwMikgYXJlIHdlbGwgY2FwdHVyZWQgYnkgdGhlIG1vZGVsLiBUaGVzZSBjb25maWd1cmF0aW9ucyByZXByZXNlbnQgZGlzY29ubmVjdGVkIG9yIG1pbmltYWxseSBjb25uZWN0ZWQgdHJpYWRzLCBhbmQgdGhlIGdvb2QgZml0IGxpa2VseSByZWZsZWN0cyB0aGUgaW5jbHVzaW9uIG9mIG91dGRlZ3JlZSAoZGVuc2l0eSkgYW5kIHJlY2lwcm9jaXR5IGVmZmVjdHMuCgpIb3dldmVyLCB0aGUgbW9kZWwgdW5kZXJlc3RpbWF0ZXMgYm90aCAwMjFEICh0d28gbm9kZXMgcmVjZWl2aW5nIHRpZXMgZnJvbSB0aGUgc2FtZSBub2RlKSBhbmQgMDIxVSAodHdvIG5vZGVzIHNlbmRpbmcgdGllcyB0byB0aGUgc2FtZSBub2RlKSwgc3VnZ2VzdGluZyB0aGF0IGl0IGRvZXMgbm90IGZ1bGx5IGNhcHR1cmUgcGF0dGVybnMgb2YgaGlnaCBhY3Rpdml0eSBvciBwb3B1bGFyaXR5LiBJbmNsdWRpbmcgZXhwbGljaXQgZWZmZWN0cyBmb3Igb3V0ZGVncmVlIGFjdGl2aXR5IGFuZCBpbmRlZ3JlZSBwb3B1bGFyaXR5IGNvdWxkIGltcHJvdmUgdGhlIGZpdCBmb3IgdGhlc2Ugc3RydWN0dXJlcy4KCkluIGNvbnRyYXN0LCB0aGUgMDIxQyBjb25maWd1cmF0aW9uIChBIC0+QiwgQi0+QykgaXMgd2VsbCByZXByb2R1Y2VkLCBpbmRpY2F0aW5nIHRoYXQgdGhlIGp1bXBYdHJhbnNUcmlwIGFuZCBob21YdHJhbnNUcmlwIHRlcm1zIHN1Y2Nlc3NmdWxseSBhY2NvdW50IGZvciBzaW1wbGUgc2VxdWVudGlhbCBjbG9zdXJlIHdpdGhpbiBhbmQgYWNyb3NzIGNvdmFyaWF0ZS1kZWZpbmVkIGdyb3Vwcy4KClRoZSBtb2RlbCBzdHJ1Z2dsZXMgd2l0aCBzZXZlcmFsIG1vcmUgY29tcGxleCB0cmlhZHMuIFRoZSAxMTFEIHRyaWFkLCB3aGljaCBjb21iaW5lcyBhIG11dHVhbCB0aWUgd2l0aCBhbiBhZGRpdGlvbmFsIGFzeW1tZXRyaWMgdGllLCBpcyBjbGVhcmx5IG1pc2ZpdCwgc3VnZ2VzdGluZyB0aGF0IHdoaWxlIHJlY2lwcm9jaXR5IGlzIGNhcHR1cmVkIGF0IHRoZSBkeWFkaWMgbGV2ZWwsIHRoZSBtb2RlbCBmYWlscyB0byBleHRlbmQgdGhpcyBwYXR0ZXJuIHRvIHRyaWFkcyB3aGVyZSBtdXR1YWwgYW5kIGFzeW1tZXRyaWMgdGllcyBjb2V4aXN0LiBTaW1pbGFybHksIHRoZSAwMzBUICh0cmFuc2l0aXZlKSBhbmQgMDMwQyAoY3ljbGljKSB0cmlhZHMgYXJlIHBvb3JseSByZXByb2R1Y2VkLCBpbmRpY2F0aW5nIHRoYXQgdGhlIGN1cnJlbnQgdHJhbnNpdGl2aXR5IHRlcm1zIGRvIG5vdCBmdWxseSBjYXB0dXJlIHRoZSBvYnNlcnZlZCBleHRlbnQgb2YgaGllcmFyY2hpY2FsIGFuZCBjeWNsaWMgY2xvc3VyZS4KCk1peGVkIHJlY2lwcm9jaXR54oCTdHJhbnNpdGl2aXR5IGNvbmZpZ3VyYXRpb25zIHN1Y2ggYXMgMTIwRCBhbmQgMTIwQyBhcmUgYWxzbyB1bmRlcmVzdGltYXRlZCwgY29uZmlybWluZyB0aGF0IHRoZSBtb2RlbCBkb2VzIG5vdCBhZGVxdWF0ZWx5IGNhcHR1cmUgb3ZlcmxhcHBpbmcgcGF0dGVybnMgb2YgbXV0dWFsIGFuZCBhc3ltbWV0cmljIHRpZXMuIFRoZSBmdWxseSBtdXR1YWwgMzAwIHRyaWFkIGlzIGxpa2V3aXNlIHBvb3JseSByZXByb2R1Y2VkLgoKSW4gY29uY2x1c2lvbiwgdGhlc2UgcmVzdWx0cyBzdWdnZXN0IHRoYXQgdGhlIGN1cnJlbnQgbW9kZWwgY2FwdHVyZXMgYmFzaWMgdHJpYWRpYyBzdHJ1Y3R1cmVzIGJ1dCBmYWlscyB0byByZXByb2R1Y2UgbW9yZSBjb21wbGV4IHBhdHRlcm5zIG9mIGFjdGl2aXR5LCBwb3B1bGFyaXR5LCBhbmQgY2xvc3VyZS4gVG8gYWRkcmVzcyB0aGVzZSBnYXBzLCBJIHdpbGwgZmlyc3QgaW5jbHVkZSBlZ28tbGV2ZWwgc3RhdGlzdGljcyBzdWNoIGFzIGluZGVncmVlIHBvcHVsYXJpdHkgYW5kIG91dGRlZ3JlZSBhY3Rpdml0eS4gTmV4dCwgSSB3aWxsIGluY29ycG9yYXRlIGR5YWRpYyBjb3ZhcmlhdGUgZWZmZWN0cywgZm9yIGV4YW1wbGUsIGdlbmRlciBob21vcGhpbHkgdXNpbmcgc2FtZVggdGVybXMuIEZpbmFsbHksIEkgd2lsbCBhZGQgZW5oYW5jZWQgdHJpYWRpYyB0ZXJtcywgaW5jbHVkaW5nIFRyYW5zVHJpcCBhbmQgY3ljbGljIGNsb3N1cmUgZWZmZWN0cywgdG8gYmV0dGVyIHJlZmxlY3QgdGhlIGZ1bGwgc3BlY3RydW0gb2Ygb2JzZXJ2ZWQgdHJpYWRpYyBzdHJ1Y3R1cmVzLgoKYGBge3IsIGV2YWwgPSBGfQpnb2ZpMyA8LSBzaWVuYUdPRihhbnNNMSwgVHJpYWRDZW5zdXMsIHZlcmJvc2UgPSBGQUxTRSwgam9pbiA9IFRSVUUsIHZhck5hbWUgPSAibmV0MiIpCnNhdmUoZ29maTMsIGZpbGUgPSAiZ29maTMuUkRhdGEiKQpgYGAKCmBgYHtyfQpsb2FkKCJnb2ZpMy5SRGF0YSIpCnBsb3QoZ29maTMsIHZpb2xpbiA9IEYsIGNlbnRlciA9IFQsIHNjYWxlID0gVCkKYGBgCgojIyMgQ29uY2x1c2lvbgoKQWx0aG91Z2ggdGhlIG1vZGVsIHNob3dzIHNpZ25pZmljYW50IGVmZmVjdHMgb2YganVtcFh0cmFuc1RyaXAgYW5kIGhvbVh0cmFuc1RyaXAsIGl0IGZhaWxzIHRvIGFkZXF1YXRlbHkgY2FwdHVyZSBzZXZlcmFsIGtleSBzdHJ1Y3R1cmVzIGluIHRoZSBvYnNlcnZlZCBuZXR3b3JrLCBoaWdobGlnaHRpbmcgdGhlIG5lZWQgZm9yIHJlZmluZW1lbnQuIFRvIGFkZHJlc3MgdGhlc2Ugc2hvcnRjb21pbmdzLCBJIHdpbGwgZmlyc3QgaW5jb3Jwb3JhdGUgZWdvLWxldmVsIHN0YXRpc3RpY3MsIHN1Y2ggYXMgaW5kZWdyZWUgcG9wdWxhcml0eSBhbmQgb3V0ZGVncmVlIGFjdGl2aXR5LCB0byBiZXR0ZXIgYWNjb3VudCBmb3Igbm9kZS1sZXZlbCBwYXR0ZXJucy4gTmV4dCwgSSB3aWxsIGluY2x1ZGUgZHlhZGljIGNvdmFyaWF0ZSBlZmZlY3RzLCBzdWNoIGFzIGdlbmRlciBob21vcGhpbHkgdmlhIHNhbWVYIHRlcm1zLCB0byByZWZsZWN0IHRlbmRlbmNpZXMgaW4gcGFpcndpc2UgaW50ZXJhY3Rpb25zLiBGaW5hbGx5LCBJIHdpbGwgZXh0ZW5kIHRoZSBtb2RlbCB3aXRoIGVuaGFuY2VkIHRyaWFkaWMgdGVybXMsIGluY2x1ZGluZyBUcmFuc1RyaXAgYW5kIGN5Y2xpYyBjbG9zdXJlIGVmZmVjdHMsIHRvIG1vcmUgYWNjdXJhdGVseSByZXByZXNlbnQgdGhlIGZ1bGwgcmFuZ2Ugb2Ygb2JzZXJ2ZWQgdHJpYWRpYyBzdHJ1Y3R1cmVzLgoKCiMjIE1vZGVsIDIKCiMjIyBJbmNsdWRlIGVmZmVjdHMgCmBgYHtyLCBldmFsID0gRn0KbXllZmYgPC0gc2V0RWZmZWN0KG15ZWZmLCBvdXRBY3QsIGluY2x1ZGUgPSBUKQpteWVmZiA8LSBzZXRFZmZlY3QobXllZmYsIGluUG9wLCBpbmNsdWRlID0gVCkKYGBgCiMjIyBSdW4gbW9kZWwKYGBge3IsIGV2YWwgPSBGQUxTRX0KCm15QWxnb3JpdGhtIDwtIHNpZW5hQWxnb3JpdGhtQ3JlYXRlKHByb2puYW1lID0gInJlc3VsdF9nZW5kZXIiKQphbnNNMiA8LSBzaWVuYTA3KG15QWxnb3JpdGhtLCBkYXRhID0gbXlkYXRhMywgZWZmZWN0cyA9IG15ZWZmLCByZXR1cm5EZXBzID0gVFJVRSwgcHJldkFucyA9IGFuc00xICkKCnNhdmUoYW5zTTIsIGZpbGUgPSAiYW5zTTIuUkRhdGEiKQpgYGAKCmBgYHtyfQpsb2FkKCJhbnNNMi5SRGF0YSIpCmFuc00yCmBgYAoKIyMjIEludGVycHJldGF0aW9uIAoKSW4gdGhpcyBtb2RlbCAyLCB0aGUgbmV0d29yayByZW1haW5zIHNwYXJzZSwgYXMgaW5kaWNhdGVkIGJ5IHRoZSBzaWduaWZpY2FudCBuZWdhdGl2ZSBvdXRkZWdyZWUgKGRlbnNpdHkpIGVmZmVjdCAoYiA9IC01LjA2LCBTRSA9IDAuMTYpLCB3aGlsZSByZWNpcHJvY2l0eSBjb250aW51ZXMgdG8gYmUgc2lnbmlmaWNhbnQgYW5kIHBvc2l0aXZlIChiID0gMy4zMiwgU0UgPSAwLjE5KS4KClRoZSBpbmNsdXNpb24gb2YgaW5kZWdyZWUgcG9wdWxhcml0eSAoYiA9IDAuMTgsIFNFID0gMC4wMykgYW5kIG91dGRlZ3JlZSBhY3Rpdml0eSAoYiA9IDAuMTIsIFNFID0gMC4wMikgc2hvd3MgdGhhdCBzb21lIGFjdG9ycyBhcmUgY29uc2lzdGVudGx5IHBvcHVsYXIgb3IgYWN0aXZlLgoKVGhlIHRyYW5zaXRpdmUgdHJpcGxldCBlZmZlY3RzIHJlbWFpbiBwb3NpdGl2ZSBhbmQgc2lnbmlmaWNhbnQ6IHNhbWUtZ2VuZGVyIChiID0gMC45NSwgU0UgPSAwLjIzKSBhbmQganVtcGluZy1nZW5kZXIgKGIgPSAyLjQxLCBTRSA9IDAuNDEpIHRyaWFkcyBjb250aW51ZSB0byBmb3JtLCBzdXBwb3J0aW5nIGh5cG90aGVzZXMgMSBhbmQgMy4gVGhlIHNsaWdodGx5IHNtYWxsZXIgbWFnbml0dWRlcyBjb21wYXJlZCB0byBNb2RlbCAxIHN1Z2dlc3QgdGhhdCBwYXJ0IG9mIHRoZSB0cmlhZGljIGNsb3N1cmUgaXMgZXhwbGFpbmVkIGJ5IHBvcHVsYXJpdHkgYW5kIGFjdGl2aXR5IHJhdGhlciB0aGFuIGdlbmRlci1zcGVjaWZpYyBtZWNoYW5pc21zIGFsb25lLgoKIyMjIEdPRiBpbmRlZ3JlZQoKVGhpcyBtb2RlbCwgd2hpY2ggaW5jbHVkZXMgaW5kZWdyZWUgcG9wdWxhcml0eSBhbmQgb3V0ZGVncmVlIGFjdGl2aXR5LCBhcHBlYXJzIHRvIGJldHRlciBjYXB0dXJlIHRoZSBpbmRlZ3JlZSBkaXN0cmlidXRpb24gaW4gdGhlIG5ldHdvcmsgY29tcGFyZWQgdG8gTW9kZWwgMS4gSG93ZXZlciwgdGhlIGZpdCBpcyBzdGlsbCBub3QgZ29vZCwgYXMgaW5kaWNhdGVkIGJ5IGEgcC12YWx1ZSBvZiAwLiBUaGlzIG1vZGVsIHN0aWxsIHVuZGVyZXN0aW1hdGVzIHRoZSBudW1iZXIgb2Ygbm9lZGVzIHdpdGggbm8gaW5jb21pbmcgdGllcyBhbmQgb3ZlcmVzdGltYXRlcyBub2RlcyB3aXRoIG9uZSBvciB0d28gaW5jb21pbmcgdGllcy4gCgpgYGB7ciwgZXZhbCA9IEZ9CmdvZmk0IDwtIHNpZW5hR09GKGFuc00yLCBJbmRlZ3JlZURpc3RyaWJ1dGlvbiwgdmVyYm9zZSA9IEZBTFNFLCBqb2luID0gVFJVRSwgdmFyTmFtZSA9ICJuZXQyIiwgY3VtdWxhdGl2ZSA9IEYpCgpzYXZlKGdvZmk0LCBmaWxlID0gImdvZmk0LlJEYXRhIikKYGBgCgpgYGB7cn0KbG9hZCgiZ29maTQuUkRhdGEiKQpwbG90KGdvZmk0LCB2aW9saW4gPSBGKQpgYGAKCiMjIyBHT0Ygb3V0ZGVncmVlCgpGb3IgdGhlIG91dGRlZ3JlZSBkaXN0cmlidXRpb24sIGluY2x1ZGluZyBpbmRlZ3JlZSBwb3B1bGFyaXR5IGFuZCBvdXRkZWdyZWUgYWN0aXZpdHkgZG9lcyBub3Qgc3Vic3RhbnRpYWxseSBpbXByb3ZlIGZpdCBjb21wYXJlZCB0byBNb2RlbCAxLiBUaGUgR09GIHRlc3QgaW5kaWNhdGVzIGEgcC12YWx1ZSBvZiAwLCBzaG93aW5nIHRoYXQgdGhlIG1vZGVsIHN0aWxsIHBvb3JseSByZXByZXNlbnRzIHRoZSBkaXN0cmlidXRpb24gb2Ygb3V0Z29pbmcgdGllcyBpbiB0aGUgb2JzZXJ2ZWQgbmV0d29yay4gU3BlY2lmaWNhbGx5LCBpdCB1bmRlcmVzdGltYXRlcyB0aGUgbnVtYmVyIG9mIGFjdG9ycyB3aXRoIG5vIG91dGdvaW5nIHRpZXMgYW5kIG92ZXJlc3RpbWF0ZXMgYWN0b3JzIHdpdGggb25lIG9yIHR3byBvdXRnb2luZyB0aWVzLgoKYGBge3IsIGV2YWwgPSBGfQpnb2ZpNSA8LSBzaWVuYUdPRihhbnNNMiwgT3V0ZGVncmVlRGlzdHJpYnV0aW9uLCB2ZXJib3NlID0gRkFMU0UsIGpvaW4gPSBUUlVFLCB2YXJOYW1lID0gIm5ldDIiLCBjdW11bGF0aXZlID0gRikKc2F2ZShnb2ZpNSwgZmlsZSA9ICJnb2ZpNS5SRGF0YSIpCmBgYAoKYGBge3J9CmxvYWQoImdvZmk1LlJEYXRhIikKcGxvdChnb2ZpNSwgdmlvbGluID0gRikKYGBgCgojIyMgR09GIHRyaWFkIGNlbnN1cwoKVGhlIEdvb2RuZXNzLW9mLUZpdCBwbG90IGZvciB0aGUgdXBkYXRlZCBtb2RlbCBpbmRpY2F0ZXMgY2xlYXIgaW1wcm92ZW1lbnRzIG92ZXIgdGhlIHByZXZpb3VzIG1vZGVsLCBwYXJ0aWN1bGFybHkgZm9yIHRyaWFkcyByZWxhdGVkIHRvIGFjdGl2aXR5IGFuZCBwb3B1bGFyaXR5LiBPdmVyYWxsLCB0aGlzIG1vZGVsIGNhcHR1cmVzIHRoZSB0cmlhZGljIHN0cnVjdHVyZSBvZiB0aGUgb2JzZXJ2ZWQgbmV0d29yayBhIGJpdCBtb3JlIGFjY3VyYXRlbHkgdGhhbiBNb2RlbCAxIChwID0gMC4wMDIpLgoKVGhlIGZpdCBmb3IgdGhlIDAyMUQgYW5kIDAyMVUgdHJpYWRzLCB3aGVyZSB0d28gbm9kZXMgZWl0aGVyIHJlY2VpdmUgdGllcyBmcm9tIHRoZSBzYW1lIGFjdG9yIG9yIHNlbmQgdGllcyB0byB0aGUgc2FtZSBhY3Rvciwgc2hvd3MgbWFya2VkIGltcHJvdmVtZW50LCByZWZsZWN0aW5nIHRoZSBpbmNsdXNpb24gb2YgdGhlIG91dGRlZ3JlZSBhY3Rpdml0eSBhbmQgaW5kZWdyZWUgcG9wdWxhcml0eSBlZmZlY3RzLiBTaW1wbGUgc2VxdWVudGlhbCB0cmlhZHMsIHN1Y2ggYXMgMDIxQyAoQeKGkkIsIELihpJDKSwgYWxzbyByZW1haW4gd2VsbCByZXByb2R1Y2VkLCBpbmRpY2F0aW5nIHRoYXQgdGhlIGp1bXBYVHJhbnNUcmlwIGFuZCBob21YVHJhbnNUcmlwIHRlcm1zIGNvbnRpbnVlIHRvIGNhcHR1cmUgbWVkaWF0ZWQgY2xvc3VyZSBib3RoIGFjcm9zcyBhbmQgd2l0aGluIGdlbmRlciBncm91cHMuIFRoZSBvdmVyYWxsIGRpc3RyaWJ1dGlvbiBvZiBiYXNpYyBkaXNjb25uZWN0ZWQgdHJpYWRzICgwMDMsIDAxMiwgMTAyKSBpcyBsaWtld2lzZSBzdGlsbCB3ZWxsIHJlcHJlc2VudGVkLiBJbXBvcnRhbnRseSwgMTExRCB0cmlhZHMsIHdoaWNoIGNvbWJpbmUgbXV0dWFsIGFuZCBhc3ltbWV0cmljIHRpZXMsIGFyZSBub3cgcXVpdGUgd2VsbCBjYXB0dXJlZCwgc3VnZ2VzdGluZyB0aGF0IHRoZSBtb2RlbCBzdWNjZXNzZnVsbHkgZXh0ZW5kcyBkeWFkaWMgcmVjaXByb2NpdHkgdG8gc2xpZ2h0bHkgbW9yZSBjb21wbGV4IGNvbmZpZ3VyYXRpb25zLgoKU29tZSBtaXNmaXQgcmVtYWlucyBmb3IgaGlnaGVyLW9yZGVyIHN0cnVjdHVyZXMuIFRyYW5zaXRpdmUgKDAzMFQpIGFuZCBjeWNsaWMgKDAzMEMpIHRyaWFkcyBhcmUgc3RpbGwgc29tZXdoYXQgdW5kZXJlc3RpbWF0ZWQsIGluZGljYXRpbmcgdGhhdCBhZGRpdGlvbmFsIGhpZXJhcmNoaWNhbCBvciBjeWNsaWMgY2xvc3VyZSBtZWNoYW5pc21zIG1heSBub3QgeWV0IGJlIGZ1bGx5IGNhcHR1cmVkLiBNaXhlZCBjb25maWd1cmF0aW9ucyBvZiByZWNpcHJvY2l0eSBhbmQgdHJhbnNpdGl2aXR5ICgxMjBELCAxMjBDKSBhbmQgZnVsbHkgbXV0dWFsIHRyaWFkcyAoMzAwKSBhbHNvIHJlbWFpbiBpbXBlcmZlY3RseSByZXByb2R1Y2VkLgoKT3ZlcmFsbCwgdGhlIHVwZGF0ZWQgbW9kZWwgcHJvdmlkZXMgYSBzdWJzdGFudGlhbGx5IGJldHRlciBmaXQgdG8gZGVncmVlLXJlbGF0ZWQgdHJpYWRzIGFuZCBjYXB0dXJlcyBrZXkgY2xvc3VyZSBwcm9jZXNzZXMgaW4gdGhlIG5ldHdvcmsuIFdoaWxlIGl0IG5vdyBhY2NvdW50cyB3ZWxsIGZvciByZWNpcHJvY2l0eSBhbmQgYmFzaWMgdHJpYWRpYyBwYXR0ZXJucywgYWRkaXRpb25hbCBoaWdoZXItb3JkZXIgb3IgbWl4ZWQtZWZmZWN0IHRlcm1zIG1heSBiZSBuZWNlc3NhcnkgdG8gZnVsbHkgcmVwcm9kdWNlIHRoZSBtb3JlIGNvbXBsZXggc3RydWN0dXJlcyBwcmVzZW50IGluIHRoZSBvYnNlcnZlZCBuZXR3b3JrLgoKYGBge3IsIGV2YWwgPSBGfQpnb2ZpNiA8LSBzaWVuYUdPRihhbnNNMiwgVHJpYWRDZW5zdXMsIHZlcmJvc2UgPSBGQUxTRSwgam9pbiA9IFRSVUUsIHZhck5hbWUgPSAibmV0MiIpCnNhdmUoZ29maTYsIGZpbGUgPSAiZ29maTYuUkRhdGEiKQpgYGAKCmBgYHtyfQpsb2FkKCJnb2ZpNi5SRGF0YSIpCnBsb3QoZ29maTYsIHZpb2xpbiA9IEYsIGNlbnRlciA9IFQsIHNjYWxlID0gVCkKYGBgCiMjIyBDb25jbHVzaW9uCgpUaGVzZSByZXN1bHRzIHN1Z2dlc3QgdGhhdCB0aGUgaW5kZWdyZWUgYW5kIG91dGRlZ3JlZSBkaXN0cmlidXRpb25zIGFyZSBub3cgYmV0dGVyIHJlcHJlc2VudGVkIGluIHRoZSBtb2RlbC4gVG8gZnVydGhlciBpbXByb3ZlIHRoZSBmaXQsIHRoZSBuZXh0IG1vZGVsIHdpbGwgY29udHJvbCBmb3IgZHlhZGljLWxldmVsIGhvbW9waGlseSwgaW5jbHVkaW5nIGdlbmRlciwgdW5pdmVyc2l0eSBhZmZpbGlhdGlvbiwgYW5kIGRpc2NpcGxpbmUuIFRoZXNlIGNvdmFyaWF0ZXMgbWF5IGhlbHAgZXhwbGFpbiByZXNpZHVhbCB2YXJpYXRpb24gaW4gdGllIGZvcm1hdGlvbiBhbmQgcmVjZXB0aW9uIGJleW9uZCB0aGUgc3RydWN0dXJhbCBlZmZlY3RzIG9mIGFjdGl2aXR5IGFuZCBwb3B1bGFyaXR5LiBUbyBiZXR0ZXIgY2FwdHVyZSB0aGUgbW9yZSBjb21wbGV4IHRyaWFkaWMgY29uZmlndXJhdGlvbnMgdGhhdCByZW1haW4gdW5kZXJlc3RpbWF0ZWQsIHN1Y2ggYXMgY3ljbGljIGFuZCB0cmFuc2l0aXZlIHBhdHRlcm5zLCBJIHdpbGwgc3Vic2VxdWVudGx5IGluY2x1ZGUgdHJhbnNpdGl2ZSB0cmlwbGV0IGFuZCBjeWNsaWMgY2xvc3VyZSBlZmZlY3RzIGluIGxhdGVyIG1vZGVsIGl0ZXJhdGlvbnMuCgoKIyMgTW9kZWwgMwoKIyMjIEluY2x1ZGUgZWZmZWN0cyAKYGBge3IsIGV2YWwgPSBGfQpteWVmZiA8LSBzZXRFZmZlY3QobXllZmYsIHNhbWVYLCBpbnRlcmFjdGlvbjEgPSAiZ2VuZGVyIiwgaW5jbHVkZSA9IFQpCm15ZWZmIDwtIHNldEVmZmVjdChteWVmZiwgc2FtZVgsIGludGVyYWN0aW9uMSA9ICJ1bml2ZXJzaXR5IiwgaW5jbHVkZSA9IFQpCm15ZWZmIDwtIHNldEVmZmVjdChteWVmZiwgc2FtZVgsIGludGVyYWN0aW9uMSA9ICJkaXNjaXBsaW5lIiwgaW5jbHVkZSA9IFQpCmBgYAojIyMgUnVuIG1vZGVsCmBgYHtyLCBldmFsID0gRkFMU0V9CgpteUFsZ29yaXRobSA8LSBzaWVuYUFsZ29yaXRobUNyZWF0ZShwcm9qbmFtZSA9ICJyZXN1bHRfZ2VuZGVyIikKYW5zTTMgPC0gc2llbmEwNyhteUFsZ29yaXRobSwgZGF0YSA9IG15ZGF0YTMsIGVmZmVjdHMgPSBteWVmZiwgcmV0dXJuRGVwcyA9IFRSVUUsIHByZXZBbnMgPSBhbnNNMiApCgpzYXZlKGFuc00zLCBmaWxlID0gImFuc00zLlJEYXRhIikKYGBgCgpgYGB7cn0KbG9hZCgiYW5zTTMuUkRhdGEiKQphbnNNMwpgYGAKCiMjIyBJbnRlcnByZXRhdGlvbiAKCkp1c3QgbGlrZSBpbiBNb2RlbCAxIGFuZCBNb2RlbCAyLCB0aGUgbmVnYXRpdmUgb3V0ZGVncmVlIChkZW5zaXR5KSBwYXJhbWV0ZXIgKGIgPSAtOC43NCwgU0UgPSAwLjMxKSBpbmRpY2F0ZXMgdGhhdCwgb3ZlcmFsbCwgdGllcyBhcmUgdW5saWtlbHkgdG8gZm9ybSB3aXRob3V0IGNvbnNpZGVyaW5nIG90aGVyIHN0cnVjdHVyYWwgb3IgYXR0cmlidXRlLWJhc2VkIGVmZmVjdHMuIFJlY2lwcm9jaXR5IChiID0gMi4zNSwgU0UgPSAwLjE1KSByZW1haW5zIHNpZ25pZmljYW50IGFuZCBwb3NpdGl2ZSwgc3VnZ2VzdGluZyB0aGF0IG11dHVhbCBjb25uZWN0aW9ucyBhcmUgc3Vic3RhbnRpYWxseSBtb3JlIGxpa2VseSB0aGFuIG9uZS13YXkgdGllcywgcmVmbGVjdGluZyBhIGNvbW1vbiBzb2NpYWwgdGVuZGVuY3kgZm9yIGluZGl2aWR1YWxzIHRvIHJlY2lwcm9jYXRlIGludGVyYWN0aW9ucy4KClJlZ2FyZGluZyBpbmRpdmlkdWFsLWxldmVsIGFjdGl2aXR5LCBib3RoIGluZGVncmVlIHBvcHVsYXJpdHkgKGIgPSAwLjE2LCBTRSA9IDAuMDQpIGFuZCBvdXRkZWdyZWUgYWN0aXZpdHkgKGIgPSAwLjE0LCBTRSA9IDAuMDIpIGFyZSBwb3NpdGl2ZS4gVGhpcyBpbmRpY2F0ZXMgdGhhdCBwb3B1bGFyIGluZGl2aWR1YWxzIGFyZSBsaWtlbHkgdG8gYmVjb21lIGV2ZW4gbW9yZSBwb3B1bGFyLCB3aGlsZSBpbmRpdmlkdWFscyB3aG8gc2VuZCBtYW55IHRpZXMgYXJlIGxpa2VseSB0byBjb250aW51ZSBmb3JtaW5nIHRpZXMuCgpEeWFkaWMgaG9tb3BoaWx5IGVmZmVjdHMgYmFzZWQgb24gZ2VuZGVyLCB1bml2ZXJzaXR5LCBhbmQgZGlzY2lwbGluZSBhcmUgYWxzbyBldmlkZW50LiBTYW1lLWdlbmRlciB0aWVzIChiID0gMC4yMCwgU0UgPSAwLjA4KSBzaG93IGEgbW9kZXN0IGJ1dCBzaWduaWZpY2FudCBwcmVmZXJlbmNlIGZvciBjb25uZWN0aW9ucyBhbW9uZyBpbmRpdmlkdWFscyBvZiB0aGUgc2FtZSBnZW5kZXIuIEluc3RpdHV0aW9uYWwgYW5kIGRpc2NpcGxpbmFyeSBob21vcGhpbHkgYXJlIHBhcnRpY3VsYXJseSBzdHJvbmc6IHRpZXMgYmV0d2VlbiBpbmRpdmlkdWFscyBmcm9tIHRoZSBzYW1lIHVuaXZlcnNpdHkgKGIgPSAyLjI3LCBTRSA9IDAuMTEpIG9yIHRoZSBzYW1lIGRpc2NpcGxpbmUgKGIgPSAyLjY3LCBTRSA9IDAuMjcpIGFyZSBoaWdobHkgcHJvYmFibGUsIGluZGljYXRpbmcgdGhhdCBzaGFyZWQgb3JnYW5pemF0aW9uYWwgb3IgYWNhZGVtaWMgY29udGV4dCBpcyBhIGRvbWluYW50IGZhY3RvciBpbiBuZXR3b3JrIGZvcm1hdGlvbi4KCkZvY3VzaW5nIG9uIHRoZSBoeXBvdGhlc2l6ZWQgZWZmZWN0cywgdGhleSBoYXZlIGJlY29tZSBzbGlnaHRseSBsZXNzIHBvc2l0aXZlIGNvbXBhcmVkIHRvIE1vZGVsIDIgYnV0IHJlbWFpbiBzaWduaWZpY2FudC4gVGhlIGVmZmVjdCBvZiBqdW1wWHRyYW5zVHJpcCByZW1haW5zIHN1YnN0YW50aWFsIChiID0gMS42OCwgU0UgPSAwLjQwKSwgaW5kaWNhdGluZyB0aGF0IGluIGNvbmZpZ3VyYXRpb25zIEEg4oaSIEIg4oaSIEMgd2hlcmUgQSBhbmQgQiBhcmUgb2YgdGhlIHNhbWUgZ2VuZGVyLCBBIGlzIHN0aWxsIGxpa2VseSB0byBmb3JtIGEgdGllIHRvIEMgd2hlbiBDIGlzIG9mIGEgZGlmZmVyZW50IGdlbmRlci4gVGhpcyBmaW5kaW5nIHN1cHBvcnRzIEh5cG90aGVzaXMgMSB3aGljaCBpcyBiYXNlZCBvbiBDb250YWN0IHRoZW9yeSBidXQgY29udHJhZGljdHMgSHlwb3RoZXNpcyAyLCB3aGljaCBpcyBiYXNlZCBvbiBTb2NpYWwgSWRlbnRpdHkgVGhlb3J5IChTSVQpLgoKVGhlIGhvbVh0cmFuc1RyaXAgZWZmZWN0IGFsc28gcmVtYWlucyBzaWduaWZpY2FudCwgcmVmbGVjdGluZyB0aGF0IEEgaXMgbGlrZWx5IHRvIGNsb3NlIG9yIG1haW50YWluIGEgdHJpYWQgYnkgc2VuZGluZyBhIHRpZSB0byBDIHdoZW4gQyBpcyBvZiB0aGUgc2FtZSBnZW5kZXIuIFRoaXMgZWZmZWN0IGlzIGhvd2V2ZXIgcXVpdGUgbG93ZXIgdGhhbiBiZWZvcmUsIHdoaWNoIG1heSBwYXJ0bHkgcmVzdWx0IHRoZSBkeWFkaWMgaG9tb3BoaWx5IGVmZmVjdCwgQeKAmXMgcHJlZmVyZW5jZSBmb3Igc2FtZS1nZW5kZXIgY29ubmVjdGlvbnMsIHJhdGhlciB0aGFuIHJlaW5mb3JjZW1lbnQgZnJvbSBncm91cCBiZWxvbmdpbmcgd2l0aCBCLiBOZXZlcnRoZWxlc3MsIHRoZSBlZmZlY3QgaXMgc3RpbGwgc2lnbmlmaWNhbnQgYWxsaWduaW5nIHdpdGggSHlwb3RoZXNpcyAzIHJlZ2FyZGluZyBTSVQsIHN1Z2dlc3RpbmcgdGhhdCBnZW5kZXItaG9tb2dlbmVvdXMgdHJpYWRpYyBjbG9zdXJlIGlzIHN0aWxsIHJlbGV2YW50IGluIHRoZSBuZXR3b3JrLgoKCiMjIyBHT0YgaW5kZWdyZWUKCk1vZGVsIDMgc3RpbGwgZmFpbHMgdG8gYWNjdXJhdGVseSBjYXB0dXJlIHRoZSBpbmRlZ3JlZSBkaXN0cmlidXRpb24gaW4gdGhlIG9ic2VydmVkIG5ldHdvcmsgKHAgPSAwKS4gSXQgY29uc2lzdGVudGx5IHVuZGVyZXN0aW1hdGVzIHRoZSBudW1iZXIgb2Ygbm9kZXMgd2l0aCBubyBpbmNvbWluZyB0aWVzIGFuZCBvdmVyZXN0aW1hdGVzIG5vZGVzIHdpdGggb25lIG9yIHR3byBpbmNvbWluZyB0aWVzLgoKYGBge3IsIGV2YWwgPSBGfQpnb2ZpNyA8LSBzaWVuYUdPRihhbnNNMywgSW5kZWdyZWVEaXN0cmlidXRpb24sIHZlcmJvc2UgPSBGQUxTRSwgam9pbiA9IFRSVUUsIHZhck5hbWUgPSAibmV0MiIsIGN1bXVsYXRpdmUgPSBGKQoKc2F2ZShnb2ZpNywgZmlsZSA9ICJnb2ZpNy5SRGF0YSIpCmBgYAoKYGBge3J9CmxvYWQoImdvZmk3LlJEYXRhIikKcGxvdChnb2ZpNywgdmlvbGluID0gRikKYGBgCgojIyMgR09GIG91dGRlZ3JlZQoKU2ltaWxhcmx5LCBNb2RlbCAzIGRvZXMgbm90IGFkZXF1YXRlbHkgcmVwcmVzZW50IHRoZSBvdXRkZWdyZWUgZGlzdHJpYnV0aW9uIChwID0gMCkuIEl0IHVuZGVyZXN0aW1hdGVzIG5vZGVzIHdpdGggbm8gb3V0Z29pbmcgdGllcywgb3ZlcmVzdGltYXRlcyBub2RlcyB3aXRoIGEgc2luZ2xlIG91dGdvaW5nIHRpZSwgYW5kIGFnYWluIHVuZGVyZXN0aW1hdGVzIG5vZGVzIHdpdGggdGhyZWUgb3V0Z29pbmcgdGllcy4KCmBgYHtyLCBldmFsID0gRn0KZ29maTggPC0gc2llbmFHT0YoYW5zTTMsIE91dGRlZ3JlZURpc3RyaWJ1dGlvbiwgdmVyYm9zZSA9IEZBTFNFLCBqb2luID0gVFJVRSwgdmFyTmFtZSA9ICJuZXQyIiwgY3VtdWxhdGl2ZSA9IEYpCnNhdmUoZ29maTgsIGZpbGUgPSAiZ29maTguUkRhdGEiKQpgYGAKCmBgYHtyfQpsb2FkKCJnb2ZpOC5SRGF0YSIpCnBsb3QoZ29maTgsIHZpb2xpbiA9IEYpCmBgYAoKIyMjIEdPRiB0cmlhZCBjZW5zdXMKClRoZSBHb29kbmVzcy1vZi1GaXQgcGxvdCBmb3IgTW9kZWwgMyBzaG93cyBhIG1peGVkIHBhdHRlcm4gaW4gY2FwdHVyaW5nIHRyaWFkaWMgc3RydWN0dXJlcyBjb21wYXJlZCB0byBNb2RlbCAyLiBPdmVyYWxsLCB0aGUgbW9kZWwgZml0IHJlbWFpbnMgbG93IChwID0gMC4wMDIpLiBTZXZlcmFsIGFzcGVjdHMgb2YgdGhlIHRyaWFkaWMgc3RydWN0dXJlIHJlbWFpbiBzdGFibGUsIHdoaWxlIHNvbWUgc2hvdyBub3RpY2VhYmxlIGltcHJvdmVtZW50IGFuZCBvdGhlcnMgaGF2ZSB3b3JzZW5lZC4KCk1vc3Qgbm90YWJseSwgMDMwVCB0cmlhbmdsZXMsIHJlcHJlc2VudGluZyBjeWNsaWMgdHJpYWRzLCBhcmUgYmV0dGVyIGNhcHR1cmVkLiBUaGlzIGNvdWxkIGJlIGJlY2F1c2UgdGhlIGluY2x1c2lvbiBvZiBkeWFkaWMgaG9tb3BoaWx5IHRlcm1zIGZvciBnZW5kZXIsIGRpc2NpcGxpbmUsIGFuZCB1bml2ZXJzaXR5IGluY3JlYXNlcyB0aGUgbGlrZWxpaG9vZCBvZiB0aWVzIGJldHdlZW4gbm9kZXMgc2hhcmluZyB0aGVzZSBhdHRyaWJ1dGVzLiBBcyBhIHJlc3VsdCwgaWYgQSBjb2xsYWJvcmF0ZXMgd2l0aCBCIGFuZCBCIHdpdGggQywgQyBpcyBtb3JlIGxpa2VseSB0byBzZW5kIGEgdGllIGJhY2sgdG8gQSB3aGVuIGFsbCB0aHJlZSBzaGFyZSBnZW5kZXIsIGRpc2NpcGxpbmUsIG9yIHVuaXZlcnNpdHkgYWZmaWxpYXRpb24uIFRoaXMgaW1wcm92ZW1lbnQgaW5kaWNhdGVzIHRoYXQgYXR0cmlidXRlLWRyaXZlbiB0aWUgcHJvYmFiaWxpdGllcywgaW4gY29tYmluYXRpb24gd2l0aCB0aGUgZXhpc3RpbmcgdHJhbnNpdGl2ZSBhbmQganVtcCBlZmZlY3RzIGJhc2VkIG9uIGdlbmRlciwgaGVscCB0aGUgbW9kZWwgYmV0dGVyIHJlcHJvZHVjZSBjeWNsaWMgdHJpYWRzIHRoYXQgd2VyZSBwcmV2aW91c2x5IHVuZGVyZXN0aW1hdGVkLgoKSW4gY29udHJhc3QsIDEyMEMgYW5kIDEyMEQgY29uZmlndXJhdGlvbnMsIHdoaWNoIHJlcHJlc2VudCBzdGFyLWxpa2UgdHJpYWRzIHdpdGggYSBjZW50cmFsIHNlbmRlciBvciByZWNlaXZlciwgYXJlIG5vdyBsZXNzIHdlbGwgY2FwdHVyZWQuIFRoaXMgY291bGQgYmUgYmVjYXVzZSB0aGUgc3Ryb25nIGhvbW9waGlseSBlZmZlY3RzIGZhdm9yIHRpZXMgYmV0d2VlbiBzaW1pbGFyIG5vZGVzLCByZWR1Y2luZyB0aGUgZm9ybWF0aW9uIG9mIHRoZXNlIGNlbnRyYWxpemVkIHRyaWFkcyB3aGVuIG5vZGVzIGRpZmZlciBpbiBhdHRyaWJ1dGVzLiBDb25zZXF1ZW50bHksIHRoZSB1bmRlcnJlcHJlc2VudGF0aW9uIG9mIHRoZXNlIHRpZXMgaW5kaWNhdGVzIHRoYXQgdGhlIG1vZGVsIG5vdyBjYXB0dXJlcyBjeWNsZXMgbW9yZSBlZmZlY3RpdmVseSBhdCB0aGUgZXhwZW5zZSBvZiBjZXJ0YWluIHN0YXItbGlrZSBzdHJ1Y3R1cmVzLgoKYGBge3IsIGV2YWwgPSBGfQpnb2ZpOSA8LSBzaWVuYUdPRihhbnNNMywgVHJpYWRDZW5zdXMsIHZlcmJvc2UgPSBGQUxTRSwgam9pbiA9IFRSVUUsIHZhck5hbWUgPSAibmV0MiIpCnNhdmUoZ29maTksIGZpbGUgPSAiZ29maTkuUkRhdGEiKQpgYGAKCmBgYHtyfQpsb2FkKCJnb2ZpOS5SRGF0YSIpCnBsb3QoZ29maTksIHZpb2xpbiA9IEYsIGNlbnRlciA9IFQsIHNjYWxlID0gVCkKYGBgCgojIyMgQ29uY2x1c2lvbgoKSW4gdGhpcyBtb2RlbCBJIGFkZGVkIHRoZSBkeWFkaWMgZ2VuZGVyIGhvbW9waGlseSBlZmZlY3QgdG8gYnJpbmcgbW9yZSBudWFuY2UgdG8gdGhlIGV2YWx1YXRpb24gb2YgbXkgaHlwb3RoZXNlcyBieSBjb250cm9sbGluZyBmb3IgaW5kaXZpZHVhbHPigJkgaW5pdGlhbCB0ZW5kZW5jeSB0byBjb2xsYWJvcmF0ZSB3aXRoIG90aGVycyBvZiB0aGUgc2FtZSBnZW5kZXIuIFRoZSBpbmNsdXNpb24gb2Ygc2FtZS11bml2ZXJzaXR5IGFuZCBzYW1lLWRpc2NpcGxpbmUgZWZmZWN0cyBmdXJ0aGVyIGVuc3VyZWQgdGhhdCB0aGVzZSBmYWN0b3JzIGRpZCBub3QgY29uZm91bmQgdGhlIG1haW4gZWZmZWN0cyBvZiBpbnRlcmVzdC4gSG93ZXZlciwgdGhlIEdvb2RuZXNzLW9mLUZpdCBpbmRpY2VzIGluZGljYXRlIHRoYXQgdGhlc2UgYWRkaXRpb25zIGRpZCBub3Qgc3Vic3RhbnRpYWxseSBpbXByb3ZlIHRoZSBtb2RlbOKAmXMgb3ZlcmFsbCBmaXQgdG8gdGhlIG9ic2VydmVkIG5ldHdvcmsuCgoKIyMgTW9kZWwgNAoKIyMjIEluY2x1ZGUgZWZmZWN0cyAKYGBge3IsIGV2YWwgPSBGfQpteWVmZiA8LSBzZXRFZmZlY3QobXllZmYsIHRyYW5zVHJpcCwgaW5jbHVkZSA9IFQpCmBgYAojIyMgUnVuIG1vZGVsCmBgYHtyLCBldmFsID0gRkFMU0V9CgpteUFsZ29yaXRobSA8LSBzaWVuYUFsZ29yaXRobUNyZWF0ZShwcm9qbmFtZSA9ICJyZXN1bHRfZ2VuZGVyIikKYW5zTTQgPC0gc2llbmEwNyhteUFsZ29yaXRobSwgZGF0YSA9IG15ZGF0YTMsIGVmZmVjdHMgPSBteWVmZiwgcmV0dXJuRGVwcyA9IFRSVUUsIHByZXZBbnMgPSBhbnNNMyApCgpzYXZlKGFuc000LCBmaWxlID0gImFuc000LlJEYXRhIikKYGBgCgpgYGB7cn0KbG9hZCgiYW5zTTQuUkRhdGEiKQphbnNNNApgYGAKCiMjIyBJbnRlcnByZXRhdGlvbiAKCiMjIyBHT0YgaW5kZWdyZWUKCmBgYHtyLCBldmFsID0gRn0KZ29maTEwIDwtIHNpZW5hR09GKGFuc000LCBJbmRlZ3JlZURpc3RyaWJ1dGlvbiwgdmVyYm9zZSA9IEZBTFNFLCBqb2luID0gVFJVRSwgdmFyTmFtZSA9ICJuZXQyIiwgY3VtdWxhdGl2ZSA9IEYpCgpzYXZlKGdvZmkxMCwgZmlsZSA9ICJnb2ZpMTAuUkRhdGEiKQpgYGAKCmBgYHtyfQojbG9hZCgiZ29maTEwLlJEYXRhIikKI3Bsb3QoZ29maTEwLCB2aW9saW4gPSBGKQpgYGAKCiMjIyBHT0Ygb3V0ZGVncmVlCgoKYGBge3IsIGV2YWwgPSBGfQpnb2ZpMTEgPC0gc2llbmFHT0YoYW5zTTQsIE91dGRlZ3JlZURpc3RyaWJ1dGlvbiwgdmVyYm9zZSA9IEZBTFNFLCBqb2luID0gVFJVRSwgdmFyTmFtZSA9ICJuZXQyIiwgY3VtdWxhdGl2ZSA9IEYpCnNhdmUoZ29maTExLCBmaWxlID0gImdvZmk4LlJEYXRhIikKYGBgCgpgYGB7cn0KI2xvYWQoImdvZmkxMS5SRGF0YSIpCiNwbG90KGdvZmkxMSwgdmlvbGluID0gRikKYGBgCgojIyMgR09GIHRyaWFkIGNlbnN1cwoKYGBge3IsIGV2YWwgPSBGfQpnb2ZpMTIgPC0gc2llbmFHT0YoYW5zTTQsIFRyaWFkQ2Vuc3VzLCB2ZXJib3NlID0gRkFMU0UsIGpvaW4gPSBUUlVFLCB2YXJOYW1lID0gIm5ldDIiKQpzYXZlKGdvZmkxMiwgZmlsZSA9ICJnb2ZpMTIuUkRhdGEiKQpgYGAKCmBgYHtyfQojbG9hZCgiZ29maTEyLlJEYXRhIikKI3Bsb3QoZ29maTEyLCB2aW9saW4gPSBGLCBjZW50ZXIgPSBULCBzY2FsZSA9IFQpCmBgYAo=</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("Results.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -74,6 +74,29 @@ if (window.hljs) {
 }
 </style>
 
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="tweaks.css" type="text/css" />
 
@@ -373,6 +396,9 @@ div.tocify {
     <li>
       <a href="lab6.html">Week 6</a>
     </li>
+    <li>
+      <a href="lab7.html">Week 7</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -387,6 +413,18 @@ div.tocify {
     </li>
     <li>
       <a href="theory.html">Theory</a>
+    </li>
+    <li>
+      <a href="DataMethods.html">Data and Methods</a>
+    </li>
+    <li>
+      <a href="dataconstruction.html">Data Construction</a>
+    </li>
+    <li>
+      <a href="Descriptives.html">Descriptive Analyses</a>
+    </li>
+    <li>
+      <a href="Results.html">Exploratory Analyses</a>
     </li>
   </ul>
 </li>
@@ -431,16 +469,99 @@ div.tocify {
 <hr />
 <div id="theory" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Theory</h1>
-<p>In-group preferences More easily introduced</p>
-<div id="section" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> <br></h2>
+<p>The first two research questions are descriptive and not
+hypothesis-driven, but they are essential for establishing the local
+network landscape. Specifically, examining how frequently different
+triadic structures occur (RQ1) and how gender is distributed across
+these triads (RQ2) provides the foundation for understanding the context
+in which collaboration decisions take place.</p>
+<p>The third research question, by contrast, is theory-driven and
+focuses on the micro-level mechanisms that may influence triadic
+closure. The social network structure central to this research is an A
+-&gt; B -&gt; C configuration, in which A and B share the same gender.
+Whether the gender of C affects A’s likelihood of forming or maintaining
+a tie with C can be interpreted through intergroup relations theories.
+The following section outlines how these theories, specifically Contact
+Theory and Social Identity Theory, apply to this triadic structure and
+inform competing hypotheses about gendered closure.</p>
+<div id="hypothesis-1" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Hypothesis 1</h2>
+<p>Contact Theory suggests that interactions between members of
+different social groups can reduce prejudice and foster more positive
+intergroup attitudes <span class="citation">(Allport 1954)</span>.
+Suppose researchers A and B are both men, and B has collaborated with
+researcher C, who is a woman. Even if A initially prefers to work with
+men (reflecting dyadic homophily), observing that B has successfully
+collaborated with C may alter A’s perceptions. Through this indirect
+exposure, A experiences positive contact with an outgroup member via a
+trusted collaborator, which may increase his willingness to collaborate
+with C despite initial biases. Such triadic processes can therefore act
+as micro-level mechanisms that help overcome gender homophily,
+potentially fostering more cross-gender collaborations and, over time,
+reducing gender segregation in the network.</p>
+<p>H1: In triads of the form A → B → C, actor A is more likely to create
+or maintain a tie with C, rather than break or refrain from forming one,
+when C is of a different gender than both A and B.</p>
+</div>
+<div id="hypothesis-2" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Hypothesis 2</h2>
+<p>Social Identity Theory posits that group membership forms a central
+part of an individual’s self-concept and can lead to ingroup favoritism
+and outgroup bias <span class="citation">(Tajfel and Turner
+2004)</span>. In this context, the opposite dynamic to that described by
+Contact Theory may occur. When researchers A and B share the same
+gender, their shared identity can strengthen their sense of ingroup
+belonging and mutual trust. As a result, A may be more inclined to
+collaborate with others of the same gender as B, and more hesitant to
+collaborate with C if C belongs to a different gender group. Such
+triadic patterns can reinforce existing gender boundaries in
+collaboration networks, perpetuating same-gender clustering and
+contributing to persistent gender segregation at the macro level. Based
+on the above I set forth this contrasting hypothesis:</p>
+<p>H2: In triads of the form A → B → C, actor A is more likely to break
+or refrain from forming a tie with C, rather than create or maintain
+one, when C is of a different gender than both A and B.</p>
+<p>And a triadic homophily hypothesis: H3: In triads of the form A → B →
+C, actor A is more likely to create or maintain a tie with C, rather
+than break or refrain from forming one, when C is of the same gender as
+both A and B.</p>
+</div>
+<div id="conclusion" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Conclusion</h2>
+<p>Taken together, these intergroup theories offer contrasting
+predictions about how triadic structures relate to gender segregation in
+academic collaboration networks. Contact Theory predicts that indirect
+or mediated cross-gender collaborations—such as when A and B are men and
+B collaborates with a woman, C—can gradually reduce gender boundaries by
+promoting positive exposure across groups. Social Identity Theory, by
+contrast, predicts that individuals are more likely to form and maintain
+triads that reinforce gender similarity, as collaborating with
+same-gender peers strengthens trust and shared identity, thereby
+inhibiting the closure of mixed-gender triads. Testing both perspectives
+allows for an assessment of whether triadic closure processes in
+academic collaboration networks serve to bridge or reproduce gender
+divisions.</p>
+<p><br></p>
 </div>
 </div>
-<div id="references" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> References</h1>
+<div id="references" class="section level1 unnumbered">
+<h1 class="unnumbered">References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
+<div id="ref-Allport" class="csl-entry">
+Allport, G. W. 1954. <em><a href="">The Nature of Prejudice</a></em>.
+Addison-Wesley.
+</div>
+<div id="ref-Tajfel_Turner" class="csl-entry">
+Tajfel, H., and J. C. Turner. 2004. <span>“The Social Identity Theory of
+Intergroup Behavior.”</span> In <em>Political Psychology</em>, 276–93.
+Routledge. <a
+href="https://doi.org/10.4324/9780203505984-16">https://doi.org/10.4324/9780203505984-16</a>.
+</div>
+</div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiSm91cm5hbCAxIgpiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliCmF1dGhvcjogIk15bMOobmUgSHVzc29uIgotLS0KCmBgYHtyLCBnbG9iYWxzZXR0aW5ncywgZWNobz1GQUxTRSwgd2FybmluZz1GQUxTRSwgcmVzdWx0cz0naGlkZSd9CmxpYnJhcnkoa25pdHIpCgprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpCm9wdHNfY2h1bmskc2V0KHRpZHkub3B0cz1saXN0KHdpZHRoLmN1dG9mZj0xMDApLHRpZHk9VFJVRSwgd2FybmluZyA9IEZBTFNFLCBtZXNzYWdlID0gRkFMU0UsY29tbWVudCA9ICIjPiIsIGNhY2hlPVRSVUUsIGNsYXNzLnNvdXJjZT1jKCJ0ZXN0IiksIGNsYXNzLm91dHB1dD1jKCJ0ZXN0MiIpKQpvcHRpb25zKHdpZHRoID0gMTAwKQojcmdsOjpzZXR1cEtuaXRyKCkKCgoKY29sb3JpemUgPC0gZnVuY3Rpb24oeCwgY29sb3IpIHtzcHJpbnRmKCI8c3BhbiBzdHlsZT0nY29sb3I6ICVzOyc+JXM8L3NwYW4+IiwgY29sb3IsIHgpIH0KCmBgYAoKYGBge3Iga2xpcHB5LCBlY2hvPUZBTFNFLCBpbmNsdWRlPVRSVUV9CmtsaXBweTo6a2xpcHB5KHBvc2l0aW9uID0gYygndG9wJywgJ3JpZ2h0JykpCiNrbGlwcHk6OmtsaXBweShjb2xvciA9ICdkYXJrcmVkJykKI2tsaXBweTo6a2xpcHB5KHRvb2x0aXBfbWVzc2FnZSA9ICdDbGljayB0byBjb3B5JywgdG9vbHRpcF9zdWNjZXNzID0gJ0RvbmUnKQpgYGAKCkxhc3QgY29tcGlsZWQgb24gYHIgZm9ybWF0KFN5cy50aW1lKCksICclQiwgJVknKWAKPGJyPgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgojIFRoZW9yeQoKSW4tZ3JvdXAgcHJlZmVyZW5jZXMKTW9yZSBlYXNpbHkgaW50cm9kdWNlZAoKCgoKCgoKCgoKPGJyPgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiMgUmVmZXJlbmNlcwo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSm91cm5hbCAxIgpiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliCmF1dGhvcjogIk15bMOobmUgSHVzc29uIgotLS0KCmBgYHtyLCBnbG9iYWxzZXR0aW5ncywgZWNobz1GQUxTRSwgaW5jbHVkZT1UUlVFLCB3YXJuaW5nPUZBTFNFLCByZXN1bHRzPSdoaWRlJ30KbGlicmFyeShrbml0cikKCmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkKb3B0c19jaHVuayRzZXQodGlkeS5vcHRzPWxpc3Qod2lkdGguY3V0b2ZmPTEwMCksdGlkeT1UUlVFLCB3YXJuaW5nID0gRkFMU0UsIG1lc3NhZ2UgPSBGQUxTRSxjb21tZW50ID0gIiM+IiwgY2FjaGU9VFJVRSwgY2xhc3Muc291cmNlPWMoInRlc3QiKSwgY2xhc3Mub3V0cHV0PWMoInRlc3QyIikpCm9wdGlvbnMod2lkdGggPSAxMDApCiNyZ2w6OnNldHVwS25pdHIoKQoKCgpjb2xvcml6ZSA8LSBmdW5jdGlvbih4LCBjb2xvcikge3NwcmludGYoIjxzcGFuIHN0eWxlPSdjb2xvcjogJXM7Jz4lczwvc3Bhbj4iLCBjb2xvciwgeCkgfQoKYGBgCgpgYGB7ciBrbGlwcHksIGVjaG89RkFMU0UsIGluY2x1ZGU9VFJVRX0Ka2xpcHB5OjprbGlwcHkocG9zaXRpb24gPSBjKCd0b3AnLCAncmlnaHQnKSkKI2tsaXBweTo6a2xpcHB5KGNvbG9yID0gJ2RhcmtyZWQnKQoja2xpcHB5OjprbGlwcHkodG9vbHRpcF9tZXNzYWdlID0gJ0NsaWNrIHRvIGNvcHknLCB0b29sdGlwX3N1Y2Nlc3MgPSAnRG9uZScpCmBgYAoKTGFzdCBjb21waWxlZCBvbiBgciBmb3JtYXQoU3lzLnRpbWUoKSwgJyVCLCAlWScpYAo8YnI+CgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiMgVGhlb3J5CgpUaGUgZmlyc3QgdHdvIHJlc2VhcmNoIHF1ZXN0aW9ucyBhcmUgZGVzY3JpcHRpdmUgYW5kIG5vdCBoeXBvdGhlc2lzLWRyaXZlbiwgYnV0IHRoZXkgYXJlIGVzc2VudGlhbCBmb3IgZXN0YWJsaXNoaW5nIHRoZSBsb2NhbCBuZXR3b3JrIGxhbmRzY2FwZS4gU3BlY2lmaWNhbGx5LCBleGFtaW5pbmcgaG93IGZyZXF1ZW50bHkgZGlmZmVyZW50IHRyaWFkaWMgc3RydWN0dXJlcyBvY2N1ciAoUlExKSBhbmQgaG93IGdlbmRlciBpcyBkaXN0cmlidXRlZCBhY3Jvc3MgdGhlc2UgdHJpYWRzIChSUTIpIHByb3ZpZGVzIHRoZSBmb3VuZGF0aW9uIGZvciB1bmRlcnN0YW5kaW5nIHRoZSBjb250ZXh0IGluIHdoaWNoIGNvbGxhYm9yYXRpb24gZGVjaXNpb25zIHRha2UgcGxhY2UuCgpUaGUgdGhpcmQgcmVzZWFyY2ggcXVlc3Rpb24sIGJ5IGNvbnRyYXN0LCBpcyB0aGVvcnktZHJpdmVuIGFuZCBmb2N1c2VzIG9uIHRoZSBtaWNyby1sZXZlbCBtZWNoYW5pc21zIHRoYXQgbWF5IGluZmx1ZW5jZSB0cmlhZGljIGNsb3N1cmUuIFRoZSBzb2NpYWwgbmV0d29yayBzdHJ1Y3R1cmUgY2VudHJhbCB0byB0aGlzIHJlc2VhcmNoIGlzIGFuIEEgLT4gQiAtPiBDIGNvbmZpZ3VyYXRpb24sIGluIHdoaWNoIEEgYW5kIEIgc2hhcmUgdGhlIHNhbWUgZ2VuZGVyLiBXaGV0aGVyIHRoZSBnZW5kZXIgb2YgQyBhZmZlY3RzIEHigJlzIGxpa2VsaWhvb2Qgb2YgZm9ybWluZyBvciBtYWludGFpbmluZyBhIHRpZSB3aXRoIEMgY2FuIGJlIGludGVycHJldGVkIHRocm91Z2ggaW50ZXJncm91cCByZWxhdGlvbnMgdGhlb3JpZXMuIFRoZSBmb2xsb3dpbmcgc2VjdGlvbiBvdXRsaW5lcyBob3cgdGhlc2UgdGhlb3JpZXMsIHNwZWNpZmljYWxseSBDb250YWN0IFRoZW9yeSBhbmQgU29jaWFsIElkZW50aXR5IFRoZW9yeSwgYXBwbHkgdG8gdGhpcyB0cmlhZGljIHN0cnVjdHVyZSBhbmQgaW5mb3JtIGNvbXBldGluZyBoeXBvdGhlc2VzIGFib3V0IGdlbmRlcmVkIGNsb3N1cmUuCgojIyBIeXBvdGhlc2lzIDEKCkNvbnRhY3QgVGhlb3J5IHN1Z2dlc3RzIHRoYXQgaW50ZXJhY3Rpb25zIGJldHdlZW4gbWVtYmVycyBvZiBkaWZmZXJlbnQgc29jaWFsIGdyb3VwcyBjYW4gcmVkdWNlIHByZWp1ZGljZSBhbmQgZm9zdGVyIG1vcmUgcG9zaXRpdmUgaW50ZXJncm91cCBhdHRpdHVkZXMgW0BBbGxwb3J0XS4gU3VwcG9zZSByZXNlYXJjaGVycyBBIGFuZCBCIGFyZSBib3RoIG1lbiwgYW5kIEIgaGFzIGNvbGxhYm9yYXRlZCB3aXRoIHJlc2VhcmNoZXIgQywgd2hvIGlzIGEgd29tYW4uIEV2ZW4gaWYgQSBpbml0aWFsbHkgcHJlZmVycyB0byB3b3JrIHdpdGggbWVuIChyZWZsZWN0aW5nIGR5YWRpYyBob21vcGhpbHkpLCBvYnNlcnZpbmcgdGhhdCBCIGhhcyBzdWNjZXNzZnVsbHkgY29sbGFib3JhdGVkIHdpdGggQyBtYXkgYWx0ZXIgQeKAmXMgcGVyY2VwdGlvbnMuIFRocm91Z2ggdGhpcyBpbmRpcmVjdCBleHBvc3VyZSwgQSBleHBlcmllbmNlcyBwb3NpdGl2ZSBjb250YWN0IHdpdGggYW4gb3V0Z3JvdXAgbWVtYmVyIHZpYSBhIHRydXN0ZWQgY29sbGFib3JhdG9yLCB3aGljaCBtYXkgaW5jcmVhc2UgaGlzIHdpbGxpbmduZXNzIHRvIGNvbGxhYm9yYXRlIHdpdGggQyBkZXNwaXRlIGluaXRpYWwgYmlhc2VzLiBTdWNoIHRyaWFkaWMgcHJvY2Vzc2VzIGNhbiB0aGVyZWZvcmUgYWN0IGFzIG1pY3JvLWxldmVsIG1lY2hhbmlzbXMgdGhhdCBoZWxwIG92ZXJjb21lIGdlbmRlciBob21vcGhpbHksIHBvdGVudGlhbGx5IGZvc3RlcmluZyBtb3JlIGNyb3NzLWdlbmRlciBjb2xsYWJvcmF0aW9ucyBhbmQsIG92ZXIgdGltZSwgcmVkdWNpbmcgZ2VuZGVyIHNlZ3JlZ2F0aW9uIGluIHRoZSBuZXR3b3JrLgoKSDE6IEluIHRyaWFkcyBvZiB0aGUgZm9ybSBBIOKGkiBCIOKGkiBDLCBhY3RvciBBIGlzIG1vcmUgbGlrZWx5IHRvIGNyZWF0ZSBvciBtYWludGFpbiBhIHRpZSB3aXRoIEMsIHJhdGhlciB0aGFuIGJyZWFrIG9yIHJlZnJhaW4gZnJvbSBmb3JtaW5nIG9uZSwgd2hlbiBDIGlzIG9mIGEgZGlmZmVyZW50IGdlbmRlciB0aGFuIGJvdGggQSBhbmQgQi4KCiMjIEh5cG90aGVzaXMgMgoKU29jaWFsIElkZW50aXR5IFRoZW9yeSBwb3NpdHMgdGhhdCBncm91cCBtZW1iZXJzaGlwIGZvcm1zIGEgY2VudHJhbCBwYXJ0IG9mIGFuIGluZGl2aWR1YWzigJlzIHNlbGYtY29uY2VwdCBhbmQgY2FuIGxlYWQgdG8gaW5ncm91cCBmYXZvcml0aXNtIGFuZCBvdXRncm91cCBiaWFzIFtAVGFqZmVsX1R1cm5lcl0uIEluIHRoaXMgY29udGV4dCwgdGhlIG9wcG9zaXRlIGR5bmFtaWMgdG8gdGhhdCBkZXNjcmliZWQgYnkgQ29udGFjdCBUaGVvcnkgbWF5IG9jY3VyLiBXaGVuIHJlc2VhcmNoZXJzIEEgYW5kIEIgc2hhcmUgdGhlIHNhbWUgZ2VuZGVyLCB0aGVpciBzaGFyZWQgaWRlbnRpdHkgY2FuIHN0cmVuZ3RoZW4gdGhlaXIgc2Vuc2Ugb2YgaW5ncm91cCBiZWxvbmdpbmcgYW5kIG11dHVhbCB0cnVzdC4gQXMgYSByZXN1bHQsIEEgbWF5IGJlIG1vcmUgaW5jbGluZWQgdG8gY29sbGFib3JhdGUgd2l0aCBvdGhlcnMgb2YgdGhlIHNhbWUgZ2VuZGVyIGFzIEIsIGFuZCBtb3JlIGhlc2l0YW50IHRvIGNvbGxhYm9yYXRlIHdpdGggQyBpZiBDIGJlbG9uZ3MgdG8gYSBkaWZmZXJlbnQgZ2VuZGVyIGdyb3VwLiBTdWNoIHRyaWFkaWMgcGF0dGVybnMgY2FuIHJlaW5mb3JjZSBleGlzdGluZyBnZW5kZXIgYm91bmRhcmllcyBpbiBjb2xsYWJvcmF0aW9uIG5ldHdvcmtzLCBwZXJwZXR1YXRpbmcgc2FtZS1nZW5kZXIgY2x1c3RlcmluZyBhbmQgY29udHJpYnV0aW5nIHRvIHBlcnNpc3RlbnQgZ2VuZGVyIHNlZ3JlZ2F0aW9uIGF0IHRoZSBtYWNybyBsZXZlbC4gQmFzZWQgb24gdGhlIGFib3ZlIEkgc2V0IGZvcnRoIHRoaXMgY29udHJhc3RpbmcgaHlwb3RoZXNpczoKCkgyOiBJbiB0cmlhZHMgb2YgdGhlIGZvcm0gQSDihpIgQiDihpIgQywgYWN0b3IgQSBpcyBtb3JlIGxpa2VseSB0byBicmVhayBvciByZWZyYWluIGZyb20gZm9ybWluZyBhIHRpZSB3aXRoIEMsIHJhdGhlciB0aGFuIGNyZWF0ZSBvciBtYWludGFpbiBvbmUsIHdoZW4gQyBpcyBvZiBhIGRpZmZlcmVudCBnZW5kZXIgdGhhbiBib3RoIEEgYW5kIEIuCgpBbmQgYSB0cmlhZGljIGhvbW9waGlseSBoeXBvdGhlc2lzOgpIMzogSW4gdHJpYWRzIG9mIHRoZSBmb3JtIEEg4oaSIEIg4oaSIEMsIGFjdG9yIEEgaXMgbW9yZSBsaWtlbHkgdG8gY3JlYXRlIG9yIG1haW50YWluIGEgdGllIHdpdGggQywgcmF0aGVyIHRoYW4gYnJlYWsgb3IgcmVmcmFpbiBmcm9tIGZvcm1pbmcgb25lLCB3aGVuIEMgaXMgb2YgdGhlIHNhbWUgZ2VuZGVyIGFzIGJvdGggQSBhbmQgQi4KCiMjIENvbmNsdXNpb24KClRha2VuIHRvZ2V0aGVyLCB0aGVzZSBpbnRlcmdyb3VwIHRoZW9yaWVzIG9mZmVyIGNvbnRyYXN0aW5nIHByZWRpY3Rpb25zIGFib3V0IGhvdyB0cmlhZGljIHN0cnVjdHVyZXMgcmVsYXRlIHRvIGdlbmRlciBzZWdyZWdhdGlvbiBpbiBhY2FkZW1pYyBjb2xsYWJvcmF0aW9uIG5ldHdvcmtzLiBDb250YWN0IFRoZW9yeSBwcmVkaWN0cyB0aGF0IGluZGlyZWN0IG9yIG1lZGlhdGVkIGNyb3NzLWdlbmRlciBjb2xsYWJvcmF0aW9uc+KAlHN1Y2ggYXMgd2hlbiBBIGFuZCBCIGFyZSBtZW4gYW5kIEIgY29sbGFib3JhdGVzIHdpdGggYSB3b21hbiwgQ+KAlGNhbiBncmFkdWFsbHkgcmVkdWNlIGdlbmRlciBib3VuZGFyaWVzIGJ5IHByb21vdGluZyBwb3NpdGl2ZSBleHBvc3VyZSBhY3Jvc3MgZ3JvdXBzLiBTb2NpYWwgSWRlbnRpdHkgVGhlb3J5LCBieSBjb250cmFzdCwgcHJlZGljdHMgdGhhdCBpbmRpdmlkdWFscyBhcmUgbW9yZSBsaWtlbHkgdG8gZm9ybSBhbmQgbWFpbnRhaW4gdHJpYWRzIHRoYXQgcmVpbmZvcmNlIGdlbmRlciBzaW1pbGFyaXR5LCBhcyBjb2xsYWJvcmF0aW5nIHdpdGggc2FtZS1nZW5kZXIgcGVlcnMgc3RyZW5ndGhlbnMgdHJ1c3QgYW5kIHNoYXJlZCBpZGVudGl0eSwgdGhlcmVieSBpbmhpYml0aW5nIHRoZSBjbG9zdXJlIG9mIG1peGVkLWdlbmRlciB0cmlhZHMuIFRlc3RpbmcgYm90aCBwZXJzcGVjdGl2ZXMgYWxsb3dzIGZvciBhbiBhc3Nlc3NtZW50IG9mIHdoZXRoZXIgdHJpYWRpYyBjbG9zdXJlIHByb2Nlc3NlcyBpbiBhY2FkZW1pYyBjb2xsYWJvcmF0aW9uIG5ldHdvcmtzIHNlcnZlIHRvIGJyaWRnZSBvciByZXByb2R1Y2UgZ2VuZGVyIGRpdmlzaW9ucy4KCgo8YnI+CgojIFJlZmVyZW5jZXMK</div>
 
 
 </div>

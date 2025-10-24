@@ -28,12 +28,22 @@ navbar:
         href: Create_Dataset.html 
       - text: "Week 6"
         href: lab6.html
+      - text: "Week 7"
+        href: lab7.html
     - text: "Final Project"
       menu:
       - text: "Introduction"
         href: intro.html 
       - text: "Theory"
-        href: theory.html 
+        href: theory.html
+      - text: "Data and Methods"
+        href: DataMethods.html
+      - text: "Data Construction"
+        href: dataconstruction.html
+      - text: "Descriptive Analyses"
+        href: Descriptives.html
+      - text: "Exploratory Analyses"
+        href: Results.html
   right:
   - icon: fab fa-github
     href: https://mcmhusson.github.io/labjournal_mylene/

@@ -6,7 +6,7 @@ Filename is Siena.txt.
 
 This file contains primary output for SIENA project <<Siena>>.
 
-Date and time: 15/10/2025 16:57:03 
+Date and time: 24/10/2025 17:17:24 
 
 RSiena version 1.5.0 (06 07 2025)
 
@@ -139,7 +139,7 @@ Initialisation of project <<Siena>> executed succesfully.
 
 -----------------------------------
 New Analysis started.
-Date and time: 15/10/2025 16:59:07
+Date and time: 24/10/2025 17:19:23
 New results follow.
 -----------------------------------
 
@@ -151,143 +151,7 @@ Estimation by stochastic approximation algorithm.
 =================================================
 
 Random initialization of random number stream.
-Current random number seed is 404356.
-Effects object used: myeffects 
-Model Type:
- Standard actor-oriented model 
-Behavioral Model Type:
- Standard behavior actor-oriented model ('restrict')
-Estimation method: unconditional moment estimation
-.
-
-Time duration for simulations in each period is 1.0.
-Standard errors are estimated with the likelihood ratio method.
-Dolby method (regression on scores) is used.
-Initial value of gain parameter is  0.2000000.
-Reduction factor for gain parameter is  0.5000000.
-Number of subphases in Phase 2 is 4.
-
-Initial parameter values are 
-  1. rate:  constant mynet1 rate (period 1)                 4.6960
-  2. rate:  constant mynet1 rate (period 2)                 4.3288
-  3. eval:  outdegree (density)                            -1.4677
-  4. eval:  reciprocity                                     0.0000
-  5. eval:  unequal mybeh                                   0.0000
-  6. eval:  unequal smoke                                   0.0000
-  7. rate:  rate mybeh (period 1)                           0.7057
-  8. rate:  rate mybeh (period 2)                           0.8494
-  9. eval:  mybeh linear shape                              0.3224
- 10. eval:  mybeh quadratic shape                           0.0000
-
-
-Values of target statistics are
-  1. Amount of network change in period 1                               115.0000
-  2. Amount of network change in period 2                               106.0000
-  3. Number of ties                                                     238.0000
-  4. Number of reciprocated ties                                        160.0000
-  5. number ties between different mybeh                                158.0000
-  6. number ties between different smoke                                 81.0000
-  7. Amount of behavioral change in period 1 on mybeh                    27.0000
-  8. Amount of behavioral change in period 2 on mybeh                    33.0000
-  9. mybeh centered sum                                                  11.6667
- 10. mybeh sum of cent. squares                                         121.0711
-These were calculated from the data.
-
- 10 parameters, 10 statistics
-
-Estimation of derivatives by the LR method (type 1).
-
-
-@2
-End of stochastic approximation algorithm, phase 3.
----------------------------------------------------
-
-Total of 2767 iterations.
-Parameter estimates based on 1767 iterations,
-convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
-
-Information for convergence diagnosis.
-Averages, standard deviations, and t-ratios for deviations from targets:
-  1.   0.1660   9.4738   0.0175 
-  2.  -0.1110   9.0091  -0.0123 
-  3.   0.4730  15.2563   0.0310 
-  4.   0.1580  14.3178   0.0110 
-  5.  -0.2750  12.2956  -0.0224 
-  6.  -0.1540   9.0182  -0.0171 
-  7.   0.0360   4.5250   0.0080 
-  8.  -0.0020   4.8478  -0.0004 
-  9.   0.4380   7.4611   0.0587 
- 10.   0.7247  12.3106   0.0589 
-
-Good convergence is indicated by the t-ratios being close to zero.
-
-Overall maximum convergence ratio =  0.1363 .
-
-
-
-@2
-Estimation Results.
--------------------
-
-Regular end of estimation algorithm.
-Total of 2767 iteration steps.
-
-
-@3
-Estimates and standard errors
-                             
-Network Dynamics
- 1. rate:  constant mynet1 rate (period 1)                         5.7589  (   0.9006)
- 2. rate:  constant mynet1 rate (period 2)                         4.5191  (   0.6562)
- 3. eval:  outdegree (density)                                    -1.9113  (   0.2709)
- 4. eval:  reciprocity                                             2.7922  (   0.1916)
- 5. eval:  unequal mybeh                                          -0.5131  (   0.4167)
- 6. eval:  unequal smoke                                          -0.1964  (   0.1364)
-
-Behavior Dynamics
- 7. rate:  rate mybeh (period 1)                                   1.1933  (   0.3196)
- 8. rate:  rate mybeh (period 2)                                   1.6446  (   0.4046)
- 9. eval:  mybeh linear shape                                      0.3663  (   0.1422)
-10. eval:  mybeh quadratic shape                                  -0.1999  (   0.0934)
-
-
-@3
-Covariance matrices
-                   
-Covariance matrix of estimates (correlations below diagonal):
-     0.811      0.005     -0.057     -0.008      0.098      0.003     -0.021     -0.008      0.006     -0.001
-     0.008      0.431     -0.021     -0.008      0.038     -0.001     -0.007      0.008      0.003      0.000
-    -0.234     -0.117      0.073     -0.008     -0.102     -0.003      0.008     -0.006     -0.003     -0.003
-    -0.049     -0.060     -0.148      0.037     -0.012     -0.002     -0.004     -0.002      0.000      0.000
-     0.261      0.138     -0.904     -0.154      0.174     -0.004     -0.010      0.008      0.006      0.004
-     0.028     -0.012     -0.092     -0.075     -0.074      0.019      0.001      0.005     -0.002      0.001
-    -0.074     -0.035      0.091     -0.065     -0.077      0.013      0.102      0.015     -0.014      0.004
-    -0.021      0.030     -0.056     -0.031      0.049      0.092      0.116      0.164     -0.011      0.003
-     0.046      0.032     -0.085      0.004      0.093     -0.104     -0.299     -0.198      0.020     -0.003
-    -0.012     -0.008     -0.124      0.006      0.111      0.050      0.119      0.088     -0.217      0.009
-
-Derivative matrix of expected statistics X by parameters and
-covariance/correlation matrix of X can be found using
-summary(ans) within R, or by using the 'verbose' option in Siena07.
- 
-Total computation time 4.55 seconds.
-
-
------------------------------------
-New Analysis started.
-Date and time: 15/10/2025 17:13:15
-New results follow.
------------------------------------
-
-RSiena version 1.5.0 (06 Jul 25)
-
-
-@1
-Estimation by stochastic approximation algorithm.
-=================================================
-
-Random initialization of random number stream.
-Current random number seed is 14137.
+Current random number seed is 734388.
 Effects object used: myeffects 
 Model Type:
  Standard actor-oriented model 
@@ -344,20 +208,20 @@ convergence diagnostics, covariance and derivative matrices based on 1000 iterat
 
 Information for convergence diagnosis.
 Averages, standard deviations, and t-ratios for deviations from targets:
-  1.  -0.5680   9.5050  -0.0598 
-  2.   0.1230   8.6502   0.0142 
-  3.  -0.0870  14.2647  -0.0061 
-  4.   0.6060  13.6736   0.0443 
-  5.  -0.2940  11.9925  -0.0245 
-  6.   0.1330   9.0246   0.0147 
-  7.   0.5000   4.5779   0.1092 
-  8.   0.1350   4.8642   0.0278 
-  9.   0.5350   8.0419   0.0665 
- 10.   0.6317  12.8576   0.0491 
+  1.   0.0470   9.7095   0.0048 
+  2.   0.2310   8.6788   0.0266 
+  3.  -0.1640  14.5005  -0.0113 
+  4.   0.4880  13.5461   0.0360 
+  5.   0.0740  12.7408   0.0058 
+  6.  -0.4770   8.7085  -0.0548 
+  7.   0.0160   4.3985   0.0036 
+  8.   0.1220   4.7057   0.0259 
+  9.   0.4240   7.7598   0.0546 
+ 10.   0.3079  12.0178   0.0256 
 
 Good convergence is indicated by the t-ratios being close to zero.
 
-Overall maximum convergence ratio =  0.1706 .
+Overall maximum convergence ratio =  0.1356 .
 
 
 
@@ -373,37 +237,37 @@ Total of 2926 iteration steps.
 Estimates and standard errors
                              
 Network Dynamics
- 1. rate:  constant mynet1 rate (period 1)                         5.7282  (   0.7627)
- 2. rate:  constant mynet1 rate (period 2)                         4.5695  (   0.7137)
- 3. eval:  outdegree (density)                                    -1.9382  (   0.2763)
- 4. eval:  reciprocity                                             2.8142  (   0.1917)
- 5. eval:  unequal mybeh                                          -0.4894  (   0.3730)
- 6. eval:  unequal smoke                                          -0.1977  (   0.1445)
+ 1. rate:  constant mynet1 rate (period 1)                         5.7647  (   1.0092)
+ 2. rate:  constant mynet1 rate (period 2)                         4.5505  (   0.6619)
+ 3. eval:  outdegree (density)                                    -1.9327  (   0.3037)
+ 4. eval:  reciprocity                                             2.8025  (   0.2025)
+ 5. eval:  unequal mybeh                                          -0.4866  (   0.4193)
+ 6. eval:  unequal smoke                                          -0.1965  (   0.1442)
 
 Behavior Dynamics
- 7. rate:  rate mybeh (period 1)                                   1.1917  (   0.3070)
- 8. rate:  rate mybeh (period 2)                                   1.6601  (   0.4037)
- 9. eval:  mybeh linear shape                                      0.3680  (   0.1441)
-10. eval:  mybeh quadratic shape                                  -0.2002  (   0.0916)
+ 7. rate:  rate mybeh (period 1)                                   1.1905  (   0.3082)
+ 8. rate:  rate mybeh (period 2)                                   1.6518  (   0.4587)
+ 9. eval:  mybeh linear shape                                      0.3657  (   0.1444)
+10. eval:  mybeh quadratic shape                                  -0.2024  (   0.0904)
 
 
 @3
 Covariance matrices
                    
 Covariance matrix of estimates (correlations below diagonal):
-     0.582      0.010     -0.040     -0.010      0.059      0.004      0.002     -0.019      0.001      0.001
-     0.018      0.509     -0.018     -0.018      0.043     -0.015      0.000      0.009     -0.008     -0.002
-    -0.190     -0.089      0.076     -0.020     -0.094     -0.002      0.004      0.003      0.002     -0.001
-    -0.066     -0.130     -0.369      0.037      0.008     -0.003     -0.004      0.003     -0.001      0.000
-     0.207      0.163     -0.909      0.113      0.139     -0.007     -0.005     -0.006     -0.002      0.001
-     0.040     -0.144     -0.041     -0.107     -0.134      0.021     -0.001     -0.001      0.001      0.001
-     0.008      0.000      0.051     -0.063     -0.044     -0.013      0.094      0.004     -0.009      0.001
-    -0.060      0.030      0.029      0.043     -0.038     -0.016      0.034      0.163     -0.014      0.005
-     0.007     -0.076      0.052     -0.034     -0.034      0.034     -0.199     -0.239      0.021     -0.003
-     0.016     -0.027     -0.042     -0.008      0.035      0.049      0.050      0.123     -0.190      0.008
+     1.018     -0.017     -0.062      0.001      0.085      0.013     -0.010     -0.001      0.010      0.003
+    -0.025      0.438     -0.019     -0.005      0.034     -0.005      0.004     -0.005      0.001     -0.005
+    -0.204     -0.095      0.092     -0.021     -0.115     -0.009     -0.008      0.015     -0.001     -0.002
+     0.007     -0.036     -0.348      0.041      0.003      0.004      0.007      0.003     -0.002      0.001
+     0.201      0.123     -0.901      0.031      0.176     -0.001      0.005     -0.030      0.004      0.001
+     0.090     -0.057     -0.194      0.120     -0.018      0.021     -0.004     -0.004      0.001      0.001
+    -0.033      0.021     -0.083      0.104      0.040     -0.087      0.095      0.009     -0.012      0.000
+    -0.002     -0.018      0.110      0.029     -0.155     -0.056      0.063      0.210     -0.014      0.004
+     0.070      0.013     -0.034     -0.075      0.073      0.048     -0.280     -0.214      0.021     -0.001
+     0.032     -0.090     -0.070      0.046      0.036      0.044      0.017      0.098     -0.104      0.008
 
 Derivative matrix of expected statistics X by parameters and
 covariance/correlation matrix of X can be found using
 summary(ans) within R, or by using the 'verbose' option in Siena07.
  
-Total computation time 4.72 seconds.
+Total computation time 4.97 seconds.
