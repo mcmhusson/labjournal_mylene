@@ -80,12 +80,14 @@ For the exploratory analyses, I examine whether A -> B -> C are likely to be clo
 In RSiena, network dynamics are modeled as actors making decisions at each time step to either create new ties, maintain existing ties, break existing ties, or choose not to form ties. Thus, when referring to A creating or maintaining a tie to C, this is contrasted with A breaking or avoiding a tie with C. In other words, the hypotheses test whether ties are more likely to be present (through creation or maintenance) rather than absent (through dissolution or non-creation) based on the gender composition of the triad.
 
 
-As previously described in the Data and Methods section, the model construction followed an iterative process informed by both the Goodness Of Fit (GOF) of the models and theoretical considerations.
+As previously described in the Data and Methods section, the model construction followed an iterative process informed by both the Goodness Of Fit (GOF) of the models and theoretical considerations. The final models are:
 
-![](images/ModelCon.png)
+![](images/Mconstr.png)
+
 <br>
 
 ## Prepare for analysis
+
 ```{r}
 load("./data/processed/result_gender2.rda")
 
@@ -230,11 +232,11 @@ ansM1
 
 With an overall convergence ratio of 0.16, the model shows good convergence, suggesting that the parameter estimates are stable and the model is well estimated.
 
-The outdegree and reciprocity effects remain similar to those in Model 0. Both the jumpXTransTrip and homXTransTrip effects are positive and statistically significant.
+The outdegree and reciprocity effects remain similar to those in Model 0. 
 
-The jumpXTransTrip effect (3.50, SE = 0.38) indicates that in A -> B -> C triads, actor A is more likely to form or maintain a tie with C, rather than dissolve or refrain from forming one, when C is of a different gender than both A and B. This finding supports Hypothesis 1, consistent with Contact Theory, and contradicts Hypothesis 2, derived from Social Identity Theory (SIT). It suggests that A tends to collaborate with C despite C's gender difference to A and B. 
+The significant positive jumpXTransTrip effect (3.50, SE = 0.38) indicates that in A -> B -> C triads, actor A is more likely to form or maintain a tie with C, rather than dissolve or refrain from forming one, when C is of a different gender than both A and B. This finding supports Hypothesis 1, consistent with Contact Theory, and contradicts Hypothesis 2, derived from Social Identity Theory (SIT). It suggests that A tends to collaborate with C despite C's gender difference to A and B. 
 
-The homXTransTrip effect (1.61, SE = 0.24) indicates that actor A is also more likely to form or maintain a tie with C, rather than dissolve or refrain from forming one, when C shares the same gender as both A and B. This finding supports Hypothesis 3, in line with Social Identity Theory, suggesting that A is likely to collaborate with C when C is the same gender as A and B.
+The significant positive homXTransTrip effect (1.61, SE = 0.24) indicates that actor A is also more likely to form or maintain a tie with C, rather than dissolve or refrain from forming one, when C shares the same gender as both A and B. This finding supports Hypothesis 3, in line with Social Identity Theory, suggesting that A is likely to collaborate with C when C is the same gender as A and B.
 
 Taken together, these results imply that triadic closure occurs both across and within gender groups. Because both types of triads are favored, there is no clear restriction on tie formation based on gender: A is likely to collaborate with C regardless of whether C shares A’s and B’s gender.
 
@@ -281,7 +283,7 @@ In contrast, the 021C configuration (A -> B, B -> C) is well reproduced, indicat
 
 The model struggles with several more complex triads. The 111D triad, which combines a mutual tie with an additional asymmetric tie, is clearly misfit, suggesting that while reciprocity is captured at the dyadic level, the model fails to extend this pattern to triads where mutual and asymmetric ties coexist. Similarly, the 030T (transitive) and 030C (cyclic) triads are poorly reproduced, indicating that the current transitivity terms do not fully capture the observed extent of hierarchical and cyclic closure.
 
-Mixed reciprocity–transitivity configurations such as 120D and 120C are also underestimated, confirming that the model does not adequately capture overlapping patterns of mutual and asymmetric ties.
+Transitivity configurations such as 120D and 120C are also underestimated, confirming that the model does not adequately capture overlapping patterns of mutual and asymmetric ties.
 
 In conclusion, these results suggest that the current model captures basic triadic structures but fails to reproduce more complex patterns of activity, popularity, and closure. 
 
@@ -303,7 +305,7 @@ I will start with this refinement at the ego level.
 
 The GOF plots for the indegree and outdegree distributions reveal many nodes with no incoming or outgoing ties. My descriptive analyses confirmed a substantial number of isolates in the data. To address this, the next model will include the ego-level statistic isolateNet, which accounts for nodes with no ties.
 
-Additionally, ego-level effects such as indegree popularity and outdegree activity are important for reproducing the overall distribution of ties in the network, which in turn can improve the model’s representation of higher-order structures like triads.
+Additionally, I will add ego-level effects such as indegree popularity and outdegree activity may be important for reproducing the overall distribution of ties in the network, which in turn can improve the model’s representation of higher-order structures like triads.
 
 <br>
 
@@ -335,11 +337,7 @@ The overall convergence ratio is 0.58, which is higher than in Model 1, indicati
 
 Compared to Model 1, the outdegree (density) and reciprocity parameters remain stable.
 
-In this model, more ego-level effects were added to account for individual differences in tie-sending and tie-receiving behavior.The indegree popularity effect (0.18, SE = 0.03) is positive and statistically significant, showing that actors who already receive many incoming ties are more likely to receive additional ones. This reflects a “popularity” process in which well-connected actors continue to attract collaborations.
-
-The outdegree activity effect is small and negative (−0.08, SE = 0.03), suggesting that actors who already send many ties are slightly less likely to initiate further ones.
-
-The network-isolate effect (5.76, SE = 0.87) is large and significant, indicating that isolates—actors without any incoming or outgoing ties—are overrepresented in the observed network.
+In this model, more ego-level effects were added to account for individual differences in tie-sending and tie-receiving behavior. The indegree popularity effect (0.18, SE = 0.03) is positive and statistically significant, showing that actors who already receive many incoming ties are more likely to receive additional ones. This reflects a “popularity” process in which well-connected actors continue to attract collaborations. The outdegree activity effect is small and negative (−0.08, SE = 0.03), suggesting that actors who already send many ties are slightly less likely to initiate further ones. Finally, the network-isolate effect (5.76, SE = 0.87) is large and significant, indicating that isolates—actors without any incoming or outgoing ties—are overrepresented in the observed network.
 
 Turning to the gender-related triadic effects, both homXTransTrip (1.08, SE = 0.21) and jumpXTransTrip (2.36, SE = 0.31) remain positive and statistically significant, although their magnitudes are smaller than in Model 1. This suggests that part of the variation previously captured by these terms was due to unmodeled individual-level differences, now accounted for by ego-level effects.
 
@@ -566,6 +564,7 @@ save(gofi12, file = "gofi12.RData")
 load("gofi12.RData")
 plot(gofi12, violin = F, center = T, scale = T)
 ```
+
 ### Conclusion
 
 None of the gender-based hypotheses are supported by the model. The jumpXTransTrip effect shows that actor A is not more likely to form or maintain ties with C when C is of a different gender than A and B, contradicting hypothesis 1 and hypothesis 2. Similarly, the homXTransTrip effect becomes slightly negative after accounting for general triadic closure, indicating that same-gender triads are not more likely to close, and hypothesis 3 is not supported. Overall, it apperas gender does not meaningfully influence tie formation in these triads.

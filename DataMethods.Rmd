@@ -85,7 +85,7 @@ It is important to note that the collection years (2022 and 2024) do not define 
 
 Collaboration networks were constructed by identifying co-authorships within each wave. These co-authorships can be represented as either undirected or directed networks. In the case of a directed network, directionality can be defined from the first-named author to others or from the last-named author to others. I adopt the latter approach, as it reflects academic hierarchies in which senior scholars, who are typically listed last, are more likely to initiate collaborations.
 
-After constructing the co-authorship networks, the overall structure of the data can be described as a complete, or “socionet,” network [@SNASS]. Such networks are defined by clearly specified boundaries and complete information on all actors and their relationships within those boundaries. In this research project, the network boundary is defined by all researchers affiliated with Sociology and Politicology departments at Dutch universities. The dataset includes all individuals within this defined academic context and all known collaborations among them. Because both the population of actors and their intra-boundary ties are fully captured, the data constitute a complete, or socionet, network in Tolsma’s terms.
+After constructing the co-authorship networks, the overall structure of the data can be described as a complete, or “socionet,” network [@SNASS]. Such networks are defined by clearly specified boundaries and complete information on all actors and their relationships within those boundaries. In this research project, the network boundary is defined by all researchers affiliated with Sociology and Politicology departments at Dutch universities between 2015 and 2023. The dataset includes all individuals within this defined academic context and all known collaborations among them. Because both the population of actors and their intra-boundary ties are fully captured, the data constitute a complete, or socionet.
 
 Besides collaboration ties, the data also includes node-level attributes. These encompass time-varying characteristics, such as each researcher’s position and university affiliation, and time-constant characteristics, such as their name and discipline.
 
@@ -95,7 +95,7 @@ In this study, I manually included gender as a (usually) time-constant character
 
 ### Control covariates
 
-To account for other factors that may influence the formation or closure of triads, I include controls for university affiliation, discipline, and position. These variables are already available in the dataset.
+To account for other factors that may influence the formation or closure of triads, I include controls for university affiliation and discipline. These variables are already available in the dataset. Although university affiliation can change over time, I have data from only two waves; therefore, it will be included as a time-constant covariate.
 
 <br>
 
@@ -115,7 +115,7 @@ Based on these configurations, I can calculate the frequency of different gender
 
 The explanatory hypotheses will be addressed using Stochastic Actor-Oriented Models (SAOMs) with RSiena [@Rsiena]. SAOMs model network evolution over time by simulating probabilistic changes in ties based on specified network statistics, which function as independent variables. RSiena distinguishes between structural effects (network-level tendencies, e.g., reciprocity, popularity, or triadic closure) and covariate effects (node characteristics, e.g., gender, prestige). 
 
-To test the hypotheses, I will focus on two RSiena statistics: “jumpXTransTrip” and “sameXTransTrip”, both interacting with gender. 
+To test the hypotheses, I will focus on two RSiena statistics: “jumpXTransTrip” and “homXTransTrip”, both interacting with gender. 
 
 “jumpXTransTrip” captures the tendency of actors to close a triad by forming a tie to a node of a different attribute, reflecting cross-gender closure or bridging tendencies. In other words, if a focal actor i is connected to h, and h is connected to j, then jumpXTransTrip increases the probability that i will form or maintain a tie to j when i and h share the same gender and j has a different gender.
 
@@ -141,15 +141,15 @@ It is worth noting that the concept of significance in RSiena differs from its u
 
 The Model construction was a process of trial and error. I ultimately settled on the following sequence.
 
-![](images/ModelCon.png)
+![](images/Mconstr.png)
 
 First, I constructed a null model, including only the standard RSiena effects for network density and reciprocity. For this baseline model, I conducted goodness-of-fit (GOF) tests for both the indegree and outdegree distributions.
 
-Next, in Model 1, I introduced the main effects of theoretical interest (jumpXTransTrip and homXTransTrip) to test the three hypotheses. The same GOF tests were applied as for the null model to assess improvement in fit, and an additional GOF test was performed for the triad census to evaluate how well the model captured the triadic configurations in the observed network, which are central to these effects. These three GOF tests were repeated for all subsequent models.
+Next, in Model 1, I introduced the main effects of theoretical interest (jumpXTransTrip and homXTransTrip) to test the three hypotheses. The same GOF tests were applied as for the null model to assess improvement in fit, and an additional GOF test was performed for the triad census to evaluate how well the model captured the triadic configurations in the observed network, which are central to the main effects. These three GOF tests were repeated for all subsequent models.
 
 In Model 2, I added individual-level structural effects: outdegree activity (outAct), indegree popularity (inPop), and isolateNet. These parameters were included to improve the model’s fit to the observed indegree and outdegree distributions.
 
-In Model 3, I incorporated dyadic-level effects. Specifically, I incorporated homophily effects using sameX for gender, university, and discipline. Gender homophily was included to control for the general tendency to collaborate with others of the same gender, which might otherwise confound the triadic gender effects. University and discipline homophily were added because researchers are often more likely to collaborate within the same institutional and disciplinary boundaries.
+In Model 3, I incorporated dyadic-level effects. Specifically, I incorporated homophily effects using sameX for gender, university, and discipline. Gender homophily was included to control for the general tendency to collaborate with others of the same gender, which might otherwise confound the triadic gender effects. University and discipline homophily were added because researchers I expected collaborations within the same institutional or disciplinary contexts were more likely.
 
 Finally, in Model 4, I included the TransTrip effect to better capture transitive closure in the network and to check whether the gender-related jumpXTransTrip and homXTransTrip effects reflected genuine gender dynamics or simply the general structural principle that “a friend of my friend is my friend.”
 

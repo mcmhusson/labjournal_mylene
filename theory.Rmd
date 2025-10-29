@@ -40,7 +40,7 @@ The third research question, by contrast, is theory-driven and focuses on the mi
 
 ## Hypothesis 1
 
-Contact Theory suggests that interactions between members of different social groups can reduce prejudice and foster more positive intergroup attitudes [@Allport]. Suppose researchers A and B are both men, and B has collaborated with researcher C, who is a woman. Even if A initially prefers to work with men, reflecting dyadic homophily [@wang2023homophily], observing that B has successfully collaborated with C may alter A’s perceptions. Through this indirect exposure, A experiences positive contact with an outgroup member via a trusted collaborator, which may increase his willingness to collaborate with C despite initial biases.
+Contact Theory suggests that interactions between members of different social groups can reduce prejudice and foster more positive intergroup attitudes [@Allport]. Suppose researchers A and B are both men, and B has collaborated with researcher C, who is a woman. Even if A initially prefers to work with men, reflecting dyadic homophily [@wang2023homophily], observing that B has successfully collaborated with C may alter A’s perceptions. Through this indirect exposure, A experiences positive contact with an outgroup member via a trusted collaborator, which may increase his willingness to collaborate with C, despite initial biases.
 
 Previous social network research on extended contact shows that indirect exposure can indeed foster more positive intergroup attitudes [@Stark]. However, Stark notes that this effect requires the outgroup member to be more than a distant, unknown figure. In the context of sociology and political science departments in Dutch universities, I believe researchers are likely to be at least peripherally aware of one another. Therefore, I expect:
 
@@ -50,15 +50,15 @@ H1: In A -> B -> C collaboration triads within the sociology and political scien
 
 ## Hypothesis 2
 
-Social Identity Theory (SIT) posits that group membership forms a central part of an individual’s self-concept and can lead to ingroup favoritism and outgroup bias [@Tajfel_Turner]. Gender is a salient social identity, and people tend to automatically categorize others as male or female in interactions [@Carter]. Consequently, when researchers A and B share the same gender, their common identity can strengthen trust and ingroup cohesion, making A more inclined to collaborate with others of the same gender and more hesitant to collaborate with C if C belongs to a different gender. These triadic patterns can reinforce gender boundaries, promote same-gender clustering, and contribute to persistent gender segregation at the macro level.
+Social Identity Theory (SIT) posits that group membership forms a central part of an individual’s self-concept and can produce ingroup favoritism and outgroup bias [@Tajfel_Turner]. Because gender is a salient social identity, individuals often automatically categorize others as male or female during professional interactions [@Carter]. This categorization can shape collaboration decisions: when researchers A and B share the same gender, their common identity can foster trust and ingroup cohesion, making A more inclined to collaborate with someone like B and more hesitant to collaborate with C if C has a different gender.
 
-Based on this reasoning, the opposite of Hypothesis 1 is expected: A is more likely to avoid collaboration with C when C differs in gender from both A and B, perceiving C as an outgroup member. Formally, this leads to the following hypothesis:
+Based on this reasoning, the opposite of Hypothesis 1 can be expected: A is more likely to avoid collaboration with C when C differs in gender from both A and B, perceiving C as an outgroup member. Formally, this leads to the following hypothesis:
 
-H2: In A → B → C collaboration triads within the sociology and political science departments of Dutch universities, when C differs in gender from A and B, A is more likely to break or refrain from forming a tie with C, rather than initiate or maintain collaboration, across the period from Wave 1 (2015–2018) to Wave 2 (2019–2023).
+H2: In A -> B -> C collaboration triads within the sociology and political science departments of Dutch universities, when C differs in gender from A and B, A is more likely to break or refrain from forming a tie with C, rather than initiate or maintain collaboration, across the period from Wave 1 (2015–2018) to Wave 2 (2019–2023).
 
 Conversely, when C shares the same gender as A and B, A is more likely to initiate or maintain collaboration, as C is considered part of the ingroup:
 
-H3: In A → B → C collaboration triads within the sociology and political science departments of Dutch universities, where C is the same gender as A and B, A is more likely to initiate or maintain (rather than break or avoid) collaboration with C across the period from Wave 1 (2015–2018) to Wave 2 (2019–2023).
+H3: In A -> B -> C collaboration triads within the sociology and political science departments of Dutch universities, where C is the same gender as A and B, A is more likely to initiate or maintain (rather than break or avoid) collaboration with C across the period from Wave 1 (2015–2018) to Wave 2 (2019–2023).
 
 As these hypotheses are perhaps a bit hard to read, I created this visualization:
 

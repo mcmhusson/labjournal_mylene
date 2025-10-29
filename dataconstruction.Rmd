@@ -132,7 +132,7 @@ scholars <- fload("./data/processed/scholars_20240924.rda")
 
 ## Apply Folcnet
 
-Within the folcnet function I specify to take all researchers from sociology and political science departments in Dutch Universities. I also specify my waves as 2015-2018 (wave 1) and 2019-2023 (wave 2). Lastly, I want a directed network in which the last named author on a paper is the one who sent the ties, and I therefore choose type "last". 
+Within the folcnet function I specify it should include all researchers from sociology and political science departments in Dutch Universities. I also specify my waves as 2015-2018 (wave 1) and 2019-2023 (wave 2). Lastly, I want a directed network in which the last named author on a paper is the one who sent the ties, and I therefore choose type "last". 
 
 ```{r, eval = F}
 fcolnet <- function(data = scholars,
@@ -371,6 +371,7 @@ save(result_gender2, file = "./data/processed/result_gender2.rda")
 ```
 
 <br>
+
 ## Result
 
 As a result I now have a demographics list within my data including the gender of people. As you will read in the descriptive analyses, the gender of only 22 people was missing (3.26)

@@ -76,13 +76,12 @@ Last compiled on `r format(Sys.time(), '%B, %Y')`
 # Descriptive Analyses
 <br>
 
-For the descriptive analyses, I will first identify which triads occur in the network data, with particular attention to 021C and 030T triads (RQ1), and then examine the gender distribution within these specific triads (RQ2). The latter will be illustrated with a plot.
+For the descriptive analyses, I will identify which triads occur in the network data, with particular attention to 021C and 030T triads (RQ1), and then examine the gender distribution within these specific triads (RQ2). The latter will be illustrated with a plot.
 
 However, before exploring these patterns in detail, I will assess the overall gender distribution in the network, as well as key structural characteristics such as density, degree distribution, and clustering, to provide a clearer understanding of the network as a whole.
 
 <br>
 
-Load in the data
 ```{r}
 load("./data/processed/result_gender2.rda")
 ```
@@ -158,7 +157,7 @@ ecount(g2)
 
 ### Density
 
-The overall network density is low in both waves (Wave 1: 0.00074; Wave 2: 0.00126), indicating that only a small fraction of all possible collaborations occurrs. The slight increase from Wave 1 to Wave 2 suggests that collaborative activity became marginally more frequent over time, although part of this increase may reflect the inclusion of researchers who joined only in Wave 2 rather than a true rise in collaborations among existing members
+The overall network density is low in both waves (Wave 1: 0.00074; Wave 2: 0.00126), indicating that only a small fraction of all possible collaborations occurrs. The slight increase from Wave 1 to Wave 2 suggests that collaborative activity became marginally more frequent over time, although part of this increase may reflect the inclusion of researchers who joined only the sociology and political science departments within Dutch universities in Wave 2 rather than a true rise in collaborations among existing members
 
 ```{r}
 # Wave 1 density
@@ -170,7 +169,7 @@ edge_density(g2)
 
 ### Indegree
 
-In Wave 1, many researchers had no incoming collaborations, with the most connected reseracher having 5 incoming ties. In Wave 2, connectivity increased slightly: the mean in-degree rose from 0.50 to 0.85, and the most connected researcher had 14 incoming ties. Overall, the network remains sparse, but collaborative activity appears to have increased over time
+In Wave 1, many researchers had no incoming collaborations, with the most connected reseracher having 8 incoming ties. In Wave 2, connectivity increased slightly: the mean in-degree rose from 0.50 to 0.85, and the most connected researcher had 14 incoming ties. Overall, people appear to have few incoming ties. 
 ```{r}
 # Indegree Wave 1
 indeg <- igraph::degree(g1, mode = "in")
@@ -183,7 +182,7 @@ summary(indeg)
 ```
 ### Outdegree
 
-Out-degree distributions indicate that most researchers initiated few or no collaborations in both waves. In Wave 1, the average out-degree was 0.50, and the most active researcher initiated 10 collaborations. By Wave 2, average out-degree increased to 0.85, suggesting that more researchers engaged in initiating collaborations, even though the network remains relatively sparse overall.
+Out-degree distributions indicate that most researchers initiated few or no collaborations in both waves. In Wave 1, the average out-degree was 0.50, and the most active researcher initiated 10 collaborations. By Wave 2, average out-degree increased to 0.85, suggesting that more researchers engaged in initiating collaborations, but the average outdegree remains low.
 ```{r}
 # Outdegree wave 1
 outdeg <- igraph::degree(g1, mode = "out")
@@ -324,16 +323,13 @@ df$name <- paste0(df$i, ".", df$j, ".", df$k)
 write.csv(df, "./data/processed/wave1excel.csv", row.names = FALSE)
 ```
 
-Load the file
 ```{r}
 wave1excel <- read.csv("./data/processed/wave1excel.csv")
 head(wave1excel[, 1:13])
 ```
 
+### Analysis 021C
 
-### Analysis
-
-021C
 ```{r}
 # only keep the triangles we are interested in
 # also filter the people with gender = NA out (was one person)
@@ -423,7 +419,8 @@ mmf
 mmm
 fff
 ```
-030T
+### Analysis 030T
+
 ```{r}
 # Initialize counters for 030T
 ffmclosed <- 0
@@ -500,23 +497,24 @@ mmfclosed
 mmmclosed
 fffclosed
 ```
+
 ### Results
 
 Based on the analyses above, the second research question can be addressed. This research question was descriptive, focusing on how gender is distributed across the triadic structures 021C and 031T observed in the network.
 
 ![](images/dis_prop_gender3.png)
 
-Although the overall network is approximately gender balanced (47.0% female and 49.7% male), the composition of the 021C and 031T triadic types in Wave 1 reveals a clear over-representation of all-male groups. In 021C triads, nearly 40% are composed entirely of men, compared to only 7% all-female triads. A similar pattern appears in 031T triads, where 39% are all-male and 22% all-female. Triads in which A and B are the same gender but C differs (female-female-male or male-male-female) are considerably less frequent, particularly those with a female majority (female-female-male).
+Although the overall network is approximately gender balanced with 47.0 percent female and 49.7 percent male (as seen in 1.1. Gender distribution), the composition of the 021C and 031T triadic types in Wave 1 reveals a clear over-representation of all-male groups. In 021C triads, nearly 40 percent are composed entirely of men, compared to only 7 percent all-female triads. A similar pattern appears in 031T triads, where 39 percent are all-male and 22 percent all-female. Triads in which A and B are the same gender but C differs (female-female-male or male-male-female) are considerably less frequent, particularly those with a female majority (female-female-male).
 
-For 031T triads specifically, same gender triads are especially pronounced. Approximately 61% of these triads consist entirely of one gender (either all-male or all-female), while only around 8% are of the female-female-male or male-male-female type. Given the overall gender balance of the network, this indicates that transitive or tightly interconnected triads tend to form within same-gender groups rather than across them, particularly in all-male triads.
+For 031T triads specifically, same gender triads are especially pronounced. Approximately 61 percent of these triads consist entirely of one gender (either all-male or all-female), while only around 8 percent are of the female-female-male or male-male-female type. Given the overall gender balance of the network, this indicates that transitive or tightly interconnected triads tend to form within same-gender groups rather than across them, particularly in all-male triads.
 
 Taken together, the results addressing the second research question reveal gendered structuring within the 021C and 031T triads, suggesting that these network configurations are shaped by gender-based tendencies in tie formation.
 
 <br>
 
-### Graph 021C 030T Triads
+### Visualisation
 
-Now, to visualize the network of 021C triads and 030T triads I turn the dataset "df_filtered" from Wave 1 back into an adjaceny matrix and create a gender list for those people. 
+Now, to visualize the network of 021C triads and 030T triads I turn the dataset "df_filtered" back into an adjaceny matrix and create a gender list for those people. 
 
 ```{r}
 # Assuming your dataframe is called df_filtered

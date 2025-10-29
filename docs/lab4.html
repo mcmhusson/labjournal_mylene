@@ -1056,15 +1056,12 @@ adj_mat &lt;- result_gender$nets[1,,]
 
 # create igraph object
 g &lt;- graph_from_adjacency_matrix(adj_mat, mode = &quot;undirected&quot;)</code></pre>
-<pre><code>## Warning: The `adjmatrix` argument of
-## `graph_from_adjacency_matrix()` must be
-## symmetric with mode = &quot;undirected&quot; as of
-## igraph 1.6.0.
-## ℹ Use mode = &quot;max&quot; to achieve the original
-##   behavior.
+<pre><code>## Warning: The `adjmatrix` argument of `graph_from_adjacency_matrix()` must
+## be symmetric with mode = &quot;undirected&quot; as of igraph 1.6.0.
+## ℹ Use mode = &quot;max&quot; to achieve the original behavior.
 ## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_lifecycle_warnings()` to
-## see where this warning was generated.</code></pre>
+## Call `lifecycle::last_lifecycle_warnings()` to see where this
+## warning was generated.</code></pre>
 <pre class="r"><code># make sure vertex order matches demographics order
 gender_vec &lt;- result_gender$demographics$gender
 names(gender_vec) &lt;- result_gender$demographics$au_id
@@ -1144,11 +1141,12 @@ network_df |&gt;
     max_degree = max(degree),
     n = n()
   )</code></pre>
-<pre><code>## # A tibble: 2 × 5
+<pre><code>## # A tibble: 3 × 5
 ##   gender mean_degree median_degree max_degree     n
 ##   &lt;chr&gt;        &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;
 ## 1 female       0.577             0          3    26
-## 2 male         2.29              2          8    24</code></pre>
+## 2 male         2.17              2          8    23
+## 3 &lt;NA&gt;         5                 5          5     1</code></pre>
 <p>In this network, male scholars tend to have higher degree centrality
 than female scholars.</p>
 <p>Many female nodes are isolated or weakly connected, while males have
