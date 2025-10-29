@@ -74,30 +74,21 @@ Last compiled on `r format(Sys.time(), '%B, %Y')`
 ------------------------------------------------------------------------
 
 # Exploratory Analyses
-<br>
 
-Load in the data
-```{r}
-load("./data/processed/result_gender2.rda")
+For the exploratory analyses, I examine whether A -> B -> C are likely to be closed or maintained by A, depending on the gender composition of the triad. Specifically, I investigate whether A is more likely to create or maintain a tie to C when C is of a different gender than A and B (H1), or whether the opposite happens and A is more likely to break or avoid a tie with C, when C is of a different gender than A and B (H2). Additionally, I will analyse whether A is likely to create or maintain a tie to C when C is of the same gender as A and B (H3).
 
-# create waves
-wave1 <- result_gender2$nets[1,,]
-wave2 <- result_gender2$nets[2,,]
-```
+In RSiena, network dynamics are modeled as actors making decisions at each time step to either create new ties, maintain existing ties, break existing ties, or choose not to form ties. Thus, when referring to A creating or maintaining a tie to C, this is contrasted with A breaking or avoiding a tie with C. In other words, the hypotheses test whether ties are more likely to be present (through creation or maintenance) rather than absent (through dissolution or non-creation) based on the gender composition of the triad.
 
-<br>
 
-For the exploratory analyses, I examine whether A → B → C triads are more likely to be closed or maintained by A, depending on the gender composition of the triad. Specifically, I investigate whether A is more likely to create or maintain a tie to C when C is of a different gender than A and B (H1), or when C is of the same gender as A and B (H2).
+As previously described in the Data and Methods section, the model construction followed an iterative process informed by both the Goodness Of Fit (GOF) of the models and theoretical considerations.
 
-In RSiena, network dynamics are modeled as actors making decisions at each time step to either create new ties, maintain existing ties, break existing ties, or choose not to form ties. Thus, when referring to A creating or maintaining a tie to C, this is contrasted with A breaking or not creating a tie to C. In other words, the hypotheses test whether ties are more likely to be present (through creation or maintenance) rather than absent (through dissolution or non-creation) based on the gender composition of the triad.
-
-As previously described in the Data and Methods section, the models will be created as follows:
-![](images/model.png)
-
+![](images/ModelCon.png)
 <br>
 
 ## Prepare for analysis
 ```{r}
+load("./data/processed/result_gender2.rda")
+
 wave1 <- result_gender2$nets[1,,]
 wave2 <- result_gender2$nets[2,,]
 
@@ -154,7 +145,66 @@ myeff <-getEffects(mydata3)
 ifelse(!dir.exists("results"), dir.create("results"), FALSE)
 print01Report(mydata3, modelname = "./results/result_gender")
 ```
+<br>
 
+## Model 0
+
+### Run model
+This model only contains the standard statistics of Rsiena: density and reciprocity. 
+```{r, eval = FALSE}
+myAlgorithm <- sienaAlgorithmCreate(projname = "result_gender")
+ansM0 <- siena07(myAlgorithm, data = mydata3, effects = myeff, returnDeps = TRUE)
+
+save(ansM0, file = "ansM0.RData")
+```
+
+```{r}
+load("ansM0.RData")
+ansM0
+```
+
+### Interpretation
+
+This null model achieves a very low convergence ratio of 0.03. This is expected, as the model includes only two basic structural effects (density and reciprocity), which makes estimation straightforward and convergence easy to achieve.
+
+The RSiena model results indicate that the network is relatively sparse, as shown by the significant negative outdegree effect (b = -4.12, SE = 0.07). This means that nodes generally form few ties overall. However, ties that do form are highly reciprocal, as the reciprocity effect is significant and positive (b = 3.67, SE = 0.16).
+
+### GOF indegree
+
+The null model achieves a goodness-of-fit (GOF) value of 0 for the indegree distribution. The GOF measure indicates how well the model reproduces the structure of the observed network—in this case, the distribution of incoming ties. The results show that the model fits the data poorly, underestimating the number of actors with zero incoming ties and overestimating those with one or two.
+
+```{r, eval = F}
+gofi0 <- sienaGOF(ansM0, IndegreeDistribution, verbose = FALSE, join = TRUE, varName = "net2", cumulative = F)
+
+save(gofi0, file = "gofi0.RData")
+```
+
+```{r}
+load("gofi0.RData")
+plot(gofi0, violin = F)
+```
+
+### GOF outdegree
+
+Similarly, the goodness-of-fit value for the outdegree distribution is 0, indicating that the model does not adequately capture the structure of the observed outdegree distribution. The number of nodes which do not send any ties is underestimated and the number of nodes who send only one tie is severly overestimated. 
+
+```{r, eval = F}
+gofi01 <- sienaGOF(ansM0, OutdegreeDistribution, verbose = FALSE, join = TRUE, varName = "net2", cumulative = F)
+save(gofi01, file = "gofi01.RData")
+```
+
+```{r}
+load("gofi01.RData")
+plot(gofi01, violin = F)
+```
+
+### Conclusion
+
+The statistics suggest that nodes generally form few ties overall, but when they do, the ties are highly reciprocal. 
+
+The GOF plots indicate that the model may need additional statistics to better capture the prevalence of nodes with no outgoing or incoming ties. However, first, I will look at the main statistics of interest: jumpXTransTrip (for Hypothesis 1 and 2) and homXTransTrip (for Hypothesis 3).
+
+<br>
 
 ## Model 1
 
@@ -178,21 +228,21 @@ ansM1
 
 ### Interpretation 
 
-In this model the structural effects reciprocity and density were included, as is standard in RSiena. The RSiena model results indicate that the network is relatively sparse, as shown by the significant negative outdegree effect (b = -4.24, SE = 0.08), meaning that actors generally form few ties overall. However, ties that do form are highly reciprocal, as the reciprocity effect is significant and positive (b = 3.33, SE = 0.18).
+With an overall convergence ratio of 0.16, the model shows good convergence, suggesting that the parameter estimates are stable and the model is well estimated.
 
-I am particularly interested in the jumpXTransTrip and the homXTransTrip effects as those will help me answer my hypotheses. Both effects are positive and statistically significant. 
+The outdegree and reciprocity effects remain similar to those in Model 0. Both the jumpXTransTrip and homXTransTrip effects are positive and statistically significant.
 
-The jumpXTransTrip effect was 3.49 (SE = 0.35). This indicates that in A -> B -> C triads, actor A is likely to form or maintain a tie with C (rather than dissolve or refrain from forming one) when C is of a different gender than both A and B. This result supports Hypothesis 1, as it aligns with the predictions of Contact Theory, and contradicts Hypothesis 2: when C is a different gender than A and B, A wants to collaborate with C despite a gender difference.
+The jumpXTransTrip effect (3.50, SE = 0.38) indicates that in A -> B -> C triads, actor A is more likely to form or maintain a tie with C, rather than dissolve or refrain from forming one, when C is of a different gender than both A and B. This finding supports Hypothesis 1, consistent with Contact Theory, and contradicts Hypothesis 2, derived from Social Identity Theory (SIT). It suggests that A tends to collaborate with C despite C's gender difference to A and B. 
 
-The homXTransTrip effect was 1.61 (SE = 0.24). This indicates that in A -> B -> C triads, actor A is likely to form or maintain a tie with C (rather than dissolve or refrain from forming one) when C is of the same gender as both A and B. This result supports Hypothesis 3 and aligns with Social Identity Theory, suggesting that A likes collaborating within gender-homogeneous triads.
+The homXTransTrip effect (1.61, SE = 0.24) indicates that actor A is also more likely to form or maintain a tie with C, rather than dissolve or refrain from forming one, when C shares the same gender as both A and B. This finding supports Hypothesis 3, in line with Social Identity Theory, suggesting that A is likely to collaborate with C when C is the same gender as A and B.
 
-Taken together, these first findings suggest that triadic closure in the network occurs both across and within gender groups. On the one hand, the positive jumpXTransTrip effect shows that A forms ties to out-group members in mediated triads, consistent with Contact Theory. On the other hand, the positive homXTransTrip effect indicates that A also favors same-gender triads, consistent with Social Identity Theory. Overall, this pattern suggests that A’s collaboration decisions in triadic structures may not be constrained by gender: A is likely to collaborate with C regardless of whether C shares A's and B's gender.
+Taken together, these results imply that triadic closure occurs both across and within gender groups. Because both types of triads are favored, there is no clear restriction on tie formation based on gender: A is likely to collaborate with C regardless of whether C shares A’s and B’s gender.
 
-While the estimated effects in this model are statistically significant, this alone does not guarantee that the model accurately represents the structures observed in the network. Significance indicates that particular covariates are associated with tie formation, but it does not show whether the model reproduces the overall patterns of relationships among nodes. Goodness-of-Fit (GOF) tests are therefore essential: they compare the simulated networks generated by the model to the observed network across key structural features, such as outdegree distributions (reflecting individual activity), indegree distributions (capturing popularity), and triadic configurations (which relate to the tendency of groups to form clusters or reciprocal relationships). By evaluating these aspects, GOF tests reveal whether Model 1 is able to realistically replicate the network’s fundamental structural properties, helping us determine whether the model provides a meaningful representation of the social processes under study or merely captures isolated covariate effects.
+Although these effects are statistically significant, this does not guarantee that the model reproduces the observed network structure, particularly the triadic patterns central to this study. To assess this, a triad census goodness-of-fit test is condcuted to evaluate how well Model 1 captures these triadic structures, complementing the indegree and outdegree goodness-of-fit tests.
 
-### GOF Indegree popularity 
+### GOF indegree
 
-The goodness-of-fit graph for the indegree distribution indicates that the current model does not adequately capture the network’s indegree structure (p = 0). The model underestimates the number of actors with no incoming ties and overestimates the number of actors with one or two incoming ties. These are the most notable misestimations and suggest that including an indegree popularity effect could improve model fit.
+This model does not capture the indegree distribution of the observed network (p = 0), and shows the same misestimations as Model 0. 
 
 ```{r, eval = F}
 gofi1 <- sienaGOF(ansM1, IndegreeDistribution, verbose = FALSE, join = TRUE, varName = "net2", cumulative = F)
@@ -205,9 +255,9 @@ load("gofi1.RData")
 plot(gofi1, violin = F)
 ```
 
-### GOF Outdegree activity
+### GOF outdegree
 
-Similarly, the goodness-of-fit graph for the outdegree distribution shows that the model fails to reproduce the observed outdegree structure (p = 0). The model underestimates the number of actors who send no ties and overestimates those who send only one tie. It again underestimates actors sending three or four ties. These patterns suggest that adding an outdegree activity effect could improve the model.
+Similarly, the outdegree distribution is not well represented (p = 0), with the same patterns of under- and overestimation as Model 0.
 
 ```{r, eval = F}
 gofi2 <- sienaGOF(ansM1, OutdegreeDistribution, verbose = FALSE, join = TRUE, varName = "net2", cumulative = F)
@@ -219,22 +269,21 @@ load("gofi2.RData")
 plot(gofi2, violin = F)
 ```
 
-
 ### GOF triad census
 
 The graph below shows that the model does not adequately reproduce the local triadic structures of the observed network (p = 0).
 
-The first three triad types (003, 012, 102) are well captured by the model. These configurations represent disconnected or minimally connected triads, and the good fit likely reflects the inclusion of outdegree (density) and reciprocity effects.
+The first three triad types (003, 012, 102) are well captured by the model. These configurations represent disconnected or minimally connected triads, and the good fit likely reflects the inclusion of outdegree and reciprocity effects.
 
 However, the model underestimates both 021D (two nodes receiving ties from the same node) and 021U (two nodes sending ties to the same node), suggesting that it does not fully capture patterns of high activity or popularity. Including explicit effects for outdegree activity and indegree popularity could improve the fit for these structures.
 
-In contrast, the 021C configuration (A ->B, B->C) is well reproduced, indicating that the jumpXtransTrip and homXtransTrip terms successfully account for simple sequential closure within and across covariate-defined groups.
+In contrast, the 021C configuration (A -> B, B -> C) is well reproduced, indicating that the jumpXTransTrip and homXTransTrip terms successfully capture simple sequential patterns.
 
 The model struggles with several more complex triads. The 111D triad, which combines a mutual tie with an additional asymmetric tie, is clearly misfit, suggesting that while reciprocity is captured at the dyadic level, the model fails to extend this pattern to triads where mutual and asymmetric ties coexist. Similarly, the 030T (transitive) and 030C (cyclic) triads are poorly reproduced, indicating that the current transitivity terms do not fully capture the observed extent of hierarchical and cyclic closure.
 
-Mixed reciprocity–transitivity configurations such as 120D and 120C are also underestimated, confirming that the model does not adequately capture overlapping patterns of mutual and asymmetric ties. The fully mutual 300 triad is likewise poorly reproduced.
+Mixed reciprocity–transitivity configurations such as 120D and 120C are also underestimated, confirming that the model does not adequately capture overlapping patterns of mutual and asymmetric ties.
 
-In conclusion, these results suggest that the current model captures basic triadic structures but fails to reproduce more complex patterns of activity, popularity, and closure. To address these gaps, I will first include ego-level statistics such as indegree popularity and outdegree activity. Next, I will incorporate dyadic covariate effects, for example, gender homophily using sameX terms. Finally, I will add enhanced triadic terms, including TransTrip and cyclic closure effects, to better reflect the full spectrum of observed triadic structures.
+In conclusion, these results suggest that the current model captures basic triadic structures but fails to reproduce more complex patterns of activity, popularity, and closure. 
 
 ```{r, eval = F}
 gofi3 <- sienaGOF(ansM1, TriadCensus, verbose = FALSE, join = TRUE, varName = "net2")
@@ -248,13 +297,21 @@ plot(gofi3, violin = F, center = T, scale = T)
 
 ### Conclusion
 
-Although the model shows significant effects of jumpXtransTrip and homXtransTrip, it fails to adequately capture several key structures in the observed network, highlighting the need for refinement. To address these shortcomings, I will first incorporate ego-level statistics, such as indegree popularity and outdegree activity, to better account for node-level patterns. Next, I will include dyadic covariate effects, such as gender homophily via sameX terms, to reflect tendencies in pairwise interactions. Finally, I will extend the model with enhanced triadic terms, including TransTrip and cyclic closure effects, to more accurately represent the full range of observed triadic structures.
+Although the model shows significant jumpXTransTrip and homXTransTrip effects, it fails to adequately capture several key structures in the observed network, indicating the need for refinement.
 
+I will start with this refinement at the ego level. 
+
+The GOF plots for the indegree and outdegree distributions reveal many nodes with no incoming or outgoing ties. My descriptive analyses confirmed a substantial number of isolates in the data. To address this, the next model will include the ego-level statistic isolateNet, which accounts for nodes with no ties.
+
+Additionally, ego-level effects such as indegree popularity and outdegree activity are important for reproducing the overall distribution of ties in the network, which in turn can improve the model’s representation of higher-order structures like triads.
+
+<br>
 
 ## Model 2
 
 ### Include effects 
 ```{r, eval = F}
+myeff <- setEffect(myeff, isolateNet, include = T)
 myeff <- setEffect(myeff, outAct, include = T)
 myeff <- setEffect(myeff, inPop, include = T)
 ```
@@ -274,15 +331,23 @@ ansM2
 
 ### Interpretation 
 
-In this model 2, the network remains sparse, as indicated by the significant negative outdegree (density) effect (b = -5.06, SE = 0.16), while reciprocity continues to be significant and positive (b = 3.32, SE = 0.19).
+The overall convergence ratio is 0.58, which is higher than in Model 1, indicating that some parameter estimates are unstable and the model may not be reliably estimated.
 
-The inclusion of indegree popularity (b = 0.18, SE = 0.03) and outdegree activity (b = 0.12, SE = 0.02) shows that some actors are consistently popular or active.
+Compared to Model 1, the outdegree (density) and reciprocity parameters remain stable.
 
-The transitive triplet effects remain positive and significant: same-gender (b = 0.95, SE = 0.23) and jumping-gender (b = 2.41, SE = 0.41) triads continue to form, supporting hypotheses 1 and 3. The slightly smaller magnitudes compared to Model 1 suggest that part of the triadic closure is explained by popularity and activity rather than gender-specific mechanisms alone.
+In this model, more ego-level effects were added to account for individual differences in tie-sending and tie-receiving behavior.The indegree popularity effect (0.18, SE = 0.03) is positive and statistically significant, showing that actors who already receive many incoming ties are more likely to receive additional ones. This reflects a “popularity” process in which well-connected actors continue to attract collaborations.
+
+The outdegree activity effect is small and negative (−0.08, SE = 0.03), suggesting that actors who already send many ties are slightly less likely to initiate further ones.
+
+The network-isolate effect (5.76, SE = 0.87) is large and significant, indicating that isolates—actors without any incoming or outgoing ties—are overrepresented in the observed network.
+
+Turning to the gender-related triadic effects, both homXTransTrip (1.08, SE = 0.21) and jumpXTransTrip (2.36, SE = 0.31) remain positive and statistically significant, although their magnitudes are smaller than in Model 1. This suggests that part of the variation previously captured by these terms was due to unmodeled individual-level differences, now accounted for by ego-level effects.
+
+The continued significance of these positive effects provides support for Hypothesis 1 and refutes Hypothesis 2: in a triad A -> B -> C, where A and B share the same gender and C is different, A is likely to initiate or maintain collaboration with C. The results furthermore continue to support Hypothesis 3, which posits that A is likely to initiate or maintain collaboration with C when C shares the same gender as A and B. Taken together, these findings still indicate that gender itself does not strongly constrain collaboration: node A is likely to form or maintain ties with C regardless of whether C shares the gender of A and B.
 
 ### GOF indegree
 
-This model, which includes indegree popularity and outdegree activity, appears to better capture the indegree distribution in the network compared to Model 1. However, the fit is still not good, as indicated by a p-value of 0. This model still underestimates the number of noedes with no incoming ties and overestimates nodes with one or two incoming ties. 
+When visually inspecting the GOF plot, Model 2 appears to capture the indegree distribution structure of the observed network somewhat better than Model 1. However, the overall fit remains poor (p = 0), indicating that the model still fails to adequately reproduce the observed indegree distribution.
 
 ```{r, eval = F}
 gofi4 <- sienaGOF(ansM2, IndegreeDistribution, verbose = FALSE, join = TRUE, varName = "net2", cumulative = F)
@@ -297,7 +362,7 @@ plot(gofi4, violin = F)
 
 ### GOF outdegree
 
-For the outdegree distribution, including indegree popularity and outdegree activity does not substantially improve fit compared to Model 1. The GOF test indicates a p-value of 0, showing that the model still poorly represents the distribution of outgoing ties in the observed network. Specifically, it underestimates the number of actors with no outgoing ties and overestimates actors with one or two outgoing ties.
+In contrast, Model 2 adequately reproduces the observed outdegree distribution (p = 0.43). The plot shows that the number of nodes with each outdegree falls within the model’s upper and lower bounds.
 
 ```{r, eval = F}
 gofi5 <- sienaGOF(ansM2, OutdegreeDistribution, verbose = FALSE, join = TRUE, varName = "net2", cumulative = F)
@@ -311,13 +376,11 @@ plot(gofi5, violin = F)
 
 ### GOF triad census
 
-The Goodness-of-Fit plot for the updated model indicates clear improvements over the previous model, particularly for triads related to activity and popularity. Overall, this model captures the triadic structure of the observed network a bit more accurately than Model 1 (p = 0.002).
+Visually, Model 2 appears to capture the triadic structures in the observed network better than Model 1, with more configurations falling within the model’s upper and lower bounds. However, the overall fit remains poor (p = 0).
 
-The fit for the 021D and 021U triads, where two nodes either receive ties from the same actor or send ties to the same actor, shows marked improvement, reflecting the inclusion of the outdegree activity and indegree popularity effects. Simple sequential triads, such as 021C (A→B, B→C), also remain well reproduced, indicating that the jumpXTransTrip and homXTransTrip terms continue to capture mediated closure both across and within gender groups. The overall distribution of basic disconnected triads (003, 012, 102) is likewise still well represented. Importantly, 111D triads, which combine mutual and asymmetric ties, are now quite well captured, suggesting that the model successfully extends dyadic reciprocity to slightly more complex configurations.
+Several triad types are now better represented. The triad configurations 021D (two nodes receiving ties from the same node) and 021U (two nodes sending ties to the same node) are now well captured, likely due to the inclusion of indegree popularity and outdegree activity statistics. Triads 111D, 030T, and 120D also show improved fit compared to Model 1.
 
-Some misfit remains for higher-order structures. Transitive (030T) and cyclic (030C) triads are still somewhat underestimated, indicating that additional hierarchical or cyclic closure mechanisms may not yet be fully captured. Mixed configurations of reciprocity and transitivity (120D, 120C) and fully mutual triads (300) also remain imperfectly reproduced.
-
-Overall, the updated model provides a substantially better fit to degree-related triads and captures key closure processes in the network. While it now accounts well for reciprocity and basic triadic patterns, additional higher-order or mixed-effect terms may be necessary to fully reproduce the more complex structures present in the observed network.
+The 021C triad is captured less well than in Model 1. Including ego-level effects such as indegree popularity, outdegree activity, and isolate status increases the baseline probability of tie formation for certain actors. This tends to improve the fit for degree-related structures but can also lead the model to overestimate sequential ties, resulting in more 021C triads than are observed. A similar overestimation occurs for 111U, while the 120C triad remains poorly captured.
 
 ```{r, eval = F}
 gofi6 <- sienaGOF(ansM2, TriadCensus, verbose = FALSE, join = TRUE, varName = "net2")
@@ -328,10 +391,16 @@ save(gofi6, file = "gofi6.RData")
 load("gofi6.RData")
 plot(gofi6, violin = F, center = T, scale = T)
 ```
+
 ### Conclusion
 
-These results suggest that the indegree and outdegree distributions are now better represented in the model. To further improve the fit, the next model will control for dyadic-level homophily, including gender, university affiliation, and discipline. These covariates may help explain residual variation in tie formation and reception beyond the structural effects of activity and popularity. To better capture the more complex triadic configurations that remain underestimated, such as cyclic and transitive patterns, I will subsequently include transitive triplet and cyclic closure effects in later model iterations.
+Including ego-level statistics does not substantially alter the effect sizes of jumpXTransTrip and homXTransTrip. This indicates that the conclusion from Model 1 still holds: actor A is likely to form or maintain a tie with C (rather than dissolve or refrain from forming one) both when C shares the same gender as A and B and when C has a different gender. Overall, gender does not appear to constrain tie formation in these triadic structures.
 
+The model captures the observed outdegree distribution very well. While there are some improvements in representing the indegree distribution and triadic structures, these fits remain poor.
+
+For the next model, I include dyadic effects by adding the sameX statistic for gender, university, and department. This allows me to control for baseline homophily (A’s general preference to collaborate with C due to similarity in gender) so that I can more accurately test whether group structures, as predicted by contact theory or social identity theory, actually influence A's choice. University and department are included as additional controls for structural tendencies to collaborate within the same institution or discipline.
+
+<br>
 
 ## Model 3
 
@@ -357,20 +426,19 @@ ansM3
 
 ### Interpretation 
 
-Just like in Model 1 and Model 2, the negative outdegree (density) parameter (b = -8.74, SE = 0.31) indicates that, overall, ties are unlikely to form without considering other structural or attribute-based effects. Reciprocity (b = 2.35, SE = 0.15) remains significant and positive, suggesting that mutual connections are substantially more likely than one-way ties, reflecting a common social tendency for individuals to reciprocate interactions.
+The overall maximum convergence ratio of this model was 0.16, which is considered good and much lower than in the previous model.
 
-Regarding individual-level activity, both indegree popularity (b = 0.16, SE = 0.04) and outdegree activity (b = 0.14, SE = 0.02) are positive. This indicates that popular individuals are likely to become even more popular, while individuals who send many ties are likely to continue forming ties.
+While the effects of outdegree and reciprocity are largely similar to those in the previous model, indegree popularity and outdegree activity are no longer significant. These structures appear to have been accounted for by dyadic-level homophily. The effect of isolates remains strong.
 
-Dyadic homophily effects based on gender, university, and discipline are also evident. Same-gender ties (b = 0.20, SE = 0.08) show a modest but significant preference for connections among individuals of the same gender. Institutional and disciplinary homophily are particularly strong: ties between individuals from the same university (b = 2.27, SE = 0.11) or the same discipline (b = 2.67, SE = 0.27) are highly probable, indicating that shared organizational or academic context is a dominant factor in network formation.
+Interestingly, the homXTransTrip effect is no longer significant, likely because the sameX gender effect accounts for why A chooses to send a tie to C. This pattern does not reflect a shared social identity between A and B prompting collaboration with C, but rather A’s individual preference to work with researchers of the same gender. This finding contradicts Hypothesis 3, which, based on social identity theory, predicted that if A and B share a gender, A would be more likely to close or maintain the triad when C is of the same gender. Overall, this suggests that the specific gender configuration within the triad is not a decisive factor in collaboration, but rather A's individual preference. 
 
-Focusing on the hypothesized effects, they have become slightly less positive compared to Model 2 but remain significant. The effect of jumpXtransTrip remains substantial (b = 1.68, SE = 0.40), indicating that in configurations A → B → C where A and B are of the same gender, A is still likely to form a tie to C when C is of a different gender. This finding supports Hypothesis 1 which is based on Contact theory but contradicts Hypothesis 2, which is based on Social Identity Theory (SIT).
+The jumpXTransTrip effect is weaker than in the previous model, indicating that the dyadic sameX effects account for part of this tendency. However, the effect remains significant and positive, consistent with hypothesis 1, and contrary to hypothesis 2: in the triad A -> B -> C, A is likely to initiate or maintain (rather than break of abstain from) a collaboration with C when C differs in gender from both A and B.
 
-The homXtransTrip effect also remains significant, reflecting that A is likely to close or maintain a triad by sending a tie to C when C is of the same gender. This effect is however quite lower than before, which may partly result the dyadic homophily effect, A’s preference for same-gender connections, rather than reinforcement from group belonging with B. Nevertheless, the effect is still significant alligning with Hypothesis 3 regarding SIT, suggesting that gender-homogeneous triadic closure is still relevant in the network.
-
+Regarding dyadic homophily, nodes show a tendency to form or maintain ties with others who share the same gender (b = 1.18, SE = 0.10), university affiliation (b = 1.92, SE = 0.14), and discipline (b = 2.31, SE = 0.29). All of these effects are positive and statistically significant.
 
 ### GOF indegree
 
-Model 3 still fails to accurately capture the indegree distribution in the observed network (p = 0). It consistently underestimates the number of nodes with no incoming ties and overestimates nodes with one or two incoming ties.
+Model 3 still fails to accurately capture the indegree distribution in the observed network (p = 0). It still underestimates the number of nodes with no incoming ties and overestimates nodes with one or two incoming ties.
 
 ```{r, eval = F}
 gofi7 <- sienaGOF(ansM3, IndegreeDistribution, verbose = FALSE, join = TRUE, varName = "net2", cumulative = F)
@@ -385,7 +453,7 @@ plot(gofi7, violin = F)
 
 ### GOF outdegree
 
-Similarly, Model 3 does not adequately represent the outdegree distribution (p = 0). It underestimates nodes with no outgoing ties, overestimates nodes with a single outgoing tie, and again underestimates nodes with three outgoing ties.
+Model 3 continues to capture the outdegree distribution of the observed network well (p = 0.21). 
 
 ```{r, eval = F}
 gofi8 <- sienaGOF(ansM3, OutdegreeDistribution, verbose = FALSE, join = TRUE, varName = "net2", cumulative = F)
@@ -399,11 +467,7 @@ plot(gofi8, violin = F)
 
 ### GOF triad census
 
-The Goodness-of-Fit plot for Model 3 shows a mixed pattern in capturing triadic structures compared to Model 2. Overall, the model fit remains low (p = 0.002). Several aspects of the triadic structure remain stable, while some show noticeable improvement and others have worsened.
-
-Most notably, 030T triangles, representing cyclic triads, are better captured. This could be because the inclusion of dyadic homophily terms for gender, discipline, and university increases the likelihood of ties between nodes sharing these attributes. As a result, if A collaborates with B and B with C, C is more likely to send a tie back to A when all three share gender, discipline, or university affiliation. This improvement indicates that attribute-driven tie probabilities, in combination with the existing transitive and jump effects based on gender, help the model better reproduce cyclic triads that were previously underestimated.
-
-In contrast, 120C and 120D configurations, which represent star-like triads with a central sender or receiver, are now less well captured. This could be because the strong homophily effects favor ties between similar nodes, reducing the formation of these centralized triads when nodes differ in attributes. Consequently, the underrepresentation of these ties indicates that the model now captures cycles more effectively at the expense of certain star-like structures.
+The following plot shows an improvement over the previous model in its ability to capture the triadic structures in the observed network. However, the model’s fit remains inadequate, as indicated by the low p-value (p = 0.002). For almost all triads, the observed counts fall within the model’s expected range, but the model still misrepresents three triad types: it overestimates the occurrences of 021C and 111U, while it underestimates 030T.
 
 ```{r, eval = F}
 gofi9 <- sienaGOF(ansM3, TriadCensus, verbose = FALSE, join = TRUE, varName = "net2")
@@ -417,8 +481,15 @@ plot(gofi9, violin = F, center = T, scale = T)
 
 ### Conclusion
 
-In this model I added the dyadic gender homophily effect to bring more nuance to the evaluation of my hypotheses by controlling for individuals’ initial tendency to collaborate with others of the same gender. The inclusion of same-university and same-discipline effects further ensured that these factors did not confound the main effects of interest. However, the Goodness-of-Fit indices indicate that these additions did not substantially improve the model’s overall fit to the observed network.
+Most importantly, Model 3 revealed that the homXTransTrip effect with gender can be explained by dyadic gender homophily, and not because of the specific gender composition of the triad. This contradicts hypothesis three, which based on social identity theory, predicted A would be likely to create or maintain ties with C when C was of the same gender as A and B. 
 
+The jumpXTransTrip effect remained positive, which is still in line with hypothesis 1 and contradictory to hypothesis 2. 
+
+This model demonstrates a mixed fit to the observed network. While it continues to capture the outdegree distribution reasonably well (p = 0.21), it fails to reproduce the indegree distribution accurately (p = 0), underestimating nodes with no incoming ties and overestimating those with one or two. The model also shows improvement in capturing triadic structures, though its overall fit remains inadequate (p = 0.002), particularly for certain triad types. 
+
+To address these remaining discrepancies in structural closure, the next model introduces the transTrip effect, allowing for a more direct test of transitivity in tie formation.
+
+<br>
 
 ## Model 4
 
@@ -441,8 +512,19 @@ ansM4
 ```
 
 ### Interpretation 
+The overall maximum convergence ratio of this model was satisfactory (0.15), indicating good model convergence and stable parameter estimation.
+
+Most effects remained consistent with those observed in Model 3. Both indegree popularity and outdegree activity are again significant.
+
+Regarding the gendered triadic hypotheses, the jumpXTransTrip effect is no longer significant after the inclusion of transTrip, which is positive and significant (b = 1.11, SE = 0.20). This indicates that in triads A -> B -> C, where C is of a different gender than A and B, gender does not influence A’s decision to create or maintain a tie with C. Rather, because transTrip is significant and positive, A is likely to create or maintain a transitive triad regardless of C’s gender. This finding runs counter to my hypotheses, suggesting that gender does not meaningfully influence tie formation in these mixed-gender triads. Instead, tie formation appears to be primarily driven by general triadic closure: “a friend of my friend is my friend.”
+
+Interestingly, the homXTransTrip effect becomes slightly but significantly negative once the general transitive triplet effect is included. This suggests that same-gender triads are somewhat less likely to close than to remain open or dissolve once overall triadic closure tendencies are accounted for. Consequently, the third hypothesis — that actor A is more likely to form or maintain a tie with C when C shares A and B’s gender — is not supported either.
+
+Overall, these results indicate that gender does not meaningfully constrain triadic closure in this network. Instead, tie formation appears to be primarily shaped by the general social tendency toward triadic closure.
 
 ### GOF indegree
+
+The indegree distribution structure remains a bad fit (p = 0). <span style="color:grey"> I already tried several other additions (such as inPopSqrt, inIsDegree) but they did not improve the fit so I will leave this be :( </span>
 
 ```{r, eval = F}
 gofi10 <- sienaGOF(ansM4, IndegreeDistribution, verbose = FALSE, join = TRUE, varName = "net2", cumulative = F)
@@ -451,24 +533,29 @@ save(gofi10, file = "gofi10.RData")
 ```
 
 ```{r}
-#load("gofi10.RData")
-#plot(gofi10, violin = F)
+load("gofi10.RData")
+plot(gofi10, violin = F)
 ```
 
 ### GOF outdegree
 
+The GOF of outdegree distribution is slightly lower than before (p = 0.17), but it still reveals a good fit. 
 
 ```{r, eval = F}
 gofi11 <- sienaGOF(ansM4, OutdegreeDistribution, verbose = FALSE, join = TRUE, varName = "net2", cumulative = F)
-save(gofi11, file = "gofi8.RData")
+save(gofi11, file = "gofi11.RData")
 ```
 
 ```{r}
-#load("gofi11.RData")
-#plot(gofi11, violin = F)
+load("gofi11.RData")
+plot(gofi11, violin = F)
 ```
-
 ### GOF triad census
+
+The GOF assessment of the triad census indicates that the model still does not fit the data well (p = 0.006). With the addition of TransTrip, the 021C triads are now well captured. However, the model continues to heavily underestimate 111U triads and overestimate 030T triads. 
+
+<span style="color:grey"> Sidenote: I imagine that achieving a good GOF for the triad census is especially challenging, given the many different configurations that must all be captured accurately. </span>
+
 
 ```{r, eval = F}
 gofi12 <- sienaGOF(ansM4, TriadCensus, verbose = FALSE, join = TRUE, varName = "net2")
@@ -476,6 +563,13 @@ save(gofi12, file = "gofi12.RData")
 ```
 
 ```{r}
-#load("gofi12.RData")
-#plot(gofi12, violin = F, center = T, scale = T)
+load("gofi12.RData")
+plot(gofi12, violin = F, center = T, scale = T)
 ```
+### Conclusion
+
+None of the gender-based hypotheses are supported by the model. The jumpXTransTrip effect shows that actor A is not more likely to form or maintain ties with C when C is of a different gender than A and B, contradicting hypothesis 1 and hypothesis 2. Similarly, the homXTransTrip effect becomes slightly negative after accounting for general triadic closure, indicating that same-gender triads are not more likely to close, and hypothesis 3 is not supported. Overall, it apperas gender does not meaningfully influence tie formation in these triads.
+
+Caveat based on GOF: While the model captures outdegree patterns well, the fit for indegree distribution and triadic structures is poor. This suggests that, although the model provides a clear indication that gender is not a primary driver of collaboration, it may not fully capture all structural tendencies in the observed network.
+
+

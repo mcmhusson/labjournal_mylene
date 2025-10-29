@@ -44,6 +44,8 @@ navbar:
         href: Descriptives.html
       - text: "Exploratory Analyses"
         href: Results.html
+      - text: "Conclusion"
+        href: Conclusion.html
   right:
   - icon: fab fa-github
     href: https://mcmhusson.github.io/labjournal_mylene/

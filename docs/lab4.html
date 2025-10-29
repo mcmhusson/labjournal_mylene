@@ -403,6 +403,9 @@ div.tocify {
     <li>
       <a href="Results.html">Exploratory Analyses</a>
     </li>
+    <li>
+      <a href="Conclusion.html">Conclusion</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -1055,16 +1058,13 @@ adj_mat &lt;- result_gender$nets[1,,]
 g &lt;- graph_from_adjacency_matrix(adj_mat, mode = &quot;undirected&quot;)</code></pre>
 <pre><code>## Warning: The `adjmatrix` argument of
 ## `graph_from_adjacency_matrix()` must be
-## symmetric with mode = &quot;undirected&quot; as
-## of igraph 1.6.0.
-## ℹ Use mode = &quot;max&quot; to achieve the
-##   original behavior.
-## This warning is displayed once every 8
-## hours.
-## Call
-## `lifecycle::last_lifecycle_warnings()`
-## to see where this warning was
-## generated.</code></pre>
+## symmetric with mode = &quot;undirected&quot; as of
+## igraph 1.6.0.
+## ℹ Use mode = &quot;max&quot; to achieve the original
+##   behavior.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to
+## see where this warning was generated.</code></pre>
 <pre class="r"><code># make sure vertex order matches demographics order
 gender_vec &lt;- result_gender$demographics$gender
 names(gender_vec) &lt;- result_gender$demographics$au_id

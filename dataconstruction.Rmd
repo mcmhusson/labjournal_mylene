@@ -78,7 +78,7 @@ Last compiled on `r format(Sys.time(), '%B, %Y')`
 
 ## Genderize function
 
-To manually add gender to the demographics dataset, I first created a custom function that extracts each researcher’s first name from the original dataset and automatically queries the Nederlandse Voornamenbank (NVB) database. The function retrieves the corresponding gender frequency table and assigns the researcher as male or female based on the most common association for that name. If a name is not found in the NVB database, or if the name field is incomplete or incorrectly formatted, the function returns NA. 
+To manually add gender to the demographics dataset, I first create a custom function that extracts each researcher’s first name from the original dataset and automatically queries the Nederlandse Voornamenbank (NVB) database. The function retrieves the corresponding gender frequency table and assigns the researcher as male or female based on the most common association for that name. If a name is not found in the NVB database, or if the name field is incomplete or incorrectly formatted, the function returns NA. 
 ```{r, eval = F}
 
 my_genderizer <- function(name) {
@@ -120,14 +120,20 @@ my_genderizer <- function(name) {
 }
 ```
 
+<br>
+
 ## Load in Data
 
-Load in the data
 ```{r, eval=F}
 scholars <- fload("./data/processed/scholars_20240924.rda")
 ```
 
-Apply Folcnet function to make your nomination network
+<br>
+
+## Apply Folcnet
+
+Within the folcnet function I specify to take all researchers from sociology and political science departments in Dutch Universities. I also specify my waves as 2015-2018 (wave 1) and 2019-2023 (wave 2). Lastly, I want a directed network in which the last named author on a paper is the one who sent the ties, and I therefore choose type "last". 
+
 ```{r, eval = F}
 fcolnet <- function(data = scholars,
                     university = c("RU","EUR","WUR","UvA","Leiden","VU","UU","UvT","RUG"),
@@ -219,8 +225,11 @@ df <- fcolnet(data = scholars,
                     type = c("last"))
 ```
 
+<br>
+
 ## Apply function
-Apply the mygenderizer function. 
+
+Now I apply the genderizer function to the data I just created.
 ```{r, eval= F}
 df_scholars <- do.call(rbind, df$data$demographics)
 
@@ -238,8 +247,10 @@ for (i in seq_len(nrow(df_gender))) {
 }
 ```
 
+<br>
+
 ## Attach
-I attach the gender data by overriding the demographic part.
+And then I attach the demographics data which includes gender to the collaboration network again. 
 ```{r, eval= F}
 fcolnet_gender <- function(data = df,
                            waves = list(c(2015, 2018), c(2019, 2023)),
@@ -358,6 +369,12 @@ result_gender2 <- fcolnet_gender(
 # Save entire result (list containing networks, data, demographics, etc.)
 save(result_gender2, file = "./data/processed/result_gender2.rda")
 ```
+
+<br>
+## Result
+
+As a result I now have a demographics list within my data including the gender of people. As you will read in the descriptive analyses, the gender of only 22 people was missing (3.26)
+
 ```{r}
 load("./data/processed/result_gender2.rda")
 

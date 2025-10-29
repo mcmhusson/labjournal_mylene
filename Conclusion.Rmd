@@ -1,0 +1,62 @@
+---
+title: "Journal 1"
+bibliography: references.bib
+author: "Mylène Husson"
+---
+
+```{r, globalsettings, echo=FALSE, include=TRUE, warning=FALSE, results='hide'}
+library(knitr)
+
+knitr::opts_chunk$set(echo = TRUE)
+opts_chunk$set(tidy.opts=list(width.cutoff=100),tidy=TRUE, warning = FALSE, message = FALSE,comment = "#>", cache=TRUE, class.source=c("test"), class.output=c("test2"))
+options(width = 100)
+#rgl::setupKnitr()
+
+
+
+colorize <- function(x, color) {sprintf("<span style='color: %s;'>%s</span>", color, x) }
+
+```
+
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy(position = c('top', 'right'))
+#klippy::klippy(color = 'darkred')
+#klippy::klippy(tooltip_message = 'Click to copy', tooltip_success = 'Done')
+```
+
+Last compiled on `r format(Sys.time(), '%B, %Y')`
+<br>
+
+------------------------------------------------------------------------
+
+# Conclusion
+
+This research examined gender homophily within triadic collaboration structures, focusing on whether, in triads where researcher A collaborates with researcher B and researcher B with researcher C, the gender of C affects A’s likelihood of collaborating them when A and B share the same gender. Using web-scraped data on all researchers within the sociology and political science departments at Dutch universities from 2015–2023, I conducted a social network analysis over two waves (2015–2018 and 2019–2023).
+
+Studying this question is important because gender homophily at the dyadic level is well-documented in academia: researchers tend to collaborate with others of the same gender [@wang2023homophily]. Such micro-level preferences can aggregate into macro-level patterns of gender segregation, reinforcing structural inequalities by limiting access to influential networks, mentorship, and high-status collaborations [@powell2018gender]. This study extends the literature by examining whether these patterns persist in triadic structures or whether triads might provide opportunities for cross-gender collaboration.
+
+The first two research questions are descriptive. The first asks which types of triads are present in the network, focusing on 021C (A -> B -> C) and 031T (A -> B -> C <- A) triads, as these structures are central to the research. The second examines which gender combinations are most common within these triads. Analyses show that both triad types exist in the network but are unevenly distributed by gender. Although the overall network was roughly balanced, 021C and 031T triads are dominated by all-male groups, while mixed-gender triads (female–female–male or male–male–female) are relatively rare. This indicates a tendency for same-gender clustering within triads, particularly among men, reflecting patterns of gender homophily in triadic academic collaborations.
+
+The third research question was exploratory and examined whether C’s gender influences A’s collaboration behavior when A and B share the same gender. Based on contact theory, the first hypothesis predicted that A would be more likely to initiate or maintain collaboration with C (rather than break or avoid it) when C differs in gender, as indirect exposure through B might reduce bias [@Allport]. Drawing on Social Identity Theory (SIT), the second hypothesis predicted that A would be more likely to avoid or break collaboration with C when C differs in gender, due to in-group identification with B [@Tajfel_Turner]. Finally, the third hypothesis, also based on SIT, predicted that A would be more likely to collaborate when all three share the same gender, as C would be part of the in-group [@Tajfel_Turner].
+
+The results did not support any of these hypotheses. Gender had little effect on tie formation: A’s decision to collaborate with C appeared largely independent of C’s gender. Interestingly, in triads where all three researchers shared the same gender, A was slightly more likely to break or avoid collaboration with C.
+
+Overall, the findings suggest that while researchers may prefer to work with someone of the same gender (dyadic homophily), once they are in a triadic structure such as 021C or 031T, the gender of C appears to matter little: A is generally likely to close the triad regardless of C’s gender.
+
+This implies that configurations like male–male–female or female–female–male could help reduce segregation at the macro level, as the first researcher is likely to form cross-gender ties simply to close the triad, stimulating more diverse collaborations. While my descriptive analyses indicated that these mixed-gender configurations are currently rare, this research suggests they could foster even more cross-gender collaborations, ultimately contributing to lower gender segregation in Dutch sociology and political science departments.
+
+This research has a few limitations. First, the goodness-of-fit tests indicate that the indegree distribution and the triadic configurations of the observed network are not well captured. While I think this is quite logical for the triadic configurations, since there are many different ones to model correctly, the fact that the indegree distribution is not well captured is more problematic. In future research, I should spend more time identifying statistics that accurately capture this aspect. I tried several options but, due to time constraints, had to proceed. The outdegree distribution, on the other hand, is well captured, which is encouraging.
+
+Second, my main independent variable of interest, gender, is inferred using the Nederlandse Voornamenbank (NVB) of the Meertens Institute. This approach can misidentify individuals, as first names are not always representative of one’s gender. In future research, it would be preferable to ask researchers for their self-identified gender directly. This would also allow for a more inclusive understanding of gender, beyond a binary classification. However, this poses practical challenges, as the data is web-scraped from OpenAlexAI, which does not include gender information. Contacting each researcher individually would be time-consuming.
+
+A final limitation concerns the density of the network. The network overall has a low density, which could suggest that researchers prefer to work alone. However, the density in wave 1 is lower than in wave 2, likely because new people joined the departments in the second wave. Since the data require the same set of individuals to appear in both waves, those who joined later were retroactively added to wave 1, even though they were not yet part of the department at that time. This created many isolates. Consequently, the low density observed in wave 1 may not reflect genuine structural characteristics of the network, but rather the composition of the departments at the different time points when the data were collected.
+
+Taken together, these findings suggest that A -> B -> C triadic collaborations can naturally foster cross-gender connections: A is likely to form a tie with C simply to close the triad, and if A and C participate in other triads, this process can propagate cross-gender ties throughout the network, gradually reducing overall gender segregation.
+
+<br>
+
+# References
+
+
+
+
