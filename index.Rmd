@@ -58,12 +58,12 @@ Welcome to my lab journal. In here you will find an overview of my work for the 
 
 Everyone can fork this repository. Use this example to journal your lab work and assignments.
 
-We, Jochem Tolsma and Bas Hofstra, use this repository for our Social Network Analysis For Social Scientists course [@SNASS]. <!--- this is a reference, stored in references.bib. It will be automatically added at the bottom of the page ---> 
+Jochem Tolsma and Bas Hofstra use this repository for our Social Network Analysis For Social Scientists course [@SNASS]. <!--- this is a reference, stored in references.bib. It will be automatically added at the bottom of the page ---> 
 
 :::
 
 ::: {.column width="50%"}
-![](images/Network.jpg)
+![](images/Main.png)
 ::: 
 
 :::::
